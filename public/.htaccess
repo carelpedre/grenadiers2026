@@ -1,0 +1,226 @@
+# Deployed at https://grenadiers2026.com/
+# DreamHost Shared Hosting (Apache)
+#
+# This file does five things:
+#   1. Force HTTPS
+#   2. Serve per-route HTML (with route-specific OG/title/description) to
+#      everyone — not just social crawlers. This is what makes SEO work.
+#   3. Return real 404 for missing assets instead of HTML fallback
+#   4. Cache, compress, and harden security headers
+#   5. Block direct access to dotfiles and the API source
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Disable content negotiation so MultiViews can't shadow our .html rewrites
+  Options -MultiViews
+
+  # ─── Force HTTPS ─────────────────────────────────────────────────
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # ─── Force canonical host (strip www) ───────────────────────────
+  RewriteCond %{HTTP_HOST} ^www\.grenadiers2026\.com$ [NC]
+  RewriteRule ^(.*)$ https://grenadiers2026.com/$1 [R=301,L]
+
+  # ─── Real 404 for missing static asset paths ────────────────────
+  # Without this, requesting any missing asset returns the SPA HTML with
+  # 200 OK because the catch-all rewrites to index.html. The audit flagged
+  # this. Return 404 for missing assets in known asset paths instead.
+  RewriteCond %{REQUEST_URI} \.(png|jpg|jpeg|gif|webp|svg|ico|mp4|webm|woff2?|ttf|eot|pdf|zip|js|mjs|css|map|json|xml|txt)$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule .* - [R=404,L]
+
+  # ─── Per-route HTML serving ─────────────────────────────────────
+  # Serve route-specific HTML (with correct OG, title, canonical) to
+  # ALL traffic — not just social crawlers. This is the SEO fix.
+  # The route-specific HTML still loads the SPA via its <script> tag,
+  # so the user experience is identical; only the initial HTML response
+  # is different (and now has correct metadata for crawlers).
+
+  RewriteCond %{REQUEST_URI} ^/squad/?$
+  RewriteRule .* /squad.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/matches/?$
+  RewriteRule .* /matches.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/watch-parties/?$
+  RewriteRule .* /watch-parties.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/stories/?$
+  RewriteRule .* /stories.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/anthem/?$
+  RewriteRule .* /anthem.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/federation/?$
+  RewriteRule .* /federation.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/history-1974/?$
+  RewriteRule .* /history-1974.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/press/?$
+  RewriteRule .* /press.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/documentary/?$
+  RewriteRule .* /documentary.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/interviews/?$
+  RewriteRule .* /interviews.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/say-their-names/?$
+  RewriteRule .* /say-their-names.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/atlas/?$
+  RewriteRule .* /atlas.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/gallery/?$
+  RewriteRule .* /gallery.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/about/?$
+  RewriteRule .* /about.html [L]
+
+  # ─── SPA aliases (route to coverage/documentary HTML) ───────────
+  # /the-tribute and /the-coverage are React Router aliases for /anthem;
+  # serve the documentary metadata for /the-tribute (more on-theme),
+  # and the anthem metadata for /the-coverage.
+  RewriteCond %{REQUEST_URI} ^/the-tribute/?$
+  RewriteRule .* /documentary.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/the-coverage/?$
+  RewriteRule .* /anthem.html [L]
+
+  # ─── SPA dynamic slug routes ────────────────────────────────────
+  # These patterns ARE valid SPA routes (React Router handles the slug).
+  # Send them to index.html — React Router will render the right page,
+  # or show NotFound if the slug doesn't match real content.
+  RewriteCond %{REQUEST_URI} ^/stories/[^/]+/?$
+  RewriteRule .* /index.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/interviews/[^/]+/?$
+  RewriteRule .* /index.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/live/[^/]+/?$
+  RewriteRule .* /index.html [L]
+
+  # /journal (index) → /journal.html (gets its own OG metadata)
+  # /journal/<slug>   → /index.html (SPA route, OG metadata generic for now)
+  RewriteCond %{REQUEST_URI} ^/journal/?$
+  RewriteRule .* /journal.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/journal/[^/]+/?$
+  RewriteRule .* /index.html [L]
+
+  # ─── 200 history fallback (SPA) ─────────────────────────────────
+  # Anything reaching here is not a known top-level route. Serve a real
+  # file/dir if it exists; otherwise prefer a pre-rendered
+  # <route>/index.html or <route>.html (route-specific OG metadata);
+  # otherwise fall through to the SPA shell with HTTP 200 so React Router
+  # resolves the route client-side (NotFound.jsx renders for misses).
+  # Missing *assets* still hard-404 via the asset rule near the top.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^ %{REQUEST_URI}/index.html [L]
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^ %{REQUEST_URI}.html [L]
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# ─── Cache headers ─────────────────────────────────────────────────
+# Vite fingerprints JS/CSS filenames (hash in the name), so we can cache
+# those aggressively. HTML is short-lived so updates ship fast.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType text/html "access plus 5 minutes"
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType text/xml "access plus 1 day"
+</IfModule>
+
+# ─── Compression (try Brotli first, fall back to gzip) ─────────────
+# DreamHost shared has mod_deflate (gzip). If the server has mod_brotli
+# loaded it'll take priority and serve .br variants automatically.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/atom+xml
+  AddOutputFilterByType DEFLATE application/manifest+json
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff
+  AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# Vary header so caches respect Accept-Encoding
+<IfModule mod_headers.c>
+  Header append Vary Accept-Encoding env=!dont-vary
+</IfModule>
+
+# ─── Don't long-cache the HTML files ───────────────────────────────
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "max-age=300, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ─── Security headers ──────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Prevent MIME-type sniffing
+  Header set X-Content-Type-Options "nosniff"
+
+  # Don't leak full URLs in Referer
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Force HTTPS for 1 year, include subdomains. Preload eligible.
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Disable powerful features the site doesn't need
+  Header set Permissions-Policy "camera=(), microphone=(), payment=(), usb=(), geolocation=(self), interest-cohort=()"
+
+  # Prevent the site from being embedded in iframes on other domains.
+  Header set X-Frame-Options "SAMEORIGIN"
+
+  # CSP — relatively permissive since we use external map tiles, ipapi.co
+  # for geolocation, OpenStreetMap nominatim, etc. Tighten over time.
+  #
+  # frame-src: allow embeds from YouTube, Spotify, Apple Music (iframe sources)
+  # img-src: allow https for player thumbnails / YouTube poster frames
+  # connect-src: includes Supabase (fixtures/live data + Pwonostik leaderboard),
+  #              Brevo (newsletter), ipapi.co (geolocation),
+  #              OpenStreetMap (atlas reverse geocoding), Apple Music API
+  # media-src: for any inline audio/video the embeds may load
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://s.ytimg.com https://open.spotify.com https://embed.music.apple.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https://*.supabase.co https://ipapi.co https://nominatim.openstreetmap.org https://api.open-meteo.com https://api.brevo.com https://www.youtube.com https://open.spotify.com https://embed.music.apple.com https://*.mzstatic.com https://challenges.cloudflare.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://open.spotify.com https://embed.spotify.com https://embed.music.apple.com https://challenges.cloudflare.com; child-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://open.spotify.com https://embed.spotify.com https://embed.music.apple.com https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+</IfModule>
+
+# ─── MIME types ────────────────────────────────────────────────────
+<IfModule mod_mime.c>
+  AddType application/manifest+json .json
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+</IfModule>
+
+# ─── Block direct access to dotfiles, .env, etc. ───────────────────
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+<FilesMatch "^\.env">
+  Require all denied
+</FilesMatch>

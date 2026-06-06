@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D21034"/>
+      <stop offset="100%" stop-color="#9A0828"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Stripes left (flag motif) -->
+  <rect x="0" y="0" width="40" height="630" fill="#00209F"/>
+  <rect x="40" y="0" width="40" height="630" fill="#D21034"/>
+
+  <!-- Top right brand stamp -->
+  <g transform="translate(920, 60)">
+    <rect width="220" height="36" rx="18" fill="#FAFAF7" fill-opacity="0.12"/>
+    <text x="20" y="24" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="14" font-weight="700" fill="#FAFAF7" letter-spacing="1.2">GRENADIERS2026.COM</text>
+  </g>
+
+  <text x="120" y="160" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="22" font-weight="700" fill="#C8A45C" letter-spacing="2">1974 · ALLEMAGNE FÉDÉRALE</text>
+
+  <!-- Title -->
+  <text x="120" y="250" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="88" font-weight="800" fill="#FAFAF7"><tspan x="120" dy="0">Les soixante-dix</tspan><tspan x="120" dy="92.4">minutes.</tspan></text>
+
+  <text x="120" y="418.79999999999995" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="26" font-weight="500" fill="#FAFAF7" opacity="0.85"><tspan x="120" dy="0">L&apos;histoire de Manno Sanon, du but contre Dino Zoff, et des</tspan><tspan x="120" dy="36.4">cinquante-deux ans qui ont suivi.</tspan></text>
+
+  <text x="120" y="540" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="20" font-weight="700" fill="#C8A45C" letter-spacing="1">LIRE L&apos;HISTOIRE COMPLÈTE</text>
+
+  <!-- Bottom strip -->
+  <rect x="0" y="624" width="396" height="6" fill="#00209F"/>
+  <rect x="396" y="624" width="396" height="6" fill="#D21034"/>
+  <rect x="792" y="624" width="408.00000000000006" height="6" fill="#C8A45C"/>
+
+  <!-- Bottom corner Chokarella attribution -->
+  <text x="1140" y="600" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="14" font-weight="600" fill="#FAFAF7" text-anchor="end" opacity="0.6">by Chokarella Media</text>
+</svg>
