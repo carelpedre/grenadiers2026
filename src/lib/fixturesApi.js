@@ -59,6 +59,71 @@ export async function fetchFixtures() {
   }
 }
 
+// Meilleurs buteurs récents d'Haïti (totaux de la fenêtre récente, hors carrière).
+// Lit la vue publique haiti_contributions_public, buts > 0, triés buts puis passes
+// décisives, limité à 10. Retourne un tableau, ou null si backend indisponible.
+export async function getRecentScorers() {
+  if (!backendReady) return null;
+  try {
+    const cols =
+      "player_id,player_name,photo,goals,assists,appearances,minutes," +
+      "last_goal_date,matches_counted,window_from,window_to,updated_at";
+    const q =
+      `${SUPABASE_URL}/rest/v1/haiti_contributions_public` +
+      `?select=${cols}` +
+      `&goals=gt.0` +
+      `&order=goals.desc,assists.desc` +
+      `&limit=10`;
+    const res = await fetch(q, { headers: headers() });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+// Scouting avant-match d'un adversaire : H2H face à Haïti + forme récente de
+// l'adversaire. Appelle la fonction edge publique wc-h2h (mise en cache 12h
+// côté serveur ; seuls les 3 adversaires du Mondial sont autorisés). Aucune
+// API externe côté navigateur. Retourne la charge utile { ok, ... } ou null.
+export async function getOpponentScouting(oppId) {
+  if (!backendReady || !oppId) return null;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/functions/v1/wc-h2h?id=${encodeURIComponent(oppId)}`,
+      { headers: headers() },
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data?.ok ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+// Derniers résultats d'Haïti (matchs terminés) pour la « Forme récente ».
+// Lit la vue publique, statuts terminés uniquement, du plus récent au plus
+// ancien, limité à 10. Retourne un tableau, ou null si backend indisponible.
+export async function getRecentResults() {
+  if (!backendReady) return null;
+  try {
+    const cols =
+      "fixture_id,kickoff,status_short,league_name,round," +
+      "home_id,home_name,home_logo,away_id,away_name,away_logo," +
+      "goals_home,goals_away";
+    const q =
+      `${SUPABASE_URL}/rest/v1/haiti_fixtures_public` +
+      `?select=${cols}` +
+      `&status_short=in.(FT,AET,PEN)` +
+      `&order=kickoff.desc&limit=10`;
+    const res = await fetch(q, { headers: headers() });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 // Détail complet d'un match d'Haïti par adversaire (nom anglais en minuscules,
 // ex. "peru"). Inclut events / lineups / statistics. Le plus récent si plusieurs.
 // Retourne l'objet fixture, ou null.

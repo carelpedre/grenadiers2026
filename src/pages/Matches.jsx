@@ -7,6 +7,7 @@ import StadiumWeather from "../components/StadiumWeather";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import MatchReminder from "../components/MatchReminder";
 import GroupCTable from "../components/GroupCTable";
+import RecentForm from "../components/RecentForm";
 import { frName } from "../lib/teamNames";
 import { friendlies } from "../data/friendlies";
 import { matches } from "../data/matches";
@@ -103,20 +104,10 @@ export default function Matches() {
           </section>
         )}
 
-        {/* Past preparation games */}
-        <section>
-          <div className="border-b border-line pb-3 mb-6">
-            <h2 className="font-display text-2xl md:text-3xl">Résultats récents</h2>
-            <p className="text-muted text-sm mt-1">
-              Matchs de préparation disputés lors de la fenêtre internationale de mars 2026 à Toronto.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {friendlies.past.map((f, i) => (
-              <FriendlyCard key={i} friendly={f} />
-            ))}
-          </div>
-        </section>
+        {/* Forme récente — unique zone de résultats récents, lue depuis la base
+            (DB only). N'affecte pas la vue des matchs à venir : requête séparée
+            FT/AET/PEN. Remplace l'ancien bloc statique des matchs de préparation. */}
+        <RecentForm />
 
         {/* Group C card */}
         <section className="p-6 md:p-8 bg-white border border-line rounded-lg">
@@ -185,7 +176,7 @@ function HeroTeam({ name, logo }) {
       {logo && (
         <img src={logo} alt="" loading="lazy" className="w-6 h-6 md:w-8 md:h-8 object-contain flex-shrink-0" />
       )}
-      <span className="font-display text-base md:text-2xl uppercase tracking-tight truncate">
+      <span className="font-display text-base md:text-2xl uppercase tracking-tight whitespace-nowrap">
         {name}
       </span>
     </span>
@@ -201,7 +192,7 @@ function NextMatchHero({ feature }) {
   const awayScore = homeIsHaiti ? oppGoals : haitiGoals;
 
   const inner = (
-    <div className="bg-ink text-bg rounded-lg px-5 py-5 md:px-8 md:py-6 flex items-center justify-between gap-4 transition-shadow group-hover:ring-1 group-hover:ring-haiti-red">
+    <div className="bg-ink text-bg rounded-lg px-5 py-5 md:px-8 md:py-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 transition-shadow group-hover:ring-1 group-hover:ring-haiti-red">
       <div className="min-w-0">
         <div className="mb-2.5">
           {isLive ? (
@@ -212,14 +203,14 @@ function NextMatchHero({ feature }) {
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2.5 md:gap-3 min-w-0">
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 md:gap-x-3">
           <HeroTeam name={frName(homeName)} logo={homeLogo} />
           <span className="text-bg/40 font-display text-sm">vs</span>
           <HeroTeam name={frName(awayName)} logo={awayLogo} />
         </div>
       </div>
 
-      <div className="text-right flex-shrink-0">
+      <div className="text-left sm:text-right flex-shrink-0">
         {isLive ? (
           <p className="font-display text-3xl md:text-4xl tabular-nums">
             {homeScore}
@@ -355,7 +346,8 @@ function MatchCard({ match, live }) {
           <span className="text-ink">{date}</span>
           <span className="text-muted">·</span>
           <span className="text-ink">
-            <span className="text-muted">{stadium.fifaName}</span> ({stadium.realName})
+            <span className="text-muted">{stadium.fifaName}</span>
+            {stadium.realName && stadium.realName !== stadium.fifaName ? ` (${stadium.realName})` : ""}
           </span>
           <span className="text-muted">·</span>
           <span className="text-ink">{stadium.city}</span>

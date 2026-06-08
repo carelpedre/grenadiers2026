@@ -87,6 +87,11 @@ const dict = {
     fr: "Mur des supporters",
     ht: "Mi sipòtè yo",
   },
+  "nav.photos": {
+    en: "Photos",
+    fr: "Photos",
+    ht: "Foto",
+  },
 
   // ─── GALLERY PAGE ────────────────────────────────────────────────────
   "gallery.eyebrow": {
@@ -704,9 +709,9 @@ const dict = {
     ht: "Konsènan",
   },
   "footer.about.body": {
-    en: "Unofficial site of Les Grenadiers at the FIFA World Cup 2026, created by Carel Pedre in collaboration with the Haitian Football Federation.",
-    fr: "Site non-officiel des Grenadiers à la Coupe du Monde de la FIFA 2026, créé par Carel Pedre en collaboration avec la Fédération Haïtienne de Football.",
-    ht: "Sit ki pa ofisyèl Grenadye yo nan Coupe du Monde FIFA 2026 a, kreye pa Carel Pedre an kolaborasyon ak Federasyon Foutbòl Ayisyen.",
+    en: "Independent, unofficial site about Les Grenadiers at the FIFA World Cup 2026, designed and built by Carel Pedre.",
+    fr: "Site indépendant et non-officiel sur les Grenadiers à la Coupe du Monde de la FIFA 2026, conçu et développé par Carel Pedre.",
+    ht: "Sit endepandan ki pa ofisyèl sou Grenadye yo nan Coupe du Monde FIFA 2026 a, konsevwa ak devlope pa Carel Pedre.",
   },
   "footer.explore.title": {
     en: "Explore",

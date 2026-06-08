@@ -13,6 +13,7 @@ const navItems = [
   { to: "/matches", labelKey: "nav.matches" },
   { to: "/journal", labelKey: "nav.journal" },
   { to: "/mur", labelKey: "nav.fanwall" },
+  { to: "/foto", labelKey: "nav.photos" },
   { to: "/the-tribute", labelKey: "nav.tribute" },
   { to: "/federation", labelKey: "nav.federation" },
   { to: "/history-1974", labelKey: "nav.history" },
@@ -26,6 +27,13 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Accessibility: keyboard skip-to-content link (visible only on focus) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-haiti-blue focus:text-bg focus:font-semibold focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-haiti-red"
+      >
+        Aller au contenu
+      </a>
       <header className="sticky top-0 z-40 bg-bg/95 backdrop-blur border-b border-line">
         <div className="max-w-content mx-auto px-5 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group">
@@ -92,7 +100,7 @@ export default function Layout() {
         )}
       </header>
 
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -109,11 +117,19 @@ export default function Layout() {
       {/* Site-wide live match bar (dynamic island), bottom-center */}
       <LiveIsland />
 
-      {/* Floating actions on every page: share (always) + back-to-top (on scroll) */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <ShareButton floating title="Grenadiers 2026 — Haïti à la Coupe du Monde 2026" />
+      {/* Floating actions on every page: share (always) + back-to-top (on scroll).
+          Positioned with the iOS safe-area inset so they clear the home indicator
+          and the auto-hiding toolbar instead of pinning to the raw viewport bottom. */}
+      <div
+        className="fixed right-5 z-40"
+        style={{ bottom: "max(env(safe-area-inset-bottom), 16px)" }}
+      >
+        <ShareButton floating title="Grenadiers 2026 · Haïti à la Coupe du Monde 2026" />
       </div>
-      <div className="fixed bottom-[5.5rem] right-6 z-40">
+      <div
+        className="fixed right-5 z-40"
+        style={{ bottom: "calc(max(env(safe-area-inset-bottom), 16px) + 3.75rem)" }}
+      >
         <BackToTop />
       </div>
 
@@ -139,12 +155,9 @@ export default function Layout() {
               Grenadiers <span className="text-haiti-red">2026</span>
             </p>
             <p className="text-bg/60 text-sm mt-1 max-w-prose">
-              Fédération Haïtienne de Football · Coupe du Monde de la FIFA 2026
+              Coupe du Monde de la FIFA 2026
             </p>
           </div>
-
-          {/* Sponsor scarf — chevron-edged white band with logo slots */}
-          <FooterSponsorScarf />
         </div>
 
         <div className="max-w-content mx-auto px-5 py-12 grid md:grid-cols-3 gap-8">
@@ -194,74 +207,3 @@ export default function Layout() {
   );
 }
 
-// ─── Sponsor scarf ─────────────────────────────────────────────────
-// FFF-inspired chevron-edged white band. Renders 6 logo slots.
-// When a slot has logoUrl + name set, displays the logo. Otherwise,
-// displays a subtle placeholder text inviting partners.
-// Edit the FOOTER_SPONSORS array below to fill the scarf.
-const FOOTER_SPONSORS = [
-  { name: null, logoUrl: null, url: null },
-  { name: null, logoUrl: null, url: null },
-  { name: null, logoUrl: null, url: null },
-  { name: null, logoUrl: null, url: null },
-  { name: null, logoUrl: null, url: null },
-  { name: null, logoUrl: null, url: null },
-];
-
-function FooterSponsorScarf() {
-  return (
-    <div className="max-w-content mx-auto px-5 pb-12">
-      <p className="text-bg/40 text-[10px] uppercase tracking-[0.2em] text-center mb-4 font-semibold">
-        Partenaires officiels
-      </p>
-      <div
-        className="bg-white text-ink py-5 px-6 md:px-10 shadow-lg"
-        style={{
-          // chevron / scarf shape — pointed ends on both sides
-          clipPath:
-            "polygon(2% 0, 98% 0, 100% 50%, 98% 100%, 2% 100%, 0 50%)",
-        }}
-      >
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-6 items-center">
-          {FOOTER_SPONSORS.map((sponsor, idx) => (
-            <SponsorSlot key={idx} {...sponsor} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SponsorSlot({ name, logoUrl, url }) {
-  // No sponsor assigned yet — render a quiet placeholder
-  if (!logoUrl) {
-    return (
-      <div className="h-12 md:h-14 flex items-center justify-center">
-        <span className="text-muted/40 text-[10px] md:text-xs uppercase tracking-wider text-center leading-tight">
-          Espace<br />partenaire
-        </span>
-      </div>
-    );
-  }
-  const inner = (
-    <img
-      src={logoUrl}
-      alt={name || "Sponsor"}
-      className="max-h-12 md:max-h-14 w-auto max-w-full object-contain"
-    />
-  );
-  if (url) {
-    return (
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="h-12 md:h-14 flex items-center justify-center hover:opacity-80 transition-opacity"
-        aria-label={name || "Sponsor"}
-      >
-        {inner}
-      </a>
-    );
-  }
-  return <div className="h-12 md:h-14 flex items-center justify-center">{inner}</div>;
-}

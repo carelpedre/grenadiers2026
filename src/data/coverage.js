@@ -93,6 +93,12 @@ export const musicVideos = [
     artist: "DANAEE",
     note: "« Champions ». Le mot qu'un peuple entier ose enfin prononcer. DANAEE transforme l'ambition en hymne : une déclaration portée par la nouvelle scène haïtienne, taillée pour accompagner Les Grenadiers sur la route du Mondial 2026.",
   },
+  {
+    videoId: "5cg4Zw42lO8",
+    title: "Ayibobo (Hymne de la Victoire)",
+    artist: "DOIZAY",
+    note: "« Ayibobo », le cri de louange hérité du vaudou haïtien, devenu ici hymne de la victoire. DOIZAY transforme cette affirmation ancestrale en chant de ralliement, où la ferveur populaire et la fierté nationale se rejoignent pour accompagner Les Grenadiers vers le Mondial 2026.",
+  },
 ];
 
 // ─── Archives FIFA 1974 ──────────────────────────────────────────────
@@ -150,6 +156,35 @@ export const lyneLucien = {
 // d'artistes ou d'institutions. Chaque entrée porte son propre crédit,
 // affiché tel quel (pas de crédit hérité). Nouvelles entrées en tête.
 export const creativeTributes = [
+  {
+    slug: "lento-ayizan-tanbou-2026",
+    title: "Ayiti nan Mondyal 2026 : Tanbou viktwa a deja frape",
+    credit: "Lento Ayizan",
+    chapter: "art",
+    medium: "Peinture · Mars 2026",
+    image: "/images/tribute/lento-ayizan-tanbou-2026.jpg",
+    imageLabel: "Lento Ayizan — Ayiti nan Mondyal 2026, le tambour de la victoire",
+    caption:
+      "Une toile où le tambour, aux couleurs du drapeau, devient le cœur du peuple qui accompagne les Grenadiers vers le Mondial 2026.",
+    statement_kr: `Nan tablo sa a, mwen chwazi fè yon retou nan rasin pèp ayisyen an pou montre fòs, kouraj ak eritaj ki mache ansanm ak Seleksyon Nasyonal Ayiti a nan chemen li pou Mondyal 2026 la.
+Anndan estad la, dèyè foul sipòtè yo, nou ka remake Sitadèl Laferrière, youn nan pi gwo senbòl fyète nasyonal nou. Li reprezante rezistans, diyite ak memwa ewo nou yo ki te goumen pou libète peyi a. Prezans li nan tablo a fè nou sonje ke chak jwè k ap pote koulè ble ak wouj yo ap mache sou tras zansèt vanyan sa yo.
+Sou lòt bò a, gen yon ti kay peyizan, ki senbolize kominote ak fanmi chak jwè. Li raple nou ke dèyè chak atlèt genyen yon istwa, yon bitasyon, yon Loa, yon fanmi ak yon pèp k ap sipòte li. Se rasin sa yo ki bay fòs pou monte pi wo.
+Nan sant tablo a, tanbou a, ki pote koulè drapo ayisyen an, se kè pèp la. Nan tradisyon nou, lè tanbou a frape, li rele rasanbleman, solidarite ak fòs espirityèl. Nan vizyon sa a, chak kout tanbou se yon apèl pou tout enèji pozitif peyi a reyini pou akonpaye seleksyon an sou sèn mondyal la.
+Jwè yo parèt tankou boul dife, ak flanm ki limen sou tèt yo. Flanm sa yo reprezante pasyon, detèminasyon ak lespri konba ki pa janm etenn. Si advèsè yo ka eseye kenbe dife a, yo pap janm ka etenn kouraj ak volonte pèp ayisyen an.
+Twofe Mondyal la, ki plase devan ekip la, pa sèlman yon rèv. Li senbolize objektif, espwa ak anbisyon yon nasyon ki kwè nan kapasite pitit li yo pou fè listwa.
+Tablo sa a se yon omaj pou Seleksyon Nasyonal Ayiti a, yon mesaj inite ak lafwa. Li montre ke lè rasin nou, kilti nou ak lanmou nou pou peyi a reyini, pa gen limit pou sa nou kapab reyalize.
+« Lè tanbou Ayiti a frape, se pa sèlman yon ekip ki antre sou teren an; se tout yon pèp, tout yon istwa ak tout fòs zansèt yo k ap mache ansanm pou viktwa. »
+LEANDRE Loodwens aka LENTO AYIZAN`,
+    statement_fr: `Dans ce tableau, j'ai choisi de revenir aux racines du peuple haïtien pour montrer la force, le courage et l'héritage qui accompagnent la Sélection nationale d'Haïti sur son chemin vers le Mondial 2026.
+À l'intérieur du stade, derrière la foule des supporters, on aperçoit la Citadelle Laferrière, l'un des plus grands symboles de notre fierté nationale. Elle représente la résistance, la dignité et la mémoire de nos héros qui se sont battus pour la liberté du pays. Sa présence dans le tableau nous rappelle que chaque joueur portant les couleurs bleu et rouge marche sur les traces de ces vaillants ancêtres.
+De l'autre côté, une petite maison paysanne symbolise la communauté et la famille de chaque joueur. Elle nous rappelle que derrière chaque athlète, il y a une histoire, une habitation, un Loa, une famille et un peuple qui le soutiennent. Ce sont ces racines qui donnent la force de monter plus haut.
+Au centre du tableau, le tambour, qui porte les couleurs du drapeau haïtien, est le cœur du peuple. Dans notre tradition, lorsque le tambour frappe, il appelle au rassemblement, à la solidarité et à la force spirituelle. Dans cette vision, chaque coup de tambour est un appel à réunir toute l'énergie positive du pays pour accompagner la sélection sur la scène mondiale.
+Les joueurs apparaissent comme des boules de feu, avec des flammes allumées au-dessus de leur tête. Ces flammes représentent la passion, la détermination et l'esprit de combat qui ne s'éteint jamais. Même si les adversaires peuvent tenter de contenir le feu, ils ne pourront jamais éteindre le courage et la volonté du peuple haïtien.
+Le trophée du Mondial, placé devant l'équipe, n'est pas qu'un rêve. Il symbolise l'objectif, l'espoir et l'ambition d'une nation qui croit en la capacité de ses enfants à écrire l'histoire.
+Ce tableau est un hommage à la Sélection nationale d'Haïti, un message d'unité et de foi. Il montre que lorsque nos racines, notre culture et notre amour pour le pays se rejoignent, il n'y a aucune limite à ce que nous pouvons accomplir.
+« Lorsque le tambour d'Haïti frappe, ce n'est pas seulement une équipe qui entre sur le terrain ; c'est tout un peuple, toute une histoire et toute la force des ancêtres qui marchent ensemble vers la victoire. »
+LEANDRE Loodwens aka LENTO AYIZAN`,
+  },
   {
     slug: "haitian-hero",
     title: "Haitian Hero",

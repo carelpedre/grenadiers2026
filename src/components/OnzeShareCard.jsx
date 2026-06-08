@@ -1,8 +1,8 @@
 import { useState, useMemo, useEffect } from "react";
-import { svgToPng, pngFile, saveImageSync, sharePngSync, imageToDataURL } from "../lib/shareCard";
+import { composeCardBlob, saveImageSync, sharePngSync, imageToDataURL } from "../lib/shareCard";
 
 // ╔═══════════════════════════════════════════════════════════════════════╗
-// ║  ONZE SHARE CARD — shareable starting-XI image (1080×1920, 9:16)      ║
+// ║  ONZE SHARE CARD · shareable starting-XI image (1080×1920, 9:16)      ║
 // ║  Realistic green striped pitch with full markings; the XI sits well    ║
 // ║  inside the field with clear top/bottom margins (no player on the      ║
 // ║  goal line, none jammed in the boxes).                                 ║
@@ -136,21 +136,79 @@ function buildInner(formation, lineup, photoFor, coach) {
     <rect x="${W * 0.33}" y="${H - 70}" width="${W * 0.33}" height="70" fill="${HAITI_RED}"/>
     <rect x="${W * 0.66}" y="${H - 70}" width="${W * 0.34}" height="70" fill="${GOLD}"/>
     <text x="60" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="${BG}" letter-spacing="2">GRENADIERS2026.COM</text>
-    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">en collaboration avec la FHF</text>
+    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">Un projet de Carel Pedre</text>
   `;
 }
 
-function buildString(formation, lineup, photoMap, coach) {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-${buildInner(formation, lineup, (p) => photoMap[p.slug] ?? p.photo, coach)}
-</svg>`;
+// ── Canvas export: split into a VECTOR-ONLY base (under the photos) and a
+// VECTOR-ONLY chrome (over them). The player photos are composited directly on
+// the canvas as circles · NOT via SVG <image> · so iOS doesn't taint the canvas.
+const TILE_R = 60;
+
+// Base: background, header, pitch, and the dark backing disc per tile.
+function buildBaseInner(formation, lineup, coach) {
+  const discs = lineup
+    .map((slot) => {
+      const { px, py } = place(slot);
+      return `<circle cx="${px}" cy="${py}" r="${TILE_R}" fill="${HAITI_BLUE_DARK}"/>`;
+    })
+    .join("");
+
+  return `
+    <defs>
+      <linearGradient id="onze-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="${HAITI_BLUE}"/>
+        <stop offset="100%" stop-color="${HAITI_BLUE_DARK}"/>
+      </linearGradient>
+    </defs>
+    <rect width="${W}" height="${H}" fill="url(#onze-bg)"/>
+    <text x="60" y="118" font-family="Plus Jakarta Sans, sans-serif" font-size="30" font-weight="700" fill="${GOLD}" letter-spacing="4">MON ONZE DE DÉPART</text>
+    <text x="60" y="208" font-family="Plus Jakarta Sans, sans-serif" font-size="76" font-weight="800" fill="${BG}">${escapeXml(formation)}</text>
+    ${coach ? `<text x="${W - 60}" y="126" font-family="Plus Jakarta Sans, sans-serif" font-size="26" font-weight="700" fill="${GOLD}" text-anchor="end" letter-spacing="3">SÉLECTIONNEUR</text>
+    <text x="${W - 60}" y="200" font-family="Plus Jakarta Sans, sans-serif" font-size="46" font-weight="800" fill="${BG}" text-anchor="end">${escapeXml(coach)}</text>` : ""}
+    ${pitchMarkup()}
+    ${discs}
+  `;
 }
+
+// Chrome: ring, number badge, name (+ initials when a tile has no photo),
+// drawn ON TOP of the composited photos. Plus the bottom strip.
+function buildChromeInner(lineup, photoSlugs) {
+  const tiles = lineup
+    .map((slot) => {
+      const p = slot.player;
+      const { px, py } = place(slot);
+      const R = TILE_R;
+      const showInitials = p && !photoSlugs.has(p.slug);
+      const initials = p ? escapeXml(String(p.name).split(" ").map((n) => n[0]).join("").slice(0, 2)) : "";
+      return `
+      ${showInitials ? `<text x="${px}" y="${py + 14}" font-family="Plus Jakarta Sans, sans-serif" font-size="40" font-weight="800" fill="${BG}" text-anchor="middle">${initials}</text>` : ""}
+      <circle cx="${px}" cy="${py}" r="${R}" fill="none" stroke="${BG}" stroke-width="4"/>
+      <circle cx="${px + 42}" cy="${py + 42}" r="23" fill="${HAITI_BLUE_DARK}" stroke="${BG}" stroke-width="2"/>
+      <text x="${px + 42}" y="${py + 50}" font-family="Plus Jakarta Sans, sans-serif" font-size="25" font-weight="800" fill="${GOLD}" text-anchor="middle">${p && p.number != null ? escapeXml(p.number) : ""}</text>
+      <text x="${px}" y="${py + R + 36}" font-family="Plus Jakarta Sans, sans-serif" font-size="27" font-weight="700" fill="${BG}" text-anchor="middle" stroke="#0a1f1a" stroke-width="0.6" paint-order="stroke">${p ? escapeXml(surname(p.name)) : ""}</text>
+    `;
+    })
+    .join("");
+
+  return `
+    ${tiles}
+    <rect x="0" y="${H - 70}" width="${W * 0.33}" height="70" fill="${HAITI_BLUE_DARK}"/>
+    <rect x="${W * 0.33}" y="${H - 70}" width="${W * 0.33}" height="70" fill="${HAITI_RED}"/>
+    <rect x="${W * 0.66}" y="${H - 70}" width="${W * 0.34}" height="70" fill="${GOLD}"/>
+    <text x="60" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="${BG}" letter-spacing="2">GRENADIERS2026.COM</text>
+    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">Un projet de Carel Pedre</text>
+  `;
+}
+
+const wrapSvg = (inner) =>
+  `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${inner}</svg>`;
 
 export default function OnzeShareCard({ formation, lineup, coach = "", onClose }) {
   const [copyStatus, setCopyStatus] = useState("idle");
-  const [png, setPng] = useState(null);
   const [file, setFile] = useState(null);
+  const [downloadUrl, setDownloadUrl] = useState(null);
   const [ready, setReady] = useState(false);
 
   const coachName = (coach || "").trim();
@@ -158,8 +216,8 @@ export default function OnzeShareCard({ formation, lineup, coach = "", onClose }
   const previewInner = useMemo(() => buildInner(formation, lineup, (p) => p.photo, coachName), [formation, lineup, coachName]);
 
   const SHARE_META = {
-    title: "Mon Onze de Départ — Grenadiers 2026",
-    text: `Mon Onze de Départ 🇭🇹 Grenadiers 2026 — ${formation}${coachName ? ` · par ${coachName}` : ""}`,
+    title: "Mon Onze de Départ · Grenadiers 2026",
+    text: `Mon Onze de Départ 🇭🇹 Grenadiers 2026 · ${formation}${coachName ? ` · par ${coachName}` : ""}`,
     url: SHARE_URL,
   };
 
@@ -170,13 +228,16 @@ export default function OnzeShareCard({ formation, lineup, coach = "", onClose }
     [formation, coachName, lineup]
   );
 
-  // Pre-build the PNG + File when the modal opens (photos embedded as base64)
-  // so the Save/Share taps stay synchronous → iOS shows "Save Image" → Photos.
+  // Pre-build the PNG Blob + File when the modal opens. Photos are composited
+  // directly on the canvas (circles) and the rest is vector-only SVG, so iOS
+  // doesn't taint the canvas → toBlob() succeeds and the share sheet offers
+  // "Save Image" → Photos with the real card.
   useEffect(() => {
     let cancelled = false;
+    let objUrl = null;
     setReady(false);
-    setPng(null);
     setFile(null);
+    setDownloadUrl(null);
     (async () => {
       try {
         const entries = await Promise.all(
@@ -184,40 +245,61 @@ export default function OnzeShareCard({ formation, lineup, coach = "", onClose }
             .filter((s) => s.player)
             .map(async (s) => [s.player.slug, await imageToDataURL(s.player.photo)])
         );
-        const photoMap = Object.fromEntries(entries);
-        const dataUrl = await svgToPng(buildString(formation, lineup, photoMap, coachName), { width: W, height: H, background: HAITI_BLUE_DARK });
-        if (cancelled) return;
-        setPng(dataUrl);
-        setFile(await pngFile(dataUrl, FILENAME));
+        const photoMap = Object.fromEntries(entries.filter(([, v]) => v));
+        const photoSlugs = new Set(Object.keys(photoMap));
+        const photos = lineup
+          .filter((s) => s.player && photoMap[s.player.slug])
+          .map((s) => {
+            const { px, py } = place(s);
+            return { dataUrl: photoMap[s.player.slug], cx: px, cy: py, r: TILE_R };
+          });
+        const blob = await composeCardBlob({
+          width: W,
+          height: H,
+          background: HAITI_BLUE_DARK,
+          baseSvg: wrapSvg(buildBaseInner(formation, lineup, coachName)),
+          photos,
+          overlaySvg: wrapSvg(buildChromeInner(lineup, photoSlugs)),
+        });
+        if (cancelled || !blob) return;
+        objUrl = URL.createObjectURL(blob);
+        setFile(new File([blob], FILENAME, { type: "image/png" }));
+        setDownloadUrl(objUrl);
       } catch (e) {
-        if (!cancelled) console.error("Onze PNG generation failed", e);
+        if (!cancelled) console.error("Onze card generation failed", e);
       } finally {
         if (!cancelled) setReady(true);
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+      if (objUrl) URL.revokeObjectURL(objUrl);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sig]);
 
   function handleDownload() {
-    if (!png) {
-      alert("Image en cours de génération — réessayez dans un instant.");
+    if (!file && !downloadUrl) {
+      alert("Image en cours de génération · réessayez dans un instant.");
       return;
     }
-    saveImageSync(file, png, { ...SHARE_META, filename: FILENAME });
+    saveImageSync(file, downloadUrl, { filename: FILENAME });
   }
 
   function handleShare() {
-    sharePngSync(file, png, SHARE_META, () => {
+    sharePngSync(file, downloadUrl, { ...SHARE_META, filename: FILENAME }, () => {
       setCopyStatus("copied");
       setTimeout(() => setCopyStatus("idle"), 2000);
     });
   }
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center sm:p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm" />
-      <div className="relative bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-lg flex flex-col max-h-[92dvh] overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-ink/60 hover:bg-ink/80 text-bg flex items-center justify-center backdrop-blur-sm"
@@ -228,7 +310,7 @@ export default function OnzeShareCard({ formation, lineup, coach = "", onClose }
           </svg>
         </button>
 
-        <div className="p-5">
+        <div className="overflow-y-auto p-5 min-h-0">
           <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-1">Carte de partage</p>
           <h2 className="font-display text-xl mb-4">Mon onze de départ · {formation}</h2>
 
@@ -240,14 +322,19 @@ export default function OnzeShareCard({ formation, lineup, coach = "", onClose }
               dangerouslySetInnerHTML={{ __html: previewInner }}
             />
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 gap-3 mt-5">
+        <div
+          className="border-t border-line bg-white px-5 pt-3"
+          style={{ paddingBottom: "max(env(safe-area-inset-bottom), 16px)" }}
+        >
+          <div className="grid grid-cols-2 gap-3">
             <button
               onClick={handleDownload}
-              disabled={!png}
+              disabled={!ready}
               className="px-4 py-3 bg-haiti-blue hover:bg-haiti-blue-dark disabled:opacity-50 text-bg font-semibold rounded-full text-sm transition-colors"
             >
-              ⬇ Enregistrer l'image
+              {ready ? "↓ Enregistrer" : "…"}
             </button>
             <button
               onClick={handleShare}
@@ -257,8 +344,8 @@ export default function OnzeShareCard({ formation, lineup, coach = "", onClose }
               {copyStatus === "copied" ? "Copié ✓" : "Partager"}
             </button>
           </div>
-          <p className="text-xs text-muted text-center mt-3">
-            Enregistrez l'image et publiez-la sur vos stories.
+          <p className="text-xs text-muted text-center mt-2">
+            « Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…
           </p>
         </div>
       </div>

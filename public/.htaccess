@@ -13,8 +13,9 @@
   RewriteEngine On
   RewriteBase /
 
-  # Disable content negotiation so MultiViews can't shadow our .html rewrites
-  Options -MultiViews
+  # Disable content negotiation so MultiViews can't shadow our .html rewrites.
+  # Disable directory indexing so a stray folder never exposes an "Index of" page.
+  Options -MultiViews -Indexes
 
   # ─── Force HTTPS ─────────────────────────────────────────────────
   RewriteCond %{HTTPS} !=on
@@ -81,12 +82,45 @@
   RewriteCond %{REQUEST_URI} ^/about/?$
   RewriteRule .* /about.html [L]
 
-  # ─── SPA aliases (route to coverage/documentary HTML) ───────────
-  # /the-tribute and /the-coverage are React Router aliases for /anthem;
-  # serve the documentary metadata for /the-tribute (more on-theme),
-  # and the anthem metadata for /the-coverage.
+  RewriteCond %{REQUEST_URI} ^/mur/?$
+  RewriteRule .* /mur.html [L]
+
+  # /foto/upload is a private SPA tool (no prerender) — serve the app shell.
+  # Must come BEFORE the /foto rule so it isn't shadowed.
+  RewriteCond %{REQUEST_URI} ^/foto/upload/?$
+  RewriteRule .* /index.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/foto/?$
+  RewriteRule .* /foto.html [L]
+
+  # Legacy prerender URLs (before the /games/ move) → clean React routes, so any
+  # indexed/shared /jeux/<x>.html link 301s instead of erroring on the old path.
+  RewriteRule ^jeux/quiz\.html$ /jeux/quiz [R=301,L]
+  RewriteRule ^jeux/pwonostik\.html$ /jeux/pwonostik [R=301,L]
+
+  # /jeux is a React route (games landing). Its prerendered OG HTML lives at the
+  # repo root as jeux.html — NOT in a jeux/ folder, which would shadow the route
+  # and expose a directory listing. The two game shells live under /games/ so
+  # nothing physical ever occupies /jeux/<x>.
+  RewriteCond %{REQUEST_URI} ^/jeux/?$
+  RewriteRule .* /jeux.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/jeux/quiz/?$
+  RewriteRule .* /games/quiz.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/jeux/pwonostik/?$
+  RewriteRule .* /games/pwonostik.html [L]
+
+  # Other /jeux/<slug> games (onze, devine) are pure SPA routes. Dotless so the
+  # rewritten /games/*.html targets above aren't re-clobbered on the second pass.
+  RewriteCond %{REQUEST_URI} ^/jeux/[^/.]+/?$
+  RewriteRule .* /index.html [L]
+
+  # ─── SPA aliases ─────────────────────────────────────────────────
+  # /the-tribute (Hommages Créatifs) has its own prerendered HTML + OG.
+  # /the-coverage is a React Router alias for /anthem.
   RewriteCond %{REQUEST_URI} ^/the-tribute/?$
-  RewriteRule .* /documentary.html [L]
+  RewriteRule .* /the-tribute.html [L]
 
   RewriteCond %{REQUEST_URI} ^/the-coverage/?$
   RewriteRule .* /anthem.html [L]
@@ -101,7 +135,25 @@
   RewriteCond %{REQUEST_URI} ^/interviews/[^/]+/?$
   RewriteRule .* /index.html [L]
 
-  RewriteCond %{REQUEST_URI} ^/live/[^/]+/?$
+  # /live/<slug> → explicit prerendered per-opponent HTML (same pattern as the
+  # top-level routes above). Any other /live slug falls back to the SPA shell.
+  RewriteCond %{REQUEST_URI} ^/live/scotland/?$
+  RewriteRule .* /live/scotland.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/live/brazil/?$
+  RewriteRule .* /live/brazil.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/live/morocco/?$
+  RewriteRule .* /live/morocco.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/live/peru/?$
+  RewriteRule .* /live/peru.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/live/new-zealand/?$
+  RewriteRule .* /live/new-zealand.html [L]
+
+  # Dotless so the rewritten /live/<slug>.html target isn't re-clobbered here.
+  RewriteCond %{REQUEST_URI} ^/live/[^/.]+/?$
   RewriteRule .* /index.html [L]
 
   # /journal (index) → /journal.html (gets its own OG metadata)

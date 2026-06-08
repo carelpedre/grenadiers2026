@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { svgToPng, pngFile, saveImageSync, sharePngSync } from "../lib/shareCard";
 
 // ╔═══════════════════════════════════════════════════════════════════════╗
-// ║  QUIZ SHARE CARD — shareable score image (1080×1350)                  ║
+// ║  QUIZ SHARE CARD · shareable score image (1080×1350)                  ║
 // ║  Same brand tokens + PNG/share pipeline as PlayerShareCard. No photos.║
 // ╚═══════════════════════════════════════════════════════════════════════╝
 
@@ -55,7 +55,7 @@ function buildInner(score, total, themeLabel) {
     <rect x="${W * 0.33}" y="${H - 70}" width="${W * 0.33}" height="70" fill="${HAITI_RED}"/>
     <rect x="${W * 0.66}" y="${H - 70}" width="${W * 0.34}" height="70" fill="${GOLD}"/>
     <text x="60" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="${BG}" letter-spacing="2">GRENADIERS2026.COM</text>
-    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">en collaboration avec la FHF</text>
+    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">Un projet de Carel Pedre</text>
   `;
 }
 
@@ -75,8 +75,8 @@ export default function QuizShareCard({ score, total, themeLabel, onClose }) {
   const previewInner = useMemo(() => buildInner(score, total, themeLabel), [score, total, themeLabel]);
 
   const SHARE_META = {
-    title: "Quiz Grenadier — Grenadiers 2026",
-    text: `Quiz Grenadier 🇭🇹 — ${score}/${total} · ${quizQualifier(score, total)}`,
+    title: "Quiz Grenadier · Grenadiers 2026",
+    text: `Quiz Grenadier 🇭🇹 · ${score}/${total} · ${quizQualifier(score, total)}`,
     url: SHARE_URL,
   };
 
@@ -104,23 +104,26 @@ export default function QuizShareCard({ score, total, themeLabel, onClose }) {
 
   function handleDownload() {
     if (!png) {
-      alert("Image en cours de génération — réessayez dans un instant.");
+      alert("Image en cours de génération · réessayez dans un instant.");
       return;
     }
     saveImageSync(file, png, { ...SHARE_META, filename: FILENAME });
   }
 
   function handleShare() {
-    sharePngSync(file, png, SHARE_META, () => {
+    sharePngSync(file, png, { ...SHARE_META, filename: FILENAME }, () => {
       setCopyStatus("copied");
       setTimeout(() => setCopyStatus("idle"), 2000);
     });
   }
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center sm:p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm" />
-      <div className="relative bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-lg flex flex-col max-h-[92dvh] overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-ink/60 hover:bg-ink/80 text-bg flex items-center justify-center backdrop-blur-sm"
@@ -131,7 +134,7 @@ export default function QuizShareCard({ score, total, themeLabel, onClose }) {
           </svg>
         </button>
 
-        <div className="p-5">
+        <div className="overflow-y-auto p-5 min-h-0">
           <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-1">Carte de partage</p>
           <h2 className="font-display text-xl mb-4">Mon score · {score}/{total}</h2>
 
@@ -143,14 +146,19 @@ export default function QuizShareCard({ score, total, themeLabel, onClose }) {
               dangerouslySetInnerHTML={{ __html: previewInner }}
             />
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 gap-3 mt-5">
+        <div
+          className="border-t border-line bg-white px-5 pt-3"
+          style={{ paddingBottom: "max(env(safe-area-inset-bottom), 16px)" }}
+        >
+          <div className="grid grid-cols-2 gap-3">
             <button
               onClick={handleDownload}
-              disabled={!png}
+              disabled={!ready}
               className="px-4 py-3 bg-haiti-blue hover:bg-haiti-blue-dark disabled:opacity-50 text-bg font-semibold rounded-full text-sm transition-colors"
             >
-              ⬇ Enregistrer l'image
+              {ready ? "↓ Enregistrer" : "…"}
             </button>
             <button
               onClick={handleShare}
@@ -160,8 +168,8 @@ export default function QuizShareCard({ score, total, themeLabel, onClose }) {
               {copyStatus === "copied" ? "Copié ✓" : "Partager"}
             </button>
           </div>
-          <p className="text-xs text-muted text-center mt-3">
-            Enregistrez l'image et publiez-la sur vos stories.
+          <p className="text-xs text-muted text-center mt-2">
+            « Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…
           </p>
         </div>
       </div>

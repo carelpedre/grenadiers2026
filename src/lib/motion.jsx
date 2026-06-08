@@ -47,52 +47,47 @@ export const pinDrop = {
 
 // ─── Counter hook: counts from 0 to target when element enters view ─────
 export function useCountUp(target, duration = 1800, enabled = true) {
-  const [value, setValue] = useState(0);
+  // Default to the final value so the number is correct at rest even before /
+  // without the animation — it can never get stuck at 0.
+  const [value, setValue] = useState(target);
   const ref = useRef(null);
 
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled) {
+      setValue(target);
+      return;
+    }
 
-    // Respect prefers-reduced-motion
-    const prefersReduced = typeof window !== "undefined" &&
+    // Respect prefers-reduced-motion → snap to the final value, no animation.
+    const prefersReduced =
+      typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
       setValue(target);
       return;
     }
 
+    // Animation runs to completion on mount (not gated on viewport), so it
+    // always lands on `target` and is never left at 0.
     let startTs = null;
     let raf = null;
-    let observer = null;
+    setValue(0);
 
     const tick = (ts) => {
       if (startTs === null) startTs = ts;
       const progress = Math.min(1, (ts - startTs) / duration);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(target * eased));
-      if (progress < 1) raf = requestAnimationFrame(tick);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      if (progress < 1) {
+        setValue(Math.round(target * eased));
+        raf = requestAnimationFrame(tick);
+      } else {
+        setValue(target); // land exactly on target
+      }
     };
-
-    if (ref.current && "IntersectionObserver" in window) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            raf = requestAnimationFrame(tick);
-            observer.disconnect();
-          }
-        },
-        { threshold: 0.5 }
-      );
-      observer.observe(ref.current);
-    } else {
-      // Fallback: just animate immediately
-      raf = requestAnimationFrame(tick);
-    }
+    raf = requestAnimationFrame(tick);
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
-      if (observer) observer.disconnect();
     };
   }, [target, duration, enabled]);
 

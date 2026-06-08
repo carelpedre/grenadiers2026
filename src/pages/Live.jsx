@@ -8,7 +8,8 @@ import CountdownClock from "../components/CountdownClock";
 import StadiumWeather from "../components/StadiumWeather";
 import GroupCTable from "../components/GroupCTable";
 import { useLiveFixtures } from "../lib/useLiveFixtures";
-import { fetchFixtureByOpponent, isLive } from "../lib/fixturesApi";
+import { fetchFixtureByOpponent, getOpponentScouting, isLive } from "../lib/fixturesApi";
+import ScoutingSection from "../components/ScoutingSection";
 
 const HAITI_TEAM_ID = 2386;
 
@@ -76,6 +77,27 @@ function LiveMatchView({ match }) {
       if (timer) clearTimeout(timer);
     };
   }, [opponent.country]);
+
+  // Scouting avant-match (H2H + forme de l'adversaire) via la fonction edge
+  // publique wc-h2h. Identifiant adversaire dérivé du match chargé (detail) ;
+  // requête uniquement en pré-match. Masqué dès que le match est lancé/terminé.
+  const oppId = detail ? (detail.home_id === HAITI_TEAM_ID ? detail.away_id : detail.home_id) : null;
+  const isPreMatch = effStatus === "scheduled";
+  const [scouting, setScouting] = useState(null);
+  useEffect(() => {
+    if (!isPreMatch || !oppId) {
+      setScouting(null);
+      return;
+    }
+    let alive = true;
+    (async () => {
+      const d = await getOpponentScouting(oppId);
+      if (alive) setScouting(d);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [oppId, isPreMatch]);
 
   const apiEvents = Array.isArray(detail?.events) ? detail.events : [];
   const lineups = Array.isArray(detail?.lineups) ? detail.lineups : [];
@@ -327,6 +349,9 @@ function LiveMatchView({ match }) {
             </>
           )}
         </section>
+
+        {/* Scouting adversaire — avant-match uniquement (masqué dès le coup d'envoi) */}
+        {isPreMatch && scouting && <ScoutingSection data={scouting} />}
 
         {/* Recent form */}
         {recentForm.length > 0 && (

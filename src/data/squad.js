@@ -311,12 +311,14 @@ export const squad = {
       born: "30 décembre 2004",
       birthplace: "Cité Soleil, Port-au-Prince, Haiti",
       age: 21,
-      caps: 2,
+      caps: 1,
       goals: 0,
       club: "Violette AC",
       clubCountry: "Haïti",
       league: "Ligue Haïtienne",
-      bio: "Né le 30 décembre 2004 à Cité Soleil, Olivier Woodensky Pierre est le seul joueur du groupe à évoluer dans le championnat haïtien. Formé au Violette AC, le doyen des clubs nationaux, il s'est révélé lors du Championnat U20 de la CONCACAF en 2022, notamment lors d'un match nul historique face au Mexique. Passé au Real Hope FA de Cap-Haïtien entre 2023 et 2025, il y a remporté le championnat d'Haïti en mai 2024 avant de retourner au Violette AC. Milieu défensif au profil moderne, capable de jouer des deux pieds, il fait ses débuts en sélection en 2025 et compte deux sélections avec les Grenadiers.",
+      // Crest local : l'API de stats n'a pas de logo correct pour ce club haïtien.
+      clubLogo: "/images/clubs/violette-ac.png",
+      bio: "Né le 30 décembre 2004 à Cité Soleil, Olivier Woodensky Pierre est le seul joueur du groupe à évoluer dans le championnat haïtien. Formé au Violette AC, le doyen des clubs nationaux, il s'est révélé lors du Championnat U20 de la CONCACAF en 2022, notamment lors d'un match nul historique face au Mexique. Passé au Real Hope FA de Cap-Haïtien entre 2023 et 2025, il y a remporté le championnat d'Haïti en mai 2024 avant de retourner au Violette AC. Milieu défensif au profil moderne, capable de jouer des deux pieds, il fait ses débuts en sélection en 2026 et compte une sélection avec les Grenadiers.",
       notes: "Seul joueur de la sélection à évoluer dans le championnat haïtien. Né à Cité Soleil.",
     },
     {

@@ -273,7 +273,7 @@ export const diaryEntries = [
 
       "Une question, presque pour le plaisir : quel joueur, hors Groupe C, aimerait-il croiser ? « Cristiano Ronaldo. C'est mon idole, un joueur que j'admire vraiment. Son histoire parle d'elle-même. Il travaille énormément, et je suis comme lui. »",
 
-      "Le 13 juin à Boston Stadium, Haïti entrera en compétition face à l'Écosse. Ce sera, pour Adé, plus qu'un match. « Quand l'hymne va retentir, ce sera tout le pays. Pas une seule personne en moins. Rien que de chanter l'hymne sur la pelouse, j'ai déjà des frissons. Imaginez en Coupe du Monde. »",
+      "Le 13 juin au Gillette Stadium, Haïti entrera en compétition face à l'Écosse. Ce sera, pour Adé, plus qu'un match. « Quand l'hymne va retentir, ce sera tout le pays. Pas une seule personne en moins. Rien que de chanter l'hymne sur la pelouse, j'ai déjà des frissons. Imaginez en Coupe du Monde. »",
 
       "Et un dernier souhait, formulé comme une évidence : « Mon rêve, ce serait de pouvoir, comme d'autres pays, jouer un match à la maison avant la Coupe du Monde, et célébrer. Pourquoi pas, cinquante-deux ans après ? Je sais que tout le pays sera avec nous. Nous savons ce que nous représentons, et nous allons bien le représenter. »",
     ],

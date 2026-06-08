@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageHeader from "../components/PageHeader";
+import DevineShareCard from "../components/DevineShareCard";
 import { squad as rawSquad } from "../data/squad";
 
 // ╔══════════════════════════════════════════════════════════════════╗
@@ -93,6 +94,7 @@ export default function DevineGrenadier() {
   const [query, setQuery] = useState("");
   const [streak, setStreak] = useState(0);
   const [howOpen, setHowOpen] = useState(false); // « Comment jouer » : ouvert pour les nouveaux, replié pour les habitués
+  const [shareOpen, setShareOpen] = useState(false); // carte de partage (image)
 
   const guessedPlayers = guesses.map((name) => players.find((p) => p.name === name)).filter(Boolean);
   const won = guessedPlayers.some((p) => p.name === target.name);
@@ -162,19 +164,11 @@ export default function DevineGrenadier() {
     s === "hit" ? "bg-emerald-500 text-white"
     : s === "near" ? "bg-amber-400 text-ink"
     : "bg-slate-200 text-ink/70";
-  const emoji = (s) => (s === "hit" ? "🟩" : s === "near" ? "🟨" : "⬛");
-
-  async function share() {
-    const grid = guessedPlayers
-      .map((p) => attrs.map((a) => emoji(compare(p, a.key).status)).join(""))
-      .join("\n");
-    const head = `Devine le Grenadier nº${puzzle} — ${won ? guesses.length : "X"}/${MAX_TRIES} 🇭🇹`;
-    const text = `${head}\n${grid}\n\ngrenadiers2026.com/jeux/devine`;
-    try {
-      if (navigator.share) await navigator.share({ text });
-      else { await navigator.clipboard.writeText(text); alert("Copié — collez-le dans votre groupe."); }
-    } catch { /* annulé */ }
-  }
+  // Grille de statuts ("hit" | "near" | "miss") pour la carte image — sans
+  // nom de joueur, donc pas de spoiler. Le partage passe par la carte (image),
+  // comme les autres jeux → iOS propose « Enregistrer l'image » → Photos.
+  const shareGrid = guessedPlayers.map((p) => attrs.map((a) => compare(p, a.key).status));
+  const scoreLabel = `${won ? guesses.length : "X"}/${MAX_TRIES}`;
 
   return (
     <div className="bg-bg min-h-screen">
@@ -300,11 +294,22 @@ export default function DevineGrenadier() {
             <p className="text-muted mt-1 text-sm">
               Le Grenadier mystère était <span className="text-ink font-semibold">{target.name}</span>.
             </p>
-            <button onClick={share} className="mt-4 w-full rounded-xl bg-haiti-red py-3 font-display text-lg text-white">
+            <button onClick={() => setShareOpen(true)} className="mt-4 w-full rounded-xl bg-haiti-red py-3 font-display text-lg text-white">
               Partager mon résultat →
             </button>
             <p className="text-muted mt-3 text-xs">Un nouveau joueur mystère demain.</p>
           </div>
+        )}
+
+        {shareOpen && (
+          <DevineShareCard
+            puzzle={puzzle}
+            scoreLabel={scoreLabel}
+            won={won}
+            cols={attrs.map((a) => a.label)}
+            grid={shareGrid}
+            onClose={() => setShareOpen(false)}
+          />
         )}
 
         <div className="mt-10 border-t border-line pt-6">

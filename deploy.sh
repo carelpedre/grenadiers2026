@@ -23,9 +23,6 @@ REMOTE_PATH="/home/carelp/grenadiers2026.com"
 
 set -e  # exit on first error
 
-echo "🎨  Generating OG images (always — keeps social previews fresh)..."
-node scripts/generate-og.mjs
-
 echo "🛠️   Building production bundle..."
 npm run build
 

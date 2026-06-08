@@ -115,21 +115,21 @@ function Hero({ t }) {
 
       <div className="relative max-w-content mx-auto px-5 py-24 md:py-32 w-full">
         <div className="max-w-3xl">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="inline-flex items-center gap-2 px-3 py-1.5 bg-haiti-red text-bg text-xs font-bold uppercase tracking-wider rounded-full mb-7">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.05 }} className="inline-flex items-center gap-2 px-3 py-1.5 bg-haiti-red text-bg text-xs font-bold uppercase tracking-wider rounded-full mb-7">
             <span className="w-1.5 h-1.5 bg-bg rounded-full animate-pulse"></span>
             {t("home.hero.badge")}
           </motion.div>
 
-          <motion.h1 className="font-display text-6xl md:text-8xl text-bg mb-7 leading-[0.95]" initial="hidden" animate="show" variants={stagger(0.08, 0.4)}>
+          <motion.h1 className="font-display text-6xl md:text-8xl text-bg mb-7 leading-[0.95]" initial="hidden" animate="show" variants={stagger(0.06, 0.05)}>
             <motion.span variants={fadeUp} className="block">{t("home.hero.title1")}</motion.span>
             <motion.span variants={fadeUp} className="block text-haiti-red">{t("home.hero.title2")}</motion.span>
           </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }} className="text-bg/85 text-lg md:text-xl leading-relaxed mb-9 max-w-2xl">
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.12 }} className="text-bg/85 text-lg md:text-xl leading-relaxed mb-9 max-w-2xl">
             {t("home.hero.body")}
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 1.1 }} className="flex flex-wrap gap-3">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.18 }} className="flex flex-wrap gap-3">
             <Link to="/matches" className="inline-flex items-center gap-2 px-7 py-3.5 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors">
               {t("home.hero.fixtures")} →
             </Link>

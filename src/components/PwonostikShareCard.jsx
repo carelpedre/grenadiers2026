@@ -1,8 +1,8 @@
-import { useState, useMemo } from "react";
-import { svgToPng, downloadPng, sharePng } from "../lib/shareCard";
+import { useState, useMemo, useEffect } from "react";
+import { svgToPng, pngFile, saveImageSync, sharePngSync } from "../lib/shareCard";
 
 // ╔═══════════════════════════════════════════════════════════════════════╗
-// ║  PWONOSTIK SHARE CARD — shareable prediction image (1080×1350)        ║
+// ║  PWONOSTIK SHARE CARD · shareable prediction image (1080×1350)        ║
 // ║  Same brand tokens + PNG/share pipeline as the Onze/Quiz cards.       ║
 // ║  Renders the user's current 3 Group-C picks. No persistence.          ║
 // ╚═══════════════════════════════════════════════════════════════════════╝
@@ -58,7 +58,7 @@ function buildInner(predictions) {
     <rect x="${W * 0.33}" y="${H - 70}" width="${W * 0.33}" height="70" fill="${HAITI_RED}"/>
     <rect x="${W * 0.66}" y="${H - 70}" width="${W * 0.34}" height="70" fill="${GOLD}"/>
     <text x="60" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="${BG}" letter-spacing="2">GRENADIERS2026.COM</text>
-    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">en collaboration avec la FHF</text>
+    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">Un projet de Carel Pedre</text>
   `;
 }
 
@@ -71,52 +71,79 @@ ${buildInner(predictions)}
 
 export default function PwonostikShareCard({ predictions, onClose }) {
   const [copyStatus, setCopyStatus] = useState("idle");
-  const [busy, setBusy] = useState(false);
+  const [png, setPng] = useState(null);
+  const [file, setFile] = useState(null);
+  const [ready, setReady] = useState(false);
 
   const previewInner = useMemo(() => buildInner(predictions), [predictions]);
 
-  function buildPng() {
-    return svgToPng(buildString(predictions), { width: W, height: H, background: HAITI_BLUE_DARK });
+  const SHARE_META = {
+    title: "Mon pronostic · Grenadiers 2026",
+    text: "Mon pronostic 🇭🇹 Grenadiers 2026 · Coupe du Monde, Groupe C",
+    url: SHARE_URL,
+  };
+
+  // Stable signature so the build effect only re-runs when the picks change.
+  const sig = useMemo(
+    () =>
+      (predictions || [])
+        .map((p) => `${p.date}|${p.homeName}:${p.home}-${p.away}:${p.awayName}`)
+        .join(","),
+    [predictions]
+  );
+
+  // Pre-build the PNG + File when the modal opens so the Save/Share taps stay
+  // synchronous → iOS keeps the tap activation and the share sheet exposes
+  // "Save Image" → Photos (and shares the actual card, not just the page).
+  useEffect(() => {
+    let cancelled = false;
+    setReady(false);
+    setPng(null);
+    setFile(null);
+    (async () => {
+      try {
+        const dataUrl = await svgToPng(buildString(predictions), {
+          width: W,
+          height: H,
+          background: HAITI_BLUE_DARK,
+        });
+        if (cancelled) return;
+        setPng(dataUrl);
+        setFile(await pngFile(dataUrl, FILENAME));
+      } catch (e) {
+        if (!cancelled) console.error("Pwonostik PNG generation failed", e);
+      } finally {
+        if (!cancelled) setReady(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sig]);
+
+  function handleDownload() {
+    if (!png) {
+      alert("Image en cours de génération · réessayez dans un instant.");
+      return;
+    }
+    saveImageSync(file, png, { ...SHARE_META, filename: FILENAME });
   }
 
-  async function handleDownload() {
-    setBusy(true);
-    try {
-      const png = await buildPng();
-      if (png) downloadPng(png, FILENAME);
-    } catch (e) {
-      console.error("Pwonostik PNG generation failed", e);
-      alert("Impossible de générer l'image — réessayez ou faites une capture d'écran.");
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function handleShare() {
-    setBusy(true);
-    let png = null;
-    try {
-      png = await buildPng();
-    } catch (e) {
-      // share without the image if rasterization fails
-    }
-    const result = await sharePng(png, {
-      title: "Mon pronostic — Grenadiers 2026",
-      text: "Mon pronostic 🇭🇹 Grenadiers 2026 — Coupe du Monde, Groupe C",
-      url: SHARE_URL,
-      filename: FILENAME,
-    });
-    if (result === "copied") {
+  function handleShare() {
+    sharePngSync(file, png, { ...SHARE_META, filename: FILENAME }, () => {
       setCopyStatus("copied");
       setTimeout(() => setCopyStatus("idle"), 2000);
-    }
-    setBusy(false);
+    });
   }
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center sm:p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm" />
-      <div className="relative bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-lg flex flex-col max-h-[92dvh] overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-ink/60 hover:bg-ink/80 text-bg flex items-center justify-center backdrop-blur-sm"
@@ -127,7 +154,7 @@ export default function PwonostikShareCard({ predictions, onClose }) {
           </svg>
         </button>
 
-        <div className="p-5">
+        <div className="overflow-y-auto p-5 min-h-0">
           <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-1">Carte de partage</p>
           <h2 className="font-display text-xl mb-4">Mon pronostic · Groupe C</h2>
 
@@ -139,25 +166,30 @@ export default function PwonostikShareCard({ predictions, onClose }) {
               dangerouslySetInnerHTML={{ __html: previewInner }}
             />
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 gap-3 mt-5">
+        <div
+          className="border-t border-line bg-white px-5 pt-3"
+          style={{ paddingBottom: "max(env(safe-area-inset-bottom), 16px)" }}
+        >
+          <div className="grid grid-cols-2 gap-3">
             <button
               onClick={handleDownload}
-              disabled={busy}
+              disabled={!ready}
               className="px-4 py-3 bg-haiti-blue hover:bg-haiti-blue-dark disabled:opacity-50 text-bg font-semibold rounded-full text-sm transition-colors"
             >
-              ↓ Télécharger
+              {ready ? "↓ Enregistrer" : "…"}
             </button>
             <button
               onClick={handleShare}
-              disabled={busy}
+              disabled={!ready}
               className="px-4 py-3 bg-haiti-red hover:bg-haiti-red-dark disabled:opacity-50 text-bg font-semibold rounded-full text-sm transition-colors"
             >
               {copyStatus === "copied" ? "Copié ✓" : "Partager"}
             </button>
           </div>
-          <p className="text-xs text-muted text-center mt-3">
-            Enregistrez l'image et publiez-la sur vos stories.
+          <p className="text-xs text-muted text-center mt-2">
+            « Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…
           </p>
         </div>
       </div>

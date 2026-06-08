@@ -35,7 +35,7 @@ export const federation = {
       since: "30 novembre 2024",
       photo: "/images/photos/monique-andre.jpg",
       photoLabel: "Monique André · Présidente du Comité de Normalisation de la FHF",
-      bio: "Nommée par la FIFA à la tête du Comité de Normalisation de la FHF le 30 novembre 2024, en remplacement de l'administrateur cubain Luiz Hernandez. Son mandat a depuis été reconduit par la FIFA. Sous sa direction, la fédération a mené à bien la qualification d'Haïti pour la Coupe du Monde 2026, la campagne éliminatoire de la sélection masculine senior disputée sans stade à domicile, la qualification du programme de jeunes pour la Coupe du Monde FIFA U-17 au Qatar, ainsi que la nomination historique de Pia Sundhage à la tête de la sélection féminine en février 2026.",
+      bio: "Nommée par la FIFA à la tête du Comité de Normalisation de la FHF le 30 novembre 2024, en remplacement de l'administrateur cubain Luis Hernández. Son mandat a depuis été reconduit par la FIFA. Sous sa direction, la fédération a mené à bien la qualification d'Haïti pour la Coupe du Monde 2026, la campagne éliminatoire de la sélection masculine senior disputée sans stade à domicile, la qualification du programme de jeunes pour la Coupe du Monde FIFA U-17 au Qatar, ainsi que la nomination historique de Pia Sundhage à la tête de la sélection féminine en février 2026.",
       milestones: [
         "30 novembre 2024 — Nomination à la présidence du Comité de Normalisation",
         "14 janvier 2025 — Rencontre à haut niveau avec la FIFA à Zurich",
@@ -54,12 +54,14 @@ export const federation = {
     ],
     members: [
       { role: "Secrétaire général", name: "Patrick Massenat" },
-      { role: "Directeur technique national", name: "Pierre Cherry" },
+      { role: "Directeur technique national", name: "Pierre Chéry" },
       { role: "Sélectionneur des Grenadiers", name: "Sébastien Migné" },
       { role: "Sélectionneure des Grenadières", name: "Pia Sundhage" },
       { role: "Responsable communication", name: "Louis Charles" },
       { role: "Coordonnateur futsal", name: "Frédéric Aupont" },
-      { role: "Président de la Commission des arbitres", name: "Wilson Tolus" },
+      { role: "Président de la Commission des arbitres", name: "Wilson Tilus" },
+      { role: "Directeur du Département des arbitres", name: "Joseph Marckingson Natoux" },
+      { role: "Coordonnateur des arbitres", name: "Jean-Lesly Jean-Laurent" },
     ],
   },
   competitionsOrganized: [

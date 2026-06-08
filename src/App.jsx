@@ -1,7 +1,9 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
+import RouteHead from "./components/RouteHead";
 import { LangProvider } from "./lib/i18n";
 
 // ─── Eager routes (loaded on first paint) ────────────────────────────
@@ -31,6 +33,8 @@ const OnzeDepart = lazy(() => import("./pages/OnzeDepart"));
 const DevineGrenadier = lazy(() => import("./pages/DevineGrenadier"));
 const Mur = lazy(() => import("./pages/Mur"));
 const AdminMur = lazy(() => import("./pages/AdminMur"));
+const Foto = lazy(() => import("./pages/Foto"));
+const FotoUpload = lazy(() => import("./pages/FotoUpload"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Lightweight loading fallback while a lazy route's chunk downloads
@@ -42,13 +46,15 @@ function PageLoading() {
   );
 }
 
-// French-only site (non-official, in collaboration with the FHF). No language picker.
+// French-only site (independent, non-official; not affiliated with the FHF). No language picker.
 const LANG = "fr";
 
 export default function App() {
   return (
     <LangProvider lang={LANG}>
+      <MotionConfig reducedMotion="user">
       <ScrollToTop />
+      <RouteHead />
       <Suspense fallback={<PageLoading />}>
         <Routes>
           <Route element={<Layout lang={LANG} />}>
@@ -75,6 +81,8 @@ export default function App() {
             <Route path="/jeux/onze" element={<OnzeDepart />} />
             <Route path="/jeux/devine" element={<DevineGrenadier />} />
             <Route path="/mur" element={<Mur />} />
+            <Route path="/foto" element={<Foto />} />
+            <Route path="/foto/upload" element={<FotoUpload />} />
             <Route path="/about" element={<About />} />
             {/* Catch-all 404 — must be last */}
             <Route path="*" element={<NotFound />} />
@@ -83,6 +91,7 @@ export default function App() {
           <Route path="/admin/mur" element={<AdminMur />} />
         </Routes>
       </Suspense>
+      </MotionConfig>
     </LangProvider>
   );
 }

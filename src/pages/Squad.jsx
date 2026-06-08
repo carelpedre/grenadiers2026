@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { SponsorPanel } from "../components/Sponsor";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import PlayerModal from "../components/PlayerModal";
+import TopScorers from "../components/TopScorers";
 import { squad, squadStats, staff, getAllPlayers } from "../data/squad";
 import { trainingCamp } from "../data/friendlies";
 import { fetchPlayerStats } from "../lib/fixturesApi";
@@ -146,6 +147,10 @@ export default function Squad() {
         {/* Technical staff */}
         <StaffGroup anchorId="staff-technique" title={t("squad.staff")} staff={staff} onStaffClick={openStaff} />
 
+        {/* Top buteurs récents — totaux fenêtre récente (DB), distincts des
+            sélections de carrière des fiches. Clic = ouvre la fiche joueur. */}
+        <TopScorers onSelectPlayer={setSelectedPlayer} />
+
         {/* The kit */}
         <section className="space-y-6">
           <div className="border-b border-line pb-3">
@@ -185,9 +190,20 @@ export default function Squad() {
                 />
               </div>
 
-              <p className="text-xs uppercase tracking-wider text-muted font-semibold pt-2 border-t border-line">
-                Fabriqué par Saeta
-              </p>
+              <div className="pt-4 border-t border-line flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <p className="text-sm text-muted leading-relaxed">
+                  Fabriqué par <strong className="text-ink">Saeta</strong>, partenaire de la
+                  Fédération Haïtienne de Football depuis 2014.
+                </p>
+                <a
+                  href="https://saeta.us/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 shrink-0 px-6 py-3 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors"
+                >
+                  Acheter le maillot →
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -515,7 +531,8 @@ function derivedStatTag(slug) {
 function PlayerCard({ player, stat, onClick }) {
   const isCaptain = player.captain;
   const statTag = derivedStatTag(player.slug);
-  const clubLogo = !player.isStaff ? stat?.club_logo : null;
+  // Local crest override (player.clubLogo) wins over the stats-API logo.
+  const clubLogo = !player.isStaff ? (player.clubLogo || stat?.club_logo) : null;
 
   return (
     <motion.button

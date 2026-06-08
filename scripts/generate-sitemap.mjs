@@ -32,6 +32,7 @@ const routes = [
   { path: "/say-their-names", priority: "0.5", changefreq: "monthly" },
   { path: "/atlas", priority: "0.7", changefreq: "weekly" },
   { path: "/gallery", priority: "0.7", changefreq: "weekly" },
+  { path: "/foto", priority: "0.7", changefreq: "weekly" },
   { path: "/about", priority: "0.5", changefreq: "monthly" },
 ];
 
@@ -63,6 +64,9 @@ Allow: /
 
 # Don't index the API endpoints
 Disallow: /api/
+
+# Private uploader (password-protected, not for indexing)
+Disallow: /foto/upload
 
 # Sitemap
 Sitemap: ${BASE}/sitemap.xml

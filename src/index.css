@@ -37,3 +37,18 @@ body {
 .animate-modal-in {
   animation: modal-in 0.25s ease-out;
 }
+
+/* ─── Accessibility: honor prefers-reduced-motion globally ───────────────
+   Kills CSS animations (marquees, pulses, modal-in), transitions and
+   smooth-scroll. Framer Motion is handled separately via <MotionConfig
+   reducedMotion="user"> in App.jsx. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

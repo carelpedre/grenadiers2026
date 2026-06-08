@@ -6,6 +6,136 @@
 // ║  the logic stays in one place and doesn't drift.                       ║
 // ╚═══════════════════════════════════════════════════════════════════════╝
 
+// ─── Taint-safe canvas compositor (iOS WebKit) ───────────────────────────
+//
+// WebKit (iOS Safari AND iOS Chrome) taints a canvas when you draw an <img>
+// whose source is an SVG that itself contains an <image> element — even if that
+// embedded image is a same-origin data: URL. A tainted canvas makes toBlob()/
+// toDataURL() throw SecurityError, which silently collapses the share to a URL.
+//
+// The fix: never put rasters inside the SVG. Composite directly on the canvas —
+// background paint → photo via drawImage → a VECTOR-ONLY overlay SVG. Rasters
+// drawn directly + a vector-only SVG keep the canvas origin-clean, so toBlob()
+// succeeds and we get a real File for Web Share Level 2.
+
+// Load an <img> from a URL (data: or same-origin). Resolves null on failure.
+function loadImg(src, crossOrigin) {
+  return new Promise((resolve) => {
+    if (!src) return resolve(null);
+    const img = new Image();
+    if (crossOrigin) img.crossOrigin = crossOrigin;
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+// Rasterize a VECTOR-ONLY SVG string to an <img> (for compositing). Must have
+// width/height on the root <svg> so iOS rasterizes at full size.
+function svgToImg(svgString) {
+  const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(img);
+    };
+    img.onerror = (e) => {
+      URL.revokeObjectURL(url);
+      reject(e);
+    };
+    img.src = url;
+  });
+}
+
+// drawImage with object-fit: cover into a destination rect.
+function drawCover(ctx, img, dx, dy, dw, dh) {
+  const ir = img.width / img.height;
+  const dr = dw / dh;
+  let sx = 0, sy = 0, sw = img.width, sh = img.height;
+  if (ir > dr) {
+    sw = img.height * dr;
+    sx = (img.width - sw) / 2;
+  } else {
+    sh = img.width / dr;
+    sy = (img.height - sh) / 2;
+  }
+  ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+}
+
+// cover-fit a circular photo (clipped to a circle).
+function drawCircleCover(ctx, img, cx, cy, r) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.clip();
+  drawCover(ctx, img, cx - r, cy - r, r * 2, r * 2);
+  ctx.restore();
+}
+
+async function drawPhoto(ctx, ph) {
+  if (!ph || !ph.dataUrl) return;
+  // Remote URLs must be requested with CORS so they don't taint the canvas.
+  // Same-origin / data: URLs (the default for our cards) don't need it.
+  const isRemote = /^https?:\/\//i.test(ph.dataUrl);
+  const img = await loadImg(ph.dataUrl, isRemote ? "anonymous" : undefined);
+  if (!img) return;
+  if (ph.r != null) drawCircleCover(ctx, img, ph.cx, ph.cy, ph.r);
+  else drawCover(ctx, img, ph.x || 0, ph.y || 0, ph.w || ctx.canvas.width, ph.h || ctx.canvas.height);
+}
+
+// Compose a card to a PNG Blob without tainting the canvas on iOS. Draw order:
+//   paintBackground/background → baseSvg → photos → overlaySvg
+//   paintBackground(ctx, w, h) — optional custom bg (e.g. a gradient)
+//   baseSvg    — vector-only SVG drawn under the photos (e.g. a pitch)
+//   photo      — single { dataUrl, x,y,w,h } rect (cover-fit)
+//   photos     — array of rects {dataUrl,x,y,w,h} and/or circles {dataUrl,cx,cy,r}
+//   overlaySvg — vector-only SVG drawn on top (chrome, text, badges)
+// Returns a Blob, or null if rasterization failed.
+export async function composeCardBlob({ width, height, background = "#FAFAF7", paintBackground, baseSvg, photo, photos, overlaySvg }) {
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (paintBackground) paintBackground(ctx, width, height);
+    else {
+      ctx.fillStyle = background;
+      ctx.fillRect(0, 0, width, height);
+    }
+    if (baseSvg) {
+      const bimg = await svgToImg(baseSvg);
+      ctx.drawImage(bimg, 0, 0, width, height);
+    }
+    const list = photos && photos.length ? photos : photo ? [photo] : [];
+    for (const ph of list) {
+      // sequential so draw order is deterministic
+      // eslint-disable-next-line no-await-in-loop
+      await drawPhoto(ctx, ph);
+    }
+    if (overlaySvg) {
+      const oimg = await svgToImg(overlaySvg);
+      ctx.drawImage(oimg, 0, 0, width, height);
+    }
+    return await new Promise((resolve) => {
+      if (canvas.toBlob) canvas.toBlob((b) => resolve(b), "image/png");
+      else {
+        // Very old fallback — toDataURL is origin-clean here (no SVG <image>).
+        try {
+          const dataUrl = canvas.toDataURL("image/png");
+          fetch(dataUrl).then((r) => r.blob()).then(resolve).catch(() => resolve(null));
+        } catch {
+          resolve(null);
+        }
+      }
+    });
+  } catch {
+    return null;
+  }
+}
+
 // Rasterize an SVG string to a PNG data URL via an offscreen canvas.
 export function svgToPng(svgString, { width, height, background = "#FAFAF7" } = {}) {
   const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
@@ -115,9 +245,11 @@ export function canShareFile(file) {
 // Photos. Prefers sharing the pre-built File; falls back to a direct download on
 // desktop or when file-sharing isn't supported. The File must already exist (build
 // it with pngFile when the modal opens).
-export function saveImageSync(file, dataUrl, { filename, title, text, url } = {}) {
+export function saveImageSync(file, dataUrl, { filename } = {}) {
   if (canShareFile(file)) {
-    navigator.share({ files: [file], title, text, url }).catch((e) => {
+    // IMAGE ONLY — no title/text/url. On iOS, adding a url/text makes the share
+    // sheet treat it as a link share and hides "Save Image" → Photos.
+    navigator.share({ files: [file] }).catch((e) => {
       if (e && e.name === "AbortError") return; // user dismissed the sheet
       if (dataUrl) downloadPng(dataUrl, filename); // genuine failure → download
     });
@@ -130,18 +262,22 @@ export function saveImageSync(file, dataUrl, { filename, title, text, url } = {}
 // SHARE — same synchronous contract as saveImageSync. Prefers native share with the
 // image file, then native share without it, then clipboard. `onCopied` fires after a
 // successful clipboard write so the caller can flash a "Copié ✓" state.
-export function sharePngSync(file, dataUrl, { title, text, url } = {}, onCopied) {
+export function sharePngSync(file, dataUrl, { filename, text, url } = {}, onCopied) {
   if (canShareFile(file)) {
-    navigator.share({ files: [file], title, text, url }).catch(() => {});
+    // IMAGE ONLY — keeps iOS from collapsing into a link/text share.
+    navigator.share({ files: [file] }).catch(() => {});
     return "shared";
   }
-  if (navigator.share) {
-    navigator.share({ title, text, url }).catch(() => {});
-    return "shared";
+  // No file-share support (desktop, iOS Chrome): download the PNG. We never fall
+  // back to a URL-only share — on iOS that loses the image entirely.
+  if (dataUrl) {
+    downloadPng(dataUrl, filename || "grenadiers2026.png");
+    return "downloaded";
   }
-  if (navigator.clipboard) {
+  // Last resort (no image available at all): copy the link.
+  if (navigator.clipboard && url) {
     navigator.clipboard
-      .writeText(`${text} → ${url}`)
+      .writeText(text ? `${text} ${url}` : url)
       .then(() => onCopied && onCopied())
       .catch(() => {});
     return "copied";

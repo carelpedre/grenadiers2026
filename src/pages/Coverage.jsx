@@ -105,6 +105,8 @@ export default function Coverage() {
           />
 
           <LyneLucienExhibit />
+          {/* Peintures et autres œuvres d'art (tributs taggés chapter:"art"). */}
+          <CreativeTributesExhibit chapter="art" />
         </>
       )}
 
@@ -640,12 +642,17 @@ function ArtworkExhibit({ work }) {
 //  CREATIVE TRIBUTES — objets & œuvres avec leur propre crédit (hors Lyne)
 // ════════════════════════════════════════════════════════════════════════
 
-function CreativeTributesExhibit() {
-  if (!creativeTributes.length) return null;
+function CreativeTributesExhibit({ chapter = "objets" }) {
+  // Route each tribute to its chapter: entries tagged chapter:"art" (paintings)
+  // render in the Art chapter; everything else stays under Objets & emblèmes.
+  const works = creativeTributes.filter((w) =>
+    chapter === "art" ? w.chapter === "art" : (w.chapter ?? "objets") !== "art",
+  );
+  if (!works.length) return null;
   return (
     <div className="bg-bg">
       <div className="space-y-20 md:space-y-28 pb-12 md:pb-16">
-        {creativeTributes.map((work) => (
+        {works.map((work) => (
           <TributeExhibit key={work.slug} work={work} />
         ))}
       </div>
@@ -654,6 +661,15 @@ function CreativeTributesExhibit() {
 }
 
 function TributeExhibit({ work }) {
+  // Bilingual statement support: show a Kreyòl/Français toggle only when both
+  // are present. Single-statement entries (description) render unchanged.
+  const hasToggle = Boolean(work.statement_kr && work.statement_fr);
+  const [lang, setLang] = useState("kr"); // default Kreyòl
+  const statement = hasToggle ? (lang === "kr" ? work.statement_kr : work.statement_fr) : null;
+  const pill = (active) =>
+    "px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors " +
+    (active ? "bg-ink text-bg" : "text-ink hover:bg-bg");
+
   return (
     <article className="max-w-content mx-auto px-5">
       <motion.figure
@@ -679,9 +695,46 @@ function TributeExhibit({ work }) {
           <h4 className="font-display text-xl md:text-2xl text-ink mb-4 leading-tight">
             {work.title}
           </h4>
-          <p className="text-ink/75 text-base leading-relaxed mb-3">
-            {work.description}
-          </p>
+          {work.caption && (
+            <p className="text-ink/70 text-base italic leading-relaxed mb-4">
+              {work.caption}
+            </p>
+          )}
+
+          {hasToggle ? (
+            <>
+              <div
+                role="group"
+                aria-label="Langue du texte"
+                className="inline-flex items-center gap-1 mb-5 rounded-full border border-line p-1"
+              >
+                <button type="button" aria-pressed={lang === "kr"} onClick={() => setLang("kr")} className={pill(lang === "kr")}>
+                  Kreyòl
+                </button>
+                <button type="button" aria-pressed={lang === "fr"} onClick={() => setLang("fr")} className={pill(lang === "fr")}>
+                  Français
+                </button>
+              </div>
+              <div className="text-left space-y-3 mb-3">
+                {statement
+                  .split("\n")
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+                  .map((para, i) => (
+                    <p
+                      key={i}
+                      className={`text-base leading-relaxed ${para.startsWith("«") ? "italic text-ink/90" : "text-ink/80"}`}
+                    >
+                      {para}
+                    </p>
+                  ))}
+              </div>
+            </>
+          ) : (
+            <p className="text-ink/75 text-base leading-relaxed mb-3">
+              {work.description}
+            </p>
+          )}
           <p className="text-xs text-muted italic">
             {work.credit}
             {work.creditUrl && (

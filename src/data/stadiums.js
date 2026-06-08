@@ -3,7 +3,7 @@
 
 export const stadiums = {
   gillette: {
-    fifaName: "Boston Stadium",
+    fifaName: "Gillette Stadium",
     realName: "Gillette Stadium",
     photo: "/images/photos/stadium-boston.jpg",
     city: "Foxborough, Massachusetts",
@@ -16,7 +16,7 @@ export const stadiums = {
     lng: -71.2643,
     timezone: "America/New_York",
     matchesHosted: 7,
-    note: "Renommé « Boston Stadium » durant le tournoi en application des règles de branding FIFA. Un service spécial MBTA Commuter Rail relie Boston South Station à la gare de Foxboro les jours de match.",
+    note: "Désigné « Boston Stadium » par la FIFA durant le tournoi (règles de branding). Un service spécial MBTA Commuter Rail relie Boston South Station à la gare de Foxboro les jours de match.",
   },
   lincoln: {
     fifaName: "Philadelphia Stadium",
