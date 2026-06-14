@@ -135,6 +135,19 @@ export default function PlayerModal({ player, stat, onClose }) {
             </div>
           )}
 
+          {!isStaff && player.status && player.statusNote && (
+            <div className="px-5 md:px-6 pt-5">
+              <div className="rounded-lg bg-haiti-red/10 border border-haiti-red/30 px-4 py-3">
+                {player.statusLabel && (
+                  <p className="text-haiti-red font-bold uppercase tracking-wider text-xs mb-1">
+                    {player.statusLabel}
+                  </p>
+                )}
+                <p className="text-ink text-sm leading-relaxed">{player.statusNote}</p>
+              </div>
+            </div>
+          )}
+
           <div className="p-5 md:p-6 space-y-5">
             {/* Faits physiques compacts — dans le premier écran */}
             {!isStaff && (

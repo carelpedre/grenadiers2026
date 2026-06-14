@@ -65,6 +65,10 @@ export const playerSocials = {
     instagram: "keeto.thermoncy",
     x: null, tiktok: null, facebook: null, youtube: null, website: null,
   },
+  "garven-metusala": {
+    instagram: "garvenmtsa",
+    x: null, tiktok: null, facebook: null, youtube: null, website: null,
+  },
 
   // ─── MIDFIELDERS ──────────────────────────────────────────────────────
   "leverton-pierre": {

@@ -11,12 +11,237 @@
 //   cover        : hero image path
 //   body         : array of paragraphs
 //   source       : optional credit line shown below body
+//   sourceUrl    : optional URL — when present, the source line renders as a link
 //   albums       : array of { title?, photos: [{src, alt}, ...] }
 //                  - If a single album has no title, it renders as a flat gallery.
 //                  - Multiple albums each render with their title as a subsection.
 //   gallery      : (legacy) flat photo array — still supported; treated as one untitled album.
 
 export const diaryEntries = [
+  {
+    slug: "gonaives-ferveur-grenadiers",
+    featured: true,
+    date: "2026-06-13",
+    dateLabel: "13 juin 2026",
+    eyebrow: "Au pays · Gonaïves",
+    title: "À Gonaïves, la ferveur déborde dans les rues pour les Grenadiers",
+    dek: "Pas une projection sage, mais un véritable défilé : motos, voitures, DJ, drapeaux et chants. La veille du match, la cité de l'Indépendance a célébré les Grenadiers par milliers. Images de Marc Henry Antoine.",
+    cover: "/images/journal/gonaives-ferveur.jpg",
+    photoCredit: "Marc Henry Antoine",
+    body: [
+      "Il n'y a pas que la diaspora qui vibre. À Gonaïves, la cité de l'Indépendance, la veille du match a pris des allures de carnaval. Pas une sage projection sur écran, mais un véritable défilé : des motos, des voitures, un DJ, des drapeaux à perte de vue et des chants repris par des milliers de voix. La ville entière est descendue dans la rue pour les Grenadiers.",
+      "Les images du photographe Marc Henry Antoine racontent tout : une marée bicolore, des sourires, des poings levés, le drapeau haïtien brandi au milieu de la foule comme une promesse. Une énergie brute, joyeuse, indomptable.",
+      "C'est cela, le pouvoir de cette équipe : relier Boston à Gonaïves, la diaspora à la terre natale, dans un même battement de cœur. Avant même le coup d'envoi, les Grenadiers ont déjà gagné quelque chose, ils ont redonné à tout un peuple une raison de se rassembler et de rêver ensemble.",
+      "Quand le ballon roulera à Foxborough, les joueurs ne porteront pas seulement leurs propres espoirs. Ils porteront ceux de cette foule de Gonaïves, et de toutes les autres, partout où l'on aime Haïti. Grenadye, tout un pays est derrière vous.",
+    ],
+    source: "Source : Marc Henry Antoine.",
+    // Reportage complet de Marc Henry Antoine (104 photos, ordre de prise de
+    // vue) affiché en mosaïque sans recadrage, directement dans la page.
+    albums: [
+      {
+        layout: "masonry",
+        caption: "Gonaïves, la veille du match · Marc Henry Antoine",
+        photos: Array.from({ length: 104 }, (_, i) => {
+          const n = String(i + 1).padStart(3, "0");
+          return {
+            src: `/images/journal/gonaives/gonaives-${n}.jpg`,
+            alt: `Ferveur des supporters des Grenadiers à Gonaïves, la veille du match (${i + 1})`,
+          };
+        }),
+      },
+    ],
+  },
+  {
+    slug: "team-feature-fifa-migne-nazon",
+    date: "2026-06-12",
+    dateLabel: "12 juin 2026",
+    eyebrow: "Portrait d'équipe · FIFA",
+    title: "Sur les traces de Sanon : Migné et Nazon racontent Haïti au monde",
+    dek: "Dans un portrait d'équipe signé FIFA, le sélectionneur Sébastien Migné et Duckens Nazon relient l'exploit de 1974 au rêve de 2026 : marquer enfin, et montrer qu'un groupe uni peut bousculer les plus grands.",
+    cover: "/images/journal/team-feature-fifa-migne-nazon.jpg",
+    video: "https://www.youtube.com/watch?v=5_fFXj7CK-Q",
+    videoExternal: true, // contenu FIFA : intégration bloquée, ouvre sur YouTube
+    videoCaption: "Le portrait d'équipe d'Haïti produit par la FIFA.",
+    body: [
+      "À l'approche du grand soir, la FIFA a consacré un portrait à Haïti, et il commence là où tout a commencé. Un seul joueur haïtien a marqué en phase finale de Coupe du Monde : Emmanuel Sanon, en 1974, face à l'Italie et au légendaire gardien Dino Zoff. Sébastien Migné le rappelle d'emblée, et formule un souhait simple : que ses attaquants suivent les traces de cette légende, et tentent même de la dépasser.",
+      "Le sélectionneur ne cache pas son émotion. Conduire Haïti à la Coupe du Monde 52 ans après la dernière fois est une immense fierté, dit-il, mais il s'agit maintenant de répondre présent et d'élever encore le niveau pour être à la hauteur de l'événement. Il s'appuie sur une force : quatre attaquants aux profils différents, qui lui ouvrent des options. Wilson Isidor, qui évolue en Premier League à Sunderland. Frantzdy Pierrot, puissant et redoutable point d'ancrage. Et Duckens Nazon, meilleur buteur en activité de la sélection.",
+      "Nazon, justement, prend la parole avec une sincérité désarmante. Devenir le deuxième Haïtien à marquer en Coupe du Monde serait pour lui quelque chose d'extraordinaire, la cerise sur le gâteau d'une carrière en sélection. Mais il pose aussitôt l'essentiel : peu importe qui marque, ce qui compte, c'est qu'Haïti marque. Il aura, dans tous les cas, contribué à cette histoire.",
+      "Son message dépasse le terrain. Il veut montrer au monde que cette équipe peut inquiéter les plus grandes nations, et surtout qu'elle est unie. Il cite la devise du drapeau, « L'union fait la force », et dit vouloir l'appliquer pleinement : avec un groupe soudé, on peut accomplir de grandes choses. Rendez-vous samedi soir pour la première réponse.",
+    ],
+    source: "Source : FIFA.",
+    albums: [],
+  },
+  {
+    slug: "sebastien-migne-conference-presse-ecosse",
+    date: "2026-06-12",
+    dateLabel: "12 juin 2026",
+    eyebrow: "Conférence de presse · Avant-match",
+    title: "« Laisser une trace » : Sébastien Migné lance les Grenadiers face à l'Écosse",
+    dek: "En conférence de presse à la veille du match, le sélectionneur a posé l'ambition, salué l'exploit d'une qualification arrachée loin de ses bases, et appelé ses Grenadiers à marquer la Coupe du Monde de leur empreinte.",
+    cover: "/images/journal/migne-conference-presse-ecosse.jpg",
+    video: "https://www.youtube.com/watch?v=_rQD2Wy0u20",
+    videoExternal: true, // contenu FIFA : intégration bloquée, ouvre sur YouTube
+    videoCaption: "La conférence de presse d'avant-match de Sébastien Migné.",
+    body: [
+      "C'est un moment historique qui se profile. Cinquante-deux ans après l'unique participation d'Haïti à une phase finale, en 1974, les Grenadiers s'apprêtent à faire leur grand retour. À la veille d'affronter l'Écosse à Boston, le sélectionneur Sébastien Migné s'est présenté devant la presse avec de l'ambition, de la sérénité et une fierté immense pour le chemin parcouru.",
+      "Interrogé sur l'héritage de 1974 et le but historique inscrit face à l'Italie, il a rappelé l'importance de connaître cette histoire tout en regardant devant. « C'était un grand moment pour Haïti en 74. Maintenant, c'était il y a 52 ans, c'est un peu loin. Aujourd'hui, c'est une autre histoire », a-t-il dit, fixant l'objectif d'un nouveau départ pour viser le tour suivant.",
+      "Le technicien n'a pas caché l'ambition : décrocher la première victoire d'Haïti en phase finale, ce qui passera par l'audace offensive. Pour réaliser un exploit, il faudra marquer des buts, quel que soit l'adversaire.",
+      "Migné a surtout tenu à souligner l'exploit déjà accompli. En deux ans et demi, la sélection n'a jamais joué à domicile : toutes les qualifications se sont disputées à l'extérieur, y compris celles où Haïti était censée recevoir, en raison de la situation sécuritaire du pays. « Tout ça pour souligner l'exploit qu'ont réalisé mes garçons. C'est pas banal. » Malgré des matchs de préparation parfois compliqués en fin de rencontre, il refuse tout pessimisme : ces tests ont permis de gérer des états de forme disparates en fin de saison européenne et d'éviter les blessures, en dépit du forfait de Leverton Pierre.",
+      "Le premier match aura une saveur particulière pour Frantzdy Pierrot, troisième meilleur buteur de l'histoire de la sélection avec 34 buts, qui jouera presque à domicile. « Il est au sommet de son art, avec cette Coupe du Monde, et dans sa ville pour ce premier match », a souligné le coach, qui compte sur son expérience pour tirer le groupe vers le haut, en rappelant que l'animation offensive comme défensive reste l'affaire de tous.",
+      "Face à une Écosse emmenée par des cadres comme Scott McTominay, Migné assume le statut d'outsider de ses joueurs, avec l'intention de bousculer la hiérarchie. « J'ai un effectif peut-être moins renommé, moins coté que celui de l'Écosse, mais l'idée, ce sera qu'à la fin de la compétition, on laisse une trace. »",
+      "Avec le nouveau format qui repêche les huit meilleurs troisièmes, Haïti entend jouer sa chance à fond jusqu'au dernier match, et devenir par son enthousiasme et son football l'une des belles surprises de cette Coupe du Monde 2026. Le rendez-vous est pris. À l'assaut.",
+    ],
+    source: "Source : Fédération Haïtienne de Football.",
+    albums: [],
+  },
+  {
+    slug: "visite-premier-ministre-grenadiers-boston",
+    date: "2026-06-12",
+    dateLabel: "12 juin 2026",
+    eyebrow: "Sélection · Boston",
+    title: "« Vous êtes l'espoir » : le Premier ministre rend visite aux Grenadiers",
+    dek: "À quelques heures du coup d'envoi face à l'Écosse, Alix Didier Fils-Aimé est venu transmettre aux joueurs le soutien de l'État et de toute une nation. Les Grenadiers lui ont répondu avec un maillot signé par tout l'effectif.",
+    cover: "/images/journal/visite-premier-ministre-boston.jpg",
+    body: [
+      "À la veille du premier match, la visite avait valeur de symbole. Ce vendredi 12 juin, le Premier ministre haïtien Alix Didier Fils-Aimé s'est rendu à l'hôtel des Grenadiers à Boston pour saluer les joueurs et le staff, accompagné de la ministre des Affaires étrangères et des Cultes, Raina Forbin, et de la ministre des Haïtiens vivant à l'étranger, Kathia Verdier.",
+      "Le chef du gouvernement est venu porter aux joueurs le soutien des autorités haïtiennes et celui de la diaspora, en replaçant cette qualification dans ce qu'elle a de plus grand : un moment qui rassemble les Haïtiens autour d'un même idéal, bien au-delà du terrain.",
+      "Face au groupe, son message était direct. « Vous êtes bien plus qu'une équipe de football. Vous êtes le visage de la jeunesse haïtienne qui refuse de renoncer, qui ose rêver et qui prouve que, malgré les difficultés, Haïti est capable de se hisser parmi les meilleures nations du monde », a-t-il déclaré, avant d'ajouter : « Vous êtes l'espoir, vous êtes l'opportunité. Vous êtes un exemple, on vous regarde et on compte sur vous. »",
+      "Les deux ministres ont pris la parole à leur tour, Raina Forbin pour souligner la portée collective de cette qualification et le travail diplomatique qui a accompagné la route vers le Mondial, Kathia Verdier pour rappeler ce que cette performance représente pour les générations actuelles et futures, en Haïti comme dans la diaspora.",
+      "Les joueurs ont répondu par un geste qui dit tout : un maillot officiel signé par l'ensemble de l'effectif, remis au Premier ministre. Puis chacun est retourné à sa mission. La leur commence samedi soir, au Gillette Stadium, et c'est sur le terrain que les Grenadiers donneront leur vraie réponse.",
+    ],
+    source: "Source : Chokarella.",
+    sourceUrl:
+      "https://www.chokarella.com/2026/06/12/vous-etes-lespoir-le-message-du-premier-ministre-haitien-aux-grenadiers/",
+    albums: [],
+  },
+  {
+    slug: "grenadiers-arrivee-boston-quincy",
+    date: "2026-06-12",
+    dateLabel: "12 juin 2026",
+    eyebrow: "Diaspora · Boston",
+    title: "« Sak pase? N ap boule! » : Boston réserve un accueil de héros aux Grenadiers",
+    dek: "À la veille du match contre l'Écosse, la sélection a posé ses valises à Quincy sous les acclamations d'une diaspora en fusion. Récit d'une arrivée qui ressemblait déjà à une victoire.",
+    cover: "/images/journal/arrivee-boston-quincy.jpg",
+    video: "https://www.youtube.com/watch?v=lyKk1YMiKNQ",
+    videoCaption: "Le reportage de CBS News Boston sur l'arrivée des Grenadiers à Quincy.",
+    body: [
+      "Les Grenadiers sont arrivés en terre promise. Au lendemain de leur départ du camp de base du New Jersey, les joueurs de la sélection ont posé leurs valises à Quincy, dans la banlieue de Boston, accueillis devant leur hôtel par une foule en délire, comme l'a rapporté CBS News Boston. Drapeaux bicolores, chants, klaxons : l'arrivée ressemblait déjà à un jour de match.",
+      "Il faut dire que le rendez-vous se joue à domicile, ou presque. La grande région de Boston abrite la troisième plus grande communauté haïtienne des États-Unis, et pour ces milliers de familles, voir le pays disputer une Coupe du Monde dans leur propre arrière-cour relève du rêve éveillé. Un supporter a résumé le sentiment général au micro de la chaîne : quand les Grenadiers jouent, c'est toute la communauté qui joue avec eux.",
+      "Le long des barrières, l'ambiance était restée fidèle au pays : les « Sak pase? N ap boule! » fusaient de partout, donnant le ton d'un après-midi de fête. Malgré l'enjeu qui les attend, les joueurs ont pris le temps de saluer la foule, de signer des autographes et de poser pour des selfies, rendant à cette communauté l'amour qu'elle leur portait.",
+      "Parmi les supporters, un gamin de 12 ans de Hyde Park, Noah Nicholas, footballeur lui-même, a patiemment attendu avec son drapeau et une chaussure de foot à la main. Il est reparti avec la chaussure couverte de signatures et des souvenirs pour la vie, en pensant, dit-il, à son père, à ses grands-parents et à cette communauté haïtienne qui se rassemble dans les grands moments de fierté.",
+      "Place maintenant au terrain. Les Grenadiers ouvrent leur Coupe du Monde samedi face à l'Écosse au Gillette Stadium de Foxboro, premier match de la série bostonienne du Mondial. Les supporters écossais ont eux aussi fait le déplacement en nombre, mais les hommes de Sébastien Migné savent désormais qu'ils avanceront portés par toute une région.",
+      "Quoi qu'il arrive samedi, quelque chose s'est déjà produit à Quincy : plusieurs générations de la diaspora, des grands-parents de 1974 aux enfants nés ici, réunies sous un seul drapeau, entre héritage et espoir.",
+    ],
+    source: "Source : CBS News Boston.",
+    albums: [],
+  },
+  {
+    slug: "sebastien-migne-entretien-camp-de-base",
+    date: "2026-06-11",
+    dateLabel: "11 juin 2026",
+    eyebrow: "Entretien · Sélection",
+    title: "« À l'assaut » : les derniers mots de Sébastien Migné avant Boston",
+    dek: "Avant de quitter le camp de base du New Jersey pour Boston, le sélectionneur fait le point : le forfait de Leverton Pierre, la gestion du stress, les derniers réglages et un appel au douzième homme.",
+    cover: "/images/journal/migne-entretien-camp-de-base.jpg",
+    video: "https://grenadiers2026.com/media/videos/2026-06-11-sebastien-migne-itw-fhf.mp4",
+    videoCaption: "L'entretien du sélectionneur Sébastien Migné au camp de base, publié par la Fédération Haïtienne de Football.",
+    body: [
+      "Avant de boucler les valises pour Boston, le sélectionneur Sébastien Migné s'est confié dans un entretien publié par la Fédération. Installés depuis lundi 8 juin à leur camp de base du New Jersey, les Grenadiers y ont trouvé, selon lui, des conditions parfaites : un accueil chaleureux et des installations très professionnelles. « On n'aura pas d'excuse à ce niveau-là », résume-t-il.",
+      "Le coach est aussi revenu sur le coup dur de la semaine : le forfait de Leverton Pierre, remplacé par Garven Metusala. Un moment difficile pour le groupe, et pour le sélectionneur qui a dû annoncer la nouvelle au joueur. Fidèle à l'esprit de cette équipe, il veut transformer la problématique en force et puiser dans la pensée pour Leverton le supplément d'âme nécessaire pour la compétition.",
+      "Sur l'état d'esprit du groupe, Sébastien Migné ne cache pas l'enjeu émotionnel. La Coupe du Monde, c'est le Graal dont chaque joueur rêve depuis l'enfance, et il s'agit de vivre pleinement l'événement sans laisser le stress prendre le dessus. Le staff accompagne les joueurs sur ce terrain-là aussi, et le sélectionneur se dit pleinement satisfait de la réaction de son groupe : les garçons sont motivés et ont hâte que ça commence.",
+      "Côté terrain, la dernière séance au New Jersey a été consacrée aux coups de pied arrêtés, avec encore quelques réglages prévus à l'entraînement de Boston. L'essentiel du travail est fait, insiste le coach : il reste à entretenir la dynamique, prendre les précautions pour éviter toute blessure et arriver au top dans deux jours.",
+      "Le programme est désormais cadencé : départ pour Boston, installation à l'hôtel, entraînement invisible le soir, récupération en salle de soins et briefings sur l'Écosse. Puis place au match.",
+      "Le sélectionneur a gardé ses derniers mots pour le public. Touché par la ferveur des supporters en Floride, restés positifs et derrière l'équipe malgré la défaite du dernier match amical, il espère retrouver la même énergie samedi : que le douzième homme soit du côté d'Haïti à Boston. L'entretien se termine comme il se doit. Grenadiers ? À l'assaut.",
+    ],
+    source: "Source : Fédération Haïtienne de Football.",
+    albums: [],
+  },
+  {
+    slug: "leverton-pierre-forfait-metusala-appele",
+    date: "2026-06-11",
+    dateLabel: "11 juin 2026",
+    eyebrow: "Sélection · Mondial 2026",
+    title: "Coup dur pour les Grenadiers : Leverton Pierre forfait, Garven Metusala appelé",
+    dek: "À deux jours du coup d'envoi, le milieu de terrain Leverton Pierre doit renoncer au Mondial sur blessure. Garven Metusala, présent durant les éliminatoires, rejoint le groupe à Boston.",
+    cover: "/images/journal/leverton-pierre-forfait.jpg",
+    body: [
+      "Mauvaise nouvelle au camp de base des Grenadiers. Le staff médical de la sélection a annoncé que Leverton Pierre ne pourra pas disputer la Coupe du Monde. Le milieu de terrain souffre d'une lésion des adducteurs droits de niveau 2, survenue lors de l'échauffement du match amical, une blessure qui le tiendra éloigné des terrains pendant plusieurs semaines.",
+      "Pour le remplacer, le staff technique a fait appel à Garven Metusala. Le défenseur, qui peut aussi évoluer au milieu, connaît bien le groupe : il faisait partie de la sélection pendant les éliminatoires, y compris lors de la fenêtre décisive de novembre. Il rejoindra ses coéquipiers directement à Boston.",
+      "Formé au Québec, Metusala évolue aujourd'hui aux Colorado Springs Switchbacks, en USL Championship, après un passage marquant au Forge FC où il a remporté deux titres de champion de la Premier League canadienne. Solide dans les duels et habitué aux rendez-vous internationaux avec une quinzaine de sélections, il apporte au groupe une option supplémentaire dans l'axe.",
+      "Dans un message publié sur sa page, Leverton Pierre a réagi avec une dignité qui dit tout du joueur et de l'homme. Le cœur « partagé entre la tristesse et la gratitude », il raconte ce rêve porté depuis tant d'années, le travail sans relâche, les sacrifices, et cette blessure qui le prive du terrain au moment où tout commençait.",
+      "Mais il ne quitte pas le navire. Il restera auprès de ses frères jusqu'à la fin de l'aventure, promet-il, et les soutiendra de toutes ses forces, en premier supporter de cette équipe. Il remercie ses coéquipiers, le staff, tous ceux qui lui ont envoyé prières et mots d'encouragement depuis l'annonce, et sa famille, son pilier dans les bons comme dans les mauvais moments.",
+      "« Cette blessure ne définit pas mon histoire. Ce n'est qu'un chapitre de plus dans mon parcours. Je reviendrai plus fort. »",
+      "Que Dieu bénisse Haïti, conclut-il. Tout un peuple lui répond d'une seule voix : prompt rétablissement, Leverton. Le rêve continue, et il en fait pleinement partie.",
+    ],
+    source: "Source : communiqué officiel de la sélection.",
+    albums: [],
+  },
+  {
+    slug: "frantzdy-pierrot-entretien-fifa",
+    date: "2026-06-10",
+    dateLabel: "10 juin 2026",
+    eyebrow: "Entretien · FIFA",
+    title: "Des rues d'Haïti au Mondial : Frantzdy Pierrot se confie à la FIFA",
+    dek: "Dans un entretien accordé à la FIFA, l'attaquant des Grenadiers revient sur son enfance, le sacrifice de son père, son parcours jusqu'en Ligue des Champions et le rêve qu'il porte pour tout un peuple.",
+    cover: "/images/journal/pierrot-entretien-fifa.jpg",
+    body: [
+      "À quelques jours du retour d'Haïti en Coupe du Monde, la FIFA a consacré un long entretien à Frantzdy Pierrot. L'attaquant des Grenadiers y retrace un parcours qui commence très loin des grands stades : dans les rues d'Haïti, où il jouait pieds nus avec des ballons improvisés, fabriqués avec ce qui tombait sous la main. Pour lui et ses copains, raconte-t-il, le football était bien plus qu'un jeu : une source de joie, de liberté et de lien entre les enfants du quartier.",
+      "Le tournant de sa vie arrive à 11 ans, quand sa famille rejoint le Massachusetts. Son père, installé là-bas depuis plusieurs années, cumulait les emplois pour économiser de quoi faire venir les siens. Pierrot décrit ce départ comme le plus beau jour de sa vie, celui où tout est devenu possible.",
+      "La suite, c'est un pari assumé : quitter le confort du parcours universitaire américain pour tenter sa chance en Europe. Le Maccabi Haïfa devient le tremplin décisif, celui qui lui donne confiance et le propulse jusqu'en Ligue des Champions, avant son passage à l'AEK Athènes puis au Çaykur Rizespor. Mais Pierrot n'a jamais coupé le fil avec le pays : sa fondation accompagne aujourd'hui les enfants d'Haïti, avec l'ambition de leur offrir un cadre, des opportunités et une éducation, sur le terrain et en dehors.",
+      "Il revient aussi sur son but face au Costa Rica, celui qui a pratiquement scellé la qualification historique des Grenadiers. Un moment presque impossible à décrire, dit-il, où ses premières pensées sont allées à sa famille, à ses coéquipiers et au peuple haïtien, comme si des années de sacrifices trouvaient enfin leur sens. Il se souvient aussi du jour de la qualification, quand des milliers de personnes ont envahi les rues pour chanter et danser, oubliant le temps d'une soirée les difficultés du quotidien.",
+      "Face à l'Écosse, au Brésil et au Maroc, Pierrot ne se cache pas : le groupe est relevé, mais l'équipe croit en elle et compte montrer au monde le cœur, l'unité et le courage du peuple haïtien. Son objectif tient en une phrase, qui résume tout l'état d'esprit de cette sélection : « Nous voulons rendre fier le peuple haïtien ».",
+      "L'entretien complet est à lire sur fifa.com.",
+    ],
+    source: "Source : entretien publié par la FIFA (fifa.com).",
+    albums: [],
+  },
+  {
+    slug: "maillot-grenadiers-fifa-modifications",
+    date: "2026-06-10",
+    dateLabel: "10 juin 2026",
+    eyebrow: "Équipement · Mondial 2026",
+    title: "La FIFA exige des modifications au maillot des Grenadiers, Saeta s'explique",
+    dek: "À quelques jours d'Ayiti vs Écosse, l'équipementier Saeta confirme avoir ajusté le maillot officiel à la demande de la FIFA, tout en défendant l'esprit de son design original.",
+    cover: "/images/journal/maillot-fifa-modifications.jpg",
+    body: [
+      "À quelques jours de l'entrée en lice des Grenadiers face à l'Écosse, l'équipementier Saeta a annoncé que des modifications ont été apportées au maillot officiel d'Haïti à la demande de la FIFA. La confirmation est venue d'un communiqué officiel publié par la marque, après plusieurs semaines de spéculations autour de la tenue que porteront les Grenadiers pour leur retour historique en Coupe du Monde.",
+      "Dans ce communiqué, Saeta rappelle avoir conçu le maillot en étroite collaboration avec la Fédération Haïtienne de Football, avec une ambition claire : célébrer la fierté, la résilience et l'esprit du peuple haïtien. Le design original rendait hommage aux femmes et aux hommes qui construisent chaque jour l'avenir d'Haïti, autour des symboles du drapeau, de la devise « L'union fait la force » et des héros de l'indépendance.",
+      "Selon la marque, plusieurs concepts ont été soumis au processus d'approbation standard de la FIFA. C'est lors de cette évaluation que l'instance a estimé que certains éléments visuels pouvaient être interprétés différemment au regard de sa réglementation sur les équipements, et a demandé des ajustements avant le début de la compétition.",
+      "Saeta affirme avoir une lecture différente de ses propres intentions, le design n'ayant, selon elle, aucune portée politique. La marque indique néanmoins avoir respecté la décision et appliqué l'ensemble des modifications exigées.",
+      "Les changements sont déjà en vigueur : les joueurs de la sélection ont réalisé leurs photos officielles avec la version modifiée du maillot, et c'est cette tenue que les Grenadiers porteront samedi face à l'Écosse au Gillette Stadium.",
+      "Malgré l'épisode, Saeta se dit fière d'avoir contribué, aux côtés de la FHF, à ce moment historique du football haïtien, et souhaite plein succès aux Grenadiers pour cette Coupe du Monde. Le maillot, lui, reste ce qu'il était dès le premier jour : un symbole que tout un peuple porte déjà sur le cœur, des tribunes de Foxborough aux quatre coins de la diaspora.",
+    ],
+    source: "Sources : communiqué officiel de Saeta · France 24 · Juno7.",
+    albums: [
+      {
+        photos: [
+          { src: "/images/journal/saeta-communique-officiel.jpg", alt: "Le communiqué officiel publié par Saeta." },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "grenadiers-stockton-university-camp-de-base",
+    date: "2026-06-09",
+    dateLabel: "9 juin 2026",
+    eyebrow: "Camp de base · New Jersey",
+    title: "Les Grenadiers posent leurs valises à Stockton University avant le Mondial",
+    dek: "À quelques jours du coup d'envoi, la sélection haïtienne s'installe à Stockton University, son camp de base officiel pour le Mondial, sous les yeux d'une diaspora en ébullition.",
+    cover: "/images/journal/community-event.jpg",
+    video: "https://www.youtube.com/watch?v=899SgV7MPKc",
+    videoCaption: "Reportage de CBS News Philadelphia au camp de base des Grenadiers à Stockton University.",
+    body: [
+      "À quelques jours du coup d'envoi, les Grenadiers ont officiellement pris leurs quartiers à Stockton University, sur le campus de Galloway dans le sud du New Jersey. C'est ici, dans des installations de premier plan, que la sélection haïtienne prépare son retour historique en Coupe du Monde, comme l'a rapporté CBS News Philadelphia.",
+      "L'émotion était palpable autour du terrain. Pour l'immense majorité des supporters haïtiano-américains de la région et des fans venus de loin, c'est la première fois de leur vie qu'ils verront Haïti évoluer à ce niveau. Plus de 50 ans après l'épopée de 1974, la fièvre du Mondial a gagné le New Jersey.",
+      "Si les séances d'entraînement au G. Larry James Stadium et au Stockton Sports Center se déroulent à huis clos pour des raisons de sécurité, l'équipe a ouvert ses portes le temps d'un match intra-équipe organisé pour des groupes communautaires et des organisations de jeunesse locales. Au bord du terrain, des enfants observaient les Grenadiers avec des étoiles dans les yeux, certains jeunes footballeurs confiant déjà vouloir reproduire les gestes des professionnels dans leurs propres matchs.",
+      "Le défi qui attend Haïti est de taille : un groupe relevé avec l'Écosse, le Brésil et le Maroc. Les supporters locaux ont déjà coché la rencontre face au Brésil, programmée tout près, à Philadelphie. Mais l'optimisme ne faiblit pas.",
+      "« Nous sommes très enthousiastes, et nous pensons que nous irons au deuxième tour », a confié un supporter au journaliste Ross DiMattei de CBS News Philadelphia.",
+      "Pour Stockton University, accueillir une sélection nationale n'a rien d'inédit. Le campus avait déjà servi de camp de base à l'Arabie saoudite avant le Mondial 1994, et reçu le célèbre club brésilien Flamengo l'an dernier. Un choix qui, selon les responsables de l'université, confirme la qualité de ses infrastructures sportives.",
+      "Les Grenadiers utiliseront le campus comme camp de base pendant au moins deux semaines. Et si la foi inébranlable de leurs supporters est un indice, leur séjour dans la région pourrait bien se prolonger au-delà.",
+    ],
+    source: "Source : CBS News Philadelphia.",
+    albums: [],
+  },
   {
     slug: "haiti-perou-bilan-2-1",
     date: "2026-06-05",
@@ -530,9 +755,14 @@ export function getEntryBySlug(slug) {
   return diaryEntries.find((e) => e.slug === slug) || null;
 }
 
-// Helper — get entries sorted by date desc (newest first)
+// Helper — get entries sorted by date desc (newest first), but any entry
+// flagged `featured: true` is pinned ahead of the rest (used to keep a chosen
+// article in the "À la une" slot even when a more recent entry is published).
 export function getEntriesSorted() {
-  return [...diaryEntries].sort((a, b) => b.date.localeCompare(a.date));
+  return [...diaryEntries].sort((a, b) => {
+    if (!!b.featured !== !!a.featured) return a.featured ? -1 : 1;
+    return b.date.localeCompare(a.date);
+  });
 }
 
 // Helper — normalize entry to an array of albums.

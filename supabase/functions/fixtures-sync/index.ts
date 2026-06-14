@@ -29,7 +29,7 @@ const RESULTS_COUNT = 5;
 // International caps are NOT exposed by the API and stay manual in squad.js.
 const SQUAD_PLAYER_IDS: number[] = [
   87789, 174768, 123742, // GK: Placide, Alexandre Pierre, Duverger
-  12303, 20850, 190747, 20655, 102505, 275367, 1411, 573613, 20538, // DEF
+  12303, 20850, 190747, 20655, 102505, 275367, 1411, 573613, 20538, 318930, // DEF
   338367, 237142, 20665, 371050, 194242, // MID
   45020, 8601, 50958, 128766, 162733, 174915, 48535, 84087, 21613, // FWD/MID
 ];
@@ -42,7 +42,7 @@ const PLAYER_SEASON_DEFAULT = 2025;
 const TERMINAL_STATUSES = ["FT", "AET", "PEN", "PST", "CANC", "ABD", "AWD", "WO"];
 const FINISHED_STATUSES = ["FT", "AET", "PEN"]; // played to completion
 const WINDOW_BEFORE_MS = 3 * 60 * 60 * 1000; // now - 3h
-const WINDOW_AFTER_MS = 5 * 60 * 1000; // now + 5min
+const WINDOW_AFTER_MS = 90 * 60 * 1000; // now + 90min (catch the starting XI ~1h pre-kickoff)
 // Keep polling a finished match until ~match length + 15 min after kickoff, so the
 // id-based fetch captures the COMPLETE final events/lineups/stats after the whistle.
 const POST_FINISH_WINDOW_MS = (2 * 60 + 15) * 60 * 1000; // ~2h15 from kickoff
@@ -212,7 +212,7 @@ async function upsertFixtures(rows: any[]): Promise<number> {
 }
 
 // Fixtures worth polling by id (same window as the gated cron):
-//   • not-yet-terminal with kickoff in [now-3h, now+5min]  (imminent + live)
+//   • not-yet-terminal with kickoff in [now-3h, now+90min]  (pre-match XI + live)
 //   • recently finished (FT/AET/PEN) — kept ~15 min past the approximate final
 //     whistle so the id-based fetch runs a few more times and captures the
 //     COMPLETE final events / lineups / statistics, then stops.

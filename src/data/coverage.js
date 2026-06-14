@@ -32,6 +32,16 @@ export const playlist = {
 // Ordre éditorial Chokarella Media (mai 2026). L'ordre n'est pas
 // strictement hiérarchique mais reflète la séquence dans laquelle
 // les œuvres se présentent à la lecture de la page.
+// EN PAUSE · « Haiti On The Go » (videoId h1N34-DNMrg) est passé en privé sur
+// YouTube le 13 juin 2026 et ne se lit plus. Retiré du tableau pour l'instant.
+// Pour le restaurer s'il redevient public, recoller ce bloc à sa place (juste
+// après « Fè Yo Wè Nou ») :
+// {
+//   videoId: "h1N34-DNMrg",
+//   title: "Haiti On The Go",
+//   artist: "Buju Banton, Jerry Wonda, Top Adlerman, Stichiz, Mickael Marabou & Colmix",
+//   note: "Un hymne international pour les Grenadiers : la légende du reggae Buju Banton s'unit à Top Adlerman, Stichiz, Mickael Marabou et Colmix, sous la production exécutive de Jerry Wonda. Entre fierté de la première nation noire libre, esprit combatif et fête, le clip réalisé par Lucci Bagz a été tourné à Miami, chez Chef Creole.",
+// },
 export const musicVideos = [
   {
     videoId: "_-Ta-C9j6XM",
@@ -44,6 +54,24 @@ export const musicVideos = [
     title: "Dedouble",
     artist: "Tonymix & T-Ansyto feat. J Perry, Shabba, K-Dilak & Kenny Haïti",
     note: "Un sommet de la production haïtienne contemporaine. Tonymix et T-Ansyto, deux des architectes du son afrobeats-konpa de la diaspora, réunissent J Perry, Shabba, K-Dilak et Kenny Haïti pour livrer une bande-son taillée pour la campagne 2026.",
+  },
+  {
+    videoId: "j3GOVYuS0I0",
+    title: "Fè Yo Wè Nou",
+    artist: "Roody Roodboy",
+    note: "Roody Roodboy entre dans la danse avec un titre qui sonne comme un mot d'ordre : faites qu'ils nous voient. Une énergie taillée pour les tribunes, au moment précis où les Grenadiers s'apprêtent à montrer au monde entier qui nous sommes.",
+  },
+  {
+    videoId: "6euO1ITsOW8",
+    title: "Nou Fyè",
+    artist: "Darline Desca",
+    note: "Darline Desca pose sa voix sur la fierté nationale : Nou Fyè, nous sommes fiers. Un hommage tout en émotion à ce que représentent les Grenadiers pour le peuple haïtien, au moment où le pays retrouve la scène mondiale.",
+  },
+  {
+    videoId: "HRJGk9p-Sgw",
+    title: "Nan Mondyal",
+    artist: "Manno Beats feat. Fantom",
+    note: "Manno Beats s'associe à Fantom pour un morceau taillé pour l'événement : Nan Mondyal, à la Coupe du Monde. Une énergie rentre-dedans qui dit la fierté de voir Haïti enfin de retour au plus haut niveau.",
   },
   {
     videoId: "wHIpW-LvW2k",
@@ -59,7 +87,7 @@ export const musicVideos = [
   },
   {
     videoId: "DgpIcZGxCxg",
-    title: "KALE YO",
+    title: "Kale Yo",
     artist: "Leicka Paul × Eddy François",
     note: "Les battre. Les corriger. Le vocabulaire compétitif de chaque terrain vague haïtien, désormais amplifié par Eddy François — la voix légendaire de la Mizik Rasin, fondateur de Boukan Ginen après son départ de Boukman Eksperyans, dont les collaborations avec Wyclef Jean ont porté la musique racine haïtienne dans le monde. Leicka Paul apporte la nouvelle génération ; Eddy François apporte la mémoire institutionnelle de ce que sonne la musique haïtienne quand elle a du sens.",
   },
@@ -70,16 +98,16 @@ export const musicVideos = [
     note: "« Haïti, devant. » L'invitation de Halfdan a réuni l'une des plumes les plus écoutées de la chanson haïtienne : BIC Tizon Dife — dont la discographie a accompagné deux décennies de conscience haïtienne, et dont chaque couplet engage autant qu'il rythme.",
   },
   {
-    videoId: "V9cT4mf-4Iw",
-    title: "APRÈ 52 ZAN",
-    artist: "JEEJEE",
-    note: "« Après 52 ans. » Le titre, à lui seul, dit toute la distance entre Munich 1974 et Foxborough 2026. JEEJEE — voix montante de la musique haïtienne — prend en charge ce poids mémoriel et l'installe dans le langage musical contemporain. Le pont entre deux générations qui se reconnaissent dans le même drapeau.",
+    videoId: "ya02qrfeG4U",
+    title: "An Avan",
+    artist: "Fantom feat. Map Zoe, Cator Gshytt, Dutty, Percutant Flow, Boaz",
+    note: "Un hymne rap pour accompagner les Grenadiers vers le Mondial 2026, signé Fantom et invités.",
   },
   {
-    videoId: "RVD4VULrTR8",
-    title: "Ann Ale",
-    artist: "Prophete · Jessica Antoine · Zazou Beats",
-    note: "Deux mots. La phrase qu'on entendra dans chaque foyer haïtien au moment du coup d'envoi. Trois artistes qui donnent à ce cri de ralliement son propre hymne.",
+    videoId: "V9cT4mf-4Iw",
+    title: "Aprè 52 Zan",
+    artist: "JEEJEE",
+    note: "« Après 52 ans. » Le titre, à lui seul, dit toute la distance entre Munich 1974 et Foxborough 2026. JEEJEE — voix montante de la musique haïtienne — prend en charge ce poids mémoriel et l'installe dans le langage musical contemporain. Le pont entre deux générations qui se reconnaissent dans le même drapeau.",
   },
   {
     videoId: "C5Fpq4rjxdY",
@@ -98,6 +126,12 @@ export const musicVideos = [
     title: "Ayibobo (Hymne de la Victoire)",
     artist: "DOIZAY",
     note: "« Ayibobo », le cri de louange hérité du vaudou haïtien, devenu ici hymne de la victoire. DOIZAY transforme cette affirmation ancestrale en chant de ralliement, où la ferveur populaire et la fierté nationale se rejoignent pour accompagner Les Grenadiers vers le Mondial 2026.",
+  },
+  {
+    videoId: "PE6s-i2ZEbs",
+    title: "Nou Retounen",
+    artist: "Prince Dany et un collectif d'artistes haïtiens du Chili",
+    note: "Depuis le Chili, des artistes haïtiens de la diaspora signent un hymne pour le retour d'Haïti en Coupe du Monde : un message d'unité, d'espoir et de fierté, porté par ceux qui vivent loin du pays mais jamais loin du drapeau.",
   },
 ];
 
@@ -206,6 +240,23 @@ LEANDRE Loodwens aka LENTO AYIZAN`,
     imageLabel: "Timbre commémoratif des Grenadiers — 1000 gourdes",
     description:
       "À l'occasion de la qualification d'Haïti pour la Coupe du Monde 2026, Dubicart Gallery et l'Office des Postes d'Haïti ont fait émettre un timbre commémoratif officiel d'une valeur de 1000 gourdes, autorisé par un arrêté du Conseil des ministres le 6 mai 2026. La vignette réunit en une seule image les Grenadiers en bleu, le gardien en jaune et le drapeau national porté à bout de bras, au milieu d'une foule en liesse. Plus qu'un objet de collection, ce timbre devient un document officiel appelé à circuler à travers le monde, témoin durable de la résilience et du talent haïtiens. Une initiative portée par le juriste Wolff Dubic, fondateur de Dubicart Gallery, qui inscrit l'exploit des Grenadiers dans la grande tradition philatélique des Mondiaux.",
+  },
+];
+
+// ─── Courts métrages ──────────────────────────────────────────────────
+// Rendus en tête du chapitre Films, AVANT la série documentaire.
+// Nouvelles entrées en tête. Lecture via YouTubeEmbed.
+// embeddable: true SEULEMENT si la chaîne autorise la lecture intégrée
+// (vérifier avant : certaines chaînes, comme la FIFA, la bloquent) ;
+// sinon l'entrée s'affiche en carte cliquable vers YouTube.
+export const shortFilms = [
+  {
+    videoId: "hok7IOdhV3Y",
+    embeddable: true,
+    title: "Grenadye Alaso! · 1974-2026",
+    credit: "Un film de Leo Volcy · Invisible North · Voix de Jimmy Jean-Louis",
+    medium: "Court métrage · 11 juin 2026",
+    note: "Un court métrage cinématographique qui relie les deux Mondiaux d'Haïti : les images aériennes du pays, la vie quotidienne, les archives de la génération 1974 et les Grenadiers d'aujourd'hui, portés par la voix en créole de Jimmy Jean-Louis. La bande sonore marie Trio Select (Ensemble Select) au Gaya de Michaël Brun avec Lakou Mizik et J Perry. Produit par Invisible North, avec Michaël Brun et Jozy Altidore parmi les producteurs exécutifs.",
   },
 ];
 

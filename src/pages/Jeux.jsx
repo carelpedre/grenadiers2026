@@ -8,6 +8,13 @@ import PageHeader from "../components/PageHeader";
 
 const games = [
   {
+    title: "Tire Penalty",
+    blurb: "Élimine l'Écosse, le Brésil et le Maroc aux tirs au but.",
+    to: "/jeux/penalty",
+    status: "live",
+    cta: "Jouer",
+  },
+  {
     title: "Quiz Grenadier",
     blurb: "Huit questions sur 1974, la sélection 2026 et la Fédération. Score partageable.",
     to: "/jeux/quiz",

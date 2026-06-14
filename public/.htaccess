@@ -93,6 +93,15 @@
   RewriteCond %{REQUEST_URI} ^/foto/?$
   RewriteRule .* /foto.html [L]
 
+  # /foto/<slug> → prerendered album page (per-album title, description, OG)
+  # when it exists; unknown slugs fall back to the SPA shell. Dotless slug so
+  # the rewritten .html target isn't re-clobbered on the second pass.
+  RewriteCond %{DOCUMENT_ROOT}/foto/$1.html -f
+  RewriteRule ^foto/([^/.]+)/?$ /foto/$1.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/foto/[^/.]+/?$
+  RewriteRule .* /index.html [L]
+
   # Legacy prerender URLs (before the /games/ move) → clean React routes, so any
   # indexed/shared /jeux/<x>.html link 301s instead of erroring on the old path.
   RewriteRule ^jeux/quiz\.html$ /jeux/quiz [R=301,L]
@@ -110,6 +119,9 @@
 
   RewriteCond %{REQUEST_URI} ^/jeux/pwonostik/?$
   RewriteRule .* /games/pwonostik.html [L]
+
+  RewriteCond %{REQUEST_URI} ^/jeux/penalty/?$
+  RewriteRule .* /games/penalty.html [L]
 
   # Other /jeux/<slug> games (onze, devine) are pure SPA routes. Dotless so the
   # rewritten /games/*.html targets above aren't re-clobbered on the second pass.
@@ -157,11 +169,17 @@
   RewriteRule .* /index.html [L]
 
   # /journal (index) → /journal.html (gets its own OG metadata)
-  # /journal/<slug>   → /index.html (SPA route, OG metadata generic for now)
   RewriteCond %{REQUEST_URI} ^/journal/?$
   RewriteRule .* /journal.html [L]
 
-  RewriteCond %{REQUEST_URI} ^/journal/[^/]+/?$
+  # /journal/<slug> → prerendered journal/<slug>.html (per-article title,
+  # description, OG and NewsArticle JSON-LD) when the article exists.
+  # Dotless slug pattern so the rewritten .html target isn't re-clobbered.
+  RewriteCond %{DOCUMENT_ROOT}/journal/$1.html -f
+  RewriteRule ^journal/([^/.]+)/?$ /journal/$1.html [L]
+
+  # Unknown /journal slugs fall back to the SPA shell (NotFound renders).
+  RewriteCond %{REQUEST_URI} ^/journal/[^/.]+/?$
   RewriteRule .* /index.html [L]
 
   # ─── 200 history fallback (SPA) ─────────────────────────────────

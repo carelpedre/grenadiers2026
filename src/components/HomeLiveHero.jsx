@@ -194,6 +194,12 @@ export function HomeMatchHero() {
   const reduce = useReducedMotion();
   const focus = pickFocus(byOpponent) || { slug: "scotland", state: "pre", data: null };
   const { slug, state, data } = focus;
+
+  // Le compte à rebours d'avant-match vit désormais dans le CountdownHero
+  // (haut de page). On évite le doublon : ce héros ne s'affiche que lorsqu'un
+  // match est en direct ou vient de se terminer (score / résultat).
+  if (state === "pre") return null;
+
   const m = getMatch(slug);
 
   const oppLabel = m?.opponent?.name || frName(data?.oppName) || slug;

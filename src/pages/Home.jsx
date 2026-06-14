@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { SponsorBanner } from "../components/Sponsor";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import { HomeMatchHero, RouteMondial } from "../components/HomeLiveHero";
+import CountdownHero from "../components/CountdownHero";
 import FanWall from "../components/FanWall";
 import { fadeUp, stagger, CountUpNumber } from "../lib/motion";
 import { squad, squadStats } from "../data/squad";
 import { getEntriesSorted } from "../data/diary";
-import { useT } from "../lib/i18n";
 
 const featuredPlayers = [
   { slug: "jean-ricner-bellegarde", name: "Bellegarde", role: "Milieu de terrain · Wolverhampton", photo: "/images/photos/jean-ricner-bellegarde.jpg" },
@@ -29,12 +29,13 @@ function getSurnameMarquee() {
 }
 
 export default function Home() {
-  const { t } = useT();
   const surnames = getSurnameMarquee();
 
   return (
     <div>
-      <Hero t={t} />
+      <PosterBanner />
+      <CountdownHero />
+      <HeroCtaRow />
       <PlayerMarquee surnames={surnames} />
 
       {/* State-aware match hero — live / pre-match / post-match */}
@@ -42,12 +43,14 @@ export default function Home() {
 
       <SponsorBanner placement="home-after-hero" />
 
-      {/* Route vers le Mondial — compact, state-aware timeline */}
+      {/* Route vers le Mondial — compact, state-aware timeline (calendrier) */}
       <RouteMondial />
 
-      <SquadCarousel />
-      <FanWall />
+      {/* Le Journal — remonté juste après le calendrier des matchs */}
       <JournalPreview />
+      <FanWall />
+      {/* Effectif — redescendu juste après le mur des supporters */}
+      <SquadCarousel />
 
       {/* 1974 History teaser */}
       <section className="bg-ink text-bg relative overflow-hidden">
@@ -83,61 +86,112 @@ export default function Home() {
   );
 }
 
-function Hero({ t }) {
+// Poster de l'équipe, mobile uniquement (sur desktop il occupe la colonne
+// droite du héros). Pleine largeur, non recadré ; tap pour l'ouvrir en grand.
+function PosterBanner() {
+  const [open, setOpen] = useState(false);
+  const alt = "L'équipe d'Haïti pour la Coupe du Monde 2026";
   return (
-    <section className="relative overflow-hidden min-h-[80vh] md:min-h-[90vh] flex items-center">
-      <div className="absolute inset-0">
-        {/* Background: video preferred, image as poster + fallback.
-            Drop a 1080p MP4 (~5-10MB, 15-30s loop, H.264, no audio) at:
-              public/videos/home-hero.mp4
-            Without the file, the <video> tag silently fails and the
-            ImagePlaceholder behind it shows through. */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/images/photos/home-hero.jpg"
-          aria-hidden="true"
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="xl:hidden block w-full bg-ink leading-none"
+        aria-label="Voir le poster de l'équipe en grand"
+      >
+        <picture>
+          <source
+            type="image/webp"
+            srcSet="/images/photos/haiti-squad-hero-768.webp 768w, /images/photos/haiti-squad-hero-1280.webp 1280w"
+            sizes="100vw"
+          />
+          <img
+            src="/images/photos/haiti-squad-hero-1280.jpg"
+            srcSet="/images/photos/haiti-squad-hero-768.jpg 768w, /images/photos/haiti-squad-hero-1280.jpg 1280w"
+            sizes="100vw"
+            alt={alt}
+            loading="eager"
+            fetchPriority="high"
+            className="block w-full h-auto"
+          />
+        </picture>
+      </button>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-[90] bg-ink/95 flex items-center justify-center p-3"
+          onClick={() => setOpen(false)}
+          role="dialog"
+          aria-modal="true"
         >
-          <source src="/videos/home-hero.mp4" type="video/mp4" />
-          <source src="/videos/home-hero.webm" type="video/webm" />
-        </video>
-        <ImagePlaceholder src="/images/photos/home-hero.jpg" aspect="16/9" label="Les Grenadiers" rounded={false} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-ink/85 via-ink/70 to-haiti-blue-dark/80"></div>
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/90 to-transparent"></div>
-      </div>
-
-      <motion.div className="absolute left-0 top-0 bottom-0 w-1.5 bg-haiti-blue" initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }} style={{ originY: 0 }} />
-      <motion.div className="absolute left-1.5 top-0 bottom-0 w-1.5 bg-haiti-red" initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }} style={{ originY: 0 }} />
-
-      <div className="relative max-w-content mx-auto px-5 py-24 md:py-32 w-full">
-        <div className="max-w-3xl">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.05 }} className="inline-flex items-center gap-2 px-3 py-1.5 bg-haiti-red text-bg text-xs font-bold uppercase tracking-wider rounded-full mb-7">
-            <span className="w-1.5 h-1.5 bg-bg rounded-full animate-pulse"></span>
-            {t("home.hero.badge")}
-          </motion.div>
-
-          <motion.h1 className="font-display text-6xl md:text-8xl text-bg mb-7 leading-[0.95]" initial="hidden" animate="show" variants={stagger(0.06, 0.05)}>
-            <motion.span variants={fadeUp} className="block">{t("home.hero.title1")}</motion.span>
-            <motion.span variants={fadeUp} className="block text-haiti-red">{t("home.hero.title2")}</motion.span>
-          </motion.h1>
-
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.12 }} className="text-bg/85 text-lg md:text-xl leading-relaxed mb-9 max-w-2xl">
-            {t("home.hero.body")}
-          </motion.p>
-
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.18 }} className="flex flex-wrap gap-3">
-            <Link to="/matches" className="inline-flex items-center gap-2 px-7 py-3.5 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors">
-              {t("home.hero.fixtures")} →
-            </Link>
-            <Link to="/squad" className="inline-flex items-center gap-2 px-7 py-3.5 bg-bg/10 text-bg font-semibold rounded-full hover:bg-bg/20 transition-colors border border-bg/20 backdrop-blur-sm">
-              Découvrir le groupe
-            </Link>
-          </motion.div>
+          <img
+            src="/images/photos/haiti-squad-hero-1920.jpg"
+            alt={alt}
+            className="max-w-full max-h-full object-contain rounded"
+          />
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Fermer"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-bg/10 hover:bg-bg/20 text-bg flex items-center justify-center backdrop-blur-sm"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
+      )}
+    </>
+  );
+}
+
+// Rangée d'appels à l'action sous le héros : deux cartes (mur + journal).
+// Réutilise le style de carte du site (blanc, bord line, survol haiti-red).
+function HeroCtaRow() {
+  const cards = [
+    {
+      to: "/mur",
+      eyebrow: "Mur des supporters",
+      title: "Voye mesaj ou anvan match la",
+      cta: "Signer le mur",
+    },
+    {
+      to: "/journal",
+      eyebrow: "Le Journal",
+      title: "Suivez les Grenadiers jour après jour",
+      cta: "Lire les chroniques",
+    },
+  ];
+  return (
+    <section className="bg-bg border-b border-line">
+      <div className="max-w-content mx-auto px-5 py-6 md:py-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          variants={stagger(0.12)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {cards.map((c) => (
+            <motion.div key={c.to} variants={fadeUp}>
+              <Link
+                to={c.to}
+                className="group flex items-center gap-4 h-full bg-white border border-line rounded-lg p-5 hover:border-haiti-red hover:shadow-md transition-all"
+              >
+                <span className="w-1.5 self-stretch rounded-full bg-gradient-to-b from-haiti-blue to-haiti-red shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-1">
+                    {c.eyebrow}
+                  </p>
+                  <h3 className="font-display text-lg md:text-xl leading-snug">{c.title}</h3>
+                  <p className="mt-2 text-sm font-semibold text-haiti-blue group-hover:text-haiti-red transition-colors">
+                    {c.cta} →
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

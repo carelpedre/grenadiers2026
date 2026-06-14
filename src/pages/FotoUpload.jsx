@@ -91,6 +91,7 @@ export default function FotoUpload() {
   const [openSlug, setOpenSlug] = useState(null); // album déplié (photos visibles)
   const [openPhotos, setOpenPhotos] = useState(null); // null = chargement
   const [deletingPath, setDeletingPath] = useState(null);
+  const [coverBusy, setCoverBusy] = useState(null);
 
   // noindex + titre dédié (route absente du prerender/sitemap).
   useEffect(() => {
@@ -112,7 +113,10 @@ export default function FotoUpload() {
     setAlbums(list);
     setEdits(
       Object.fromEntries(
-        list.map((a) => [a.slug, { name: a.name, event_date: a.event_date || "", credit: a.credit || "" }]),
+        list.map((a) => [
+          a.slug,
+          { name: a.name, event_date: a.event_date || "", credit: a.credit || "", description: a.description || "" },
+        ]),
       ),
     );
   }, []);
@@ -206,6 +210,7 @@ export default function FotoUpload() {
     if ((e.name ?? "") !== album.name) { fd.append("album", e.name ?? ""); changed = true; }
     if ((e.event_date || "") !== (album.event_date || "")) { fd.append("event_date", e.event_date || ""); changed = true; }
     if ((e.credit || "") !== (album.credit || "")) { fd.append("credit", e.credit || ""); changed = true; }
+    if ((e.description || "") !== (album.description || "")) { fd.append("description", e.description || ""); changed = true; }
     if (!changed) {
       setManageErr(false);
       setManageMsg("Aucune modification.");
@@ -298,6 +303,33 @@ export default function FotoUpload() {
     setOpenPhotos((prev) => (prev ? prev.filter((p) => p.path !== path) : prev));
     setManageErr(false);
     setManageMsg("Photo supprimée.");
+    refreshAlbums();
+  }
+
+  async function setCover(slug, coverPath) {
+    if (!password.trim()) {
+      setManageErr(true);
+      setManageMsg("Entrez le mot de passe en haut de la page.");
+      return;
+    }
+    setCoverBusy(coverPath);
+    setManageMsg("");
+    const fd = new FormData();
+    fd.append("password", password.trim());
+    fd.append("action", "set_cover");
+    fd.append("slug", slug);
+    fd.append("cover_path", coverPath);
+    const { status: st, data } = await uploadGalleryChunk(fd);
+    setCoverBusy(null);
+    const err = errorMessage(st, data);
+    if (err) {
+      setManageErr(true);
+      setManageMsg(err);
+      return;
+    }
+    rememberPassword();
+    setManageErr(false);
+    setManageMsg("Couverture mise à jour.");
     refreshAlbums();
   }
 
@@ -456,7 +488,7 @@ export default function FotoUpload() {
               ) : (
                 <ul className="space-y-5">
                   {albums.map((a) => {
-                    const e = edits[a.slug] || { name: a.name, event_date: a.event_date || "", credit: a.credit || "" };
+                    const e = edits[a.slug] || { name: a.name, event_date: a.event_date || "", credit: a.credit || "", description: a.description || "" };
                     const busy = busySlug === a.slug;
                     return (
                       <li key={a.slug} className="bg-white border border-line rounded-lg p-4">
@@ -486,6 +518,13 @@ export default function FotoUpload() {
                               className={inputCls}
                             />
                           </div>
+                          <textarea
+                            value={e.description ?? ""}
+                            onChange={(ev) => setEdit(a.slug, { description: ev.target.value })}
+                            placeholder="Description (bio). 1re ligne : Poste · Club, puis une ligne vide, puis le texte."
+                            rows={5}
+                            className={`${inputCls} resize-y`}
+                          />
                         </div>
                         <div className="flex items-center gap-2 mt-4">
                           <button
@@ -523,25 +562,45 @@ export default function FotoUpload() {
                               <p className="text-muted text-xs mt-3">Aucune photo.</p>
                             ) : (
                               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-3">
-                                {openPhotos.map((p) => (
-                                  <div
-                                    key={p.path}
-                                    className="relative aspect-square rounded-md overflow-hidden border border-line bg-bg"
-                                  >
-                                    <img src={p.thumb} alt="" loading="lazy" className="w-full h-full object-cover" />
-                                    <button
-                                      type="button"
-                                      onClick={() => deletePhoto(p.path)}
-                                      disabled={deletingPath === p.path}
-                                      aria-label="Supprimer cette photo"
-                                      className="absolute top-1 right-1 w-6 h-6 rounded-full bg-ink/70 hover:bg-haiti-red text-bg flex items-center justify-center disabled:opacity-50"
+                                {openPhotos.map((p) => {
+                                  const isCover = a.cover_full && p.full === a.cover_full;
+                                  return (
+                                    <div
+                                      key={p.path}
+                                      className="relative aspect-square rounded-md overflow-hidden border border-line bg-bg"
                                     >
-                                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
+                                      <img src={p.thumb} alt="" loading="lazy" className="w-full h-full object-cover" />
+
+                                      <button
+                                        type="button"
+                                        onClick={() => deletePhoto(p.path)}
+                                        disabled={deletingPath === p.path}
+                                        aria-label="Supprimer cette photo"
+                                        className="absolute top-1 right-1 w-6 h-6 rounded-full bg-ink/70 hover:bg-haiti-red text-bg flex items-center justify-center disabled:opacity-50"
+                                      >
+                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                      </button>
+
+                                      {isCover ? (
+                                        <span className="absolute bottom-1 left-1 right-1 text-center text-[10px] font-bold uppercase tracking-wider bg-gold text-ink rounded px-1 py-0.5">
+                                          Couverture actuelle
+                                        </span>
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          onClick={() => setCover(a.slug, p.path)}
+                                          disabled={coverBusy === p.path}
+                                          aria-label="Définir comme couverture"
+                                          className="absolute bottom-1 left-1 right-1 text-center text-[10px] font-semibold uppercase tracking-wider bg-ink/70 hover:bg-haiti-blue text-bg rounded px-1 py-0.5 disabled:opacity-50"
+                                        >
+                                          {coverBusy === p.path ? "…" : "Couverture"}
+                                        </button>
+                                      )}
+                                    </div>
+                                  );
+                                })}
                               </div>
                             ))}
                         </div>

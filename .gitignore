@@ -18,6 +18,10 @@ qifjot-kacMij-cijgy5.pub
 id_rsa
 id_ed25519
 
+# ─── Local-only media (managed out-of-band, excluded from deploy rsync) ─
+# Large source videos uploaded to the server separately, not part of the build.
+media/
+
 # ─── Supabase local ──────────────────────────────────────────────────
 supabase/.temp/
 supabase/.branches/

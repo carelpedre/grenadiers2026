@@ -23,6 +23,15 @@ REMOTE_PATH="/home/carelp/grenadiers2026.com"
 
 set -e  # exit on first error
 
+echo "🖼️   Generating per-entry journal OG cards..."
+node scripts/generate-og-images.mjs
+
+echo "🖼️   Generating homepage hero poster derivatives..."
+node scripts/generate-hero-images.mjs
+
+echo "🖼️   Generating per-album photo OG cards..."
+node scripts/generate-album-og-images.mjs
+
 echo "🛠️   Building production bundle..."
 npm run build
 
@@ -43,6 +52,7 @@ rsync -avz --delete \
   --exclude 'api/.env' \
   --exclude 'api/atlas.json' \
   --exclude 'api/atlas-rate.json' \
+  --exclude 'media/' \
   dist/ "${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}/"
 
 echo ""

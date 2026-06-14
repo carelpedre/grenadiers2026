@@ -13,6 +13,13 @@ function getYouTubeId(input) {
   return m ? m[1] : input;
 }
 
+// Une entrée est en MP4 auto-hébergé si videoType vaut "file" ou si l'URL se
+// termine par .mp4. Sinon on retombe sur l'embed YouTube (comportement existant).
+function isSelfHostedVideo(entry) {
+  if (entry?.videoType === "file") return true;
+  return /\.mp4(\?.*)?$/i.test(entry?.video || "");
+}
+
 export default function DiaryEntry() {
   const { slug } = useParams();
   const entry = getEntryBySlug(slug);
@@ -81,17 +88,62 @@ export default function DiaryEntry() {
           )}
           {entry.video && (
             <figure className="my-8">
-              <div className="relative w-full overflow-hidden rounded-xl aspect-video">
-                <iframe
-                  className="absolute inset-0 h-full w-full"
-                  src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(entry.video)}`}
-                  title={entry.videoCaption || entry.title}
-                  loading="lazy"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
+              {isSelfHostedVideo(entry) ? (
+                <video
+                  className="w-full rounded-xl bg-ink"
+                  src={entry.video}
+                  poster={entry.cover}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
                 />
-              </div>
+              ) : entry.videoExternal ? (
+                // Certaines vidéos (contenu FIFA, etc.) sont bloquées à
+                // l'intégration par leur ayant droit : impossible de les lire
+                // hors de YouTube. On affiche une affiche cliquable qui ouvre
+                // la vidéo sur YouTube plutôt qu'un lecteur en erreur.
+                <a
+                  href={entry.video}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block w-full overflow-hidden rounded-xl aspect-video bg-ink"
+                  aria-label={`${entry.videoCaption || entry.title} · regarder sur YouTube`}
+                >
+                  {entry.cover && (
+                    <img
+                      src={entry.cover}
+                      alt=""
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity duration-300 group-hover:opacity-90"
+                    />
+                  )}
+                  <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/30">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-haiti-red text-white shadow-lg transition-transform duration-300 group-hover:scale-110">
+                      <svg className="ml-1 h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                    <span className="rounded-full bg-ink/85 px-4 py-1.5 text-sm font-semibold text-white">
+                      Regarder sur YouTube
+                    </span>
+                  </span>
+                </a>
+              ) : (
+                <div className="relative w-full overflow-hidden rounded-xl aspect-video">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(entry.video)}`}
+                    title={entry.videoCaption || entry.title}
+                    loading="lazy"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+              )}
               {entry.videoCaption && (
                 <figcaption className="mt-2 text-sm opacity-70">{entry.videoCaption}</figcaption>
               )}
@@ -123,7 +175,32 @@ export default function DiaryEntry() {
           )}
           {entry.source && (
             <p className="text-sm text-muted italic pt-4 border-t border-line">
-              {entry.source}
+              {entry.sourceUrl ? (
+                <a
+                  href={entry.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-haiti-blue transition-colors"
+                >
+                  {entry.source}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-3 h-3 opacity-70"
+                    aria-hidden="true"
+                  >
+                    <path d="M15 3h6v6" />
+                    <path d="M10 14 21 3" />
+                    <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" />
+                  </svg>
+                </a>
+              ) : (
+                entry.source
+              )}
             </p>
           )}
         </div>
@@ -136,7 +213,11 @@ export default function DiaryEntry() {
             <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3">
               La galerie
             </p>
-            <h2 className="font-display text-3xl md:text-4xl mb-10">En images</h2>
+            <h2 className="font-display text-3xl md:text-4xl mb-2">En images</h2>
+            {entry.photoCredit && (
+              <p className="text-sm text-muted mb-10">Photos : {entry.photoCredit}</p>
+            )}
+            {!entry.photoCredit && <div className="mb-10" />}
 
             <div className="space-y-12">
               {albums.map((album, ai) => (
@@ -253,7 +334,13 @@ export default function DiaryEntry() {
 
 // Single album: optional title + grid of photo thumbnails.
 // Clicking a thumbnail opens the lightbox at the correct flat index.
+// Two layouts:
+//   • default  — fixed 3/4 thumbnails, mobile 2 / desktop 3 (compact, uniform).
+//   • masonry  — natural aspect, nothing cropped (CSS columns, break-inside-avoid,
+//     w-full h-auto), mobile 2 / desktop 3. For large photo sets (e.g. a full
+//     reportage) where cropping would hurt. Opt in with `layout: "masonry"`.
 function Album({ album, flatIndexOf, onPhotoClick }) {
+  const masonry = album.layout === "masonry";
   return (
     <div>
       {album.title && (
@@ -266,23 +353,45 @@ function Album({ album, flatIndexOf, onPhotoClick }) {
           </span>
         </div>
       )}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-        {album.photos.map((photo, i) => (
-          <button
-            key={photo.src}
-            onClick={() => onPhotoClick(flatIndexOf(photo))}
-            className="block rounded-lg overflow-hidden border border-line hover:border-haiti-red transition-all"
-          >
-            <ImagePlaceholder
-              src={photo.src}
-              label={photo.alt}
-              aspect="3/4"
-              objectPosition="center top"
-              rounded={false}
-            />
-          </button>
-        ))}
-      </div>
+      {masonry ? (
+        <div className="columns-2 md:columns-3 gap-3 md:gap-4">
+          {album.photos.map((photo) => (
+            <button
+              key={photo.src}
+              onClick={() => onPhotoClick(flatIndexOf(photo))}
+              className="block w-full mb-3 md:mb-4 break-inside-avoid overflow-hidden rounded-lg border border-line hover:border-haiti-red transition-all"
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt || ""}
+                loading="lazy"
+                className="block w-full h-auto"
+              />
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {album.photos.map((photo) => (
+            <button
+              key={photo.src}
+              onClick={() => onPhotoClick(flatIndexOf(photo))}
+              className="block rounded-lg overflow-hidden border border-line hover:border-haiti-red transition-all"
+            >
+              <ImagePlaceholder
+                src={photo.src}
+                label={photo.alt}
+                aspect="3/4"
+                objectPosition="center top"
+                rounded={false}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+      {album.caption && (
+        <p className="mt-4 text-sm text-muted">{album.caption}</p>
+      )}
     </div>
   );
 }

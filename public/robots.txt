@@ -1,0 +1,16 @@
+# https://grenadiers2026.com/robots.txt
+# An independent fan project celebrating Haiti at the FIFA World Cup 2026.
+# NOTE: scripts/generate-sitemap.mjs writes the same content into dist/ at
+# deploy time. Keep the two in sync if you edit either.
+
+User-agent: *
+Allow: /
+
+# Don't index the API endpoints
+Disallow: /api/
+
+# Private uploader (password-protected, not for indexing)
+Disallow: /foto/upload
+
+# Sitemap
+Sitemap: https://grenadiers2026.com/sitemap.xml

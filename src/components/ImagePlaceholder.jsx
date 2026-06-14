@@ -21,6 +21,7 @@ export default function ImagePlaceholder({
 
   const aspectClass = {
     "16/9": "aspect-video",
+    "16/10": "aspect-[16/10]",
     "4/3": "aspect-[4/3]",
     "1/1": "aspect-square",
     "3/4": "aspect-[3/4]",

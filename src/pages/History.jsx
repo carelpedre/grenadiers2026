@@ -41,7 +41,18 @@ export default function History() {
       {/* Hero image — the squad */}
       <section className="bg-bg border-b border-line">
         <div className="max-w-content mx-auto px-5 py-8">
-          <ImagePlaceholder src="/images/photos/squad-1974.jpg" aspect="16/9" objectPosition="center top" label="Sélection nationale d'Haïti · Photo de groupe avant la Coupe du Monde 1974" />
+          <figure>
+            <ImagePlaceholder src="/images/photos/squad-1974.jpg" aspect="16/9" objectPosition="center top" label="Sélection nationale d'Haïti · Photo de groupe avant la Coupe du Monde 1974" />
+            <figcaption className="text-sm text-muted leading-relaxed mt-3 space-y-1.5">
+              <span className="block font-display text-ink">La sélection haïtienne, Coupe du Monde 1974</span>
+              <span className="block">
+                <strong className="font-display text-ink">Debout</strong> (de gauche à droite) : Arsène Auguste (défenseur, n°3), Wilner Nazaire (défenseur, n°14, capitaine), Ernst Jean-Joseph (défenseur, n°12), Pierre Bayonne (défenseur, n°6), Jean-Claude Désir (milieu, n°8), Henri Françillon (gardien, n°1, maillot jaune).
+              </span>
+              <span className="block">
+                <strong className="font-display text-ink">Accroupis</strong> (de gauche à droite) : Eddy Antoine (milieu, n°9), Guy François (milieu, n°10), Philippe Vorbe (milieu, n°7), Emmanuel Sanon (attaquant, n°20, buteur historique d'Haïti en Coupe du Monde), Roger Saint-Vil (attaquant, n°15).
+              </span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 

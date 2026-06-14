@@ -29,6 +29,7 @@ const DiaryEntry = lazy(() => import("./pages/DiaryEntry"));
 const Jeux = lazy(() => import("./pages/Jeux"));
 const Quiz = lazy(() => import("./pages/Quiz"));
 const Pwonostik = lazy(() => import("./pages/Pwonostik"));
+const Penalty = lazy(() => import("./pages/Penalty"));
 const OnzeDepart = lazy(() => import("./pages/OnzeDepart"));
 const DevineGrenadier = lazy(() => import("./pages/DevineGrenadier"));
 const Mur = lazy(() => import("./pages/Mur"));
@@ -78,11 +79,13 @@ export default function App() {
             <Route path="/jeux" element={<Jeux />} />
             <Route path="/jeux/quiz" element={<Quiz />} />
             <Route path="/jeux/pwonostik" element={<Pwonostik />} />
+            <Route path="/jeux/penalty" element={<Penalty />} />
             <Route path="/jeux/onze" element={<OnzeDepart />} />
             <Route path="/jeux/devine" element={<DevineGrenadier />} />
             <Route path="/mur" element={<Mur />} />
             <Route path="/foto" element={<Foto />} />
             <Route path="/foto/upload" element={<FotoUpload />} />
+            <Route path="/foto/:slug" element={<Foto />} />
             <Route path="/about" element={<About />} />
             {/* Catch-all 404 — must be last */}
             <Route path="*" element={<NotFound />} />

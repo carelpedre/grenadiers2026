@@ -4,49 +4,74 @@
 // ║                                                                        ║
 // ║  Generates dist/sitemap.xml and dist/robots.txt for SEO.               ║
 // ║  Run as part of `./deploy.sh` after `npm run build`, before rsync.     ║
+// ║                                                                        ║
+// ║  URLs come from src/lib/routeMeta.js (same source as the prerender)    ║
+// ║  plus one entry per journal article from src/data/diary.js, so the     ║
+// ║  sitemap can never drift from what is actually prerendered.            ║
 // ╚═══════════════════════════════════════════════════════════════════════╝
 
 import { writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { BASE, ROUTES } from "../src/lib/routeMeta.js";
+import { diaryEntries } from "../src/data/diary.js";
+import { fetchAlbumsForBuild } from "./lib/fetch-albums.mjs";
+
+const albums = await fetchAlbumsForBuild();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(__dirname, "..", "dist");
-const BASE = "https://grenadiers2026.com";
 
-// All public routes that should appear in the sitemap.
 // priority/changefreq are advisory only; modern Google mostly ignores them
-// but other crawlers may use them.
-const routes = [
-  { path: "/", priority: "1.0", changefreq: "daily" },
-  { path: "/squad", priority: "0.9", changefreq: "weekly" },
-  { path: "/matches", priority: "0.9", changefreq: "weekly" },
-  { path: "/watch-parties", priority: "0.8", changefreq: "weekly" },
-  { path: "/stories", priority: "0.8", changefreq: "weekly" },
-  { path: "/anthem", priority: "0.6", changefreq: "monthly" },
-  { path: "/federation", priority: "0.7", changefreq: "monthly" },
-  { path: "/history-1974", priority: "0.7", changefreq: "monthly" },
-  { path: "/press", priority: "0.6", changefreq: "monthly" },
-  { path: "/documentary", priority: "0.6", changefreq: "monthly" },
-  { path: "/interviews", priority: "0.7", changefreq: "weekly" },
-  { path: "/say-their-names", priority: "0.5", changefreq: "monthly" },
-  { path: "/atlas", priority: "0.7", changefreq: "weekly" },
-  { path: "/gallery", priority: "0.7", changefreq: "weekly" },
-  { path: "/foto", priority: "0.7", changefreq: "weekly" },
-  { path: "/about", priority: "0.5", changefreq: "monthly" },
-];
+// but other crawlers may use them. Anything not listed gets the default.
+const HINTS = {
+  "/": { priority: "1.0", changefreq: "daily" },
+  "/squad": { priority: "0.9", changefreq: "weekly" },
+  "/matches": { priority: "0.9", changefreq: "weekly" },
+  "/journal": { priority: "0.9", changefreq: "daily" },
+  "/mur": { priority: "0.8", changefreq: "daily" },
+  "/watch-parties": { priority: "0.8", changefreq: "weekly" },
+  "/stories": { priority: "0.8", changefreq: "weekly" },
+  "/live/scotland": { priority: "0.8", changefreq: "daily" },
+  "/live/brazil": { priority: "0.8", changefreq: "daily" },
+  "/live/morocco": { priority: "0.8", changefreq: "daily" },
+};
+const DEFAULT_HINT = { priority: "0.7", changefreq: "weekly" };
 
 const today = new Date().toISOString().split("T")[0];
 
+const urls = [
+  // Every prerendered route. /foto/upload is private and is not in ROUTES.
+  ...ROUTES.map((r) => ({
+    loc: `${BASE}${r.path}`,
+    lastmod: today,
+    ...(HINTS[r.path] || DEFAULT_HINT),
+  })),
+  // One entry per journal article, dated by the entry itself.
+  ...diaryEntries.map((e) => ({
+    loc: `${BASE}/journal/${e.slug}`,
+    lastmod: e.date || today,
+    priority: "0.6",
+    changefreq: "monthly",
+  })),
+  // One entry per public photo album (/foto/<slug>).
+  ...albums.map((a) => ({
+    loc: `${BASE}/foto/${a.slug}`,
+    lastmod: today,
+    priority: "0.6",
+    changefreq: "monthly",
+  })),
+];
+
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
+${urls
   .map(
-    (r) => `  <url>
-    <loc>${BASE}${r.path}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${r.changefreq}</changefreq>
-    <priority>${r.priority}</priority>
+    (u) => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${u.lastmod}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
   </url>`
   )
   .join("\n")}
@@ -54,8 +79,9 @@ ${routes
 `;
 
 writeFileSync(resolve(DIST, "sitemap.xml"), sitemapXml);
-console.log(`✓ sitemap.xml — ${routes.length} URLs`);
+console.log(`✓ sitemap.xml — ${urls.length} URLs (${ROUTES.length} routes + ${diaryEntries.length} journal entries)`);
 
+// Same content as public/robots.txt — keep the two in sync.
 const robotsTxt = `# https://grenadiers2026.com/robots.txt
 # An independent fan project celebrating Haiti at the FIFA World Cup 2026.
 

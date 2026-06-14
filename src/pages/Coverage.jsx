@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import ImagePlaceholder from "../components/ImagePlaceholder";
+import YouTubeEmbed from "../components/YouTubeEmbed";
 import { fadeUp, stagger } from "../lib/motion";
 import {
   playlist,
   musicVideos,
   lyneLucien,
   creativeTributes,
+  shortFilms,
   ferronDocumentary,
   chokarellaProductions,
 } from "../data/coverage";
@@ -91,6 +93,10 @@ export default function Coverage() {
             wallText="Pendant que les chansons sortent, un autre travail commence : celui de la pellicule. Loin des manchettes habituelles sur Haïti, des réalisateurs s'attachent à raconter le pays par le sport — avec nuance, avec patience, avec une caméra qui prend le temps de regarder."
           />
 
+          {/* Courts métrages d'abord, la série documentaire ensuite. */}
+          {shortFilms.map((film) => (
+            <ShortFilmExhibit key={film.videoId} film={film} />
+          ))}
           <DocumentaryExhibit />
         </>
       )}
@@ -428,6 +434,54 @@ function PlaylistExhibit() {
             />
           </div>
         </div>
+      </motion.div>
+    </article>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════
+//  SHORT FILM EXHIBIT — courts métrages (lecture via YouTubeEmbed)
+// ════════════════════════════════════════════════════════════════════════
+
+function ShortFilmExhibit({ film }) {
+  return (
+    <article className="max-w-content mx-auto px-5 py-12 md:py-16">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* Plate caption above, same convention as the documentary */}
+        <div className="max-w-3xl mx-auto mb-2 md:mb-4">
+          <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
+            {film.medium}
+          </p>
+          <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-3">
+            {film.title}
+          </h3>
+          <p className="text-muted text-base md:text-lg">
+            {film.credit}
+          </p>
+        </div>
+
+        {/* Inline player when the channel allows embedding; link-out card otherwise */}
+        <div className="max-w-5xl mx-auto">
+          <YouTubeEmbed
+            videoId={film.videoId}
+            title={film.title}
+            embeddable={film.embeddable}
+          />
+        </div>
+
+        {/* Wall text */}
+        {film.note && (
+          <div className="max-w-3xl mx-auto">
+            <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5">
+              {film.note}
+            </p>
+          </div>
+        )}
       </motion.div>
     </article>
   );

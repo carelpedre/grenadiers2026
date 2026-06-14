@@ -39,9 +39,27 @@ export default function Squad() {
   // Staff open in the same modal, flagged so it renders a staff-appropriate view.
   const openStaff = (member) => setSelectedPlayer({ ...member, isStaff: true });
 
+  // Active groups exclude any player marked `status: "forfait"`; the forfaits
+  // render in their own quieter section at the bottom (with their position).
+  const FORFAIT_GROUPS = [
+    { key: "goalkeepers", positionFull: "Gardien", position: "GB" },
+    { key: "defenders", positionFull: "Défenseur", position: "DF" },
+    { key: "midfielders", positionFull: "Milieu", position: "MT" },
+    { key: "forwards", positionFull: "Attaquant", position: "AT" },
+  ];
+  const activeGK = squad.goalkeepers.filter((p) => !p.status);
+  const activeDF = squad.defenders.filter((p) => !p.status);
+  const activeMT = squad.midfielders.filter((p) => !p.status);
+  const activeAT = squad.forwards.filter((p) => !p.status);
+  const forfaits = FORFAIT_GROUPS.flatMap((g) =>
+    squad[g.key]
+      .filter((p) => p.status === "forfait")
+      .map((p) => ({ ...p, positionFull: g.positionFull, position: g.position })),
+  );
+
   // ─── Classements — calculés depuis squad.js (source unique) ──────────
   // squad est un objet par poste ; on classe la liste à plat.
-  const allPlayers = getAllPlayers();
+  const allPlayers = getAllPlayers().filter((p) => p.status !== "forfait");
   const rankBy = (key) =>
     [...allPlayers]
       .sort((a, b) =>
@@ -107,10 +125,13 @@ export default function Squad() {
       {/* ─── STICKY POSITION NAV ──────────────────────────────────────── */}
       <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-line">
         <div className="max-w-content mx-auto px-5 py-2.5 flex items-center gap-1 overflow-x-auto">
-          <a href="#GK" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Gardiens <span className="text-muted">({squad.goalkeepers.length})</span></a>
-          <a href="#DF" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Défenseurs <span className="text-muted">({squad.defenders.length})</span></a>
-          <a href="#MT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Milieux <span className="text-muted">({squad.midfielders.length})</span></a>
-          <a href="#AT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Attaquants <span className="text-muted">({squad.forwards.length})</span></a>
+          <a href="#GK" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Gardiens <span className="text-muted">({activeGK.length})</span></a>
+          <a href="#DF" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Défenseurs <span className="text-muted">({activeDF.length})</span></a>
+          <a href="#MT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Milieux <span className="text-muted">({activeMT.length})</span></a>
+          <a href="#AT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Attaquants <span className="text-muted">({activeAT.length})</span></a>
+          {forfaits.length > 0 && (
+            <a href="#forfaits" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Forfaits <span className="text-muted">({forfaits.length})</span></a>
+          )}
           <span className="text-line shrink-0">·</span>
           <a href="#staff-technique" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Staff technique <span className="text-muted">({staff.length})</span></a>
         </div>
@@ -139,10 +160,14 @@ export default function Squad() {
         </section>
 
         {/* Position groups */}
-        <PositionGroup anchorId="GK" title="Gardiens de but" position="GB" positionFull="Gardien" count={squad.goalkeepers.length} players={squad.goalkeepers} onPlayerClick={openPlayer} statFor={statFor} />
-        <PositionGroup anchorId="DF" title="Défenseurs" position="DF" positionFull="Défenseur" count={squad.defenders.length} players={squad.defenders} onPlayerClick={openPlayer} statFor={statFor} />
-        <PositionGroup anchorId="MT" title="Milieux de terrain" position="MT" positionFull="Milieu" count={squad.midfielders.length} players={squad.midfielders} onPlayerClick={openPlayer} statFor={statFor} />
-        <PositionGroup anchorId="AT" title="Attaquants" position="AT" positionFull="Attaquant" count={squad.forwards.length} players={squad.forwards} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="GK" title="Gardiens de but" position="GB" positionFull="Gardien" count={activeGK.length} players={activeGK} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="DF" title="Défenseurs" position="DF" positionFull="Défenseur" count={activeDF.length} players={activeDF} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="MT" title="Milieux de terrain" position="MT" positionFull="Milieu" count={activeMT.length} players={activeMT} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="AT" title="Attaquants" position="AT" positionFull="Attaquant" count={activeAT.length} players={activeAT} onPlayerClick={openPlayer} statFor={statFor} />
+
+        {forfaits.length > 0 && (
+          <ForfaitsSection players={forfaits} onPlayerClick={openPlayer} statFor={statFor} />
+        )}
 
         {/* Technical staff */}
         <StaffGroup anchorId="staff-technique" title={t("squad.staff")} staff={staff} onStaffClick={openStaff} />
@@ -169,7 +194,7 @@ export default function Squad() {
             />
             <div className="p-6 md:p-8 space-y-5">
               <p className="text-ink leading-relaxed">
-                Chaque centimètre du maillot 2026 raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière.
+                Chaque centimètre du design original, conçu par Saeta, raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière.
               </p>
 
               <div className="grid md:grid-cols-3 gap-4">
@@ -186,9 +211,20 @@ export default function Squad() {
                 <KitDetail
                   label="Sur le dos"
                   title="Montagnes et palmiers"
-                  body="La silhouette d'Ayiti elle-même — les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs."
+                  body="La silhouette d'Ayiti elle-même : les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs."
                 />
               </div>
+
+              <p className="text-ink leading-relaxed">
+                <strong className="text-ink">Mise à jour, 9 juin 2026 :</strong>{" "}
+                <Link
+                  to="/journal/maillot-grenadiers-fifa-modifications"
+                  className="text-haiti-blue underline underline-offset-2 hover:text-haiti-red transition-colors"
+                >
+                  à la demande de la FIFA
+                </Link>
+                , certains éléments visuels du design original ont été ajustés avant le début de la compétition. Saeta, qui défend l'esprit de sa création, a appliqué les modifications exigées, et c'est cette version que les Grenadiers porteront pendant la Coupe du Monde.
+              </p>
 
               <div className="pt-4 border-t border-line flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <p className="text-sm text-muted leading-relaxed">
@@ -483,6 +519,37 @@ function PositionGroup({ anchorId, title, position, positionFull, count, players
   );
 }
 
+// ─── Forfaits ─────────────────────────────────────────────────────────
+// Players who are part of the journey but had to withdraw on injury. Same
+// PlayerCard + modal as active players, only quieter (PlayerCard desaturates
+// the photo and surfaces the status badge/note via the `status` fields).
+function ForfaitsSection({ players, onPlayerClick, statFor }) {
+  if (!players.length) return null;
+  return (
+    <section id="forfaits" className="scroll-mt-20">
+      <div className="flex items-baseline justify-between border-b border-line pb-3 mb-2">
+        <h2 className="font-display text-2xl md:text-3xl text-muted">Forfaits</h2>
+        <span className="text-sm text-muted uppercase tracking-wider font-semibold">
+          {players.length} {players.length === 1 ? "joueur" : "joueurs"}
+        </span>
+      </div>
+      <p className="text-muted text-sm mb-6">
+        Ils font partie de l'aventure mais ont dû renoncer sur blessure.
+      </p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        {players.map((p) => (
+          <PlayerCard
+            key={p.name}
+            player={p}
+            stat={statFor ? statFor(p) : null}
+            onClick={() => onPlayerClick(p, p.positionFull, p.position)}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ─── Staff technique ─────────────────────────────────────────────────
 // Mirrors PositionGroup/PlayerCard but adapted for staff: the role replaces
 // the position/number, no jersey number, and a monogram stands in when no
@@ -546,7 +613,7 @@ function PlayerCard({ player, stat, onClick }) {
       {/* Photo area with jersey-number watermark */}
       <div className="relative overflow-hidden aspect-[4/5]">
         <motion.div
-          className="absolute inset-0"
+          className={`absolute inset-0 ${player.status ? "grayscale-[.65] opacity-90" : ""}`}
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -580,6 +647,11 @@ function PlayerCard({ player, stat, onClick }) {
             <span className="text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 bg-haiti-blue text-bg rounded uppercase tracking-wider whitespace-nowrap">
               <span className="hidden md:inline">{statTag.label}</span>
               <span className="md:hidden">{statTag.short}</span>
+            </span>
+          )}
+          {player.status && player.statusLabel && (
+            <span className="text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 bg-haiti-red text-bg rounded uppercase tracking-wider whitespace-nowrap">
+              {player.statusLabel}
             </span>
           )}
         </div>
@@ -626,6 +698,10 @@ function PlayerCard({ player, stat, onClick }) {
           <span className="text-haiti-blue font-semibold group-hover:translate-x-0.5 transition-transform">
             Profil →
           </span>
+        </div>
+      ) : player.status ? (
+        <div className="px-3 py-2.5 border-t border-line text-[11px] md:text-xs text-haiti-red font-medium leading-snug">
+          {player.statusNote}
         </div>
       ) : (
         <div className="px-3 py-2.5 border-t border-line flex items-center justify-between gap-2 text-xs text-muted">

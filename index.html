@@ -7,33 +7,52 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <!-- Preload the homepage hero poster (the LCP element). Gated to match the
+         xl breakpoint: from xl the poster is the hero's right column (~55vw);
+         below xl it is a full-width banner (100vw). Each preloads its size. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      media="(min-width: 1280px)"
+      imagesrcset="/images/photos/haiti-squad-hero-1280.webp 1280w, /images/photos/haiti-squad-hero-1920.webp 1920w"
+      imagesizes="55vw"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      media="(max-width: 1279px)"
+      imagesrcset="/images/photos/haiti-squad-hero-768.webp 768w, /images/photos/haiti-squad-hero-1280.webp 1280w"
+      imagesizes="100vw"
+    />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Grenadiers 2026" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Site indépendant et non-officiel sur les Grenadiers à la Coupe du Monde de la FIFA 2026, conçu et développé par Carel Pedre. Pour la première fois depuis 1974, Haïti retrouve la scène mondiale." />
+    <meta name="description" content="Le portail des supporters d'Haïti pour la Coupe du Monde 2026 : calendrier, journal, mur des supporters, jeux, photos et histoire des Grenadiers." />
     <meta name="theme-color" content="#00209F" />
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Grenadiers 2026" />
-    <meta property="og:title" content="Les Grenadiers sont de retour — Haïti à la Coupe du Monde FIFA 2026" />
-    <meta property="og:description" content="Pour la première fois depuis 1974, Haïti revient à la Coupe du Monde de la FIFA. Brésil. Écosse. Maroc. Un groupe, une nation, une histoire." />
+    <meta property="og:title" content="Grenadiers 2026 · Haïti à la Coupe du Monde 2026" />
+    <meta property="og:description" content="Le portail des supporters d'Haïti pour la Coupe du Monde 2026 : calendrier, journal, mur des supporters, jeux, photos et histoire des Grenadiers." />
     <meta property="og:url" content="https://grenadiers2026.com/" />
-    <meta property="og:image" content="https://grenadiers2026.com/og/grenadiers-og.jpg" />
+    <meta property="og:image" content="https://grenadiers2026.com/og/og-home.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Grenadiers 2026 — Haïti à la Coupe du Monde FIFA" />
+    <meta property="og:image:alt" content="Les Grenadiers d'Haïti à la Coupe du Monde 2026" />
     <meta property="og:locale" content="fr_FR" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Les Grenadiers sont de retour — Haïti à la Coupe du Monde FIFA 2026" />
-    <meta name="twitter:description" content="Pour la première fois depuis 1974, Haïti revient à la Coupe du Monde de la FIFA. Brésil. Écosse. Maroc." />
-    <meta name="twitter:image" content="https://grenadiers2026.com/og/grenadiers-og.jpg" />
+    <meta name="twitter:title" content="Grenadiers 2026 · Haïti à la Coupe du Monde 2026" />
+    <meta name="twitter:description" content="Le portail des supporters d'Haïti pour la Coupe du Monde 2026 : calendrier, journal, mur des supporters, jeux, photos et histoire des Grenadiers." />
+    <meta name="twitter:image" content="https://grenadiers2026.com/og/og-home.jpg" />
 
-    <title>Grenadiers 2026 — Haïti à la Coupe du Monde FIFA</title>
+    <title>Grenadiers 2026 · Haïti à la Coupe du Monde 2026</title>
     <link rel="canonical" href="https://grenadiers2026.com/" />
   </head>
   <body>

@@ -221,11 +221,32 @@ export const squad = {
       bio: "Né le 29 mars 2006 à Marly, dans le canton de Fribourg, d'un père haïtien et d'une mère suisse, Keeto Thermoncy est le plus jeune défenseur de la sélection à 20 ans. Formé au Team AFF-FFV puis aux Young Boys de Berne, où il évolue depuis 2020, il joue actuellement avec l'équipe réserve des Young Boys U21 en Promotion League, le troisième échelon suisse. Inscrit au sein du groupe professionnel des Young Boys pour la campagne 2025-2026 d'UEFA Europa League, il découvre la sélection haïtienne à l'automne 2025 et compte une sélection avec les Grenadiers.",
       notes: "Né en 2006 en Suisse. Produit du centre de formation des Young Boys.",
     },
+    {
+      name: "Garven Metusala",
+      slug: "garven-metusala",
+      apiId: 318930,
+      photo: "/images/photos/garven-metusala.jpg",
+      positionTags: ["CB", "DM"],
+      height: 186,
+      born: "31 décembre 1999",
+      birthplace: "Terrebonne, Québec, Canada",
+      age: 26,
+      caps: 15,
+      goals: 0,
+      club: "Colorado Springs Switchbacks FC",
+      clubCountry: "États-Unis",
+      league: "USL Championship",
+      bio: "Né à Terrebonne au Québec d'une mère haïtienne, Garven Metusala s'est forgé au Forge FC, où il a soulevé deux titres de champion du Canada avant de rejoindre les Colorado Springs Switchbacks. International depuis 2022, ce défenseur central solide dans les duels a pris part aux éliminatoires du Mondial. Appelé en renfort à la veille de la Coupe du Monde, il incarne la profondeur d'un groupe où chacun se tient prêt.",
+      notes: "Appelé en renfort à la veille de la Coupe du Monde.",
+    },
   ],
   midfielders: [
     {
       name: "Leverton Pierre",
       slug: "leverton-pierre",
+      status: "forfait",
+      statusLabel: "Forfait · blessure",
+      statusNote: "Lésion aux adducteurs · remplacé par Garven Metusala",
       apiId: 20538,
       photo: "/images/photos/leverton-pierre.jpg",
       number: 14,
@@ -522,15 +543,26 @@ export const squad = {
   ],
 };
 
+// Counts derive from the squad arrays (active = not "forfait") so they stay
+// correct as players are added, removed, or moved to the forfaits section.
+const _active = (arr) => arr.filter((p) => p.status !== "forfait");
+const _activeSquad = [
+  ..._active(squad.goalkeepers),
+  ..._active(squad.defenders),
+  ..._active(squad.midfielders),
+  ..._active(squad.forwards),
+];
+const _isDomestic = (p) => p.clubCountry === "Haïti";
+
 export const squadStats = {
-  total: 26,
+  total: _activeSquad.length,
   averageAge: 26,
-  goalkeepers: 3,
-  defenders: 8,
-  midfielders: 6,
-  forwards: 9,
-  domesticPlayers: 1,
-  diasporaPlayers: 25,
+  goalkeepers: _active(squad.goalkeepers).length,
+  defenders: _active(squad.defenders).length,
+  midfielders: _active(squad.midfielders).length,
+  forwards: _active(squad.forwards).length,
+  domesticPlayers: _activeSquad.filter(_isDomestic).length,
+  diasporaPlayers: _activeSquad.filter((p) => !_isDomestic(p)).length,
   coach: "Sébastien Migné",
   coachNationality: "France",
   coachBorn: "30 novembre 1972, La Roche-sur-Yon, France",
