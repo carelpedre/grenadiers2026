@@ -6,6 +6,7 @@ import { useLiveFixtures } from "../lib/useLiveFixtures";
 import { getMatch } from "../data/liveMatches";
 import { getEntriesSorted } from "../data/diary";
 import { frName } from "../lib/teamNames";
+import { useT } from "../lib/i18n";
 
 // Palette
 const ROYAL_BLUE = "#00209F"; // bleu FHF
@@ -351,15 +352,16 @@ function timeOnly(timeLabel) {
 // Frise compacte des trois matchs de groupe (Écosse, Brésil, Maroc).
 export function RouteMondial() {
   const { byOpponent } = useLiveFixtures();
+  const { t } = useT();
 
   return (
     <section className="max-w-content mx-auto px-5 py-16 md:py-20">
       <div className="mb-8 md:mb-10">
-        <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-2">Groupe C</p>
+        <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-2">{t("matches.eyebrow")}</p>
         <h2 className="font-display text-3xl md:text-5xl leading-tight">
-          Le Mondial commence.
+          {t("home.routeTitle")}
         </h2>
-        <p className="text-muted mt-2">Trois adversaires. Trois villes. Un seul drapeau.</p>
+        <p className="text-muted mt-2">{t("matches.wcSub")}</p>
       </div>
 
       <div className="grid sm:grid-cols-3 gap-3 md:gap-4">

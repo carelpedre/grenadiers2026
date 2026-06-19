@@ -13,9 +13,21 @@ import { useT } from "../lib/i18n";
 // ║  • Rest of Normalization Committee listed below her                   ║
 // ╚═══════════════════════════════════════════════════════════════════════╝
 
+// Team-category tag (French data value) → translation key.
+const TEAM_KEY = {
+  "Institution": "institution",
+  "Hommes A": "menA",
+  "Femmes A": "womenA",
+  "Hommes U-17": "menU17",
+  "Hommes U-20": "menU20",
+  "Femmes U-20": "womenU20",
+  "Femmes U-17": "womenU17",
+};
+
 export default function Federation() {
   const yearsOld = 2026 - federation.founded;
-  const { t } = useT();
+  const { t, lang } = useT();
+  const pick = (frVal, enVal) => (lang === "en" ? enVal : frVal);
   const featured = federation.currentLeadership.featured;
 
   return (
@@ -59,7 +71,7 @@ export default function Federation() {
                   .replace("{hq}", federation.headquarters)
                   .replace("{fifa}", federation.fifaAffiliation)
                   .replace("{concacaf}", federation.concacafAffiliation)}{" "}
-                {federation.publicUtilityNote}
+                {pick(federation.publicUtilityNote, federation.publicUtilityNoteEn)}
               </p>
             </div>
           </div>
@@ -113,7 +125,7 @@ export default function Federation() {
                 {t("federation.pioneer")}
               </p>
               <h3 className="font-display text-2xl md:text-3xl mb-3">{federation.founder}</h3>
-              <p className="text-ink leading-relaxed">{federation.founderNote}</p>
+              <p className="text-ink leading-relaxed">{pick(federation.founderNote, federation.founderNoteEn)}</p>
             </div>
           </div>
         </section>
@@ -127,10 +139,10 @@ export default function Federation() {
           {/* Context card */}
           <div className="bg-white border border-line rounded-lg p-6 md:p-8 mb-6">
             <p className="text-xs uppercase tracking-wider text-haiti-red font-bold mb-2">
-              {federation.currentLeadership.structure}
+              {pick(federation.currentLeadership.structure, federation.currentLeadership.structureEn)}
             </p>
             <p className="text-ink leading-relaxed">
-              {federation.currentLeadership.structureNote}
+              {pick(federation.currentLeadership.structureNote, federation.currentLeadership.structureNoteEn)}
             </p>
           </div>
 
@@ -143,7 +155,7 @@ export default function Federation() {
                 <div className="md:hidden">
                   <ImagePlaceholder
                     src={featured.photo}
-                    label={featured.photoLabel}
+                    label={pick(featured.photoLabel, featured.photoLabelEn)}
                     aspect="1/1"
                     objectPosition="center 25%"
                     rounded={false}
@@ -153,7 +165,7 @@ export default function Federation() {
                 <div className="hidden md:block">
                   <ImagePlaceholder
                     src={featured.photo}
-                    label={featured.photoLabel}
+                    label={pick(featured.photoLabel, featured.photoLabelEn)}
                     aspect="4/5"
                     objectPosition="center 25%"
                     rounded={false}
@@ -170,11 +182,11 @@ export default function Federation() {
                   {featured.name}
                 </h3>
                 <p className="text-bg/70 text-sm md:text-base mb-5 font-semibold">
-                  {featured.role}
+                  {pick(featured.role, featured.roleEn)}
                 </p>
 
                 <p className="text-bg/85 leading-relaxed mb-6">
-                  {featured.bio}
+                  {pick(featured.bio, featured.bioEn)}
                 </p>
 
                 <div className="mb-5">
@@ -182,7 +194,7 @@ export default function Federation() {
                     {t("federation.keyMoments")}
                   </p>
                   <ul className="space-y-2">
-                    {featured.milestones.map((m, i) => (
+                    {pick(featured.milestones, featured.milestonesEn).map((m, i) => (
                       <li key={i} className="text-sm text-bg/80 leading-relaxed flex items-start gap-2">
                         <span className="text-haiti-red mt-1.5 shrink-0">●</span>
                         <span>{m}</span>
@@ -192,7 +204,7 @@ export default function Federation() {
                 </div>
 
                 <p className="text-xs text-bg/60 leading-relaxed italic">
-                  {featured.previousRoles}
+                  {pick(featured.previousRoles, featured.previousRolesEn)}
                 </p>
               </div>
             </div>
@@ -204,7 +216,7 @@ export default function Federation() {
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             {federation.currentLeadership.members.map((m) => (
-              <LeaderCard key={m.role} role={m.role} name={m.name} />
+              <LeaderCard key={m.role} role={pick(m.role, m.roleEn)} name={m.name} />
             ))}
           </div>
         </section>
@@ -226,7 +238,7 @@ export default function Federation() {
             </h3>
             <p className="text-bg/60 text-sm mb-4">{federation.homeStadium.city}</p>
             <p className="text-bg/80 leading-relaxed max-w-prose">
-              {federation.homeStadium.note}
+              {pick(federation.homeStadium.note, federation.homeStadium.noteEn)}
             </p>
           </div>
         </section>
@@ -243,7 +255,7 @@ export default function Federation() {
                 className="bg-white border border-line rounded-lg p-4 text-ink flex items-start gap-3"
               >
                 <span className="w-2 h-2 bg-haiti-red rounded-full mt-2 shrink-0"></span>
-                <span>{c}</span>
+                <span>{pick(c, federation.competitionsOrganizedEn[i])}</span>
               </li>
             ))}
           </ul>
@@ -269,10 +281,10 @@ export default function Federation() {
                 <div className="self-center">
                   {m.team && (
                     <span className={`inline-block text-[10px] md:text-xs uppercase tracking-wider font-bold px-2 py-0.5 mr-2 rounded align-middle ${teamTagClass(m.team)}`}>
-                      {m.team}
+                      {TEAM_KEY[m.team] ? t(`federation.team.${TEAM_KEY[m.team]}`) : m.team}
                     </span>
                   )}
-                  <span className="text-ink leading-relaxed text-sm md:text-base">{m.event}</span>
+                  <span className="text-ink leading-relaxed text-sm md:text-base">{pick(m.event, m.eventEn)}</span>
                 </div>
               </li>
             ))}

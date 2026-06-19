@@ -366,3 +366,19 @@ friendlies.js `trainingCamp` data fields (have fr + En; need a Creole sibling la
 - `phase2.localTies[].connection` (×2)
 - `notes`
 (Left as data per scope, still French in all languages: `dates`, `city`, `facility` for both phases.)
+
+## Homepage + newsletter + federation content (Phase 2)
+
+translations.js keys (ht = French placeholder):
+- `home.routeTitle`, `home.fanwall.title|subtitle|leaveCta|viewCta|empty`
+- `wall.message|messages|from|country|countries`
+- `newsletter.*` (eyebrow, heroTitle, heroSubtitle, footerTitle, footerSubtitle, placeholder, submit, success, invalidEmail, generic, emailAria)
+- `federation.team.institution|menA|womenA|menU17|menU20|womenU20|womenU17`
+
+federation.js data fields (have fr + En; need a Creole sibling later):
+- `founderNote`, `publicUtilityNote`, `homeStadium.note`
+- `currentLeadership.structure` / `structureNote`
+- `featured.role` / `photoLabel` / `bio` / `milestones` / `previousRoles`
+- `currentLeadership.members[].role` (9)
+- `competitionsOrganized` (5), `notableMilestones[].event` (25)
+- (Left as data, still French in all languages: `featured.since` date, image labels, person/venue names.)

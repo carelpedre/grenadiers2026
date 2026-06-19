@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchApprovedMessages, fetchWallStats } from "../lib/fanWallApi";
+import { useT } from "../lib/i18n";
 
 export function WallStatLine({ count, countries, className = "" }) {
+  const { t, lang } = useT();
   if (!count) return null;
+  // French treats 0 and 1 as singular; English only 1.
+  const isSing = (n) => (lang === "en" ? n === 1 : n <= 1);
   return (
     <p className={`text-sm font-semibold ${className}`}>
-      <span className="tabular-nums">{count}</span> message{count > 1 ? "s" : ""} de{" "}
-      <span className="tabular-nums">{countries}</span> pays
+      <span className="tabular-nums">{count}</span> {isSing(count) ? t("wall.message") : t("wall.messages")} {t("wall.from")}{" "}
+      <span className="tabular-nums">{countries}</span> {isSing(countries) ? t("wall.country") : t("wall.countries")}
     </p>
   );
 }
@@ -61,6 +65,7 @@ export function FanMessageCard({ m, className = "" }) {
 
 // Section accueil : aperçu vivant du mur + CTA vers /mur.
 export default function FanWall() {
+  const { t } = useT();
   const [messages, setMessages] = useState(null);
   const [stats, setStats] = useState({ count: 0, countries: 0 });
 
@@ -90,13 +95,13 @@ export default function FanWall() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
           <div>
             <p className="text-haiti-red-light text-xs uppercase tracking-wider font-bold mb-2">
-              La voix des Grenadiers
+              {t("mur.eyebrow")}
             </p>
             <h2 className="font-display text-3xl md:text-5xl leading-tight">
-              Le mur des supporters.
+              {t("home.fanwall.title")}
             </h2>
             <p className="text-bg/70 mt-2 max-w-prose">
-              Des messages d'Haïti et de la diaspora, du monde entier, pour la sélection.
+              {t("home.fanwall.subtitle")}
             </p>
             <WallStatLine
               count={stats.count}
@@ -109,13 +114,13 @@ export default function FanWall() {
               to="/mur"
               className="inline-flex items-center gap-2 px-6 py-3 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors whitespace-nowrap"
             >
-              Laisser un message →
+              {t("home.fanwall.leaveCta")} →
             </Link>
             <Link
               to="/mur#messages"
               className="inline-flex items-center gap-2 px-6 py-3 bg-bg/10 text-bg font-semibold rounded-full border border-bg/25 hover:bg-bg/20 transition-colors whitespace-nowrap"
             >
-              Voir le mur
+              {t("home.fanwall.viewCta")}
             </Link>
           </div>
         </div>
@@ -144,13 +149,13 @@ export default function FanWall() {
         <div className="max-w-content mx-auto px-5 pb-16 md:pb-20">
           <div className="bg-bg/5 border border-bg/15 rounded-xl p-8 text-center">
             <p className="text-bg/80">
-              Soyez le premier à laisser un message pour Les Grenadiers.
+              {t("home.fanwall.empty")}
             </p>
             <Link
               to="/mur"
               className="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors"
             >
-              Laisser un message →
+              {t("home.fanwall.leaveCta")} →
             </Link>
           </div>
         </div>

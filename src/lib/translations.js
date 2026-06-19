@@ -2510,6 +2510,157 @@ const dict = {
     ht: "sélections",
   },
 
+  // ─── HOMEPAGE: ROUTE MONDIAL + FAN WALL (Phase 2) ────────────────────
+  "home.routeTitle": {
+    en: "The World Cup begins.",
+    fr: "Le Mondial commence.",
+    ht: "Le Mondial commence.",
+  },
+  "home.fanwall.title": {
+    en: "The fan wall.",
+    fr: "Le mur des supporters.",
+    ht: "Le mur des supporters.",
+  },
+  "home.fanwall.subtitle": {
+    en: "Messages from Haiti and the diaspora, from all over the world, for the team.",
+    fr: "Des messages d'Haïti et de la diaspora, du monde entier, pour la sélection.",
+    ht: "Des messages d'Haïti et de la diaspora, du monde entier, pour la sélection.",
+  },
+  "home.fanwall.leaveCta": {
+    en: "Leave a message",
+    fr: "Laisser un message",
+    ht: "Laisser un message",
+  },
+  "home.fanwall.viewCta": {
+    en: "See the wall",
+    fr: "Voir le mur",
+    ht: "Voir le mur",
+  },
+  "home.fanwall.empty": {
+    en: "Be the first to leave a message for the Grenadiers.",
+    fr: "Soyez le premier à laisser un message pour Les Grenadiers.",
+    ht: "Soyez le premier à laisser un message pour Les Grenadiers.",
+  },
+  "wall.message": {
+    en: "message",
+    fr: "message",
+    ht: "message",
+  },
+  "wall.messages": {
+    en: "messages",
+    fr: "messages",
+    ht: "messages",
+  },
+  "wall.from": {
+    en: "from",
+    fr: "de",
+    ht: "de",
+  },
+  "wall.country": {
+    en: "country",
+    fr: "pays",
+    ht: "pays",
+  },
+  "wall.countries": {
+    en: "countries",
+    fr: "pays",
+    ht: "pays",
+  },
+
+  // ─── NEWSLETTER (Le Brief Grenadier) Phase 2 ─────────────────────────
+  "newsletter.eyebrow": {
+    en: "The Grenadier Brief",
+    fr: "Le Brief Grenadier",
+    ht: "Le Brief Grenadier",
+  },
+  "newsletter.heroTitle": {
+    en: "One email before each match. One after. Nothing more.",
+    fr: "Un e-mail avant chaque match. Un après. Rien de plus.",
+    ht: "Un e-mail avant chaque match. Un après. Rien de plus.",
+  },
+  "newsletter.heroSubtitle": {
+    en: "The Grenadiers newsletter, in French.",
+    fr: "La newsletter des Grenadiers, en français.",
+    ht: "La newsletter des Grenadiers, en français.",
+  },
+  "newsletter.footerTitle": {
+    en: "One email per match. That's it.",
+    fr: "Un e-mail par match. C'est tout.",
+    ht: "Un e-mail par match. C'est tout.",
+  },
+  "newsletter.footerSubtitle": {
+    en: "Get a short recap before and after each Haiti match.",
+    fr: "Recevez un court résumé avant et après chaque rencontre d'Haïti.",
+    ht: "Recevez un court résumé avant et après chaque rencontre d'Haïti.",
+  },
+  "newsletter.placeholder": {
+    en: "you@email.com",
+    fr: "votre@email.com",
+    ht: "votre@email.com",
+  },
+  "newsletter.submit": {
+    en: "Subscribe",
+    fr: "S'abonner",
+    ht: "S'abonner",
+  },
+  "newsletter.success": {
+    en: "✓ You're in. Welcome to the Grenadier Brief.",
+    fr: "✓ Inscription confirmée. Bienvenue au Brief Grenadier.",
+    ht: "✓ Inscription confirmée. Bienvenue au Brief Grenadier.",
+  },
+  "newsletter.invalidEmail": {
+    en: "Please enter a valid email address.",
+    fr: "Veuillez saisir une adresse e-mail valide.",
+    ht: "Veuillez saisir une adresse e-mail valide.",
+  },
+  "newsletter.generic": {
+    en: "Something went wrong. Please try again.",
+    fr: "Une erreur est survenue. Veuillez réessayer.",
+    ht: "Une erreur est survenue. Veuillez réessayer.",
+  },
+  "newsletter.emailAria": {
+    en: "Email address",
+    fr: "Adresse e-mail",
+    ht: "Adresse e-mail",
+  },
+
+  // ─── FEDERATION: team-category tags (Phase 2) ────────────────────────
+  "federation.team.institution": {
+    en: "Institution",
+    fr: "Institution",
+    ht: "Institution",
+  },
+  "federation.team.menA": {
+    en: "Men A",
+    fr: "Hommes A",
+    ht: "Hommes A",
+  },
+  "federation.team.womenA": {
+    en: "Women A",
+    fr: "Femmes A",
+    ht: "Femmes A",
+  },
+  "federation.team.menU17": {
+    en: "Men U-17",
+    fr: "Hommes U-17",
+    ht: "Hommes U-17",
+  },
+  "federation.team.menU20": {
+    en: "Men U-20",
+    fr: "Hommes U-20",
+    ht: "Hommes U-20",
+  },
+  "federation.team.womenU20": {
+    en: "Women U-20",
+    fr: "Femmes U-20",
+    ht: "Femmes U-20",
+  },
+  "federation.team.womenU17": {
+    en: "Women U-17",
+    fr: "Femmes U-17",
+    ht: "Femmes U-17",
+  },
+
   // ─── STORIES (additions) ─────────────────────────────────────────────
   "stories.eyebrow": {
     en: "Stories",

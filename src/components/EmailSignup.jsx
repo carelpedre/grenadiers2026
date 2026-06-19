@@ -10,24 +10,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useT } from "../lib/i18n";
 
 export default function EmailSignup({ variant = "inline" }) {
-  const { lang } = useT();
+  const { t } = useT();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState("");
 
   const strings = {
-    eyebrow: "Le Brief Grenadier",
-    heroTitle: "Un e-mail avant chaque match. Un après. Rien de plus.",
-    heroSubtitle:
-      "La newsletter des Grenadiers, en français.",
-    footerTitle: "Un e-mail par match. C'est tout.",
-    footerSubtitle:
-      "Recevez un court résumé avant et après chaque rencontre d'Haïti.",
-    placeholder: "votre@email.com",
-    submit: "S'abonner →",
-    success: "✓ Inscription confirmée. Bienvenue au Brief Grenadier.",
-    invalidEmail: "Veuillez saisir une adresse e-mail valide.",
-    generic: "Une erreur est survenue. Veuillez réessayer.",
+    eyebrow: t("newsletter.eyebrow"),
+    heroTitle: t("newsletter.heroTitle"),
+    heroSubtitle: t("newsletter.heroSubtitle"),
+    footerTitle: t("newsletter.footerTitle"),
+    footerSubtitle: t("newsletter.footerSubtitle"),
+    placeholder: t("newsletter.placeholder"),
+    submit: `${t("newsletter.submit")} →`,
+    emailAria: t("newsletter.emailAria"),
+    success: t("newsletter.success"),
+    invalidEmail: t("newsletter.invalidEmail"),
+    generic: t("newsletter.generic"),
   };
 
   async function handleSubmit(e) {
@@ -138,7 +137,7 @@ function FormBody({ email, setEmail, status, errorMsg, strings, handleSubmit, da
               required
               disabled={status === "loading"}
               className={inputClass}
-              aria-label="Adresse e-mail"
+              aria-label={strings.emailAria}
             />
             <button
               type="submit"
