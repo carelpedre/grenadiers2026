@@ -33,7 +33,7 @@ export default function Federation() {
             <div className="w-32 h-32 md:w-44 md:h-44 mx-auto md:mx-0 flex items-center justify-center bg-bg border border-line rounded-2xl p-4">
               <img
                 src={federation.logo}
-                alt="Écusson de la Fédération Haïtienne de Football"
+                alt={t("federation.logoAlt")}
                 className="max-w-full max-h-full object-contain"
                 onError={(e) => {
                   // Final fallback: show bicolor flag panel
@@ -45,7 +45,7 @@ export default function Federation() {
             </div>
             <div>
               <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-2">
-                L'instance dirigeante
+                {t("federation.governingBody")}
               </p>
               <h2 className="font-display text-2xl md:text-3xl mb-1 leading-tight">
                 {federation.name.fr}
@@ -54,7 +54,12 @@ export default function Federation() {
                 {federation.name.en} · {federation.name.ht}
               </p>
               <p className="text-ink/80 leading-relaxed text-sm md:text-base">
-                Fondée en {federation.founded}. Siège à {federation.headquarters}. Membre de la FIFA depuis {federation.fifaAffiliation}, membre fondateur de la CONCACAF depuis {federation.concacafAffiliation}. {federation.publicUtilityNote}
+                {t("federation.identityLine")
+                  .replace("{founded}", federation.founded)
+                  .replace("{hq}", federation.headquarters)
+                  .replace("{fifa}", federation.fifaAffiliation)
+                  .replace("{concacaf}", federation.concacafAffiliation)}{" "}
+                {federation.publicUtilityNote}
               </p>
             </div>
           </div>
@@ -64,9 +69,9 @@ export default function Federation() {
       {/* Stats strip */}
       <section className="bg-bg border-b border-line">
         <div className="max-w-content mx-auto px-5 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Stat label="Fondation" value={federation.founded} />
-          <Stat label="Années d'existence" value={yearsOld} />
-          <Stat label="Membre FIFA" value={federation.fifaAffiliation} />
+          <Stat label={t("federation.statFounded")} value={federation.founded} />
+          <Stat label={t("federation.statYears")} value={yearsOld} />
+          <Stat label={t("federation.statFifaMember")} value={federation.fifaAffiliation} />
           <Stat label="CONCACAF" value={federation.concacafAffiliation} />
         </div>
       </section>
@@ -80,16 +85,16 @@ export default function Federation() {
           </div>
           <div className="p-6 md:p-10 lg:p-12 relative">
             <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-4">
-              À la une · 31 mai 2026
+              {t("federation.newsEyebrow")}
             </p>
             <h2 className="font-display text-2xl md:text-4xl lg:text-5xl leading-[1.1] mb-5 max-w-3xl">
-              Adoption à l'unanimité des nouveaux statuts de la FHF.
+              {t("federation.newsTitle")}
             </h2>
             <p className="text-bg/85 text-base md:text-lg leading-relaxed max-w-3xl mb-4">
-              Réunis en congrès extraordinaire, vingt délégués représentant les clubs masculins, féminins et les ligues ont adopté à l'unanimité les nouveaux statuts de la Fédération Haïtienne de Football. Ces statuts, fruit de plusieurs années de travail entre la FHF et les acteurs du mouvement footballistique haïtien, dotent l'institution d'une nouvelle fondation légale.
+              {t("federation.newsBody1")}
             </p>
             <p className="text-bg/70 text-sm md:text-base leading-relaxed max-w-3xl">
-              La session s'est tenue sous la supervision du Comité de Normalisation — Yvon Sévère et Gally Amazan — et des représentants de la FIFA : Mme Salomé Tally, en ligne, et M. Belval Juventino, présent à Port-au-Prince. L'adoption de ces statuts figurait parmi les principaux objectifs confiés au Comité de Normalisation par la FIFA.
+              {t("federation.newsBody2")}
             </p>
           </div>
         </section>
@@ -105,7 +110,7 @@ export default function Federation() {
             />
             <div className="p-6 md:p-8">
               <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3">
-                Le pionnier · 1904
+                {t("federation.pioneer")}
               </p>
               <h3 className="font-display text-2xl md:text-3xl mb-3">{federation.founder}</h3>
               <p className="text-ink leading-relaxed">{federation.founderNote}</p>
@@ -116,7 +121,7 @@ export default function Federation() {
         {/* Current leadership — Monique André FEATURED */}
         <section>
           <h2 className="font-display text-2xl md:text-3xl border-b border-line pb-3 mb-6">
-            La direction actuelle
+            {t("federation.currentLeadership")}
           </h2>
 
           {/* Context card */}
@@ -159,7 +164,7 @@ export default function Federation() {
               {/* Bio + milestones */}
               <div className="p-6 md:p-10">
                 <p className="text-gold text-xs uppercase tracking-wider font-bold mb-3">
-                  En fonction · Depuis le {featured.since}
+                  {t("federation.inOffice").replace("{since}", featured.since)}
                 </p>
                 <h3 className="font-display text-3xl md:text-4xl mb-2 leading-tight">
                   {featured.name}
@@ -174,7 +179,7 @@ export default function Federation() {
 
                 <div className="mb-5">
                   <p className="text-xs uppercase tracking-wider font-bold text-bg/50 mb-3">
-                    Moments clés
+                    {t("federation.keyMoments")}
                   </p>
                   <ul className="space-y-2">
                     {featured.milestones.map((m, i) => (
@@ -195,7 +200,7 @@ export default function Federation() {
 
           {/* Rest of the Normalization Committee */}
           <p className="text-xs uppercase tracking-wider text-muted font-bold mb-3">
-            Et le reste du comité
+            {t("federation.restOfCommittee")}
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             {federation.currentLeadership.members.map((m) => (
@@ -214,7 +219,7 @@ export default function Federation() {
           />
           <div className="p-6 md:p-10">
             <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3">
-              Le stade fétiche
+              {t("federation.homeStadiumEyebrow")}
             </p>
             <h3 className="font-display text-2xl md:text-3xl mb-2">
               {federation.homeStadium.name}
@@ -229,7 +234,7 @@ export default function Federation() {
         {/* Competitions */}
         <section>
           <h2 className="font-display text-2xl md:text-3xl border-b border-line pb-3 mb-6">
-            Les compétitions organisées par la FHF
+            {t("federation.competitionsTitle")}
           </h2>
           <ul className="grid md:grid-cols-2 gap-3">
             {federation.competitionsOrganized.map((c, i) => (
@@ -247,10 +252,10 @@ export default function Federation() {
         {/* Timeline */}
         <section>
           <h2 className="font-display text-2xl md:text-3xl border-b border-line pb-3 mb-2">
-            Chronologie
+            {t("federation.timelineTitle")}
           </h2>
           <p className="text-muted text-sm mb-6">
-            Sélection nationale masculine, féminine, et catégories de jeunes — les jalons de la FHF.
+            {t("federation.timelineSubtext")}
           </p>
           <ol className="space-y-3">
             {federation.notableMilestones.map((m, i) => (
@@ -282,7 +287,7 @@ export default function Federation() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-haiti-blue text-bg font-semibold rounded-full hover:bg-haiti-blue-dark transition-colors"
           >
-            Visiter le site officiel de la FHF
+            {t("federation.visitSite")}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M7 17L17 7M7 7h10v10" />
             </svg>

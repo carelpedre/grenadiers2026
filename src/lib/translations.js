@@ -399,21 +399,8 @@ const dict = {
   },
 
   // ─── SQUAD PAGE ───────────────────────────────────────────────────────
-  "squad.eyebrow": {
-    en: "Les Grenadiers · The 26",
-    fr: "Les Grenadiers · Les 26",
-    ht: "Grenadye yo · 26 yo",
-  },
-  "squad.title": {
-    en: "The Squad",
-    fr: "L'effectif",
-    ht: "Ekip la",
-  },
-  "squad.subtitle": {
-    en: "Twenty-six players, one nation. Coach Sébastien Migné's final selection for Haiti's first World Cup in 52 years.",
-    fr: "Vingt-six joueurs, une nation. La sélection finale du coach Sébastien Migné pour la première Coupe du Monde d'Haïti en 52 ans.",
-    ht: "Venn-sis jwè, yon nasyon. Seleksyon final kòch Sébastien Migné a pou premye Coupe du Monde Ayiti depi 52 ane.",
-  },
+  // squad.eyebrow / squad.title / squad.subtitle live in the SQUAD PAGE
+  // (additions) block below (single canonical definition each).
   "squad.staff": {
     en: "Technical Staff",
     fr: "Staff technique",
@@ -1389,9 +1376,9 @@ const dict = {
     ht: "ans",
   },
   "squad.ctaEyebrow": {
-    en: "Next up · June 13, 2026",
-    fr: "Prochaine étape · 13 juin 2026",
-    ht: "Prochaine étape · 13 juin 2026",
+    en: "2026 World Cup · Group C",
+    fr: "Coupe du Monde 2026 · Groupe C",
+    ht: "Coupe du Monde 2026 · Groupe C",
   },
   "squad.ctaTitle1": {
     en: "Three opponents.",
@@ -1473,6 +1460,108 @@ const dict = {
     en: "Founded 1904. FIFA member since 1934. Founding member of CONCACAF, 1961. The institution that carries Haiti's football identity.",
     fr: "Fondée en 1904. Membre de la FIFA depuis 1934. Membre fondateur de la CONCACAF, 1961. L'institution qui porte l'identité du football haïtien.",
     ht: "Fonde an 1904. Manm FIFA depi 1934. Manm fondatè CONCACAF, 1961. Enstitisyon ki pote idantite foutbòl Ayisyen an.",
+  },
+
+  // ─── FEDERATION PAGE (Phase 2 additions) ─────────────────────────────
+  "federation.logoAlt": {
+    en: "Crest of the Haitian Football Federation",
+    fr: "Écusson de la Fédération Haïtienne de Football",
+    ht: "Écusson de la Fédération Haïtienne de Football",
+  },
+  "federation.governingBody": {
+    en: "The governing body",
+    fr: "L'instance dirigeante",
+    ht: "L'instance dirigeante",
+  },
+  "federation.identityLine": {
+    en: "Founded in {founded}. Headquartered in {hq}. A FIFA member since {fifa}, a founding member of CONCACAF since {concacaf}.",
+    fr: "Fondée en {founded}. Siège à {hq}. Membre de la FIFA depuis {fifa}, membre fondateur de la CONCACAF depuis {concacaf}.",
+    ht: "Fondée en {founded}. Siège à {hq}. Membre de la FIFA depuis {fifa}, membre fondateur de la CONCACAF depuis {concacaf}.",
+  },
+  "federation.statFounded": {
+    en: "Founded",
+    fr: "Fondation",
+    ht: "Fondation",
+  },
+  "federation.statYears": {
+    en: "Years of existence",
+    fr: "Années d'existence",
+    ht: "Années d'existence",
+  },
+  "federation.statFifaMember": {
+    en: "FIFA member",
+    fr: "Membre FIFA",
+    ht: "Membre FIFA",
+  },
+  "federation.newsEyebrow": {
+    en: "Top story · May 31, 2026",
+    fr: "À la une · 31 mai 2026",
+    ht: "À la une · 31 mai 2026",
+  },
+  "federation.newsTitle": {
+    en: "FHF's new statutes adopted unanimously.",
+    fr: "Adoption à l'unanimité des nouveaux statuts de la FHF.",
+    ht: "Adoption à l'unanimité des nouveaux statuts de la FHF.",
+  },
+  "federation.newsBody1": {
+    en: "Meeting in special congress, twenty delegates representing the men's and women's clubs and the leagues unanimously adopted the new statutes of the Haitian Football Federation. These statutes, the result of several years of work between the FHF and the figures of Haitian football, give the institution a new legal foundation.",
+    fr: "Réunis en congrès extraordinaire, vingt délégués représentant les clubs masculins, féminins et les ligues ont adopté à l'unanimité les nouveaux statuts de la Fédération Haïtienne de Football. Ces statuts, fruit de plusieurs années de travail entre la FHF et les acteurs du mouvement footballistique haïtien, dotent l'institution d'une nouvelle fondation légale.",
+    ht: "Réunis en congrès extraordinaire, vingt délégués représentant les clubs masculins, féminins et les ligues ont adopté à l'unanimité les nouveaux statuts de la Fédération Haïtienne de Football. Ces statuts, fruit de plusieurs années de travail entre la FHF et les acteurs du mouvement footballistique haïtien, dotent l'institution d'une nouvelle fondation légale.",
+  },
+  "federation.newsBody2": {
+    en: "The session was held under the supervision of the Normalization Committee (Yvon Sévère and Gally Amazan) and FIFA representatives: Ms. Salomé Tally, online, and Mr. Belval Juventino, present in Port-au-Prince. Adopting these statutes was among the main objectives FIFA had assigned to the Normalization Committee.",
+    fr: "La session s'est tenue sous la supervision du Comité de Normalisation (Yvon Sévère et Gally Amazan) et des représentants de la FIFA : Mme Salomé Tally, en ligne, et M. Belval Juventino, présent à Port-au-Prince. L'adoption de ces statuts figurait parmi les principaux objectifs confiés au Comité de Normalisation par la FIFA.",
+    ht: "La session s'est tenue sous la supervision du Comité de Normalisation (Yvon Sévère et Gally Amazan) et des représentants de la FIFA : Mme Salomé Tally, en ligne, et M. Belval Juventino, présent à Port-au-Prince. L'adoption de ces statuts figurait parmi les principaux objectifs confiés au Comité de Normalisation par la FIFA.",
+  },
+  "federation.pioneer": {
+    en: "The pioneer · 1904",
+    fr: "Le pionnier · 1904",
+    ht: "Le pionnier · 1904",
+  },
+  "federation.currentLeadership": {
+    en: "Current leadership",
+    fr: "La direction actuelle",
+    ht: "La direction actuelle",
+  },
+  "federation.inOffice": {
+    en: "In office · Since {since}",
+    fr: "En fonction · Depuis le {since}",
+    ht: "En fonction · Depuis le {since}",
+  },
+  "federation.keyMoments": {
+    en: "Key moments",
+    fr: "Moments clés",
+    ht: "Moments clés",
+  },
+  "federation.restOfCommittee": {
+    en: "And the rest of the committee",
+    fr: "Et le reste du comité",
+    ht: "Et le reste du comité",
+  },
+  "federation.homeStadiumEyebrow": {
+    en: "The home ground",
+    fr: "Le stade fétiche",
+    ht: "Le stade fétiche",
+  },
+  "federation.competitionsTitle": {
+    en: "Competitions organized by the FHF",
+    fr: "Les compétitions organisées par la FHF",
+    ht: "Les compétitions organisées par la FHF",
+  },
+  "federation.timelineTitle": {
+    en: "Timeline",
+    fr: "Chronologie",
+    ht: "Chronologie",
+  },
+  "federation.timelineSubtext": {
+    en: "Men's and women's national teams, plus youth levels: the FHF's milestones.",
+    fr: "Sélection nationale masculine, féminine, et catégories de jeunes : les jalons de la FHF.",
+    ht: "Sélection nationale masculine, féminine, et catégories de jeunes : les jalons de la FHF.",
+  },
+  "federation.visitSite": {
+    en: "Visit the official FHF website",
+    fr: "Visiter le site officiel de la FHF",
+    ht: "Visiter le site officiel de la FHF",
   },
 
   // ─── COVERAGE / L'HOMMAGE ────────────────────────────────────────────
