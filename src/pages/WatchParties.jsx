@@ -23,9 +23,9 @@ export default function WatchParties() {
       {/* Stats strip */}
       <section className="bg-white border-b border-line">
         <div className="max-w-content mx-auto px-5 py-8 grid grid-cols-3 gap-6">
-          <Stat label="Villes" value={watchPartyStats.cities} />
-          <Stat label="Pays" value={watchPartyStats.countries} />
-          <Stat label="Départements (Haïti)" value={watchPartyStats.haitiDepartments} />
+          <Stat label={t("watchParties.stat.cities")} value={watchPartyStats.cities} />
+          <Stat label={t("watchParties.stat.countries")} value={watchPartyStats.countries} />
+          <Stat label={t("watchParties.statDepartments")} value={watchPartyStats.haitiDepartments} />
         </div>
       </section>
 
@@ -34,17 +34,17 @@ export default function WatchParties() {
         <div className="max-w-content mx-auto px-5 py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-2xl">
             <h2 className="font-display text-2xl md:text-3xl mb-3">
-              Vous connaissez un lieu fréquenté par la communauté haïtienne&nbsp;?
+              {t("watchParties.submitTitle")}
             </h2>
             <p className="text-bg/80 leading-relaxed">
-              Restaurant, bar, centre communautaire, espace culturel — où que la communauté haïtienne se réunisse dans votre ville, nous voulons l'inscrire au répertoire. Aidez-nous à enrichir la liste.
+              {t("watchParties.submitBody")}
             </p>
           </div>
           <a
             href="mailto:contact@grenadiers2026.com?subject=Proposition de lieu&body=Ville :%0ANom du lieu :%0AAdresse :%0AType (restaurant / bar / centre communautaire / espace culturel) :%0AVotre lien avec le lieu :%0AContact (e-mail ou téléphone) :%0ARemarques :"
             className="inline-flex items-center gap-2 px-6 py-3 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors whitespace-nowrap self-start"
           >
-            Proposer un lieu
+            {t("watchParties.submitButton")}
           </a>
         </div>
       </section>
@@ -59,7 +59,7 @@ export default function WatchParties() {
                 view === "map" ? "bg-haiti-blue text-bg" : "text-ink hover:bg-line"
               }`}
             >
-              Carte
+              {t("watchParties.view.map")}
             </button>
             <button
               onClick={() => setView("list")}
@@ -67,11 +67,11 @@ export default function WatchParties() {
                 view === "list" ? "bg-haiti-blue text-bg" : "text-ink hover:bg-line"
               }`}
             >
-              Liste
+              {t("watchParties.view.list")}
             </button>
           </div>
           <span className="text-xs text-muted hidden md:inline">
-            {view === "map" ? "Cliquer sur une épingle pour les détails" : "Parcourir par région"}
+            {view === "map" ? t("watchParties.mapHint") : t("watchParties.list.hint")}
           </span>
         </div>
       </section>
@@ -111,7 +111,7 @@ export default function WatchParties() {
                         )}
                         {party.featured && (
                           <span className="inline-block text-[10px] font-bold px-2 py-0.5 bg-red-100 text-red-800 rounded uppercase tracking-wider mb-2">
-                            À l'affiche
+                            {t("watchParties.featured")}
                           </span>
                         )}
                         <p className="text-sm m-0 mb-1">{party.venue}</p>
@@ -132,11 +132,11 @@ export default function WatchParties() {
             <div className="flex items-center gap-6 mt-4 text-xs text-muted">
               <span className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-haiti-red"></span>
-                Lieu à l'affiche
+                {t("watchParties.legendFeatured")}
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-haiti-blue"></span>
-                Lieu haïtien
+                {t("watchParties.legendHaitian")}
               </span>
             </div>
           </div>
@@ -166,17 +166,17 @@ export default function WatchParties() {
       <div className="max-w-content mx-auto px-5 pb-16 space-y-4">
         <section className="bg-white border border-line rounded-lg p-6 md:p-8">
           <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-2">
-            À propos de ce répertoire
+            {t("watchParties.aboutTitle")}
           </p>
           <p className="text-ink leading-relaxed mb-4">
-            Il s'agit d'un répertoire communautaire de lieux fréquentés par la communauté haïtienne — bars, restaurants, centres communautaires, espaces culturels. Toutes les entrées sont actuellement des emplacements en attente de propositions de la part de la communauté. Pour ajouter ou modifier une fiche, écrire à{" "}
+            {t("watchParties.aboutBody")}{" "}
             <a href="mailto:contact@grenadiers2026.com" className="text-haiti-blue underline hover:no-underline">
               contact@grenadiers2026.com
             </a>
             .
           </p>
           <p className="text-sm text-muted leading-relaxed">
-            <strong className="text-ink">Note relative à la diffusion publique :</strong> La diffusion publique des matchs de la Coupe du Monde de la FIFA requiert une licence FIFA Public Viewing, distincte des droits de retransmission commerciale que peuvent déjà détenir certains établissements. Ce répertoire n'organise pas et ne cautionne pas l'organisation de projections publiques de matchs. Tout établissement qui choisit de retransmettre un match en est seul responsable, notamment en ce qui concerne l'obtention de la licence FIFA requise et le respect de la réglementation applicable.
+            <strong className="text-ink">{t("watchParties.broadcastNoticeLabel")}</strong> {t("watchParties.broadcastNoticeBody")}
           </p>
         </section>
       </div>
@@ -196,13 +196,14 @@ function Stat({ label, value }) {
 }
 
 function RegionSection({ region }) {
+  const { t } = useT();
   return (
     <section id={region.id} className="scroll-mt-32">
       <div className="border-b border-line pb-4 mb-6">
         <div className="flex items-baseline justify-between gap-4 flex-wrap">
           <h2 className="font-display text-2xl md:text-3xl">{region.name}</h2>
           <span className="text-sm text-muted uppercase tracking-wider font-semibold whitespace-nowrap">
-            {region.parties.length} {region.parties.length === 1 ? "lieu" : "lieux"}
+            {region.parties.length} {region.parties.length === 1 ? t("watchParties.venue") : t("watchParties.venues")}
           </span>
         </div>
         {region.note && (
@@ -219,6 +220,7 @@ function RegionSection({ region }) {
 }
 
 function PartyCard({ party }) {
+  const { t } = useT();
   return (
     <div
       className={`p-5 rounded-lg border bg-white relative ${
@@ -228,7 +230,7 @@ function PartyCard({ party }) {
       {party.featured && (
         <div className="absolute top-4 right-4">
           <span className="text-xs font-bold px-2 py-0.5 bg-haiti-red text-bg rounded uppercase tracking-wider">
-            À l'affiche
+            {t("watchParties.featured")}
           </span>
         </div>
       )}

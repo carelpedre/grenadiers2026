@@ -596,6 +596,137 @@ const dict = {
     ht: "Watch party",
   },
 
+  // ─── WATCH PARTIES PAGE (Phase 2 additions) ──────────────────────────
+  "watchParties.statDepartments": {
+    en: "Departments (Haiti)",
+    fr: "Départements (Haïti)",
+    ht: "Départements (Haïti)",
+  },
+  "watchParties.submitTitle": {
+    en: "Know a spot the Haitian community gathers at?",
+    fr: "Vous connaissez un lieu fréquenté par la communauté haïtienne ?",
+    ht: "Vous connaissez un lieu fréquenté par la communauté haïtienne ?",
+  },
+  "watchParties.submitBody": {
+    en: "Restaurant, bar, community center, cultural space: wherever the Haitian community gathers in your city, we want to add it to the directory. Help us grow the list.",
+    fr: "Restaurant, bar, centre communautaire, espace culturel : où que la communauté haïtienne se réunisse dans votre ville, nous voulons l'inscrire au répertoire. Aidez-nous à enrichir la liste.",
+    ht: "Restaurant, bar, centre communautaire, espace culturel : où que la communauté haïtienne se réunisse dans votre ville, nous voulons l'inscrire au répertoire. Aidez-nous à enrichir la liste.",
+  },
+  "watchParties.submitButton": {
+    en: "Suggest a venue",
+    fr: "Proposer un lieu",
+    ht: "Proposer un lieu",
+  },
+  "watchParties.mapHint": {
+    en: "Click a pin for details",
+    fr: "Cliquer sur une épingle pour les détails",
+    ht: "Cliquer sur une épingle pour les détails",
+  },
+  "watchParties.featured": {
+    en: "Featured",
+    fr: "À l'affiche",
+    ht: "À l'affiche",
+  },
+  "watchParties.legendFeatured": {
+    en: "Featured venue",
+    fr: "Lieu à l'affiche",
+    ht: "Lieu à l'affiche",
+  },
+  "watchParties.legendHaitian": {
+    en: "Haitian venue",
+    fr: "Lieu haïtien",
+    ht: "Lieu haïtien",
+  },
+  "watchParties.aboutTitle": {
+    en: "About this directory",
+    fr: "À propos de ce répertoire",
+    ht: "À propos de ce répertoire",
+  },
+  "watchParties.aboutBody": {
+    en: "This is a community directory of venues frequented by the Haitian community: bars, restaurants, community centers, cultural spaces. All entries are currently placeholder locations awaiting community submissions. To add or edit a listing, email",
+    fr: "Il s'agit d'un répertoire communautaire de lieux fréquentés par la communauté haïtienne : bars, restaurants, centres communautaires, espaces culturels. Toutes les entrées sont actuellement des emplacements en attente de propositions de la part de la communauté. Pour ajouter ou modifier une fiche, écrire à",
+    ht: "Il s'agit d'un répertoire communautaire de lieux fréquentés par la communauté haïtienne : bars, restaurants, centres communautaires, espaces culturels. Toutes les entrées sont actuellement des emplacements en attente de propositions de la part de la communauté. Pour ajouter ou modifier une fiche, écrire à",
+  },
+  "watchParties.broadcastNoticeLabel": {
+    en: "Public broadcast notice:",
+    fr: "Note relative à la diffusion publique :",
+    ht: "Note relative à la diffusion publique :",
+  },
+  "watchParties.broadcastNoticeBody": {
+    en: "Public broadcast of FIFA World Cup matches requires a FIFA Public Viewing license, separate from any commercial broadcast rights some venues may already hold. This directory does not organize or endorse public match screenings. Any venue that chooses to show a match is solely responsible for it, including obtaining the required FIFA license and complying with applicable regulations.",
+    fr: "La diffusion publique des matchs de la Coupe du Monde de la FIFA requiert une licence FIFA Public Viewing, distincte des droits de retransmission commerciale que peuvent déjà détenir certains établissements. Ce répertoire n'organise pas et ne cautionne pas l'organisation de projections publiques de matchs. Tout établissement qui choisit de retransmettre un match en est seul responsable, notamment en ce qui concerne l'obtention de la licence FIFA requise et le respect de la réglementation applicable.",
+    ht: "La diffusion publique des matchs de la Coupe du Monde de la FIFA requiert une licence FIFA Public Viewing, distincte des droits de retransmission commerciale que peuvent déjà détenir certains établissements. Ce répertoire n'organise pas et ne cautionne pas l'organisation de projections publiques de matchs. Tout établissement qui choisit de retransmettre un match en est seul responsable, notamment en ce qui concerne l'obtention de la licence FIFA requise et le respect de la réglementation applicable.",
+  },
+  "watchParties.venue": {
+    en: "venue",
+    fr: "lieu",
+    ht: "lieu",
+  },
+  "watchParties.venues": {
+    en: "venues",
+    fr: "lieux",
+    ht: "lieux",
+  },
+
+  // ─── FAN WALL / MUR (Phase 2 additions) ──────────────────────────────
+  "mur.eyebrow": {
+    en: "The voice of the Grenadiers",
+    fr: "La voix des Grenadiers",
+    ht: "La voix des Grenadiers",
+  },
+  "mur.title": {
+    en: "Fan wall",
+    fr: "Mur des supporters",
+    ht: "Mur des supporters",
+  },
+  "mur.subtitle": {
+    en: "Leave your message for the team, from Haiti, from the diaspora, from all over the world. Messages are published after moderation.",
+    fr: "Laissez votre message pour la sélection, d'Haïti, de la diaspora, du monde entier. Les messages sont publiés après modération.",
+    ht: "Laissez votre message pour la sélection, d'Haïti, de la diaspora, du monde entier. Les messages sont publiés après modération.",
+  },
+  "mur.messagesTitle": {
+    en: "Fan messages",
+    fr: "Les messages des supporters",
+    ht: "Les messages des supporters",
+  },
+  "mur.beFirst": {
+    en: "Be the first to write.",
+    fr: "Soyez le premier à écrire.",
+    ht: "Soyez le premier à écrire.",
+  },
+  "mur.empty": {
+    en: "No messages yet. Yours could be the first. 🇭🇹",
+    fr: "Aucun message pour le moment. Votre message pourrait être le premier. 🇭🇹",
+    ht: "Aucun message pour le moment. Votre message pourrait être le premier. 🇭🇹",
+  },
+
+  // ─── 404 / NOT FOUND (Phase 2 additions) ─────────────────────────────
+  "notFound.docTitle": {
+    en: "404 · Page not found · Grenadiers 2026",
+    fr: "404 · Page introuvable · Grenadiers 2026",
+    ht: "404 · Page introuvable · Grenadiers 2026",
+  },
+  "notFound.title": {
+    en: "Page not found.",
+    fr: "Page introuvable.",
+    ht: "Page introuvable.",
+  },
+  "notFound.body": {
+    en: "The page you asked for doesn't exist. The link may be broken, the page may have moved, or it may never have existed. Here are a few ways to keep going.",
+    fr: "La page demandée n'existe pas, le lien est peut-être rompu, la page a peut-être été déplacée, ou elle n'a jamais existé. Voici quelques pistes pour continuer.",
+    ht: "La page demandée n'existe pas, le lien est peut-être rompu, la page a peut-être été déplacée, ou elle n'a jamais existé. Voici quelques pistes pour continuer.",
+  },
+  "notFound.reportPrefix": {
+    en: "Broken link on the site? Email",
+    fr: "Lien cassé sur le site ? Écrire à",
+    ht: "Lien cassé sur le site ? Écrire à",
+  },
+  "notFound.reportSuffix": {
+    en: "to report the problem.",
+    fr: "pour signaler le problème.",
+    ht: "pour signaler le problème.",
+  },
+
   // ─── STORIES ──────────────────────────────────────────────────────────
   "stories.eyebrow": {
     en: "Chokarella editorial",

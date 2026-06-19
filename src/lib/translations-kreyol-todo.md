@@ -101,3 +101,37 @@ Running list of translation keys whose `ht` value is still a French placeholder
 - `federation.timelineTitle` · fr "Chronologie"
 - `federation.timelineSubtext` · fr "Sélection nationale masculine, féminine, et catégories de jeunes : les jalons de la FHF."
 - `federation.visitSite` · fr "Visiter le site officiel de la FHF"
+
+## Watch Parties page (Phase 2)
+
+- `watchParties.statDepartments` · fr "Départements (Haïti)"
+- `watchParties.submitTitle` · fr "Vous connaissez un lieu fréquenté par la communauté haïtienne ?"
+- `watchParties.submitBody` · fr "Restaurant, bar, centre communautaire, espace culturel : où que la communauté haïtienne se réunisse dans votre ville, nous voulons l'inscrire au répertoire. Aidez-nous à enrichir la liste."
+- `watchParties.submitButton` · fr "Proposer un lieu"
+- `watchParties.mapHint` · fr "Cliquer sur une épingle pour les détails"
+- `watchParties.featured` · fr "À l'affiche"
+- `watchParties.legendFeatured` · fr "Lieu à l'affiche"
+- `watchParties.legendHaitian` · fr "Lieu haïtien"
+- `watchParties.aboutTitle` · fr "À propos de ce répertoire"
+- `watchParties.aboutBody` · fr "Il s'agit d'un répertoire communautaire de lieux fréquentés par la communauté haïtienne : bars, restaurants, centres communautaires, espaces culturels. Toutes les entrées sont actuellement des emplacements en attente de propositions de la part de la communauté. Pour ajouter ou modifier une fiche, écrire à"
+- `watchParties.broadcastNoticeLabel` · fr "Note relative à la diffusion publique :"
+- `watchParties.broadcastNoticeBody` · fr "La diffusion publique des matchs de la Coupe du Monde de la FIFA requiert une licence FIFA Public Viewing, distincte des droits de retransmission commerciale que peuvent déjà détenir certains établissements. Ce répertoire n'organise pas et ne cautionne pas l'organisation de projections publiques de matchs. Tout établissement qui choisit de retransmettre un match en est seul responsable, notamment en ce qui concerne l'obtention de la licence FIFA requise et le respect de la réglementation applicable."
+- `watchParties.venue` · fr "lieu"
+- `watchParties.venues` · fr "lieux"
+
+## Fan Wall / Mur page (Phase 2)
+
+- `mur.eyebrow` · fr "La voix des Grenadiers"
+- `mur.title` · fr "Mur des supporters"
+- `mur.subtitle` · fr "Laissez votre message pour la sélection, d'Haïti, de la diaspora, du monde entier. Les messages sont publiés après modération."
+- `mur.messagesTitle` · fr "Les messages des supporters"
+- `mur.beFirst` · fr "Soyez le premier à écrire."
+- `mur.empty` · fr "Aucun message pour le moment. Votre message pourrait être le premier. 🇭🇹"
+
+## 404 / Not Found page (Phase 2)
+
+- `notFound.docTitle` · fr "404 · Page introuvable · Grenadiers 2026"
+- `notFound.title` · fr "Page introuvable."
+- `notFound.body` · fr "La page demandée n'existe pas, le lien est peut-être rompu, la page a peut-être été déplacée, ou elle n'a jamais existé. Voici quelques pistes pour continuer."
+- `notFound.reportPrefix` · fr "Lien cassé sur le site ? Écrire à"
+- `notFound.reportSuffix` · fr "pour signaler le problème."
