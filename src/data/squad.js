@@ -55,7 +55,7 @@ export const squad = {
     {
       name: "Josue Duverger",
       slug: "josue-duverger",
-      bioEn: "Born on April 27, 2000, in Montréal, Canada, of Haitian descent, Josué Duverger did most of his training in Portugal within the academies of Sporting CP and Vitória Setúbal. After a spell at União de Santarém, he joined FC Cosmos Koblenz in Germany in 2024, where he currently plays. A Haiti international since 2017, he rounds out the Grenadiers' goalkeeping corps for the 2026 World Cup.",
+      bioEn: "Born on April 27, 2000, in Montreal, Canada, of Haitian descent, Josué Duverger did most of his training in Portugal within the academies of Sporting CP and Vitória Setúbal. After a spell at União de Santarém, he joined FC Cosmos Koblenz in Germany in 2024, where he currently plays. A Haiti international since 2017, he rounds out the Grenadiers' goalkeeping corps for the 2026 World Cup.",
       apiId: 123742,
       photo: "/images/photos/josue-duverger.jpg?v=20260614",
       number: 23,
@@ -137,7 +137,7 @@ export const squad = {
     {
       name: "Jean-Kévin Duverne",
       slug: "jean-kevin-duverne",
-      bioEn: "Born on July 12, 1997, in Paris, Jean-Kévin Duverne is a versatile defender who can play centrally or out wide. Trained at RC Lens, where he made his professional debut in 2016, he then spent four seasons at Stade Brestois before joining FC Nantes in 2023, where he is under contract until 2027. He currently plays for KAA Gent in Belgium on loan, after a first spell at KV Courtrai in early 2025. A Haiti international since June 2024, he has fifteen caps with the Grenadiers.",
+      bioEn: "Born on July 12, 1997, in Paris, Jean-Kévin Duverne is a versatile defender who can play centrally or out wide. Trained at RC Lens, where he made his professional debut in 2016, he then spent four seasons at Stade Brestois before joining FC Nantes in 2023, where he is under contract until 2027. He currently plays for KAA Gent in Belgium on loan, after a first spell at KV Kortrijk in early 2025. A Haiti international since June 2024, he has fifteen caps with the Grenadiers.",
       apiId: 20655,
       photo: "/images/photos/jean-kevin-duverne.jpg?v=20260614",
       number: 22,
@@ -156,7 +156,7 @@ export const squad = {
     {
       name: "Duke Lacroix",
       slug: "duke-lacroix",
-      bioEn: "Born on October 14, 1993, in New Egypt, New Jersey, Markhus « Duke » Lacroix is a versatile defender who can play at left back, right back, or center back. Having attended The Lawrenceville School and then the University of Pennsylvania, where he played for the Penn Quakers from 2011 to 2014 and was named All-Ivy League four times, he continued his professional career in the USL Championship, the North American second tier. He has played since 2023 for the Colorado Springs Switchbacks, with whom he won the USL Championship in 2024. A Grenadiers international since 2024, Lacroix is among the first two players from the USL Championship to play in a World Cup final tournament.",
+      bioEn: "Born on October 14, 1993, in New Egypt, New Jersey, Markhus \"Duke\" Lacroix is a versatile defender who can play at left back, right back, or center back. Having attended The Lawrenceville School and then the University of Pennsylvania, where he played for the Penn Quakers from 2011 to 2014 and was named All-Ivy League four times, he continued his professional career in the USL Championship, the North American second tier. He has played since 2023 for the Colorado Springs Switchbacks, with whom he won the USL Championship in 2024. A Grenadiers international since 2024, Lacroix is among the first two players from the USL Championship to play in a World Cup final tournament.",
       apiId: 102505,
       photo: "/images/photos/duke-lacroix.jpg?v=20260614",
       number: 13,
@@ -235,7 +235,7 @@ export const squad = {
     {
       name: "Garven Metusala",
       slug: "garven-metusala",
-      bioEn: "Born in Terrebonne, Québec, to a Haitian mother, Garven Metusala made his name at Forge FC, where he lifted two Canadian championship titles before joining the Colorado Springs Switchbacks. An international since 2022, this central defender, strong in duels, took part in the World Cup qualifiers. Called up as reinforcement on the eve of the World Cup, he embodies the depth of a group where everyone stays ready.",
+      bioEn: "Born in Terrebonne, Quebec, to a Haitian mother, Garven Metusala made his name at Forge FC, where he lifted two Canadian championship titles before joining the Colorado Springs Switchbacks. An international since 2022, this central defender, strong in duels, took part in the World Cup qualifiers. Called up as reinforcement on the eve of the World Cup, he embodies the depth of a group where everyone stays ready.",
       apiId: 318930,
       photo: "/images/photos/garven-metusala.jpg?v=20260614",
       number: 14,
@@ -407,7 +407,7 @@ export const squad = {
     {
       name: "Frantzdy Pierrot",
       slug: "frantzdy-pierrot",
-      bioEn: "Born on March 29, 1995, in Cap-Haïtien and raised in Melrose, Massachusetts, from the age of eleven, Frantzdy Pierrot is the tallest forward in the group at 1.94 m. After his college years at Northeastern and then Coastal Carolina, he began his professional career at Royal Excel Mouscron in Belgium before playing in the French Ligue 2 with Guingamp, then at Maccabi Haïfa in Israel where he scored 28 goals in 66 matches over three seasons. In September 2024, he joined AEK Athens in the Greek Super League, then was loaned in February 2026 to Çaykur Rizespor in the Turkish Süper Lig. With the Grenadiers, he has 34 goals in 51 caps and scored the only goal of the win against Costa Rica on November 13, 2025, a result that opens the way to qualification.",
+      bioEn: "Born on March 29, 1995, in Cap-Haïtien and raised in Melrose, Massachusetts, from the age of eleven, Frantzdy Pierrot is the tallest forward in the group at 1.94 m. After his college years at Northeastern and then Coastal Carolina, he began his professional career at Royal Excel Mouscron in Belgium before playing in the French Ligue 2 with Guingamp, then at Maccabi Haifa in Israel where he scored 28 goals in 66 matches over three seasons. In September 2024, he joined AEK Athens in the Greek Super League, then was loaned in February 2026 to Çaykur Rizespor in the Turkish Süper Lig. With the Grenadiers, he has 34 goals in 51 caps and scored the only goal of the win against Costa Rica on November 13, 2025, a result that opens the way to qualification.",
       apiId: 8601,
       photo: "/images/photos/frantzdy-pierrot.jpg?v=20260614",
       number: 20,
@@ -470,7 +470,7 @@ export const squad = {
     {
       name: "Ruben Providence",
       slug: "ruben-providence",
-      bioEn: "Born on July 7, 2001, in Lagny-sur-Marne, of Haitian and Laotian descent, Ruben Fritzner Providence is a versatile winger who can play on either flank or up front. Trained at the Paris Saint-Germain academy, which he joined in 2010, he continued his progress at AS Roma from 2019, where he made his professional debut. After loans at Club Bruges in Belgium and Estoril in Portugal, he broke through at TSV Hartberg in the Austrian first division, scoring 17 goals in 54 matches over two seasons. He has played since August 2024 for Almere City FC in the Netherlands, under contract until 2027. A former France under-19 international, he opted for the Grenadiers in March 2025 and scored the second goal in the 2-0 win against Nicaragua on November 18, 2025, that sealed qualification.",
+      bioEn: "Born on July 7, 2001, in Lagny-sur-Marne, of Haitian and Laotian descent, Ruben Fritzner Providence is a versatile winger who can play on either flank or up front. Trained at the Paris Saint-Germain academy, which he joined in 2010, he continued his progress at AS Roma from 2019, where he made his professional debut. After loans at Club Brugge in Belgium and Estoril in Portugal, he broke through at TSV Hartberg in the Austrian first division, scoring 17 goals in 54 matches over two seasons. He has played since August 2024 for Almere City FC in the Netherlands, under contract until 2027. A former France under-19 international, he opted for the Grenadiers in March 2025 and scored the second goal in the 2-0 win against Nicaragua on November 18, 2025, that sealed qualification.",
       apiId: 162733,
       photo: "/images/photos/ruben-providence.jpg?v=20260614",
       number: 15,
@@ -529,7 +529,7 @@ export const squad = {
     {
       name: "Wilson Isidor",
       slug: "wilson-isidor",
-      bioEn: "Born on August 27, 2000, in Rennes, in Brittany, to Haitian and Malagasy parents, Wilson Isidor has been the striker of Sunderland AFC in the Premier League since summer 2024, first on loan and then permanently. Trained at Stade Rennais without breaking into the first team, he made his professional debut with AS Monaco in November 2018, before loans at Laval and then Bastia-Borgo where he broke out as a prolific scorer with 16 goals in 29 matches. He then played for Lokomotiv Moscou, matching the Russian record by scoring in each of his first six matches, then for Zénith Saint-Pétersbourg, with whom he won the league and the Russian Cup. A former France under-17, under-18, under-19, and under-20 international, he opted for Haitian sporting nationality in March 2026 and scored his first international goal on March 31, 2026, against Iceland, in a friendly played in Toronto.",
+      bioEn: "Born on August 27, 2000, in Rennes, in Brittany, to Haitian and Malagasy parents, Wilson Isidor has been the striker of Sunderland AFC in the Premier League since summer 2024, first on loan and then permanently. Trained at Stade Rennais without breaking into the first team, he made his professional debut with AS Monaco in November 2018, before loans at Laval and then Bastia-Borgo where he broke out as a prolific scorer with 16 goals in 29 matches. He then played for Lokomotiv Moscow, matching the Russian record by scoring in each of his first six matches, then for Zenit Saint Petersburg, with whom he won the league and the Russian Cup. A former France under-17, under-18, under-19, and under-20 international, he opted for Haitian sporting nationality in March 2026 and scored his first international goal on March 31, 2026, against Iceland, in a friendly played in Toronto.",
       apiId: 84087,
       photo: "/images/photos/wilson-isidor.jpg?v=20260614",
       number: 18,
