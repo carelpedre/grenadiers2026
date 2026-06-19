@@ -2289,6 +2289,170 @@ const dict = {
     ht: "Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels.",
   },
 
+  // ─── PLAYER MODAL + SQUAD CONTENT (Phase 2 content) ──────────────────
+  "squad.starTag": {
+    en: "Key player",
+    fr: "Cadre",
+    ht: "Cadre",
+  },
+  "squad.playerGeneric": {
+    en: "Player",
+    fr: "Joueur",
+    ht: "Joueur",
+  },
+  "squad.label.age": {
+    en: "Age",
+    fr: "Âge",
+    ht: "Âge",
+  },
+  "squad.label.goalsCaps": {
+    en: "Goals (intl.)",
+    fr: "Buts (sél.)",
+    ht: "Buts (sél.)",
+  },
+  "squad.label.bornOn": {
+    en: "Born",
+    fr: "Né le",
+    ht: "Né le",
+  },
+  "squad.label.height": {
+    en: "Height",
+    fr: "Taille",
+    ht: "Taille",
+  },
+  "squad.label.debut": {
+    en: "International debut",
+    fr: "Première sélection",
+    ht: "Première sélection",
+  },
+  "squad.label.positions": {
+    en: "Positions",
+    fr: "Postes",
+    ht: "Postes",
+  },
+  "squad.label.apps": {
+    en: "Matches",
+    fr: "Matchs",
+    ht: "Matchs",
+  },
+  "squad.label.assists": {
+    en: "Assists",
+    fr: "Passes D.",
+    ht: "Passes D.",
+  },
+  "squad.label.rating": {
+    en: "Avg. rating",
+    fr: "Note moy.",
+    ht: "Note moy.",
+  },
+  "squad.modalClubSeason": {
+    en: "At club this season",
+    fr: "En club cette saison",
+    ht: "En club cette saison",
+  },
+  "squad.modalAllComps": {
+    en: "all competitions this season",
+    fr: "toutes compétitions cette saison",
+    ht: "toutes compétitions cette saison",
+  },
+  "squad.modalBio": {
+    en: "Biography",
+    fr: "Biographie",
+    ht: "Biographie",
+  },
+  "squad.modalFollow": {
+    en: "Follow",
+    fr: "Suivre",
+    ht: "Suivre",
+  },
+  "squad.modalShareProfile": {
+    en: "Share this profile",
+    fr: "Partager cette fiche",
+    ht: "Partager cette fiche",
+  },
+  "squad.modalCapsInfoLabel": {
+    en: "About the cap count",
+    fr: "À propos du nombre de sélections",
+    ht: "À propos du nombre de sélections",
+  },
+  "squad.modalCapsInfoText": {
+    en: "The cap count comes from third-party sources and can vary: some matches are not always counted the same way.",
+    fr: "Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon.",
+    ht: "Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon.",
+  },
+  "squad.bestScorer": {
+    en: "top scorer",
+    fr: "meilleur buteur",
+    ht: "meilleur buteur",
+  },
+  "squad.bestPasser": {
+    en: "top assister",
+    fr: "meilleur passeur",
+    ht: "meilleur passeur",
+  },
+  "squad.goalsInQualif": {
+    en: "{n} goals in qualifying",
+    fr: "{n} buts en qualif.",
+    ht: "{n} buts en qualif.",
+  },
+  "squad.goalsShort": {
+    en: "{n} goals",
+    fr: "{n} buts",
+    ht: "{n} buts",
+  },
+  "squad.assistsInQualif": {
+    en: "{n} assists in qualifying",
+    fr: "{n} passes en qualif.",
+    ht: "{n} passes en qualif.",
+  },
+  "squad.assistsShort": {
+    en: "{n} assists",
+    fr: "{n} passes",
+    ht: "{n} passes",
+  },
+
+  // ─── PLAYER SHARE CARD (Phase 2 content) ─────────────────────────────
+  "share.title": {
+    en: "Share card",
+    fr: "Carte de partage",
+    ht: "Carte de partage",
+  },
+  "share.generating": {
+    en: "Image is being generated · try again in a moment.",
+    fr: "Image en cours de génération · réessayez dans un instant.",
+    ht: "Image en cours de génération · réessayez dans un instant.",
+  },
+  "share.save": {
+    en: "↓ Save",
+    fr: "↓ Enregistrer",
+    ht: "↓ Enregistrer",
+  },
+  "share.copied": {
+    en: "Copied ✓",
+    fr: "Copié ✓",
+    ht: "Copié ✓",
+  },
+  "share.share": {
+    en: "Share",
+    fr: "Partager",
+    ht: "Partager",
+  },
+  "share.hint": {
+    en: "« Save » → Save image (Photos). « Share » → stories, Messages…",
+    fr: "« Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…",
+    ht: "« Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…",
+  },
+  "share.byline": {
+    en: "A project by Carel Pedre",
+    fr: "Un projet de Carel Pedre",
+    ht: "Un projet de Carel Pedre",
+  },
+  "share.metaText": {
+    en: "{name} · Haiti at the 2026 World Cup 🇭🇹",
+    fr: "{name} · Haïti à la Coupe du Monde 2026 🇭🇹",
+    ht: "{name} · Haïti à la Coupe du Monde 2026 🇭🇹",
+  },
+
   // ─── STORIES (additions) ─────────────────────────────────────────────
   "stories.eyebrow": {
     en: "Stories",

@@ -568,9 +568,19 @@ export const squadStats = {
   coachBorn: "30 novembre 1972, La Roche-sur-Yon, France",
   coachAppointed: "March 2024",
   coachPhoto: "/images/photos/sebastien-migne.jpg?v=20260614",
+  // Leader-card content (FR + EN). The "ht" rendering reuses the FR text for now.
+  coachDetail: "France · En poste depuis mars 2024",
+  coachDetailEn: "France · In charge since March 2024",
+  coachNote: "Adjoint de Rigobert Song avec le Cameroun à la Coupe du Monde 2022 au Qatar et à la Coupe d'Afrique des Nations 2024. Le terrain mondial ne lui est pas étranger.",
+  coachNoteEn: "Assistant to Rigobert Song with Cameroon at the 2022 World Cup in Qatar and the 2024 Africa Cup of Nations. The world stage is familiar ground for him.",
   captain: "Johny Placide",
   captainPhoto: "/images/photos/johny-placide.jpg?v=20260614",
+  captainDetail: "Gardien · SC Bastia",
+  captainDetailEn: "Goalkeeper · SC Bastia",
+  captainNote: "Le gardien vétéran qui porte le brassard depuis le retour des Grenadiers sur la scène mondiale.",
+  captainNoteEn: "The veteran goalkeeper who has worn the armband since the Grenadiers' return to the world stage.",
   announcedDate: "16 mai 2026",
+  announcedDateEn: "May 16, 2026",
 };
 
 // ─── Staff technique ─────────────────────────────────────────────────
@@ -580,12 +590,14 @@ export const staff = [
   {
     name: "Sébastien Migné",
     role: "Entraîneur principal",
+    roleEn: "Head coach",
     photo: "/images/photos/sebastien-migne.jpg?v=20260614",
     bio: "Technicien français né à La Roche-sur-Yon en 1972, il a été joueur (notamment en Angleterre, à Leyton Orient) avant de devenir entraîneur. Adjoint de Jean-Pierre Papin puis de Claude Le Roy sur plusieurs sélections, il a dirigé le Congo, le Kenya et la Guinée équatoriale, et a vécu le Mondial 2022 comme adjoint de Rigobert Song avec le Cameroun. Sélectionneur d'Haïti depuis mars 2024, il a mené les Grenadiers à leur première qualification en Coupe du Monde depuis 1974.",
   },
   {
     name: "Sébastien Rabault",
     role: "Entraîneur assistant",
+    roleEn: "Assistant coach",
     photo: "/images/photos/sebastien-rabault.jpg?v=20260614",
     bio: [
       "Entraîneur adjoint de la sélection haïtienne de football masculin depuis août 2025.",
@@ -596,6 +608,7 @@ export const staff = [
   {
     name: "Alexandre Dellal",
     role: "Préparateur physique",
+    roleEn: "Fitness coach",
     photo: "/images/photos/alexandre-dellal.jpg?v=20260614",
     bio: [
       "Préparateur physique de la sélection haïtienne de football masculin depuis janvier 2024.",
@@ -607,6 +620,7 @@ export const staff = [
   {
     name: "Guillaume Coffy",
     role: "Entraîneur des gardiens",
+    roleEn: "Goalkeeping coach",
     photo: "/images/photos/guillaume-coffy.jpg?v=20260614",
     bio: [
       "Diplôme d'enseignement supérieur à Clairefontaine en entraînement sportif.",
@@ -617,6 +631,7 @@ export const staff = [
   {
     name: "Sébastien Roi",
     role: "Analyste vidéo",
+    roleEn: "Video analyst",
     photo: "/images/photos/sebastien-roi.jpg?v=20260614",
     bio: [
       "Entraîneur principal à l'ASC Biesheim de juillet 2009 à juin 2011.",
@@ -630,6 +645,7 @@ export const staff = [
   {
     name: "Olivier Henneuse",
     role: "Kinésithérapeute",
+    roleEn: "Physiotherapist",
     photo: "/images/photos/olivier-henneuse.jpg?v=20260614",
     bio: [
       "Kinésithérapeute de la sélection haïtienne de football masculin depuis 2024 ; kiné du sport depuis septembre 2016.",
@@ -639,6 +655,7 @@ export const staff = [
   {
     name: "Aurélien Abels-Eber",
     role: "Ostéopathe",
+    roleEn: "Osteopath",
     photo: "/images/photos/aurelien-abels-eber.jpg?v=20260614",
     bio: [
       "Ostéopathe au pôle de santé d'Auross depuis janvier 2013, également masseur-kinésithérapeute libéral.",
@@ -648,6 +665,7 @@ export const staff = [
   {
     name: "Jérémy Guedj",
     role: "Préparateur mental",
+    roleEn: "Mental performance coach",
     photo: "/images/photos/jeremy-guedj.jpg?v=20260614",
     bio: [
       "Jérémy prépare les athlètes ambitieux à transformer leurs émotions en puissance mentale pour exploser leur niveau, performer sous pression et inspirer sans jamais craindre l'échec.",

@@ -3,12 +3,21 @@ import { createPortal } from "react-dom";
 import ImagePlaceholder from "./ImagePlaceholder";
 import SocialIcons from "./SocialIcons";
 import PlayerShareCard from "./PlayerShareCard";
+import { useT } from "../lib/i18n";
+
+// Map the stored position (code "GB/DF/MT/AT" or French full label) to the
+// shared role key (GK/DEF/MID/FWD) used by t("onze.role.*"/"onze.roleShort.*").
+const POS_ROLE = {
+  GB: "GK", DF: "DEF", MT: "MID", AT: "FWD",
+  Gardien: "GK", "Défenseur": "DEF", Milieu: "MID", Attaquant: "FWD",
+};
 
 // Modale joueur — s'ouvre au clic sur une fiche.
 // Se ferme via : clic sur l'arrière-plan, bouton X, touche Échap.
 // Verrouille le défilement du corps pendant l'ouverture.
 
 export default function PlayerModal({ player, stat, onClose }) {
+  const { t, lang } = useT();
   const [showShareCard, setShowShareCard] = useState(false);
 
   useEffect(() => {
@@ -39,7 +48,13 @@ export default function PlayerModal({ player, stat, onClose }) {
   const isStar = player.star;
   const isCaptain = player.captain;
   const isStaff = player.isStaff;
-  const positionLabel = isStaff ? player.role : `${player.position} · ${player.positionFull}`;
+  const roleKey = POS_ROLE[player.position] || POS_ROLE[player.positionFull] || null;
+  const staffRole = lang === "en" && player.roleEn ? player.roleEn : player.role;
+  const positionLabel = isStaff
+    ? staffRole
+    : roleKey
+    ? `${t(`onze.roleShort.${roleKey}`)} · ${t(`onze.role.${roleKey}`)}`
+    : `${player.position} · ${player.positionFull}`;
 
   // Calque identité (badges + numéro + nom), réutilisé sur le portrait mobile
   // (en haut) et le portrait desktop (colonne de gauche).
@@ -49,12 +64,12 @@ export default function PlayerModal({ player, stat, onClose }) {
       <div className="absolute top-3 left-3 flex flex-wrap gap-2">
         {isCaptain && (
           <span className="text-xs font-bold px-2.5 py-1 bg-haiti-blue text-bg rounded uppercase tracking-wider">
-            Capitaine
+            {t("squad.role.captain")}
           </span>
         )}
         {isStar && (
           <span className="text-xs font-bold px-2.5 py-1 bg-haiti-red text-bg rounded uppercase tracking-wider">
-            Cadre
+            {t("squad.starTag")}
           </span>
         )}
         <span className="text-xs font-bold px-2.5 py-1 bg-bg/20 text-bg rounded uppercase tracking-wider backdrop-blur-sm">
@@ -89,7 +104,7 @@ export default function PlayerModal({ player, stat, onClose }) {
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-ink/60 hover:bg-ink/80 text-bg flex items-center justify-center transition-colors backdrop-blur-sm"
-          aria-label="Fermer"
+          aria-label={t("onze.close")}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -129,17 +144,17 @@ export default function PlayerModal({ player, stat, onClose }) {
           {/* Rail de stats principal */}
           {!isStaff && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line">
-              <Stat label="Âge" value={player.age ?? "–"} />
+              <Stat label={t("squad.label.age")} value={player.age ?? "–"} />
               <Stat
-                label="Sélections"
+                label={t("squad.label.caps")}
                 value={player.caps ?? "–"}
                 info={{
-                  label: "À propos du nombre de sélections",
-                  text: "Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon.",
+                  label: t("squad.modalCapsInfoLabel"),
+                  text: t("squad.modalCapsInfoText"),
                 }}
               />
-              <Stat label="Buts (sél.)" value={player.goals ?? "–"} accent={player.goals > 0} />
-              <Stat label="Club" value={player.club} subValue={player.league} small />
+              <Stat label={t("squad.label.goalsCaps")} value={player.goals ?? "–"} accent={player.goals > 0} />
+              <Stat label={t("squad.label.club")} value={player.club} subValue={player.league} small />
             </div>
           )}
 
@@ -148,10 +163,10 @@ export default function PlayerModal({ player, stat, onClose }) {
               <div className="rounded-lg bg-haiti-red/10 border border-haiti-red/30 px-4 py-3">
                 {player.statusLabel && (
                   <p className="text-haiti-red font-bold uppercase tracking-wider text-xs mb-1">
-                    {player.statusLabel}
+                    {lang === "en" && player.statusLabelEn ? player.statusLabelEn : player.statusLabel}
                   </p>
                 )}
-                <p className="text-ink text-sm leading-relaxed">{player.statusNote}</p>
+                <p className="text-ink text-sm leading-relaxed">{lang === "en" && player.statusNoteEn ? player.statusNoteEn : player.statusNote}</p>
               </div>
             </div>
           )}
@@ -160,16 +175,16 @@ export default function PlayerModal({ player, stat, onClose }) {
             {/* Faits physiques compacts — dans le premier écran */}
             {!isStaff && (
               <div className="grid grid-cols-2 gap-x-5 gap-y-3 text-sm">
-                {player.born && <Fact label="Né le" value={player.born} />}
-                {player.birthplace && <Fact label="Lieu de naissance" value={player.birthplace} />}
+                {player.born && <Fact label={t("squad.label.bornOn")} value={player.born} />}
+                {player.birthplace && <Fact label={t("squad.label.birthplace")} value={player.birthplace} />}
                 {player.height && (
-                  <Fact label="Taille" value={`${(player.height / 100).toFixed(2)} m`} />
+                  <Fact label={t("squad.label.height")} value={`${(player.height / 100).toFixed(2)} m`} />
                 )}
-                {player.debut && <Fact label="Première sélection" value={player.debut} />}
+                {player.debut && <Fact label={t("squad.label.debut")} value={player.debut} />}
                 {player.positionTags && player.positionTags.length > 0 && (
                   <div className="col-span-2 flex flex-wrap items-baseline gap-2">
                     <span className="text-xs uppercase tracking-wider text-muted font-semibold">
-                      Postes
+                      {t("squad.label.positions")}
                     </span>
                     <div className="flex flex-wrap gap-1">
                       {player.positionTags.map((tag) => (
@@ -194,21 +209,21 @@ export default function PlayerModal({ player, stat, onClose }) {
                     <img src={player.clubLogo || stat.club_logo} alt="" className="w-5 h-5 object-contain shrink-0" />
                   )}
                   <p className="text-xs uppercase tracking-wider text-muted font-semibold">
-                    En club cette saison
+                    {t("squad.modalClubSeason")}
                     {stat.club_name ? ` · ${stat.club_name}` : ""}
                   </p>
                 </div>
                 <div className="grid grid-cols-4 gap-px bg-line rounded-lg overflow-hidden border border-line">
-                  <Stat label="Matchs" value={stat.appearances ?? 0} />
-                  <Stat label="Buts" value={stat.goals ?? 0} accent={stat.goals > 0} />
-                  <Stat label="Passes D." value={stat.assists ?? 0} />
+                  <Stat label={t("squad.label.apps")} value={stat.appearances ?? 0} />
+                  <Stat label={t("squad.label.goals")} value={stat.goals ?? 0} accent={stat.goals > 0} />
+                  <Stat label={t("squad.label.assists")} value={stat.assists ?? 0} />
                   <Stat
-                    label="Note moy."
+                    label={t("squad.label.rating")}
                     value={stat.rating != null ? Number(stat.rating).toFixed(2) : "–"}
                   />
                 </div>
                 <p className="text-[10px] text-muted mt-2">
-                  {stat.league_name ? `${stat.league_name} · ` : ""}toutes compétitions cette saison
+                  {stat.league_name ? `${stat.league_name} · ` : ""}{t("squad.modalAllComps")}
                 </p>
               </div>
             )}
@@ -216,26 +231,29 @@ export default function PlayerModal({ player, stat, onClose }) {
             {/* Biographie — chaîne unique ou tableau de paragraphes */}
             <div className="border-t border-line pt-5">
               <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-3">
-                Biographie
+                {t("squad.modalBio")}
               </p>
-              {Array.isArray(player.bio) ? (
-                <div className="space-y-3">
-                  {player.bio.map((para, i) => (
-                    <p key={i} className="text-ink leading-relaxed">
-                      {para}
-                    </p>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-ink leading-relaxed">{player.bio}</p>
-              )}
+              {(() => {
+                const bio = lang === "en" && player.bioEn ? player.bioEn : player.bio;
+                return Array.isArray(bio) ? (
+                  <div className="space-y-3">
+                    {bio.map((para, i) => (
+                      <p key={i} className="text-ink leading-relaxed">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-ink leading-relaxed">{bio}</p>
+                );
+              })()}
             </div>
 
             {/* Réseaux sociaux — joueurs uniquement */}
             {!isStaff && (
               <div className="border-t border-line pt-5">
                 <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-3">
-                  Suivre
+                  {t("squad.modalFollow")}
                 </p>
                 <SocialIcons slug={player.slug} />
               </div>
@@ -250,7 +268,7 @@ export default function PlayerModal({ player, stat, onClose }) {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                 </svg>
-                Partager cette fiche
+                {t("squad.modalShareProfile")}
               </button>
             )}
           </div>

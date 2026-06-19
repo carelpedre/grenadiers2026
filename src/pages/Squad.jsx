@@ -14,7 +14,8 @@ import { CountUpNumber, fadeUp, stagger } from "../lib/motion";
 export default function Squad() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [statsById, setStatsById] = useState(null);
-  const { t } = useT();
+  const { t, lang } = useT();
+  const pick = (frVal, enVal) => (lang === "en" ? enVal : frVal);
 
   // Stats de club (logo + saison) chargées depuis Supabase, indexées par apiId.
   // No-op gracieux si le backend est absent : les fiches gardent les données
@@ -142,19 +143,19 @@ export default function Squad() {
           <LeaderCard
             role={t("squad.role.headCoach")}
             name={squadStats.coach}
-            detail="France · En poste depuis mars 2024"
-            note="Adjoint de Rigobert Song avec le Cameroun à la Coupe du Monde 2022 au Qatar et à la Coupe d'Afrique des Nations 2024. Le terrain mondial ne lui est pas étranger."
+            detail={pick(squadStats.coachDetail, squadStats.coachDetailEn)}
+            note={pick(squadStats.coachNote, squadStats.coachNoteEn)}
             photo={squadStats.coachPhoto}
-            photoLabel="Sébastien Migné · Sélectionneur"
+            photoLabel={`${squadStats.coach} · ${t("squad.role.headCoach")}`}
           />
           <LeaderCard
             role={t("squad.role.captain")}
             name={squadStats.captain}
-            detail="Gardien · SC Bastia"
-            note="Le gardien vétéran qui porte le brassard depuis le retour des Grenadiers sur la scène mondiale."
+            detail={pick(squadStats.captainDetail, squadStats.captainDetailEn)}
+            note={pick(squadStats.captainNote, squadStats.captainNoteEn)}
             accent
             photo={squadStats.captainPhoto}
-            photoLabel="Johny Placide · Capitaine"
+            photoLabel={`${squadStats.captain} · ${t("squad.role.captain")}`}
           />
         </section>
 
@@ -342,7 +343,15 @@ export default function Squad() {
                 {t("squad.aboutSelection")}
               </p>
               <p className="text-ink text-base md:text-lg leading-relaxed max-w-prose text-left">
-                Liste définitive des <strong>26 joueurs</strong> annoncée par le sélectionneur Sébastien Migné le <strong>{squadStats.announcedDate}</strong>. Âge moyen <strong>26 ans</strong>. Doyen <strong>Johny Placide</strong> (38), cadet <strong>Keeto Thermoncy</strong> (20). Les joueurs évoluent dans des clubs en France, en Angleterre, en Allemagne, en Suisse, en Belgique, aux Pays-Bas, au Portugal, en Slovaquie, en Hongrie, en Turquie, en Iran, en Équateur, au Canada, aux États-Unis et en Haïti — <strong>15 pays</strong> au total. Un seul joueur, Woodensky Pierre du Violette Athletic Club, évolue à Port-au-Prince. Les vingt-cinq autres jouent à l'étranger.
+                {lang === "en" ? (
+                  <>
+                    Final 26-man list announced by head coach Sébastien Migné on <strong>{squadStats.announcedDateEn}</strong>. Average age <strong>26</strong>. Oldest <strong>Johny Placide</strong> (38), youngest <strong>Keeto Thermoncy</strong> (20). The players turn out for clubs in France, England, Germany, Switzerland, Belgium, the Netherlands, Portugal, Slovakia, Hungary, Turkey, Iran, Ecuador, Canada, the United States, and Haiti, <strong>15 countries</strong> in all. Just one player, Woodensky Pierre of Violette Athletic Club, plays in Port-au-Prince. The other twenty-five play abroad.
+                  </>
+                ) : (
+                  <>
+                    Liste définitive des <strong>26 joueurs</strong> annoncée par le sélectionneur Sébastien Migné le <strong>{squadStats.announcedDate}</strong>. Âge moyen <strong>26 ans</strong>. Doyen <strong>Johny Placide</strong> (38), cadet <strong>Keeto Thermoncy</strong> (20). Les joueurs évoluent dans des clubs en France, en Angleterre, en Allemagne, en Suisse, en Belgique, aux Pays-Bas, au Portugal, en Slovaquie, en Hongrie, en Turquie, en Iran, en Équateur, au Canada, aux États-Unis et en Haïti, <strong>15 pays</strong> au total. Un seul joueur, Woodensky Pierre du Violette Athletic Club, évolue à Port-au-Prince. Les vingt-cinq autres jouent à l'étranger.
+                  </>
+                )}
               </p>
             </div>
 
@@ -354,8 +363,8 @@ export default function Squad() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-5 text-sm md:text-base text-muted">
                 <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 – 2 – 2</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">{t("squad.winsDrawsLosses")}</span></span>
                 <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">20 : 13</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">{t("squad.goalsForAgainst")}</span></span>
-                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 buts</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Nazon, meilleur buteur</span></span>
-                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">3 passes</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Jean-Jacques, meilleur passeur</span></span>
+                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 buts</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Nazon, {t("squad.bestScorer")}</span></span>
+                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">3 passes</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Jean-Jacques, {t("squad.bestPasser")}</span></span>
               </div>
             </div>
           </div>
@@ -590,21 +599,27 @@ function StaffGroup({ anchorId, title, staff, onStaffClick }) {
 
 // Derived stat tag — objective achievements during qualification.
 // Subjective "Key Player" tags avoided; only stats and roles.
-function derivedStatTag(slug) {
+function derivedStatTag(slug, t) {
   switch (slug) {
     case "duckens-nazon":
-      return { label: "6 buts en qualif.", short: "6 buts" };
+      return {
+        label: t("squad.goalsInQualif").replace("{n}", 6),
+        short: t("squad.goalsShort").replace("{n}", 6),
+      };
     case "danley-jean-jacques":
-      return { label: "3 passes en qualif.", short: "3 passes" };
+      return {
+        label: t("squad.assistsInQualif").replace("{n}", 3),
+        short: t("squad.assistsShort").replace("{n}", 3),
+      };
     default:
       return null;
   }
 }
 
 function PlayerCard({ player, stat, onClick }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const isCaptain = player.captain;
-  const statTag = derivedStatTag(player.slug);
+  const statTag = derivedStatTag(player.slug, t);
   // Local crest override (player.clubLogo) wins over the stats-API logo.
   const clubLogo = !player.isStaff ? (player.clubLogo || stat?.club_logo) : null;
 
@@ -693,7 +708,7 @@ function PlayerCard({ player, stat, onClick }) {
               />
             )}
             <span className="truncate">
-              {player.isStaff ? player.role : `${player.club} · ${player.clubCountry}`}
+              {player.isStaff ? (lang === "en" && player.roleEn ? player.roleEn : player.role) : `${player.club} · ${player.clubCountry}`}
             </span>
           </p>
         </div>

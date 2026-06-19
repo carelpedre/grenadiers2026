@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { composeCardBlob, saveImageSync, sharePngSync, imageToDataURL } from "../lib/shareCard";
+import { useT } from "../lib/i18n";
+
+// Map stored French position label → shared role key for t("onze.role.*").
+const POS_ROLE = { Gardien: "GK", "Défenseur": "DEF", Milieu: "MID", Attaquant: "FWD" };
 
 // ╔═══════════════════════════════════════════════════════════════════════╗
 // ║  PLAYER SHARE CARD                                                     ║
@@ -43,16 +47,30 @@ function paintPlayerBg(ctx, w, h) {
 }
 
 export default function PlayerShareCard({ player, onClose }) {
+  const { t } = useT();
   const [copyStatus, setCopyStatus] = useState("idle");
   const [file, setFile] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState(null);
   const [ready, setReady] = useState(false);
 
+  // Resolved labels baked into the SVG card (kept out of the pure builders).
+  const roleKey = POS_ROLE[player.positionFull];
+  const labels = {
+    position: roleKey ? t(`onze.role.${roleKey}`) : t("squad.playerGeneric"),
+    captain: t("squad.role.captain"),
+    star: t("squad.starTag"),
+    caps: t("squad.label.caps"),
+    goals: t("squad.label.goals"),
+    age: t("squad.ageUnit"),
+    height: t("squad.label.height"),
+    byline: t("share.byline"),
+  };
+
   const playerUrl = `https://grenadiers2026.com/squad`;
   const FILENAME = `${player.slug || "grenadier"}-grenadiers2026.png`;
   const SHARE_META = {
     title: `${player.name} · Grenadiers 2026`,
-    text: `${player.name} · Haïti à la Coupe du Monde 2026 🇭🇹`,
+    text: t("share.metaText").replace("{name}", player.name),
     url: playerUrl,
   };
 
@@ -77,7 +95,7 @@ export default function PlayerShareCard({ player, onClose }) {
           photo: photoDataUrl
             ? { dataUrl: photoDataUrl, x: 0, y: 0, w: W, h: PHOTO_H, focusY: 0.04 }
             : null,
-          overlaySvg: buildOverlayString(player, !!photoDataUrl),
+          overlaySvg: buildOverlayString(player, !!photoDataUrl, labels),
         });
         if (cancelled || !blob) return;
         objUrl = URL.createObjectURL(blob);
@@ -98,7 +116,7 @@ export default function PlayerShareCard({ player, onClose }) {
 
   function handleDownload() {
     if (!file && !downloadUrl) {
-      alert("Image en cours de génération · réessayez dans un instant.");
+      alert(t("share.generating"));
       return;
     }
     saveImageSync(file, downloadUrl, { filename: FILENAME });
@@ -125,7 +143,7 @@ export default function PlayerShareCard({ player, onClose }) {
         <button
           onClick={onClose}
           className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-ink/60 hover:bg-ink/80 text-bg flex items-center justify-center backdrop-blur-sm"
-          aria-label="Fermer"
+          aria-label={t("onze.close")}
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -134,7 +152,7 @@ export default function PlayerShareCard({ player, onClose }) {
 
         {/* Scrollable content (preview) */}
         <div className="overflow-y-auto p-5 min-h-0">
-          <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-1">Carte de partage</p>
+          <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-1">{t("share.title")}</p>
           <h2 className="font-display text-xl mb-4">{player.name}</h2>
 
           <div className="rounded-lg overflow-hidden border border-line">
@@ -142,7 +160,7 @@ export default function PlayerShareCard({ player, onClose }) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox={`0 0 ${W} ${H}`}
               className="w-full h-auto block"
-              dangerouslySetInnerHTML={{ __html: buildSvgInner(player, player.photo) }}
+              dangerouslySetInnerHTML={{ __html: buildSvgInner(player, player.photo, labels) }}
             />
           </div>
         </div>
@@ -158,18 +176,18 @@ export default function PlayerShareCard({ player, onClose }) {
               disabled={!ready}
               className="px-4 py-3 bg-haiti-blue hover:bg-haiti-blue-dark disabled:opacity-50 text-bg font-semibold rounded-full text-sm transition-colors"
             >
-              {ready ? "↓ Enregistrer" : "…"}
+              {ready ? t("share.save") : "…"}
             </button>
             <button
               onClick={handleShare}
               disabled={!ready}
               className="px-4 py-3 bg-haiti-red hover:bg-haiti-red-dark disabled:opacity-50 text-bg font-semibold rounded-full text-sm transition-colors"
             >
-              {copyStatus === "copied" ? "Copié ✓" : "Partager"}
+              {copyStatus === "copied" ? t("share.copied") : t("share.share")}
             </button>
           </div>
           <p className="text-xs text-muted text-center mt-2">
-            « Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…
+            {t("share.hint")}
           </p>
         </div>
       </div>
@@ -178,7 +196,7 @@ export default function PlayerShareCard({ player, onClose }) {
 }
 
 // ─── SVG content (used both for preview render and PNG conversion) ───
-function buildSvgInner(player, photoSrc) {
+function buildSvgInner(player, photoSrc, labels) {
   const isStar = player.star;
   const isCaptain = player.captain;
   const accent = isStar || isCaptain;
@@ -217,13 +235,13 @@ function buildSvgInner(player, photoSrc) {
     <!-- Position pill -->
     <g transform="translate(60, 60)">
       <rect width="220" height="46" rx="23" fill="${BG}" fill-opacity="0.15"/>
-      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((player.positionFull || "Joueur").toUpperCase())}</text>
+      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml(labels.position.toUpperCase())}</text>
     </g>
 
     ${accent ? `
       <g transform="translate(${W - 260}, 60)">
         <rect width="200" height="46" rx="23" fill="${accentColor}"/>
-        <text x="100" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${isCaptain ? "CAPITAINE" : "CADRE"}</text>
+        <text x="100" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((isCaptain ? labels.captain : labels.star).toUpperCase())}</text>
       </g>
     ` : ""}
 
@@ -247,25 +265,25 @@ function buildSvgInner(player, photoSrc) {
       ${player.caps != null ? `
         <g transform="translate(0, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${escapeXml(player.caps)}</text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">SÉLECTIONS</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.caps.toUpperCase())}</text>
         </g>
       ` : ""}
       ${(player.goals != null && player.goals > 0) ? `
         <g transform="translate(260, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${HAITI_RED}">${escapeXml(player.goals)}</text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">BUTS</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.goals.toUpperCase())}</text>
         </g>
       ` : ""}
       ${player.age ? `
         <g transform="translate(460, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${escapeXml(player.age)}</text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">ANS</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.age.toUpperCase())}</text>
         </g>
       ` : ""}
       ${player.height ? `
         <g transform="translate(660, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${(player.height / 100).toFixed(2)}<tspan font-size="40" dx="6">m</tspan></text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">TAILLE</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.height.toUpperCase())}</text>
         </g>
       ` : ""}
     </g>
@@ -276,14 +294,14 @@ function buildSvgInner(player, photoSrc) {
     <rect x="${W * 0.66}" y="${H - 70}" width="${W * 0.34}" height="70" fill="${GOLD}"/>
 
     <text x="60" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="${BG}" letter-spacing="2">GRENADIERS2026.COM</text>
-    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">Un projet de Carel Pedre</text>
+    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">${escapeXml(labels.byline)}</text>
   `;
 }
 
 // VECTOR-ONLY overlay used for the canvas export (no <image>, no full bg rect —
 // the gradient bg + photo are painted directly on the canvas). This is what
 // keeps the iOS canvas origin-clean so toBlob() succeeds.
-function buildOverlayInner(player, hasPhoto) {
+function buildOverlayInner(player, hasPhoto, labels) {
   const isStar = player.star;
   const isCaptain = player.captain;
   const accent = isStar || isCaptain;
@@ -307,13 +325,13 @@ function buildOverlayInner(player, hasPhoto) {
     <!-- Position pill -->
     <g transform="translate(60, 60)">
       <rect width="220" height="46" rx="23" fill="${BG}" fill-opacity="0.15"/>
-      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((player.positionFull || "Joueur").toUpperCase())}</text>
+      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml(labels.position.toUpperCase())}</text>
     </g>
 
     ${accent ? `
       <g transform="translate(${W - 260}, 60)">
         <rect width="200" height="46" rx="23" fill="${accentColor}"/>
-        <text x="100" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${isCaptain ? "CAPITAINE" : "CADRE"}</text>
+        <text x="100" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((isCaptain ? labels.captain : labels.star).toUpperCase())}</text>
       </g>
     ` : ""}
 
@@ -333,25 +351,25 @@ function buildOverlayInner(player, hasPhoto) {
       ${player.caps != null ? `
         <g transform="translate(0, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${escapeXml(player.caps)}</text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">SÉLECTIONS</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.caps.toUpperCase())}</text>
         </g>
       ` : ""}
       ${(player.goals != null && player.goals > 0) ? `
         <g transform="translate(260, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${HAITI_RED}">${escapeXml(player.goals)}</text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">BUTS</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.goals.toUpperCase())}</text>
         </g>
       ` : ""}
       ${player.age ? `
         <g transform="translate(460, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${escapeXml(player.age)}</text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">ANS</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.age.toUpperCase())}</text>
         </g>
       ` : ""}
       ${player.height ? `
         <g transform="translate(660, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${(player.height / 100).toFixed(2)}<tspan font-size="40" dx="6">m</tspan></text>
-          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">TAILLE</text>
+          <text y="34" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="700" fill="${GOLD}" letter-spacing="1.5">${escapeXml(labels.height.toUpperCase())}</text>
         </g>
       ` : ""}
     </g>
@@ -361,14 +379,14 @@ function buildOverlayInner(player, hasPhoto) {
     <rect x="${W * 0.66}" y="${H - 70}" width="${W * 0.34}" height="70" fill="${GOLD}"/>
 
     <text x="60" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="22" font-weight="800" fill="${BG}" letter-spacing="2">GRENADIERS2026.COM</text>
-    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">Un projet de Carel Pedre</text>
+    <text x="${W - 60}" y="${H - 27}" font-family="Plus Jakarta Sans, sans-serif" font-size="18" font-weight="600" fill="${BG}" text-anchor="end" opacity="0.85">${escapeXml(labels.byline)}</text>
   `;
 }
 
-function buildOverlayString(player, hasPhoto) {
+function buildOverlayString(player, hasPhoto, labels) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-${buildOverlayInner(player, hasPhoto)}
+${buildOverlayInner(player, hasPhoto, labels)}
 </svg>`;
 }
 

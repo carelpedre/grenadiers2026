@@ -298,3 +298,50 @@ Devine le Grenadier:
 - `devine.answerPrefix` · fr "Le Grenadier mystère était"
 - `devine.share` · fr "Partager mon résultat"
 - `devine.tomorrow` · fr "Un nouveau joueur mystère demain."
+
+## Player modal + squad content (Phase 2 content)
+
+translations.js keys (ht = French placeholder):
+- `squad.starTag` · fr "Cadre"
+- `squad.playerGeneric` · fr "Joueur"
+- `squad.label.age` · fr "Âge"
+- `squad.label.goalsCaps` · fr "Buts (sél.)"
+- `squad.label.bornOn` · fr "Né le"
+- `squad.label.height` · fr "Taille"
+- `squad.label.debut` · fr "Première sélection"
+- `squad.label.positions` · fr "Postes"
+- `squad.label.apps` · fr "Matchs"
+- `squad.label.assists` · fr "Passes D."
+- `squad.label.rating` · fr "Note moy."
+- `squad.modalClubSeason` · fr "En club cette saison"
+- `squad.modalAllComps` · fr "toutes compétitions cette saison"
+- `squad.modalBio` · fr "Biographie"
+- `squad.modalFollow` · fr "Suivre"
+- `squad.modalShareProfile` · fr "Partager cette fiche"
+- `squad.modalCapsInfoLabel` · fr "À propos du nombre de sélections"
+- `squad.modalCapsInfoText` · fr "Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon."
+- `squad.bestScorer` · fr "meilleur buteur"
+- `squad.bestPasser` · fr "meilleur passeur"
+- `squad.goalsInQualif` · fr "{n} buts en qualif." (keep {n})
+- `squad.goalsShort` · fr "{n} buts" (keep {n})
+- `squad.assistsInQualif` · fr "{n} passes en qualif." (keep {n})
+- `squad.assistsShort` · fr "{n} passes" (keep {n})
+- `share.title` · fr "Carte de partage"
+- `share.generating` · fr "Image en cours de génération · réessayez dans un instant."
+- `share.save` · fr "↓ Enregistrer"
+- `share.copied` · fr "Copié ✓"
+- `share.share` · fr "Partager"
+- `share.hint` · fr "« Enregistrer » → Enregistrer l'image (Photos). « Partager » → stories, Messages…"
+- `share.byline` · fr "Un projet de Carel Pedre"
+- `share.metaText` · fr "{name} · Haïti à la Coupe du Monde 2026 🇭🇹" (keep {name})
+
+squad.js data fields (have fr + En; need a Creole sibling later):
+- `squadStats.coachDetail` / `coachNote` (coach leader card)
+- `squadStats.captainDetail` / `captainNote` (captain leader card)
+- `squadStats.announcedDate` (used in roster summary)
+- `staff[].role` (8 entries; English sibling `roleEn` added, Creole pending)
+
+PENDING English + Creole content (NOT yet translated, render French via fallback):
+- `player.bio` for all 26 players → needs `bioEn` (modal already selects `bioEn` when present)
+- `staff[].bio` for all 8 staff → needs `bioEn`
+- forfait `player.statusLabel` / `player.statusNote` → need `statusLabelEn` / `statusNoteEn` (modal already selects them when present)
