@@ -10,9 +10,9 @@ import { useT } from "../lib/i18n";
 
 // ── Opponents (in order). jersey = keeper shirt color when you shoot. ──
 const OPPONENTS = [
-  { key: "ecosse", name: "Écosse", nameArt: "l'Écosse", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", jersey: "#1F3A68", memoryBias: 0.15 },
-  { key: "bresil", name: "Brésil", nameArt: "le Brésil", flag: "🇧🇷", jersey: "#F4D000", memoryBias: 0.35 },
-  { key: "maroc", name: "Maroc", nameArt: "le Maroc", flag: "🇲🇦", jersey: "#C1272D", memoryBias: 0.55 },
+  { key: "ecosse", name: "Écosse", nameArt: "l'Écosse", nameArtEn: "Scotland", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", jersey: "#1F3A68", memoryBias: 0.15 },
+  { key: "bresil", name: "Brésil", nameArt: "le Brésil", nameArtEn: "Brazil", flag: "🇧🇷", jersey: "#F4D000", memoryBias: 0.35 },
+  { key: "maroc", name: "Maroc", nameArt: "le Maroc", nameArtEn: "Morocco", flag: "🇲🇦", jersey: "#C1272D", memoryBias: 0.55 },
 ];
 
 // ── Zones: id = row*3 + col. 0..2 high (left/center/right), 3..5 low. ──
@@ -111,7 +111,8 @@ async function copyText(text) {
 }
 
 export default function Penalty() {
-  const { t } = useT();
+  const { t, lang } = useT();
+  const oppArt = (o) => (lang === "en" ? o.nameArtEn : o.nameArt);
   const reduced = useMemo(
     () =>
       typeof window !== "undefined" &&
@@ -478,7 +479,7 @@ export default function Penalty() {
               {phase === "won" && (
                 <ResultPanel
                   title={t("penalty.winTitle")}
-                  text={t("penalty.winText").replace("{opponent}", opp.nameArt)}
+                  text={t("penalty.winText").replace("{opponent}", oppArt(opp))}
                   cta={t("penalty.continue")}
                   onCta={nextOpponent}
                   celebrate={!reduced}
@@ -488,7 +489,7 @@ export default function Penalty() {
               {phase === "lost" && (
                 <ResultPanel
                   title={t("penalty.lostTitle")}
-                  text={t("penalty.lostText").replace("{opponent}", opp.nameArt)}
+                  text={t("penalty.lostText").replace("{opponent}", oppArt(opp))}
                   cta={t("penalty.replay")}
                   onCta={restartOpponent}
                 />
