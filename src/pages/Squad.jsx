@@ -80,7 +80,7 @@ export default function Squad() {
         <div className="absolute inset-0">
           <ImagePlaceholder
             src="/images/photos/squad-group-2026.jpg"
-            label="La sélection d'Haïti · Coupe du Monde 2026"
+            label={t("squad.heroEyebrow")}
             rounded={false}
             className="w-full h-full"
           />
@@ -99,7 +99,7 @@ export default function Squad() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-haiti-red text-xs uppercase tracking-[0.25em] font-bold mb-5"
           >
-            La sélection d'Haïti · Coupe du Monde 2026
+            {t("squad.heroEyebrow")}
           </motion.p>
           <motion.h1
             className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-7"
@@ -107,8 +107,8 @@ export default function Squad() {
             animate="show"
             variants={stagger(0.08, 0.3)}
           >
-            <motion.span variants={fadeUp} className="block">Joueurs et staff.</motion.span>
-            <motion.span variants={fadeUp} className="block text-haiti-red">Une seule mission.</motion.span>
+            <motion.span variants={fadeUp} className="block">{t("squad.heroTitle1")}</motion.span>
+            <motion.span variants={fadeUp} className="block text-haiti-red">{t("squad.heroTitle2")}</motion.span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -116,8 +116,7 @@ export default function Squad() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-bg/85 text-lg md:text-xl max-w-2xl leading-relaxed"
           >
-            Cinquante-deux ans après Munich, les Grenadiers retrouvent la Coupe du Monde de la FIFA.
-            Les 26 joueurs retenus, dévoilés par la Fédération Haïtienne de Football le 16 mai 2026.
+            {t("squad.heroSubtext")}
           </motion.p>
         </div>
       </section>
@@ -125,15 +124,15 @@ export default function Squad() {
       {/* ─── STICKY POSITION NAV ──────────────────────────────────────── */}
       <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-line">
         <div className="max-w-content mx-auto px-5 py-2.5 flex items-center gap-1 overflow-x-auto">
-          <a href="#GK" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Gardiens <span className="text-muted">({activeGK.length})</span></a>
-          <a href="#DF" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Défenseurs <span className="text-muted">({activeDF.length})</span></a>
-          <a href="#MT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Milieux <span className="text-muted">({activeMT.length})</span></a>
-          <a href="#AT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Attaquants <span className="text-muted">({activeAT.length})</span></a>
+          <a href="#GK" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">{t("squad.navGoalkeepers")} <span className="text-muted">({activeGK.length})</span></a>
+          <a href="#DF" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">{t("squad.section.defenders")} <span className="text-muted">({activeDF.length})</span></a>
+          <a href="#MT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">{t("squad.navMidfielders")} <span className="text-muted">({activeMT.length})</span></a>
+          <a href="#AT" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">{t("squad.section.forwards")} <span className="text-muted">({activeAT.length})</span></a>
           {forfaits.length > 0 && (
-            <a href="#forfaits" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Forfaits <span className="text-muted">({forfaits.length})</span></a>
+            <a href="#forfaits" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">{t("squad.forfaits")} <span className="text-muted">({forfaits.length})</span></a>
           )}
           <span className="text-line shrink-0">·</span>
-          <a href="#staff-technique" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">Staff technique <span className="text-muted">({staff.length})</span></a>
+          <a href="#staff-technique" className="shrink-0 px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold text-ink hover:bg-bg transition-colors uppercase tracking-wider">{t("squad.staff")} <span className="text-muted">({staff.length})</span></a>
         </div>
       </nav>
 
@@ -141,7 +140,7 @@ export default function Squad() {
         {/* Coach + Captain card */}
         <section id="staff" className="grid md:grid-cols-2 gap-4 scroll-mt-20">
           <LeaderCard
-            role="Sélectionneur"
+            role={t("squad.role.headCoach")}
             name={squadStats.coach}
             detail="France · En poste depuis mars 2024"
             note="Adjoint de Rigobert Song avec le Cameroun à la Coupe du Monde 2022 au Qatar et à la Coupe d'Afrique des Nations 2024. Le terrain mondial ne lui est pas étranger."
@@ -149,7 +148,7 @@ export default function Squad() {
             photoLabel="Sébastien Migné · Sélectionneur"
           />
           <LeaderCard
-            role="Capitaine"
+            role={t("squad.role.captain")}
             name={squadStats.captain}
             detail="Gardien · SC Bastia"
             note="Le gardien vétéran qui porte le brassard depuis le retour des Grenadiers sur la scène mondiale."
@@ -160,10 +159,10 @@ export default function Squad() {
         </section>
 
         {/* Position groups */}
-        <PositionGroup anchorId="GK" title="Gardiens de but" position="GB" positionFull="Gardien" count={activeGK.length} players={activeGK} onPlayerClick={openPlayer} statFor={statFor} />
-        <PositionGroup anchorId="DF" title="Défenseurs" position="DF" positionFull="Défenseur" count={activeDF.length} players={activeDF} onPlayerClick={openPlayer} statFor={statFor} />
-        <PositionGroup anchorId="MT" title="Milieux de terrain" position="MT" positionFull="Milieu" count={activeMT.length} players={activeMT} onPlayerClick={openPlayer} statFor={statFor} />
-        <PositionGroup anchorId="AT" title="Attaquants" position="AT" positionFull="Attaquant" count={activeAT.length} players={activeAT} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="GK" title={t("squad.section.goalkeepers")} position="GB" positionFull="Gardien" count={activeGK.length} players={activeGK} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="DF" title={t("squad.section.defenders")} position="DF" positionFull="Défenseur" count={activeDF.length} players={activeDF} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="MT" title={t("squad.section.midfielders")} position="MT" positionFull="Milieu" count={activeMT.length} players={activeMT} onPlayerClick={openPlayer} statFor={statFor} />
+        <PositionGroup anchorId="AT" title={t("squad.section.forwards")} position="AT" positionFull="Attaquant" count={activeAT.length} players={activeAT} onPlayerClick={openPlayer} statFor={statFor} />
 
         {forfaits.length > 0 && (
           <ForfaitsSection players={forfaits} onPlayerClick={openPlayer} statFor={statFor} />
@@ -179,9 +178,9 @@ export default function Squad() {
         {/* The kit */}
         <section className="space-y-6">
           <div className="border-b border-line pb-3">
-            <h2 className="font-display text-2xl md:text-3xl">Le maillot</h2>
+            <h2 className="font-display text-2xl md:text-3xl">{t("squad.kitTitle")}</h2>
             <p className="text-muted text-sm mt-1">
-              Trois tenues signées Saeta. Une seule signature : l'histoire d'Haïti, cousue dans le tissu.
+              {t("squad.kitSubtext")}
             </p>
           </div>
 
@@ -189,47 +188,46 @@ export default function Squad() {
             <ImagePlaceholder
               src="/images/photos/kit-2026.jpg"
               aspect="21/9"
-              label="Maillots officiels de la Coupe du Monde 2026 · Saeta"
+              label={t("squad.kitImageLabel")}
               rounded={false}
             />
             <div className="p-6 md:p-8 space-y-5">
               <p className="text-ink leading-relaxed">
-                Chaque centimètre du design original, conçu par Saeta, raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière.
+                {t("squad.kitIntro")}
               </p>
 
               <div className="grid md:grid-cols-3 gap-4">
                 <KitDetail
-                  label="Côté droit du torse, en bas"
+                  label={t("squad.kit1Label")}
                   title="Vertières, 1803"
-                  body="Hommage aux combattants de la Bataille de Vertières, où les troupes indigènes ont défait l'armée napoléonienne, scellant l'indépendance d'Haïti et donnant naissance à la première République noire du monde moderne."
+                  body={t("squad.kit1Body")}
                 />
                 <KitDetail
-                  label="Dissimulé sur tout le devant"
-                  title={`« L'union fait la force »`}
-                  body="La devise nationale, inscrite en lettres minuscules sur tout le buste du maillot. Lisible uniquement de très près. Un message que les joueurs portent en eux, même invisible à distance."
+                  label={t("squad.kit2Label")}
+                  title={t("squad.kit2Title")}
+                  body={t("squad.kit2Body")}
                 />
                 <KitDetail
-                  label="Sur le dos"
-                  title="Montagnes et palmiers"
-                  body="La silhouette d'Ayiti elle-même : les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs."
+                  label={t("squad.kit3Label")}
+                  title={t("squad.kit3Title")}
+                  body={t("squad.kit3Body")}
                 />
               </div>
 
               <p className="text-ink leading-relaxed">
-                <strong className="text-ink">Mise à jour, 9 juin 2026 :</strong>{" "}
+                <strong className="text-ink">{t("squad.kitUpdatePrefix")}</strong>{" "}
                 <Link
                   to="/journal/maillot-grenadiers-fifa-modifications"
                   className="text-haiti-blue underline underline-offset-2 hover:text-haiti-red transition-colors"
                 >
-                  à la demande de la FIFA
+                  {t("squad.kitUpdateLink")}
                 </Link>
-                , certains éléments visuels du design original ont été ajustés avant le début de la compétition. Saeta, qui défend l'esprit de sa création, a appliqué les modifications exigées, et c'est cette version que les Grenadiers porteront pendant la Coupe du Monde.
+                {t("squad.kitUpdateSuffix")}
               </p>
 
               <div className="pt-4 border-t border-line flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <p className="text-sm text-muted leading-relaxed">
-                  Fabriqué par <strong className="text-ink">Saeta</strong>, partenaire de la
-                  Fédération Haïtienne de Football depuis 2014.
+                  {t("squad.kitMadeByPrefix")} <strong className="text-ink">Saeta</strong>{t("squad.kitMadeBySuffix")}
                 </p>
                 <a
                   href="https://saeta.us/"
@@ -237,7 +235,7 @@ export default function Squad() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 shrink-0 px-6 py-3 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors"
                 >
-                  Acheter le maillot →
+                  {t("squad.kitBuy")} →
                 </a>
               </div>
             </div>
@@ -247,9 +245,9 @@ export default function Squad() {
         {/* Training camp */}
         <section className="space-y-6">
           <div className="border-b border-line pb-3">
-            <h2 className="font-display text-2xl md:text-3xl">Centres de préparation</h2>
+            <h2 className="font-display text-2xl md:text-3xl">{t("squad.campTitle")}</h2>
             <p className="text-muted text-sm mt-1">
-              Là où Les Grenadiers préparent la Coupe du Monde — deux phases, deux états d'esprit.
+              {t("squad.campSubtext")}
             </p>
           </div>
 
@@ -301,13 +299,13 @@ export default function Squad() {
               <div className="grid md:grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="text-xs uppercase tracking-wider text-bg/60 font-semibold mb-1">
-                    Hébergement
+                    {t("squad.lodging")}
                   </p>
                   <p className="text-bg">{trainingCamp.phase2.accommodation}</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-bg/60 font-semibold mb-1">
-                    Choisi par
+                    {t("squad.selectedBy")}
                   </p>
                   <p className="text-bg">{trainingCamp.phase2.selectedBy}</p>
                 </div>
@@ -318,7 +316,7 @@ export default function Squad() {
           {/* Local ties */}
           {trainingCamp.phase2.localTies && trainingCamp.phase2.localTies.length > 0 && (
             <div>
-              <h3 className="font-display text-lg mb-3">Liens locaux avec le camp de base</h3>
+              <h3 className="font-display text-lg mb-3">{t("squad.localTies")}</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {trainingCamp.phase2.localTies.map((t) => (
                   <div key={t.player} className="bg-white border border-line rounded-lg p-5">
@@ -341,7 +339,7 @@ export default function Squad() {
             {/* About this selection */}
             <div>
               <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-6">
-                À propos de cette sélection
+                {t("squad.aboutSelection")}
               </p>
               <p className="text-ink text-base md:text-lg leading-relaxed max-w-prose text-left">
                 Liste définitive des <strong>26 joueurs</strong> annoncée par le sélectionneur Sébastien Migné le <strong>{squadStats.announcedDate}</strong>. Âge moyen <strong>26 ans</strong>. Doyen <strong>Johny Placide</strong> (38), cadet <strong>Keeto Thermoncy</strong> (20). Les joueurs évoluent dans des clubs en France, en Angleterre, en Allemagne, en Suisse, en Belgique, aux Pays-Bas, au Portugal, en Slovaquie, en Hongrie, en Turquie, en Iran, en Équateur, au Canada, aux États-Unis et en Haïti — <strong>15 pays</strong> au total. Un seul joueur, Woodensky Pierre du Violette Athletic Club, évolue à Port-au-Prince. Les vingt-cinq autres jouent à l'étranger.
@@ -351,11 +349,11 @@ export default function Squad() {
             {/* Qualification record */}
             <div className="pt-8 border-t border-line lg:pt-0 lg:border-t-0 lg:border-l lg:border-line lg:pl-10">
               <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-5">
-                Bilan des éliminatoires · CONCACAF · sept. 2024 — nov. 2025
+                {t("squad.qualifRecordTitle")}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-5 text-sm md:text-base text-muted">
-                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 – 2 – 2</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Victoires · Nuls · Défaites</span></span>
-                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">20 : 13</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Buts pour · contre</span></span>
+                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 – 2 – 2</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">{t("squad.winsDrawsLosses")}</span></span>
+                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">20 : 13</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">{t("squad.goalsForAgainst")}</span></span>
                 <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 buts</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Nazon, meilleur buteur</span></span>
                 <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">3 passes</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Jean-Jacques, meilleur passeur</span></span>
               </div>
@@ -366,11 +364,11 @@ export default function Squad() {
         {/* ─── RANKINGS — data-driven top-5s from squad.js ───────────── */}
         <section className="bg-white border border-line rounded-lg p-6 md:p-10">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-6">
-            Classements de la sélection
+            {t("squad.rankingsTitle")}
           </p>
           <div className="grid gap-8 md:gap-12 md:grid-cols-2">
-            <RankingList title="Meilleurs buteurs" players={topScorers} statKey="goals" unit="buts" onSelect={openPlayer} />
-            <RankingList title="Plus sélectionnés" players={mostCapped} statKey="caps" unit="sél." onSelect={openPlayer} />
+            <RankingList title={t("squad.topScorers")} players={topScorers} statKey="goals" unit={t("squad.goalsUnit")} onSelect={openPlayer} />
+            <RankingList title={t("squad.mostCapped")} players={mostCapped} statKey="caps" unit={t("squad.capsUnit")} onSelect={openPlayer} />
           </div>
         </section>
 
@@ -382,24 +380,24 @@ export default function Squad() {
           </div>
           <div className="relative max-w-3xl">
             <p className="text-haiti-red text-xs uppercase tracking-[0.25em] font-bold mb-4">
-              Prochaine étape · 13 juin 2026
+              {t("squad.ctaEyebrow")}
             </p>
             <h2 className="font-display text-3xl md:text-5xl leading-tight mb-5">
-              Trois adversaires.<br />
-              <span className="text-haiti-red">Trois villes. Un seul drapeau.</span>
+              {t("squad.ctaTitle1")}<br />
+              <span className="text-haiti-red">{t("squad.ctaTitle2")}</span>
             </h2>
             <p className="text-bg/80 text-lg leading-relaxed mb-7 max-w-2xl">
-              Écosse à Foxborough, Brésil à Philadelphie, Maroc à Atlanta. Onze jours sur le sol américain pour la deuxième Coupe du Monde de l'histoire d'Haïti.
+              {t("squad.ctaBody")}
             </p>
             <Link to="/matches" className="inline-flex items-center gap-2 px-7 py-3.5 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors">
-              Découvrir le calendrier →
+              {t("squad.ctaButton")} →
             </Link>
           </div>
         </section>
 
         {/* Source disclaimer · caps and stats come from third-party data */}
         <p className="text-center text-xs text-muted">
-          Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels.
+          {t("squad.statsDisclaimer")}
         </p>
       </div>
 
@@ -502,12 +500,13 @@ function LeaderCard({ role, name, detail, note, accent, photoLabel, photo }) {
 }
 
 function PositionGroup({ anchorId, title, position, positionFull, count, players, onPlayerClick, statFor }) {
+  const { t } = useT();
   return (
     <section id={anchorId} className="scroll-mt-20">
       <div className="flex items-baseline justify-between border-b border-line pb-3 mb-6">
         <h2 className="font-display text-2xl md:text-3xl">{title}</h2>
         <span className="text-sm text-muted uppercase tracking-wider font-semibold">
-          {count} joueurs
+          {count} {t("squad.players")}
         </span>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
@@ -529,17 +528,18 @@ function PositionGroup({ anchorId, title, position, positionFull, count, players
 // PlayerCard + modal as active players, only quieter (PlayerCard desaturates
 // the photo and surfaces the status badge/note via the `status` fields).
 function ForfaitsSection({ players, onPlayerClick, statFor }) {
+  const { t } = useT();
   if (!players.length) return null;
   return (
     <section id="forfaits" className="scroll-mt-20">
       <div className="flex items-baseline justify-between border-b border-line pb-3 mb-2">
-        <h2 className="font-display text-2xl md:text-3xl text-muted">Forfaits</h2>
+        <h2 className="font-display text-2xl md:text-3xl text-muted">{t("squad.forfaits")}</h2>
         <span className="text-sm text-muted uppercase tracking-wider font-semibold">
-          {players.length} {players.length === 1 ? "joueur" : "joueurs"}
+          {players.length} {players.length === 1 ? t("squad.player") : t("squad.players")}
         </span>
       </div>
       <p className="text-muted text-sm mb-6">
-        Ils font partie de l'aventure mais ont dû renoncer sur blessure.
+        {t("squad.forfaitsNote")}
       </p>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
         {players.map((p) => (
@@ -566,12 +566,13 @@ function ForfaitsSection({ players, onPlayerClick, statFor }) {
 // through the same modal interaction. Missing photos fall back to the shared
 // ImagePlaceholder crest — exactly like a player with no photo yet.
 function StaffGroup({ anchorId, title, staff, onStaffClick }) {
+  const { t } = useT();
   return (
     <section id={anchorId} className="scroll-mt-20">
       <div className="flex items-baseline justify-between border-b border-line pb-3 mb-6">
         <h2 className="font-display text-2xl md:text-3xl">{title}</h2>
         <span className="text-sm text-muted uppercase tracking-wider font-semibold">
-          {staff.length} membres
+          {staff.length} {t("squad.members")}
         </span>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
@@ -601,6 +602,7 @@ function derivedStatTag(slug) {
 }
 
 function PlayerCard({ player, stat, onClick }) {
+  const { t } = useT();
   const isCaptain = player.captain;
   const statTag = derivedStatTag(player.slug);
   // Local crest override (player.clubLogo) wins over the stats-API logo.
@@ -645,7 +647,7 @@ function PlayerCard({ player, stat, onClick }) {
         <div className="absolute top-2 right-2 flex flex-col items-end gap-1 max-w-[70%]">
           {isCaptain && (
             <span className="text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 bg-haiti-red text-bg rounded uppercase tracking-wider">
-              Capitaine
+              {t("squad.role.captain")}
             </span>
           )}
           {statTag && (
@@ -701,7 +703,7 @@ function PlayerCard({ player, stat, onClick }) {
       {player.isStaff ? (
         <div className="px-3 py-2.5 border-t border-line flex items-center justify-end gap-2 text-xs text-muted">
           <span className="text-haiti-blue font-semibold group-hover:translate-x-0.5 transition-transform">
-            Profil →
+            {t("squad.profile")} →
           </span>
         </div>
       ) : player.status ? (
@@ -711,22 +713,22 @@ function PlayerCard({ player, stat, onClick }) {
       ) : (
         <div className="px-3 py-2.5 border-t border-line flex items-center justify-between gap-2 text-xs text-muted">
           <span>
-            <strong className="text-ink tabular-nums">{player.age ?? "—"}</strong> ans
+            <strong className="text-ink tabular-nums">{player.age ?? "—"}</strong> {t("squad.ageUnit")}
           </span>
           <span>
-            <strong className="text-ink tabular-nums">{player.caps ?? 0}</strong> sél.
+            <strong className="text-ink tabular-nums">{player.caps ?? 0}</strong> {t("squad.capsUnit")}
           </span>
           {player.goals > 0 ? (
             <span>
-              <strong className="text-haiti-red tabular-nums">{player.goals}</strong> buts
+              <strong className="text-haiti-red tabular-nums">{player.goals}</strong> {t("squad.goalsUnit")}
             </span>
           ) : (
             <span className="opacity-50">
-              <strong className="tabular-nums">0</strong> buts
+              <strong className="tabular-nums">0</strong> {t("squad.goalsUnit")}
             </span>
           )}
           <span className="text-haiti-blue font-semibold hidden md:inline group-hover:translate-x-0.5 transition-transform">
-            Profil →
+            {t("squad.profile")} →
           </span>
         </div>
       )}

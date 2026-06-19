@@ -42,10 +42,10 @@ export default function Matches() {
       <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-line">
         <div className="max-w-content mx-auto px-5 py-2.5 flex items-center gap-1">
           <TabPill active={tab === "apercu"} onClick={() => setTab("apercu")}>
-            Aperçu
+            {t("matches.tabOverview")}
           </TabPill>
           <TabPill active={tab === "classement"} onClick={() => setTab("classement")}>
-            Classement · Groupe C
+            {t("matches.tabStandings")}
           </TabPill>
         </div>
       </nav>
@@ -59,8 +59,8 @@ export default function Matches() {
         <>
         {/* World Cup matches */}
         <section>
-          <MatchSectionHead sub="Trois adversaires. Trois villes. Un seul drapeau.">
-            Coupe du Monde · Groupe C
+          <MatchSectionHead sub={t("matches.wcSub")}>
+            {t("matches.worldCup.title")}
           </MatchSectionHead>
           <div className="space-y-6">
             {matches.map((m) => {
@@ -72,7 +72,7 @@ export default function Matches() {
                   key={m.matchNumber}
                   to={`/live/${liveSlug}`}
                   className="block group cursor-pointer rounded-lg"
-                  aria-label={`Centre match en direct · ${m.home.name} contre ${m.away.name}`}
+                  aria-label={t("matches.liveCenterAria").replace("{home}", m.home.name).replace("{away}", m.away.name)}
                 >
                   <MatchCard match={m} live={live} />
                 </Link>
@@ -86,8 +86,8 @@ export default function Matches() {
         {/* Upcoming preparation games (the featured match is shown in the hero) */}
         {upcomingFriendlies.length > 0 && (
           <section>
-            <MatchSectionHead sub="Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF.">
-              Matchs de préparation
+            <MatchSectionHead sub={t("matches.prepSub")}>
+              {t("matches.upcoming.title")}
             </MatchSectionHead>
             <div className="grid md:grid-cols-2 gap-6">
               {upcomingFriendlies.map((f, i) => (
@@ -109,7 +109,7 @@ export default function Matches() {
 
         {/* Group C card */}
         <section className="p-6 md:p-8 bg-white border border-line rounded-xl">
-          <h3 className="font-cond text-xl font-bold uppercase tracking-tight mb-4">Les équipes du Groupe C</h3>
+          <h3 className="font-cond text-xl font-bold uppercase tracking-tight mb-4">{t("matches.groupCTeams")}</h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-4">
             <li className="flex items-center gap-2">
               <Flag country="brazil" size="sm" /> Brésil
@@ -125,7 +125,7 @@ export default function Matches() {
             </li>
           </ul>
           <p className="text-xs text-muted">
-            Les deux premières équipes du groupe accèdent aux 16es de finale. Les huit meilleures troisièmes des douze groupes complètent le tableau des 32.
+            {t("matches.qualifyNote")}
           </p>
         </section>
         </>
@@ -183,6 +183,7 @@ function HeroTeam({ name, logo }) {
 
 // Bandeau en tête de /matches : le match en direct, sinon le prochain à venir.
 function NextMatchHero({ feature }) {
+  const { t } = useT();
   if (!feature) return null;
   const { homeName, awayName, homeLogo, awayLogo, kickoff, slug, isLive, homeIsHaiti, haitiGoals, oppGoals } = feature;
   const { date, time } = miamiKickoff(kickoff);
@@ -211,7 +212,7 @@ function NextMatchHero({ feature }) {
               <LiveScoreBadge live={feature} />
             ) : (
               <span className="font-cond text-gold text-[11px] md:text-xs uppercase tracking-[0.24em] font-semibold">
-                Prochain match
+                {t("home.nextMatch")}
               </span>
             )}
           </div>
@@ -238,7 +239,7 @@ function NextMatchHero({ feature }) {
             </>
           )}
           {slug && (
-            <p className="font-cond text-gold text-xs font-semibold uppercase tracking-[0.18em] mt-2">Centre du match →</p>
+            <p className="font-cond text-gold text-xs font-semibold uppercase tracking-[0.18em] mt-2">{t("matches.matchCenter")} →</p>
           )}
         </div>
       </div>
@@ -284,6 +285,7 @@ function LiveScoreBadge({ live }) {
 }
 
 function MatchCard({ match, live }) {
+  const { t } = useT();
   const { home, away, date, time, timeET, stadium, broadcast, diaspora, matchNumber } = match;
   const showLive = Boolean(live && (live.isLive || live.isFinished));
   const homeScore = home.country === "haiti" ? live?.haitiGoals : live?.oppGoals;
@@ -306,8 +308,8 @@ function MatchCard({ match, live }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent"></div>
         <div className="absolute bottom-3 left-5 right-5 flex items-center justify-between font-cond text-xs uppercase tracking-[0.12em] font-semibold">
-          <span className="text-bg">Groupe C · Match {matchNumber}</span>
-          <span className="text-gold">Coupe du Monde FIFA 2026</span>
+          <span className="text-bg">{t("matches.groupCMatch").replace("{n}", matchNumber)}</span>
+          <span className="text-gold">{t("matches.wcFifa2026")}</span>
         </div>
       </motion.div>
 
@@ -370,24 +372,24 @@ function MatchCard({ match, live }) {
       {/* Details strip */}
       <div className="bg-bg border-t border-line px-6 py-5 grid md:grid-cols-4 gap-5 text-sm">
         <div>
-          <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">Capacité</p>
+          <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">{t("matches.capacity")}</p>
           <p className="text-ink font-display text-lg tabular-nums">
             {stadium.capacity.toLocaleString()}
           </p>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">Pelouse</p>
-          <p className="text-ink text-sm">Gazon naturel</p>
+          <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">{t("matches.pitch")}</p>
+          <p className="text-ink text-sm">{t("matches.naturalGrass")}</p>
         </div>
         <div>
           <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">
-            Diffusion
+            {t("matches.broadcastLabel")}
           </p>
           <p className="text-ink text-sm leading-snug">{broadcast.join(" · ")}</p>
         </div>
         <div>
           <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">
-            Météo
+            {t("matches.weather")}
           </p>
           <StadiumWeather lat={stadium.lat} lng={stadium.lng} city={stadium.city.split(",")[0]} compact />
         </div>
@@ -407,7 +409,7 @@ function MatchCard({ match, live }) {
           }} />
         </span>
         <span className="inline-flex items-center gap-2 px-4 py-2 border border-line text-ink text-sm font-semibold rounded-full transition-colors group-hover:border-haiti-red">
-          Centre match en direct →
+          {t("matches.liveCenter")} →
         </span>
       </div>
 
@@ -422,6 +424,7 @@ function MatchCard({ match, live }) {
 }
 
 function FriendlyCard({ friendly, upcoming, live }) {
+  const { t } = useT();
   const outcomeStyles = {
     W: "bg-haiti-blue text-bg",
     D: "bg-muted text-bg",
@@ -441,11 +444,11 @@ function FriendlyCard({ friendly, upcoming, live }) {
     >
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs uppercase tracking-wider text-muted font-semibold">
-          {upcoming ? "Préparation · À venir" : "Préparation · Résultat"}
+          {upcoming ? t("matches.prepUpcoming") : t("matches.prepResult")}
         </span>
         {!upcoming && (
           <span className={`text-xs font-bold px-2 py-0.5 rounded ${outcomeStyles[friendly.outcome]}`}>
-            {friendly.outcome === "W" ? "Victoire" : friendly.outcome === "D" ? "Nul" : "Défaite"}
+            {friendly.outcome === "W" ? t("matches.win") : friendly.outcome === "D" ? t("matches.draw") : t("matches.loss")}
           </span>
         )}
         {showLive && <LiveScoreBadge live={live} />}
@@ -475,7 +478,7 @@ function FriendlyCard({ friendly, upcoming, live }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-haiti-blue hover:gap-3 transition-all"
         >
-          Billetterie sur Ticketmaster →
+          {t("matches.ticketsTicketmaster")} →
         </a>
       )}
       {!clickable && friendly.recapUrl && !upcoming && (
@@ -483,12 +486,12 @@ function FriendlyCard({ friendly, upcoming, live }) {
           to={friendly.recapUrl}
           className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-haiti-blue hover:gap-3 transition-all"
         >
-          Résumé →
+          {t("matches.recap")} →
         </Link>
       )}
       {clickable && (
         <span className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-haiti-blue group-hover:gap-2 transition-all">
-          Voir le match →
+          {t("matches.viewMatch")} →
         </span>
       )}
     </div>

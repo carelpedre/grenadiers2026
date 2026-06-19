@@ -461,11 +461,6 @@ const dict = {
     fr: "Groupe C",
     ht: "Gwoup C",
   },
-  "matches.title": {
-    en: "Fixtures",
-    fr: "Calendrier",
-    ht: "Pwogram",
-  },
   "matches.subtitle": {
     en: "Boston, Philadelphia, Atlanta · plus the warm-up games in South Florida before the tournament opens.",
     fr: "Boston, Philadelphie, Atlanta · et les matchs de préparation en Floride avant l'ouverture du tournoi.",
@@ -940,11 +935,6 @@ const dict = {
   },
 
   // ─── MATCHES PAGE (additions) ────────────────────────────────────────
-  "matches.eyebrow": {
-    en: "Group C",
-    fr: "Groupe C",
-    ht: "Gwoup C",
-  },
   "matches.title": {
     en: "Three matches in June.",
     fr: "Trois matchs en juin.",
@@ -979,6 +969,103 @@ const dict = {
     en: "Fixtures",
     fr: "Calendrier",
     ht: "Pwogram match yo",
+  },
+
+  // ─── MATCHES PAGE (Phase 2 additions) ────────────────────────────────
+  "matches.tabOverview": {
+    en: "Overview",
+    fr: "Aperçu",
+    ht: "Aperçu",
+  },
+  "matches.tabStandings": {
+    en: "Standings · Group C",
+    fr: "Classement · Groupe C",
+    ht: "Classement · Groupe C",
+  },
+  "matches.wcSub": {
+    en: "Three opponents. Three cities. One flag.",
+    fr: "Trois adversaires. Trois villes. Un seul drapeau.",
+    ht: "Trois adversaires. Trois villes. Un seul drapeau.",
+  },
+  "matches.liveCenterAria": {
+    en: "Live match center · {home} vs {away}",
+    fr: "Centre match en direct · {home} contre {away}",
+    ht: "Centre match en direct · {home} contre {away}",
+  },
+  "matches.prepSub": {
+    en: "Final tune-ups in South Florida, under the Inter Miami CF banner.",
+    fr: "Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF.",
+    ht: "Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF.",
+  },
+  "matches.groupCTeams": {
+    en: "The Group C teams",
+    fr: "Les équipes du Groupe C",
+    ht: "Les équipes du Groupe C",
+  },
+  "matches.qualifyNote": {
+    en: "The top two teams in the group reach the round of 32. The eight best third-placed teams across the twelve groups complete the 32-team bracket.",
+    fr: "Les deux premières équipes du groupe accèdent aux 16es de finale. Les huit meilleures troisièmes des douze groupes complètent le tableau des 32.",
+    ht: "Les deux premières équipes du groupe accèdent aux 16es de finale. Les huit meilleures troisièmes des douze groupes complètent le tableau des 32.",
+  },
+  "matches.matchCenter": {
+    en: "Match center",
+    fr: "Centre du match",
+    ht: "Centre du match",
+  },
+  "matches.groupCMatch": {
+    en: "Group C · Match {n}",
+    fr: "Groupe C · Match {n}",
+    ht: "Groupe C · Match {n}",
+  },
+  "matches.wcFifa2026": {
+    en: "FIFA World Cup 2026",
+    fr: "Coupe du Monde FIFA 2026",
+    ht: "Coupe du Monde FIFA 2026",
+  },
+  "matches.pitch": {
+    en: "Pitch",
+    fr: "Pelouse",
+    ht: "Pelouse",
+  },
+  "matches.naturalGrass": {
+    en: "Natural grass",
+    fr: "Gazon naturel",
+    ht: "Gazon naturel",
+  },
+  "matches.broadcastLabel": {
+    en: "Broadcast",
+    fr: "Diffusion",
+    ht: "Diffusion",
+  },
+  "matches.liveCenter": {
+    en: "Live match center",
+    fr: "Centre match en direct",
+    ht: "Centre match en direct",
+  },
+  "matches.prepUpcoming": {
+    en: "Friendly · Upcoming",
+    fr: "Préparation · À venir",
+    ht: "Préparation · À venir",
+  },
+  "matches.prepResult": {
+    en: "Friendly · Result",
+    fr: "Préparation · Résultat",
+    ht: "Préparation · Résultat",
+  },
+  "matches.ticketsTicketmaster": {
+    en: "Tickets on Ticketmaster",
+    fr: "Billetterie sur Ticketmaster",
+    ht: "Billetterie sur Ticketmaster",
+  },
+  "matches.recap": {
+    en: "Recap",
+    fr: "Résumé",
+    ht: "Résumé",
+  },
+  "matches.viewMatch": {
+    en: "View the match",
+    fr: "Voir le match",
+    ht: "Voir le match",
   },
 
   // ─── WATCH PARTIES PAGE ──────────────────────────────────────────────
@@ -1078,6 +1165,263 @@ const dict = {
     en: "Head Coach",
     fr: "Sélectionneur",
     ht: "Kòch prensipal",
+  },
+
+  // ─── SQUAD PAGE (Phase 2 additions) ──────────────────────────────────
+  "squad.heroEyebrow": {
+    en: "Haiti's squad · 2026 World Cup",
+    fr: "La sélection d'Haïti · Coupe du Monde 2026",
+    ht: "La sélection d'Haïti · Coupe du Monde 2026",
+  },
+  "squad.heroTitle1": {
+    en: "Players and staff.",
+    fr: "Joueurs et staff.",
+    ht: "Joueurs et staff.",
+  },
+  "squad.heroTitle2": {
+    en: "One mission.",
+    fr: "Une seule mission.",
+    ht: "Une seule mission.",
+  },
+  "squad.heroSubtext": {
+    en: "Fifty-two years after Munich, the Grenadiers return to the FIFA World Cup. The 26 players selected, unveiled by the Haitian Football Federation on May 16, 2026.",
+    fr: "Cinquante-deux ans après Munich, les Grenadiers retrouvent la Coupe du Monde de la FIFA. Les 26 joueurs retenus, dévoilés par la Fédération Haïtienne de Football le 16 mai 2026.",
+    ht: "Cinquante-deux ans après Munich, les Grenadiers retrouvent la Coupe du Monde de la FIFA. Les 26 joueurs retenus, dévoilés par la Fédération Haïtienne de Football le 16 mai 2026.",
+  },
+  "squad.navGoalkeepers": {
+    en: "Goalkeepers",
+    fr: "Gardiens",
+    ht: "Gardiens",
+  },
+  "squad.navMidfielders": {
+    en: "Midfielders",
+    fr: "Milieux",
+    ht: "Milieux",
+  },
+  "squad.forfaits": {
+    en: "Withdrawals",
+    fr: "Forfaits",
+    ht: "Forfaits",
+  },
+  "squad.forfaitsNote": {
+    en: "They are part of the journey but had to pull out through injury.",
+    fr: "Ils font partie de l'aventure mais ont dû renoncer sur blessure.",
+    ht: "Ils font partie de l'aventure mais ont dû renoncer sur blessure.",
+  },
+  "squad.player": {
+    en: "player",
+    fr: "joueur",
+    ht: "joueur",
+  },
+  "squad.players": {
+    en: "players",
+    fr: "joueurs",
+    ht: "joueurs",
+  },
+  "squad.members": {
+    en: "members",
+    fr: "membres",
+    ht: "membres",
+  },
+  "squad.kitTitle": {
+    en: "The kit",
+    fr: "Le maillot",
+    ht: "Le maillot",
+  },
+  "squad.kitSubtext": {
+    en: "Three kits by Saeta. One signature: the story of Haiti, stitched into the fabric.",
+    fr: "Trois tenues signées Saeta. Une seule signature : l'histoire d'Haïti, cousue dans le tissu.",
+    ht: "Trois tenues signées Saeta. Une seule signature : l'histoire d'Haïti, cousue dans le tissu.",
+  },
+  "squad.kitImageLabel": {
+    en: "Official 2026 World Cup kits · Saeta",
+    fr: "Maillots officiels de la Coupe du Monde 2026 · Saeta",
+    ht: "Maillots officiels de la Coupe du Monde 2026 · Saeta",
+  },
+  "squad.kitIntro": {
+    en: "Every inch of the original design, created by Saeta, tells the story of Haiti past and present. Far from a simple uniform, the kit is the country's own narrative, translated into patterns and material.",
+    fr: "Chaque centimètre du design original, conçu par Saeta, raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière.",
+    ht: "Chaque centimètre du design original, conçu par Saeta, raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière.",
+  },
+  "squad.kit1Label": {
+    en: "Lower right of the chest",
+    fr: "Côté droit du torse, en bas",
+    ht: "Côté droit du torse, en bas",
+  },
+  "squad.kit1Body": {
+    en: "A tribute to the fighters of the Battle of Vertières, where the indigenous troops defeated Napoleon's army, sealing Haiti's independence and giving birth to the first Black republic of the modern world.",
+    fr: "Hommage aux combattants de la Bataille de Vertières, où les troupes indigènes ont défait l'armée napoléonienne, scellant l'indépendance d'Haïti et donnant naissance à la première République noire du monde moderne.",
+    ht: "Hommage aux combattants de la Bataille de Vertières, où les troupes indigènes ont défait l'armée napoléonienne, scellant l'indépendance d'Haïti et donnant naissance à la première République noire du monde moderne.",
+  },
+  "squad.kit2Label": {
+    en: "Hidden across the front",
+    fr: "Dissimulé sur tout le devant",
+    ht: "Dissimulé sur tout le devant",
+  },
+  "squad.kit2Title": {
+    en: "Strength in unity",
+    fr: "« L'union fait la force »",
+    ht: "« L'union fait la force »",
+  },
+  "squad.kit2Body": {
+    en: "The national motto, printed in tiny letters across the chest of the shirt. Legible only up close. A message the players carry within them, even when invisible from afar.",
+    fr: "La devise nationale, inscrite en lettres minuscules sur tout le buste du maillot. Lisible uniquement de très près. Un message que les joueurs portent en eux, même invisible à distance.",
+    ht: "La devise nationale, inscrite en lettres minuscules sur tout le buste du maillot. Lisible uniquement de très près. Un message que les joueurs portent en eux, même invisible à distance.",
+  },
+  "squad.kit3Label": {
+    en: "On the back",
+    fr: "Sur le dos",
+    ht: "Sur le dos",
+  },
+  "squad.kit3Title": {
+    en: "Mountains and palms",
+    fr: "Montagnes et palmiers",
+    ht: "Montagnes et palmiers",
+  },
+  "squad.kit3Body": {
+    en: "The silhouette of Ayiti itself: the mountains that gave the country its Taino name (land of high mountains) and the palms of the national coat of arms. The whole country, carried on the players' shoulders.",
+    fr: "La silhouette d'Ayiti elle-même : les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs.",
+    ht: "La silhouette d'Ayiti elle-même : les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs.",
+  },
+  "squad.kitUpdatePrefix": {
+    en: "Update, June 9, 2026:",
+    fr: "Mise à jour, 9 juin 2026 :",
+    ht: "Mise à jour, 9 juin 2026 :",
+  },
+  "squad.kitUpdateLink": {
+    en: "at FIFA's request",
+    fr: "à la demande de la FIFA",
+    ht: "à la demande de la FIFA",
+  },
+  "squad.kitUpdateSuffix": {
+    en: ", some visual elements of the original design were adjusted before the competition began. Saeta, defending the spirit of its creation, applied the required changes, and it is this version the Grenadiers will wear during the World Cup.",
+    fr: ", certains éléments visuels du design original ont été ajustés avant le début de la compétition. Saeta, qui défend l'esprit de sa création, a appliqué les modifications exigées, et c'est cette version que les Grenadiers porteront pendant la Coupe du Monde.",
+    ht: ", certains éléments visuels du design original ont été ajustés avant le début de la compétition. Saeta, qui défend l'esprit de sa création, a appliqué les modifications exigées, et c'est cette version que les Grenadiers porteront pendant la Coupe du Monde.",
+  },
+  "squad.kitMadeByPrefix": {
+    en: "Made by",
+    fr: "Fabriqué par",
+    ht: "Fabriqué par",
+  },
+  "squad.kitMadeBySuffix": {
+    en: ", partner of the Haitian Football Federation since 2014.",
+    fr: ", partenaire de la Fédération Haïtienne de Football depuis 2014.",
+    ht: ", partenaire de la Fédération Haïtienne de Football depuis 2014.",
+  },
+  "squad.kitBuy": {
+    en: "Buy the kit",
+    fr: "Acheter le maillot",
+    ht: "Acheter le maillot",
+  },
+  "squad.campTitle": {
+    en: "Training bases",
+    fr: "Centres de préparation",
+    ht: "Centres de préparation",
+  },
+  "squad.campSubtext": {
+    en: "Where the Grenadiers prepare for the World Cup: two phases, two mindsets.",
+    fr: "Là où Les Grenadiers préparent la Coupe du Monde : deux phases, deux états d'esprit.",
+    ht: "Là où Les Grenadiers préparent la Coupe du Monde : deux phases, deux états d'esprit.",
+  },
+  "squad.lodging": {
+    en: "Lodging",
+    fr: "Hébergement",
+    ht: "Hébergement",
+  },
+  "squad.selectedBy": {
+    en: "Selected by",
+    fr: "Choisi par",
+    ht: "Choisi par",
+  },
+  "squad.localTies": {
+    en: "Local ties to the base camp",
+    fr: "Liens locaux avec le camp de base",
+    ht: "Liens locaux avec le camp de base",
+  },
+  "squad.aboutSelection": {
+    en: "About this selection",
+    fr: "À propos de cette sélection",
+    ht: "À propos de cette sélection",
+  },
+  "squad.qualifRecordTitle": {
+    en: "Qualifying record · CONCACAF · Sept. 2024 to Nov. 2025",
+    fr: "Bilan des éliminatoires · CONCACAF · sept. 2024 à nov. 2025",
+    ht: "Bilan des éliminatoires · CONCACAF · sept. 2024 à nov. 2025",
+  },
+  "squad.winsDrawsLosses": {
+    en: "Wins · Draws · Losses",
+    fr: "Victoires · Nuls · Défaites",
+    ht: "Victoires · Nuls · Défaites",
+  },
+  "squad.goalsForAgainst": {
+    en: "Goals for · against",
+    fr: "Buts pour · contre",
+    ht: "Buts pour · contre",
+  },
+  "squad.rankingsTitle": {
+    en: "Squad rankings",
+    fr: "Classements de la sélection",
+    ht: "Classements de la sélection",
+  },
+  "squad.topScorers": {
+    en: "Top scorers",
+    fr: "Meilleurs buteurs",
+    ht: "Meilleurs buteurs",
+  },
+  "squad.mostCapped": {
+    en: "Most caps",
+    fr: "Plus sélectionnés",
+    ht: "Plus sélectionnés",
+  },
+  "squad.goalsUnit": {
+    en: "goals",
+    fr: "buts",
+    ht: "buts",
+  },
+  "squad.capsUnit": {
+    en: "caps",
+    fr: "sél.",
+    ht: "sél.",
+  },
+  "squad.ageUnit": {
+    en: "yrs",
+    fr: "ans",
+    ht: "ans",
+  },
+  "squad.ctaEyebrow": {
+    en: "Next up · June 13, 2026",
+    fr: "Prochaine étape · 13 juin 2026",
+    ht: "Prochaine étape · 13 juin 2026",
+  },
+  "squad.ctaTitle1": {
+    en: "Three opponents.",
+    fr: "Trois adversaires.",
+    ht: "Trois adversaires.",
+  },
+  "squad.ctaTitle2": {
+    en: "Three cities. One flag.",
+    fr: "Trois villes. Un seul drapeau.",
+    ht: "Trois villes. Un seul drapeau.",
+  },
+  "squad.ctaBody": {
+    en: "Scotland in Foxborough, Brazil in Philadelphia, Morocco in Atlanta. Eleven days on American soil for the second World Cup in Haiti's history.",
+    fr: "Écosse à Foxborough, Brésil à Philadelphie, Maroc à Atlanta. Onze jours sur le sol américain pour la deuxième Coupe du Monde de l'histoire d'Haïti.",
+    ht: "Écosse à Foxborough, Brésil à Philadelphie, Maroc à Atlanta. Onze jours sur le sol américain pour la deuxième Coupe du Monde de l'histoire d'Haïti.",
+  },
+  "squad.ctaButton": {
+    en: "See the schedule",
+    fr: "Découvrir le calendrier",
+    ht: "Découvrir le calendrier",
+  },
+  "squad.profile": {
+    en: "Profile",
+    fr: "Profil",
+    ht: "Profil",
+  },
+  "squad.statsDisclaimer": {
+    en: "Stats and cap totals come from third-party sources and may differ from official figures.",
+    fr: "Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels.",
+    ht: "Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels.",
   },
 
   // ─── STORIES (additions) ─────────────────────────────────────────────
