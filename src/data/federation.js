@@ -41,6 +41,7 @@ export const federation = {
       role: "Présidente · Comité de Normalisation",
       roleEn: "President · Normalization Committee",
       since: "30 novembre 2024",
+      sinceEn: "November 30, 2024",
       photo: "/images/photos/monique-andre.jpg",
       photoLabel: "Monique André · Présidente du Comité de Normalisation de la FHF",
       photoLabelEn: "Monique André · President of the FHF Normalization Committee",

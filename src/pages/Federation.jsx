@@ -176,7 +176,7 @@ export default function Federation() {
               {/* Bio + milestones */}
               <div className="p-6 md:p-10">
                 <p className="text-gold text-xs uppercase tracking-wider font-bold mb-3">
-                  {t("federation.inOffice").replace("{since}", featured.since)}
+                  {t("federation.inOffice").replace("{since}", pick(featured.since, featured.sinceEn))}
                 </p>
                 <h3 className="font-display text-3xl md:text-4xl mb-2 leading-tight">
                   {featured.name}
