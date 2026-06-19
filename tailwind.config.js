@@ -22,6 +22,9 @@ export default {
       fontFamily: {
         sans: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
         display: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
+        // Match-page display faces (2026 broadcast system).
+        block: ["'Anton'", "'Plus Jakarta Sans'", "system-ui", "sans-serif"],
+        cond: ["'Saira Condensed'", "'Plus Jakarta Sans'", "system-ui", "sans-serif"],
       },
       maxWidth: {
         content: "1200px",

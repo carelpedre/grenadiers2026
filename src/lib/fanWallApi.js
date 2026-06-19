@@ -54,18 +54,53 @@ export async function fetchWallOpen() {
   }
 }
 
+// PostgREST plafonne chaque réponse à 1000 lignes. On pagine au-delà.
+const PAGE_SIZE = 1000;
+
+// Nombre exact de messages approuvés. Lu dans l'en-tête Content-Range de
+// PostgREST (Prefer: count=exact), donc jamais plafonné à 1000.
+export async function fetchApprovedCount() {
+  if (!backendReady) return 0;
+  try {
+    const q = `${SUPABASE_URL}/rest/v1/fan_messages_public?select=id&limit=1`;
+    const res = await fetch(q, { headers: { ...headers(), Prefer: "count=exact" } });
+    if (!res.ok) return 0;
+    const total = parseInt((res.headers.get("content-range") || "").split("/")[1], 10);
+    return Number.isFinite(total) ? total : 0;
+  } catch {
+    return 0;
+  }
+}
+
+// Récupère toutes les lignes approuvées pour les colonnes demandées, en
+// paginant par tranches de 1000 jusqu'à une page incomplète. Contourne le
+// plafond de 1000 lignes par requête de PostgREST.
+async function fetchAllApprovedColumns(select) {
+  const all = [];
+  for (let from = 0; ; from += PAGE_SIZE) {
+    const q =
+      `${SUPABASE_URL}/rest/v1/fan_messages_public` +
+      `?select=${select}&offset=${from}&limit=${PAGE_SIZE}`;
+    const res = await fetch(q, { headers: headers() });
+    if (!res.ok) break;
+    const rows = await res.json();
+    all.push(...rows);
+    if (rows.length < PAGE_SIZE) break;
+  }
+  return all;
+}
+
 // Statistiques globales du mur : total approuvé + pays distincts.
-// Charge uniquement les colonnes pays (léger) sur tout l'historique.
+// Le total vient d'un count exact (non plafonné) ; les pays d'un balayage
+// paginé des colonnes pays (léger) sur tout l'historique.
 export async function fetchWallStats() {
   if (!backendReady) return { count: 0, countries: 0 };
   try {
-    const q =
-      `${SUPABASE_URL}/rest/v1/fan_messages_public` +
-      `?select=location_country,location_country_code&limit=5000`;
-    const res = await fetch(q, { headers: headers() });
-    if (!res.ok) return { count: 0, countries: 0 };
-    const rows = await res.json();
-    return { count: rows.length, countries: distinctCountries(rows) };
+    const [count, rows] = await Promise.all([
+      fetchApprovedCount(),
+      fetchAllApprovedColumns("location_country,location_country_code"),
+    ]);
+    return { count, countries: distinctCountries(rows) };
   } catch {
     return { count: 0, countries: 0 };
   }

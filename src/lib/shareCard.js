@@ -49,8 +49,10 @@ function svgToImg(svgString) {
   });
 }
 
-// drawImage with object-fit: cover into a destination rect.
-function drawCover(ctx, img, dx, dy, dw, dh) {
+// drawImage with object-fit: cover into a destination rect. focusY (0=top,
+// 0.5=center, 1=bottom) controls the vertical crop anchor, use a low value for
+// portraits so the subject's head is kept instead of cropped off.
+function drawCover(ctx, img, dx, dy, dw, dh, focusY = 0.5) {
   const ir = img.width / img.height;
   const dr = dw / dh;
   let sx = 0, sy = 0, sw = img.width, sh = img.height;
@@ -59,7 +61,7 @@ function drawCover(ctx, img, dx, dy, dw, dh) {
     sx = (img.width - sw) / 2;
   } else {
     sh = img.width / dr;
-    sy = (img.height - sh) / 2;
+    sy = (img.height - sh) * focusY;
   }
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
 }
@@ -83,7 +85,7 @@ async function drawPhoto(ctx, ph) {
   const img = await loadImg(ph.dataUrl, isRemote ? "anonymous" : undefined);
   if (!img) return;
   if (ph.r != null) drawCircleCover(ctx, img, ph.cx, ph.cy, ph.r);
-  else drawCover(ctx, img, ph.x || 0, ph.y || 0, ph.w || ctx.canvas.width, ph.h || ctx.canvas.height);
+  else drawCover(ctx, img, ph.x || 0, ph.y || 0, ph.w || ctx.canvas.width, ph.h || ctx.canvas.height, ph.focusY ?? 0.5);
 }
 
 // Compose a card to a PNG Blob without tainting the canvas on iOS. Draw order:
@@ -246,7 +248,12 @@ export function canShareFile(file) {
 // desktop or when file-sharing isn't supported. The File must already exist (build
 // it with pngFile when the modal opens).
 export function saveImageSync(file, dataUrl, { filename } = {}) {
-  if (canShareFile(file)) {
+  // On a touch device, route through the native sheet so iOS exposes
+  // "Save Image" → Photos (the only way to reach the camera roll there). On
+  // desktop, a share sheet is the wrong tool for "save" → download directly so
+  // this action stays distinct from "Partager".
+  const isTouch = typeof navigator !== "undefined" && navigator.maxTouchPoints > 0;
+  if (isTouch && canShareFile(file)) {
     // IMAGE ONLY — no title/text/url. On iOS, adding a url/text makes the share
     // sheet treat it as a link share and hides "Save Image" → Photos.
     navigator.share({ files: [file] }).catch((e) => {
@@ -262,19 +269,25 @@ export function saveImageSync(file, dataUrl, { filename } = {}) {
 // SHARE — same synchronous contract as saveImageSync. Prefers native share with the
 // image file, then native share without it, then clipboard. `onCopied` fires after a
 // successful clipboard write so the caller can flash a "Copié ✓" state.
-export function sharePngSync(file, dataUrl, { filename, text, url } = {}, onCopied) {
+export function sharePngSync(file, dataUrl, { title, text, url } = {}, onCopied) {
+  // "Partager" is a SHARE-to-people action — deliberately distinct from
+  // "Enregistrer" (save). Share the image WITH its caption + link so it lands in
+  // Messages/Stories with context, not just a bare image.
   if (canShareFile(file)) {
-    // IMAGE ONLY — keeps iOS from collapsing into a link/text share.
-    navigator.share({ files: [file] }).catch(() => {});
+    const withContext = { files: [file], title, text, url };
+    const payload =
+      navigator.canShare && navigator.canShare(withContext) ? withContext : { files: [file] };
+    navigator.share(payload).catch(() => {});
     return "shared";
   }
-  // No file-share support (desktop, iOS Chrome): download the PNG. We never fall
-  // back to a URL-only share — on iOS that loses the image entirely.
-  if (dataUrl) {
-    downloadPng(dataUrl, filename || "grenadiers2026.png");
-    return "downloaded";
+  // No file-share support but a native share sheet exists (some mobile browsers):
+  // share the link + caption.
+  if (navigator.share && url) {
+    navigator.share({ title, text, url }).catch(() => {});
+    return "shared";
   }
-  // Last resort (no image available at all): copy the link.
+  // Desktop without Web Share: copy the link to the clipboard (with "Copié ✓"
+  // feedback). We do NOT download here — that is what "Enregistrer" is for.
   if (navigator.clipboard && url) {
     navigator.clipboard
       .writeText(text ? `${text} ${url}` : url)

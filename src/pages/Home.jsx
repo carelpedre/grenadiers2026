@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SponsorBanner } from "../components/Sponsor";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import { HomeMatchHero, RouteMondial } from "../components/HomeLiveHero";
 import CountdownHero from "../components/CountdownHero";
 import FanWall from "../components/FanWall";
+import { fetchApprovedPhotos, fanPhotoUrl } from "../lib/fanGalleryApi";
 import { fadeUp, stagger, CountUpNumber } from "../lib/motion";
 import { squad, squadStats } from "../data/squad";
 import { getEntriesSorted } from "../data/diary";
+import { useT } from "../lib/i18n";
 
 const featuredPlayers = [
   { slug: "jean-ricner-bellegarde", name: "Bellegarde", role: "Milieu de terrain · Wolverhampton", photo: "/images/photos/jean-ricner-bellegarde.jpg" },
@@ -30,6 +32,7 @@ function getSurnameMarquee() {
 
 export default function Home() {
   const surnames = getSurnameMarquee();
+  const { t } = useT();
 
   return (
     <div>
@@ -46,11 +49,11 @@ export default function Home() {
       {/* Route vers le Mondial — compact, state-aware timeline (calendrier) */}
       <RouteMondial />
 
-      {/* Le Journal — remonté juste après le calendrier des matchs */}
+      {/* Galerie des supporters · placée au-dessus du Journal */}
+      <GalleryPreview />
+      {/* Le Journal */}
       <JournalPreview />
       <FanWall />
-      {/* Effectif — redescendu juste après le mur des supporters */}
-      <SquadCarousel />
 
       {/* 1974 History teaser */}
       <section className="bg-ink text-bg relative overflow-hidden">
@@ -61,19 +64,19 @@ export default function Home() {
         <div className="max-w-content mx-auto px-5 py-24 relative">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }}>
-              <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-4">1974 · Allemagne de l'Ouest</p>
+              <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-4">{t("home.munich.eyebrow")}</p>
               <h2 className="font-display text-4xl md:text-6xl mb-6 leading-[1.05]">
-                Les hommes qui ont<br />
-                <span className="text-haiti-red">ouvert la route.</span>
+                {t("home.munich.title1")}<br />
+                <span className="text-haiti-red">{t("home.munich.title2")}</span>
               </h2>
               <p className="text-bg/80 text-lg leading-relaxed mb-3">
-                Le 15 juin 1974, à Munich, 53 000 spectateurs voient une équipe caribéenne défier l'Italie. Henri Françillon tient les Azzurri en échec en première période. Puis Manno Sanon ouvre le score — premier but encaissé par Dino Zoff depuis <CountUpNumber target={1142} duration={2000} className="text-haiti-red font-display font-bold" /> minutes.
+                {t("home.munich.body1")} <CountUpNumber target={1142} duration={2000} className="text-haiti-red font-display font-bold" /> {t("home.munich.minutes")}
               </p>
               <p className="text-bg/80 text-lg leading-relaxed mb-8">
-                Vingt-deux Haïtiens. Trois matchs. La route qui mène jusqu'en 2026.
+                {t("home.munich.body2")}
               </p>
               <Link to="/history-1974" className="inline-flex items-center gap-2 text-haiti-red font-semibold hover:gap-3 transition-all">
-                Lire le récit complet →
+                {t("home.munich.cta")} →
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, delay: 0.1 }}>
@@ -90,14 +93,15 @@ export default function Home() {
 // droite du héros). Pleine largeur, non recadré ; tap pour l'ouvrir en grand.
 function PosterBanner() {
   const [open, setOpen] = useState(false);
-  const alt = "L'équipe d'Haïti pour la Coupe du Monde 2026";
+  const { t } = useT();
+  const alt = t("home.squadPhotoAlt");
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
         className="xl:hidden block w-full bg-ink leading-none"
-        aria-label="Voir le poster de l'équipe en grand"
+        aria-label={t("home.poster.ariaOpen")}
       >
         <picture>
           <source
@@ -132,7 +136,7 @@ function PosterBanner() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            aria-label="Fermer"
+            aria-label={t("a11y.close")}
             className="absolute top-4 right-4 w-10 h-10 rounded-full bg-bg/10 hover:bg-bg/20 text-bg flex items-center justify-center backdrop-blur-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,18 +152,19 @@ function PosterBanner() {
 // Rangée d'appels à l'action sous le héros : deux cartes (mur + journal).
 // Réutilise le style de carte du site (blanc, bord line, survol haiti-red).
 function HeroCtaRow() {
+  const { t } = useT();
   const cards = [
     {
       to: "/mur",
-      eyebrow: "Mur des supporters",
-      title: "Voye mesaj ou anvan match la",
-      cta: "Signer le mur",
+      eyebrow: t("nav.fanwall"),
+      title: t("home.cta.murTitle"),
+      cta: t("home.cta.murAction"),
     },
     {
       to: "/journal",
-      eyebrow: "Le Journal",
-      title: "Suivez les Grenadiers jour après jour",
-      cta: "Lire les chroniques",
+      eyebrow: t("nav.journal"),
+      title: t("home.cta.journalTitle"),
+      cta: t("home.cta.journalAction"),
     },
   ];
   return (
@@ -192,6 +197,138 @@ function HeroCtaRow() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// Mélange (Fisher-Yates) : PostgREST ne sait pas trier par random(). On
+// récupère donc un lot récent et on le mélange côté client.
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Aperçu accueil de la galerie des supporters (photos soumises par les fans),
+// distincte de la galerie éditoriale /foto. Carrousel de photos approuvées AU
+// HASARD (lot récent mélangé côté client), défilement tactile + auto-avance
+// douce. Lecture client (fetch dans useEffect), sûre pour le build et le prérendu.
+function GalleryPreview() {
+  const { t } = useT();
+  const [photos, setPhotos] = useState([]);
+  const trackRef = useRef(null);
+  const matchLabels = {
+    scotland: t("home.gallery.matchScotland"),
+    brazil: t("home.gallery.matchBrazil"),
+    morocco: t("home.gallery.matchMorocco"),
+  };
+  const ctxLabels = {
+    stadium: t("home.gallery.ctxStadium"),
+    watch_party: t("home.gallery.ctxWatch"),
+    home: t("home.gallery.ctxHome"),
+  };
+
+  useEffect(() => {
+    let alive = true;
+    fetchApprovedPhotos({ limit: 24 }).then((rows) => {
+      if (alive) setPhotos(shuffle(rows || []));
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // Auto-avance douce : glisse jusqu'à la diapo suivante, revient au début à la
+  // fin. Le glissement tactile manuel reste natif (scroll-snap).
+  useEffect(() => {
+    if (photos.length <= 1) return;
+    const id = setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      const slide = el.querySelector("[data-slide]");
+      const step = slide ? slide.getBoundingClientRect().width + 12 : el.clientWidth;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + step, behavior: "smooth" });
+    }, 4500);
+    return () => clearInterval(id);
+  }, [photos.length]);
+
+  return (
+    <section className="bg-white border-y border-line">
+      <div className="max-w-content mx-auto px-5 py-16 md:py-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-8">
+          <div>
+            <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-2">
+              {t("home.gallery.eyebrow")}
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl leading-tight text-ink">
+              {t("home.gallery.title")}
+            </h2>
+            <p className="text-ink/70 mt-2 max-w-prose">
+              {t("home.gallery.subtitle")}
+            </p>
+          </div>
+          <Link
+            to="/galerie-supporters"
+            className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-haiti-blue hover:text-haiti-red transition-colors"
+          >
+            {t("home.gallery.viewLink")} →
+          </Link>
+        </div>
+
+        {photos.length > 0 && (
+          <div
+            ref={trackRef}
+            className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-1 px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {photos.map((p) => (
+              <Link
+                key={p.id}
+                to="/galerie-supporters"
+                data-slide
+                className="snap-start shrink-0 w-[78%] sm:w-[46%] lg:w-[31%]"
+              >
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/5] border border-line bg-bg">
+                  <img
+                    src={fanPhotoUrl(p.storage_path)}
+                    alt={p.caption || t("home.gallery.photoAlt")}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-bg">
+                    <p className="text-haiti-red text-[10px] uppercase tracking-wider font-bold mb-0.5">
+                      {matchLabels[p.match] || p.match} · {ctxLabels[p.context] || p.context}
+                    </p>
+                    {p.location && <p className="text-bg/90 text-sm font-semibold truncate">{p.location}</p>}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Appels à l'action sous le carrousel : poster sa photo (primaire) et
+            voir toute la galerie (secondaire). Visibles même sans photos. */}
+        <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
+          <Link
+            to="/partager-ta-photo"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-haiti-blue text-bg font-semibold rounded-full hover:bg-haiti-blue-dark transition-colors"
+          >
+            {t("home.gallery.shareCta")} →
+          </Link>
+          <Link
+            to="/galerie-supporters"
+            className="text-sm font-semibold text-haiti-blue hover:text-haiti-red transition-colors"
+          >
+            {t("home.gallery.viewAllCta")} →
+          </Link>
+        </div>
       </div>
     </section>
   );
@@ -261,6 +398,7 @@ function SquadCarousel() {
 }
 
 function JournalPreview() {
+  const { t } = useT();
   const entries = getEntriesSorted().slice(0, 4);
   if (entries.length === 0) return null;
 
@@ -279,17 +417,17 @@ function JournalPreview() {
         >
           <div>
             <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-2">
-              Le Journal
+              {t("nav.journal")}
             </p>
             <h2 className="font-display text-4xl md:text-5xl leading-tight">
-              La sélection, jour après jour.
+              {t("home.journal.title")}
             </h2>
           </div>
           <Link
             to="/journal"
             className="text-sm font-semibold text-haiti-blue hover:text-haiti-red transition-colors whitespace-nowrap"
           >
-            Toutes les chroniques →
+            {t("home.journal.allLink")} →
           </Link>
         </motion.div>
 
@@ -314,6 +452,7 @@ function JournalPreview() {
 }
 
 function FeaturedJournalCard({ entry }) {
+  const { t } = useT();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -336,7 +475,7 @@ function FeaturedJournalCard({ entry }) {
             />
           </motion.div>
           <span className="absolute top-3 left-3 px-2.5 py-1 bg-haiti-red text-bg text-[10px] font-bold uppercase tracking-wider rounded">
-            À la une
+            {t("common.featured")}
           </span>
         </div>
         <div className="p-6 md:p-8 flex flex-col justify-center">
@@ -348,7 +487,7 @@ function FeaturedJournalCard({ entry }) {
           <h3 className="font-display text-2xl md:text-3xl mb-3 leading-snug">{entry.title}</h3>
           <p className="text-muted leading-relaxed line-clamp-3">{entry.dek}</p>
           <p className="mt-4 text-sm font-semibold text-haiti-blue group-hover:text-haiti-red transition-colors">
-            Lire la chronique →
+            {t("home.journal.readCta")} →
           </p>
         </div>
       </Link>
@@ -357,6 +496,7 @@ function FeaturedJournalCard({ entry }) {
 }
 
 function JournalCard({ entry }) {
+  const { t } = useT();
   return (
     <motion.div variants={fadeUp} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
       <Link
@@ -383,7 +523,7 @@ function JournalCard({ entry }) {
           </div>
           <h3 className="font-display text-lg md:text-xl mb-2 leading-snug">{entry.title}</h3>
           <p className="text-muted text-sm leading-relaxed">{entry.dek}</p>
-          <p className="mt-3 text-sm font-semibold text-haiti-blue">Lire la chronique →</p>
+          <p className="mt-3 text-sm font-semibold text-haiti-blue">{t("home.journal.readCta")} →</p>
         </div>
       </Link>
     </motion.div>

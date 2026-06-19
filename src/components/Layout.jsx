@@ -6,19 +6,30 @@ import EmailSignup from "./EmailSignup";
 import ShareButton from "./ShareButton";
 import BackToTop from "./BackToTop";
 import LiveIsland from "./LiveIsland";
+import { LanguageToggle } from "./LanguagePicker";
 
 const navItems = [
   { to: "/", labelKey: "nav.home" },
   { to: "/squad", labelKey: "nav.squad" },
   { to: "/matches", labelKey: "nav.matches" },
   { to: "/journal", labelKey: "nav.journal" },
-  { to: "/mur", labelKey: "nav.fanwall" },
   { to: "/foto", labelKey: "nav.photos" },
   { to: "/the-tribute", labelKey: "nav.tribute" },
   { to: "/federation", labelKey: "nav.federation" },
   { to: "/history-1974", labelKey: "nav.history" },
   { to: "/jeux", labelKey: "nav.games" },
 ];
+
+// Espace Supporters · contenus créés par les fans, regroupés sous un seul menu
+// (déroulant sur desktop, section dédiée dans le menu mobile et le pied de page).
+const supporterItems = [
+  { to: "/mur", labelKey: "nav.fanwall" },
+  { to: "/galerie-supporters", labelKey: "nav.gallery" },
+  { to: "/partager-ta-photo", label: "Partage ta photo" },
+];
+
+// Libellé d'un item : clé i18n si présente, sinon libellé brut (français).
+const navLabel = (t, item) => (item.labelKey ? t(item.labelKey) : item.label);
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
@@ -32,7 +43,7 @@ export default function Layout() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-haiti-blue focus:text-bg focus:font-semibold focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-haiti-red"
       >
-        Aller au contenu
+        {t("layout.skipToContent")}
       </a>
       <header className="sticky top-0 z-40 bg-bg/95 backdrop-blur border-b border-line">
         <div className="max-w-content mx-auto px-5 py-4 flex items-center justify-between">
@@ -49,7 +60,7 @@ export default function Layout() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-7">
+          <nav className="hidden xl:flex items-center gap-x-5 whitespace-nowrap">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -64,10 +75,54 @@ export default function Layout() {
                 {t(item.labelKey)}
               </NavLink>
             ))}
+
+            {/* Espace Supporters · menu déroulant (survol souris + focus clavier,
+                sans JS : group-hover / group-focus-within). */}
+            <div className="relative group">
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 text-sm font-medium text-ink hover:text-haiti-blue transition-colors"
+                aria-haspopup="true"
+              >
+                {t("layout.supportersMenu")}
+                <svg
+                  className="w-3.5 h-3.5 transition-transform group-hover:rotate-180"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="invisible opacity-0 translate-y-1 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 absolute right-0 top-full pt-3 z-50">
+                <div className="w-60 rounded-xl border border-line bg-bg shadow-lg p-2">
+                  {supporterItems.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      className={({ isActive }) =>
+                        `block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                          isActive
+                            ? "text-haiti-blue bg-line/40"
+                            : "text-ink hover:text-haiti-blue hover:bg-line/30"
+                        }`
+                      }
+                    >
+                      {navLabel(t, item)}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Sélecteur de langue compact (FR / EN / HT) */}
+            <LanguageToggle className="pl-3 border-l border-line" />
           </nav>
 
           <button
-            className="md:hidden p-2"
+            className="xl:hidden p-2"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -78,7 +133,7 @@ export default function Layout() {
         </div>
 
         {open && (
-          <nav className="md:hidden border-t border-line bg-bg">
+          <nav className="xl:hidden border-t border-line bg-bg">
             <div className="max-w-content mx-auto px-5 py-3 flex flex-col gap-3">
               {navItems.map((item) => (
                 <NavLink
@@ -95,6 +150,37 @@ export default function Layout() {
                   {t(item.labelKey)}
                 </NavLink>
               ))}
+
+              {/* Espace Supporters · section dédiée dans le menu mobile */}
+              <div className="mt-1 pt-3 border-t border-line">
+                <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-2">
+                  {t("layout.supportersMenu")}
+                </p>
+                <div className="flex flex-col gap-3 pl-1">
+                  {supporterItems.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `text-base font-medium py-1 ${
+                          isActive ? "text-haiti-blue" : "text-ink"
+                        }`
+                      }
+                    >
+                      {navLabel(t, item)}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+
+              {/* Langue · sélecteur compact dans le menu mobile */}
+              <div className="mt-1 pt-3 border-t border-line">
+                <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-2">
+                  {t("layout.language")}
+                </p>
+                <LanguageToggle />
+              </div>
             </div>
           </nav>
         )}
@@ -155,7 +241,7 @@ export default function Layout() {
               Grenadiers <span className="text-haiti-red">2026</span>
             </p>
             <p className="text-bg/60 text-sm mt-1 max-w-prose">
-              Coupe du Monde de la FIFA 2026
+              {t("layout.footer.tagline")}
             </p>
           </div>
         </div>
@@ -179,21 +265,21 @@ export default function Layout() {
           <div>
             <h4 className="font-display text-sm mb-3 text-bg/60 uppercase tracking-wider">{t("footer.explore.title")}</h4>
             <ul className="space-y-2 text-sm">
-              {navItems.map((item) => (
+              {[...navItems, ...supporterItems].map((item) => (
                 <li key={item.to}>
                   <Link to={item.to} className="hover:text-haiti-red transition-colors">
-                    {t(item.labelKey)}
+                    {navLabel(t, item)}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="font-display text-sm mb-3 text-bg/60 uppercase tracking-wider">Pour les médias</h4>
+            <h4 className="font-display text-sm mb-3 text-bg/60 uppercase tracking-wider">{t("layout.footer.mediaTitle")}</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/the-tribute" className="hover:text-haiti-red transition-colors">Hommage créatif</Link></li>
-              <li><Link to="/about" className="hover:text-haiti-red transition-colors">À propos de ce site</Link></li>
-              <li><a href="mailto:contact@grenadiers2026.com" className="hover:text-haiti-red transition-colors">Nous contacter</a></li>
+              <li><Link to="/the-tribute" className="hover:text-haiti-red transition-colors">{t("nav.tribute")}</Link></li>
+              <li><Link to="/about" className="hover:text-haiti-red transition-colors">{t("layout.footer.aboutSite")}</Link></li>
+              <li><a href="mailto:contact@grenadiers2026.com" className="hover:text-haiti-red transition-colors">{t("layout.footer.contact")}</a></li>
             </ul>
           </div>
         </div>

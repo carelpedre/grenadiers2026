@@ -52,7 +52,6 @@ rsync -avz --delete \
   --exclude 'api/.env' \
   --exclude 'api/atlas.json' \
   --exclude 'api/atlas-rate.json' \
-  --exclude 'media/' \
   dist/ "${SSH_USER}@${SSH_HOST}:${REMOTE_PATH}/"
 
 echo ""

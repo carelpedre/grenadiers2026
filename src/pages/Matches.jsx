@@ -7,6 +7,8 @@ import StadiumWeather from "../components/StadiumWeather";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import MatchReminder from "../components/MatchReminder";
 import GroupCTable from "../components/GroupCTable";
+import MatchSectionHead from "../components/MatchSectionHead";
+import Wc26Mark from "../components/Wc26Mark";
 import RecentForm from "../components/RecentForm";
 import { frName } from "../lib/teamNames";
 import { friendlies } from "../data/friendlies";
@@ -57,10 +59,9 @@ export default function Matches() {
         <>
         {/* World Cup matches */}
         <section>
-          <div className="border-b border-line pb-3 mb-6">
-            <h2 className="font-display text-2xl md:text-3xl">Coupe du Monde — Groupe C</h2>
-            <p className="text-muted text-sm mt-1">Trois adversaires. Trois villes. Un seul drapeau.</p>
-          </div>
+          <MatchSectionHead sub="Trois adversaires. Trois villes. Un seul drapeau.">
+            Coupe du Monde · Groupe C
+          </MatchSectionHead>
           <div className="space-y-6">
             {matches.map((m) => {
               const liveSlug = m.home.country === "haiti" ? m.away.country : m.home.country;
@@ -71,7 +72,7 @@ export default function Matches() {
                   key={m.matchNumber}
                   to={`/live/${liveSlug}`}
                   className="block group cursor-pointer rounded-lg"
-                  aria-label={`Centre match en direct — ${m.home.name} contre ${m.away.name}`}
+                  aria-label={`Centre match en direct · ${m.home.name} contre ${m.away.name}`}
                 >
                   <MatchCard match={m} live={live} />
                 </Link>
@@ -85,12 +86,9 @@ export default function Matches() {
         {/* Upcoming preparation games (the featured match is shown in the hero) */}
         {upcomingFriendlies.length > 0 && (
           <section>
-            <div className="border-b border-line pb-3 mb-6">
-              <h2 className="font-display text-2xl md:text-3xl">Matchs de préparation</h2>
-              <p className="text-muted text-sm mt-1">
-                Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF.
-              </p>
-            </div>
+            <MatchSectionHead sub="Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF.">
+              Matchs de préparation
+            </MatchSectionHead>
             <div className="grid md:grid-cols-2 gap-6">
               {upcomingFriendlies.map((f, i) => (
                 <FriendlyCard
@@ -104,14 +102,14 @@ export default function Matches() {
           </section>
         )}
 
-        {/* Forme récente — unique zone de résultats récents, lue depuis la base
+        {/* Forme récente · unique zone de résultats récents, lue depuis la base
             (DB only). N'affecte pas la vue des matchs à venir : requête séparée
             FT/AET/PEN. Remplace l'ancien bloc statique des matchs de préparation. */}
         <RecentForm />
 
         {/* Group C card */}
-        <section className="p-6 md:p-8 bg-white border border-line rounded-lg">
-          <h3 className="font-display text-xl mb-4">Les équipes du Groupe C</h3>
+        <section className="p-6 md:p-8 bg-white border border-line rounded-xl">
+          <h3 className="font-cond text-xl font-bold uppercase tracking-tight mb-4">Les équipes du Groupe C</h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-4">
             <li className="flex items-center gap-2">
               <Flag country="brazil" size="sm" /> Brésil
@@ -143,7 +141,7 @@ function TabPill({ active, onClick, children }) {
       type="button"
       onClick={onClick}
       aria-selected={active}
-      className={`shrink-0 inline-flex items-center px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-colors uppercase tracking-wider ${
+      className={`shrink-0 inline-flex items-center px-4 py-1.5 rounded-full font-cond text-xs md:text-sm font-semibold transition-colors uppercase tracking-[0.12em] ${
         active ? "bg-ink text-bg" : "text-ink hover:bg-bg"
       }`}
     >
@@ -176,7 +174,7 @@ function HeroTeam({ name, logo }) {
       {logo && (
         <img src={logo} alt="" loading="lazy" className="w-6 h-6 md:w-8 md:h-8 object-contain flex-shrink-0" />
       )}
-      <span className="font-display text-base md:text-2xl uppercase tracking-tight whitespace-nowrap">
+      <span className="font-cond font-bold text-base md:text-2xl uppercase tracking-tight whitespace-nowrap">
         {name}
       </span>
     </span>
@@ -192,42 +190,57 @@ function NextMatchHero({ feature }) {
   const awayScore = homeIsHaiti ? oppGoals : haitiGoals;
 
   const inner = (
-    <div className="bg-ink text-bg rounded-lg px-5 py-5 md:px-8 md:py-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 transition-shadow group-hover:ring-1 group-hover:ring-haiti-red">
-      <div className="min-w-0">
-        <div className="mb-2.5">
+    <div className="relative overflow-hidden bg-ink-deep text-bg rounded-xl px-5 py-6 md:px-8 md:py-7 transition-shadow group-hover:ring-1 group-hover:ring-gold/50">
+      <div
+        className="absolute inset-0"
+        style={{ background: "radial-gradient(110% 130% at 92% 0%, rgba(0,32,159,.5), transparent 60%)" }}
+      />
+      <div
+        className="pointer-events-none absolute -right-3 -top-5 w-[42%] max-w-[230px] opacity-[0.18]"
+        style={{
+          maskImage: "linear-gradient(to left, #000 30%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to left, #000 30%, transparent 100%)",
+        }}
+      >
+        <Wc26Mark className="w-full h-auto" />
+      </div>
+      <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <div className="min-w-0">
+          <div className="mb-3">
+            {isLive ? (
+              <LiveScoreBadge live={feature} />
+            ) : (
+              <span className="font-cond text-gold text-[11px] md:text-xs uppercase tracking-[0.24em] font-semibold">
+                Prochain match
+              </span>
+            )}
+          </div>
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 md:gap-x-3">
+            <HeroTeam name={frName(homeName)} logo={homeLogo} />
+            <span className="text-gold/70 font-block text-sm">VS</span>
+            <HeroTeam name={frName(awayName)} logo={awayLogo} />
+          </div>
+        </div>
+
+        <div className="text-left sm:text-right flex-shrink-0">
           {isLive ? (
-            <LiveScoreBadge live={feature} />
+            <p className="font-block text-4xl md:text-5xl tabular-nums leading-none">
+              {homeScore}
+              <span className="text-gold mx-1.5 md:mx-2">:</span>
+              {awayScore}
+            </p>
           ) : (
-            <span className="text-haiti-red text-[11px] md:text-xs uppercase tracking-[0.2em] font-bold">
-              Prochain match
-            </span>
+            <>
+              <p className="font-block text-3xl md:text-4xl tabular-nums leading-none">
+                {time} <span className="font-cond text-bg/50 text-sm">ET</span>
+              </p>
+              <p className="font-cond text-bg/60 text-xs uppercase tracking-wider mt-1.5 capitalize">{date}</p>
+            </>
+          )}
+          {slug && (
+            <p className="font-cond text-gold text-xs font-semibold uppercase tracking-[0.18em] mt-2">Centre du match →</p>
           )}
         </div>
-        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 md:gap-x-3">
-          <HeroTeam name={frName(homeName)} logo={homeLogo} />
-          <span className="text-bg/40 font-display text-sm">vs</span>
-          <HeroTeam name={frName(awayName)} logo={awayLogo} />
-        </div>
-      </div>
-
-      <div className="text-left sm:text-right flex-shrink-0">
-        {isLive ? (
-          <p className="font-display text-3xl md:text-4xl tabular-nums">
-            {homeScore}
-            <span className="text-bg/30 mx-1.5">–</span>
-            {awayScore}
-          </p>
-        ) : (
-          <>
-            <p className="font-display text-2xl md:text-3xl tabular-nums leading-none">
-              {time} <span className="text-bg/50 text-sm">ET</span>
-            </p>
-            <p className="text-bg/60 text-xs capitalize mt-1">{date}</p>
-          </>
-        )}
-        {slug && (
-          <p className="text-haiti-red text-xs font-semibold mt-2">Centre du match →</p>
-        )}
       </div>
     </div>
   );
@@ -292,21 +305,21 @@ function MatchCard({ match, live }) {
           rounded={false}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent"></div>
-        <div className="absolute bottom-3 left-5 right-5 text-bg text-xs uppercase tracking-wider font-semibold flex items-center justify-between">
-          <span>Groupe C · Match {matchNumber}</span>
-          <span className="text-bg/80">Coupe du Monde FIFA 2026™</span>
+        <div className="absolute bottom-3 left-5 right-5 flex items-center justify-between font-cond text-xs uppercase tracking-[0.12em] font-semibold">
+          <span className="text-bg">Groupe C · Match {matchNumber}</span>
+          <span className="text-gold">Coupe du Monde FIFA 2026</span>
         </div>
       </motion.div>
 
       {/* Score line */}
       <div className="px-4 md:px-10 py-7 md:py-10">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-8">
-          {/* Home — mobile: flag stacked above name; desktop: name left of flag */}
+          {/* Home · mobile: flag stacked above name; desktop: name left of flag */}
           <motion.div className="flex flex-col items-center text-center md:flex-row md:items-center md:justify-end md:gap-5 md:text-right gap-2" variants={slideInLeft}>
             <div className="md:order-2">
               <Flag country={home.country} size="responsive" />
             </div>
-            <p className="font-display text-base md:text-4xl uppercase tracking-tight leading-none md:order-1">
+            <p className="font-cond font-bold text-base md:text-4xl uppercase tracking-tight leading-none md:order-1">
               {home.name}
             </p>
           </motion.div>
@@ -315,9 +328,9 @@ function MatchCard({ match, live }) {
           <motion.div className="text-center" variants={fadeUp}>
             {showLive ? (
               <>
-                <p className="font-display text-2xl md:text-5xl tabular-nums leading-none">
+                <p className="font-block text-3xl md:text-5xl tabular-nums leading-none">
                   {homeScore}
-                  <span className="text-ink/30 mx-1.5 md:mx-2">–</span>
+                  <span className="text-gold mx-1.5 md:mx-2">:</span>
                   {awayScore}
                 </p>
                 <div className="mt-2 flex justify-center">
@@ -326,16 +339,16 @@ function MatchCard({ match, live }) {
               </>
             ) : (
               <>
-                <p className="font-display text-2xl md:text-5xl tabular-nums leading-none">{time}</p>
-                <p className="text-[10px] md:text-xs text-muted uppercase tracking-wider mt-1.5">{timeET}</p>
+                <p className="font-block text-3xl md:text-5xl tabular-nums leading-none">{time}</p>
+                <p className="font-cond text-[10px] md:text-xs text-muted uppercase tracking-[0.12em] mt-1.5">{timeET}</p>
               </>
             )}
           </motion.div>
 
-          {/* Away — mobile: flag stacked above name; desktop: flag left of name */}
+          {/* Away · mobile: flag stacked above name; desktop: flag left of name */}
           <motion.div className="flex flex-col items-center text-center md:flex-row md:items-center md:justify-start md:gap-5 gap-2" variants={slideInRight}>
             <Flag country={away.country} size="responsive" />
-            <p className="font-display text-base md:text-4xl uppercase tracking-tight leading-none">
+            <p className="font-cond font-bold text-base md:text-4xl uppercase tracking-tight leading-none">
               {away.name}
             </p>
           </motion.div>
@@ -380,7 +393,7 @@ function MatchCard({ match, live }) {
         </div>
       </div>
 
-      {/* Action row: calendar button — the whole card links to the live page,
+      {/* Action row: calendar button · the whole card links to the live page,
           so the calendar stops the click from triggering navigation. */}
       <div className="px-6 md:px-10 pb-6 -mt-2 flex flex-wrap gap-2 items-center">
         <span onClick={(e) => e.preventDefault()}>
@@ -437,15 +450,15 @@ function FriendlyCard({ friendly, upcoming, live }) {
         )}
         {showLive && <LiveScoreBadge live={live} />}
       </div>
-      <h3 className="font-display text-2xl mb-2">Haïti vs {friendly.opponent}</h3>
+      <h3 className="font-cond text-2xl font-bold uppercase tracking-tight mb-2">Haïti vs {friendly.opponent}</h3>
       {!upcoming && (
-        <p className="font-display text-3xl text-haiti-blue tabular-nums mb-3">
-          {friendly.haitiScore} – {friendly.opponentScore}
+        <p className="font-block text-3xl text-haiti-blue tabular-nums mb-3">
+          {friendly.haitiScore} <span className="text-gold">:</span> {friendly.opponentScore}
         </p>
       )}
       {showLive && (
-        <p className="font-display text-3xl text-haiti-blue tabular-nums mb-3">
-          {live.haitiGoals} – {live.oppGoals}
+        <p className="font-block text-3xl text-haiti-blue tabular-nums mb-3">
+          {live.haitiGoals} <span className="text-gold">:</span> {live.oppGoals}
         </p>
       )}
       <p className="text-sm text-muted">{friendly.date}</p>

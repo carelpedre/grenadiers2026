@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import { fetchAlbums, fetchAlbum, uploadGalleryChunk, backendReady } from "../lib/galleryApi";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  /foto/upload — téléversement + gestion, protégés par mot de passe.║
@@ -53,17 +54,17 @@ async function resizeToJpeg(file, maxDim, quality) {
   return await new Promise((res) => canvas.toBlob(res, "image/jpeg", quality));
 }
 
-// Traduit une réponse multipart en message d'erreur clair, ou null si OK.
-function errorMessage(status, data) {
-  if (status === 401) return "Mot de passe incorrect.";
-  if (status === 500 && data?.error === "server_not_configured")
-    return "Le service n'est pas configuré côté serveur.";
-  if (status === 0) return "Connexion impossible. Réessayez.";
-  if (!data?.ok) return "Une erreur est survenue. Réessayez.";
+// Traduit une réponse multipart en clé i18n de message d'erreur, ou null si OK.
+function errorKey(status, data) {
+  if (status === 401) return "fotoup.errPassword";
+  if (status === 500 && data?.error === "server_not_configured") return "fotoup.errServerConfig";
+  if (status === 0) return "fotoup.errConnection";
+  if (!data?.ok) return "fotoup.errGeneric";
   return null;
 }
 
 export default function FotoUpload() {
+  const { t } = useT();
   const [password, setPassword] = useState(() => {
     try {
       return localStorage.getItem(PASSWORD_KEY) || "";
@@ -96,7 +97,7 @@ export default function FotoUpload() {
   // noindex + titre dédié (route absente du prerender/sitemap).
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = "Téléversement · Photos";
+    document.title = t("fotoup.docTitle");
     const meta = document.createElement("meta");
     meta.setAttribute("name", "robots");
     meta.setAttribute("content", "noindex,nofollow");
@@ -172,10 +173,10 @@ export default function FotoUpload() {
         }
 
         const { status: st, data } = await uploadGalleryChunk(fd);
-        const err = errorMessage(st, data);
+        const err = errorKey(st, data);
         if (err) {
           setStatus("error");
-          setMessage(err);
+          setMessage(t(err));
           return;
         }
 
@@ -191,14 +192,14 @@ export default function FotoUpload() {
       refreshAlbums();
     } catch {
       setStatus("error");
-      setMessage("Le traitement des images a échoué. Réessayez.");
+      setMessage(t("fotoup.errProcessing"));
     }
   }
 
   async function saveAlbum(album) {
     if (!password.trim()) {
       setManageErr(true);
-      setManageMsg("Entrez le mot de passe en haut de la page.");
+      setManageMsg(t("fotoup.needPassword"));
       return;
     }
     const e = edits[album.slug] || {};
@@ -213,7 +214,7 @@ export default function FotoUpload() {
     if ((e.description || "") !== (album.description || "")) { fd.append("description", e.description || ""); changed = true; }
     if (!changed) {
       setManageErr(false);
-      setManageMsg("Aucune modification.");
+      setManageMsg(t("fotoup.noChanges"));
       return;
     }
 
@@ -221,25 +222,25 @@ export default function FotoUpload() {
     setManageMsg("");
     const { status: st, data } = await uploadGalleryChunk(fd);
     setBusySlug(null);
-    const err = errorMessage(st, data);
+    const err = errorKey(st, data);
     if (err) {
       setManageErr(true);
-      setManageMsg(err);
+      setManageMsg(t(err));
       return;
     }
     rememberPassword();
     setManageErr(false);
-    setManageMsg(`Album « ${e.name ?? album.name} » mis à jour.`);
+    setManageMsg(t("fotoup.albumUpdated").replace("{name}", e.name ?? album.name));
     refreshAlbums();
   }
 
   async function deleteAlbum(album) {
     if (!password.trim()) {
       setManageErr(true);
-      setManageMsg("Entrez le mot de passe en haut de la page.");
+      setManageMsg(t("fotoup.needPassword"));
       return;
     }
-    if (!window.confirm(`Supprimer l'album « ${album.name} » et toutes ses photos ?`)) return;
+    if (!window.confirm(t("fotoup.confirmDeleteAlbum").replace("{name}", album.name))) return;
 
     setBusySlug(album.slug);
     setManageMsg("");
@@ -249,10 +250,10 @@ export default function FotoUpload() {
     fd.append("slug", album.slug);
     const { status: st, data } = await uploadGalleryChunk(fd);
     setBusySlug(null);
-    const err = errorMessage(st, data);
+    const err = errorKey(st, data);
     if (err) {
       setManageErr(true);
-      setManageMsg(err);
+      setManageMsg(t(err));
       return;
     }
     rememberPassword();
@@ -261,7 +262,7 @@ export default function FotoUpload() {
       setOpenPhotos(null);
     }
     setManageErr(false);
-    setManageMsg(`Album « ${album.name} » supprimé.`);
+    setManageMsg(t("fotoup.albumDeleted").replace("{name}", album.name));
     refreshAlbums();
   }
 
@@ -280,10 +281,10 @@ export default function FotoUpload() {
   async function deletePhoto(path) {
     if (!password.trim()) {
       setManageErr(true);
-      setManageMsg("Entrez le mot de passe en haut de la page.");
+      setManageMsg(t("fotoup.needPassword"));
       return;
     }
-    if (!window.confirm("Supprimer cette photo ?")) return;
+    if (!window.confirm(t("fotoup.confirmDeletePhoto"))) return;
 
     setDeletingPath(path);
     setManageMsg("");
@@ -293,23 +294,23 @@ export default function FotoUpload() {
     fd.append("path", path);
     const { status: st, data } = await uploadGalleryChunk(fd);
     setDeletingPath(null);
-    const err = errorMessage(st, data);
+    const err = errorKey(st, data);
     if (err) {
       setManageErr(true);
-      setManageMsg(err);
+      setManageMsg(t(err));
       return;
     }
     rememberPassword();
     setOpenPhotos((prev) => (prev ? prev.filter((p) => p.path !== path) : prev));
     setManageErr(false);
-    setManageMsg("Photo supprimée.");
+    setManageMsg(t("fotoup.photoDeleted"));
     refreshAlbums();
   }
 
   async function setCover(slug, coverPath) {
     if (!password.trim()) {
       setManageErr(true);
-      setManageMsg("Entrez le mot de passe en haut de la page.");
+      setManageMsg(t("fotoup.needPassword"));
       return;
     }
     setCoverBusy(coverPath);
@@ -321,15 +322,15 @@ export default function FotoUpload() {
     fd.append("cover_path", coverPath);
     const { status: st, data } = await uploadGalleryChunk(fd);
     setCoverBusy(null);
-    const err = errorMessage(st, data);
+    const err = errorKey(st, data);
     if (err) {
       setManageErr(true);
-      setManageMsg(err);
+      setManageMsg(t(err));
       return;
     }
     rememberPassword();
     setManageErr(false);
-    setManageMsg("Couverture mise à jour.");
+    setManageMsg(t("fotoup.coverUpdated"));
     refreshAlbums();
   }
 
@@ -341,20 +342,20 @@ export default function FotoUpload() {
   return (
     <div>
       <PageHeader
-        eyebrow="Espace privé"
-        title="Téléverser des photos"
-        subtitle="Ajoutez des photos à la galerie. Les images sont optimisées automatiquement avant l'envoi."
+        eyebrow={t("fotoup.eyebrow")}
+        title={t("fotoup.title")}
+        subtitle={t("fotoup.subtitle")}
       />
 
       <div className="max-w-xl mx-auto px-5 py-12 space-y-14">
         {!backendReady ? (
-          <p className="text-muted text-sm">Service indisponible.</p>
+          <p className="text-muted text-sm">{t("fotoup.unavailable")}</p>
         ) : (
           <>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-xs uppercase tracking-wider text-muted font-semibold mb-1.5">
-                  Mot de passe
+                  {t("fotoup.password")}
                 </label>
                 <input
                   type="password"
@@ -367,14 +368,14 @@ export default function FotoUpload() {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-muted font-semibold mb-1.5">
-                  Album
+                  {t("fotoup.albumField")}
                 </label>
                 <select
                   value={choice}
                   onChange={(e) => setChoice(e.target.value)}
                   className={`${inputCls} bg-white`}
                 >
-                  <option value={NEW}>Nouvel album</option>
+                  <option value={NEW}>{t("fotoup.newAlbum")}</option>
                   {albums.map((a) => (
                     <option key={a.slug} value={a.slug}>
                       {a.name} ({a.count})
@@ -386,7 +387,7 @@ export default function FotoUpload() {
                     type="text"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
-                    placeholder="Nom de l'album (ex. Haïti vs Pérou)"
+                    placeholder={t("fotoup.newAlbumPlaceholder")}
                     className={`mt-2 ${inputCls}`}
                   />
                 )}
@@ -395,7 +396,7 @@ export default function FotoUpload() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-muted font-semibold mb-1.5">
-                    Date de l'événement
+                    {t("fotoup.eventDate")}
                   </label>
                   <input
                     type="date"
@@ -406,13 +407,13 @@ export default function FotoUpload() {
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-muted font-semibold mb-1.5">
-                    Crédit photo
+                    {t("fotoup.creditLabel")}
                   </label>
                   <input
                     type="text"
                     value={credit}
                     onChange={(e) => setCredit(e.target.value)}
-                    placeholder="ex. Hans Frandjy Darius"
+                    placeholder={t("fotoup.creditPlaceholder")}
                     className={inputCls}
                   />
                 </div>
@@ -420,7 +421,7 @@ export default function FotoUpload() {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-muted font-semibold mb-1.5">
-                  Photos
+                  {t("fotoup.photosLabel")}
                 </label>
                 <input
                   type="file"
@@ -447,7 +448,9 @@ export default function FotoUpload() {
                 disabled={!canSubmit}
                 className="w-full px-4 py-3 bg-haiti-red hover:bg-haiti-red-dark disabled:opacity-50 disabled:cursor-not-allowed text-bg font-semibold rounded-full transition-colors"
               >
-                {working ? `Envoi… ${progress.done}/${progress.total}` : "Téléverser"}
+                {working
+                  ? t("fotoup.uploadingProgress").replace("{done}", progress.done).replace("{total}", progress.total)
+                  : t("fotoup.upload")}
               </button>
 
               {message && (
@@ -459,7 +462,7 @@ export default function FotoUpload() {
                   <p>{message}</p>
                   {status === "done" && (
                     <Link to="/foto" className="inline-block mt-2 font-semibold text-haiti-blue hover:text-haiti-red">
-                      Voir l'album →
+                      {t("fotoup.viewAlbum")} →
                     </Link>
                   )}
                 </div>
@@ -468,9 +471,9 @@ export default function FotoUpload() {
 
             {/* ── Gestion des albums ── */}
             <section className="border-t border-line pt-10">
-              <h2 className="font-display text-xl text-ink mb-1">Gérer les albums</h2>
+              <h2 className="font-display text-xl text-ink mb-1">{t("fotoup.manageTitle")}</h2>
               <p className="text-muted text-sm mb-5">
-                Renommez, datez, créditez ou supprimez un album. Le mot de passe ci-dessus est requis.
+                {t("fotoup.manageHint")}
               </p>
 
               {manageMsg && (
@@ -484,7 +487,7 @@ export default function FotoUpload() {
               )}
 
               {albums.length === 0 ? (
-                <p className="text-muted text-sm">Aucun album pour le moment.</p>
+                <p className="text-muted text-sm">{t("fotoup.noAlbums")}</p>
               ) : (
                 <ul className="space-y-5">
                   {albums.map((a) => {
@@ -500,7 +503,7 @@ export default function FotoUpload() {
                             type="text"
                             value={e.name}
                             onChange={(ev) => setEdit(a.slug, { name: ev.target.value })}
-                            placeholder="Nom de l'album"
+                            placeholder={t("fotoup.albumNamePlaceholder")}
                             className={inputCls}
                           />
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -514,14 +517,14 @@ export default function FotoUpload() {
                               type="text"
                               value={e.credit}
                               onChange={(ev) => setEdit(a.slug, { credit: ev.target.value })}
-                              placeholder="Crédit photo"
+                              placeholder={t("fotoup.creditLabel")}
                               className={inputCls}
                             />
                           </div>
                           <textarea
                             value={e.description ?? ""}
                             onChange={(ev) => setEdit(a.slug, { description: ev.target.value })}
-                            placeholder="Description (bio). 1re ligne : Poste · Club, puis une ligne vide, puis le texte."
+                            placeholder={t("fotoup.descPlaceholder")}
                             rows={5}
                             className={`${inputCls} resize-y`}
                           />
@@ -533,7 +536,7 @@ export default function FotoUpload() {
                             disabled={busy}
                             className="px-4 py-2 bg-haiti-blue hover:bg-haiti-blue-dark disabled:opacity-50 text-bg text-sm font-semibold rounded-full transition-colors"
                           >
-                            {busy ? "…" : "Enregistrer"}
+                            {busy ? "…" : t("fotoup.save")}
                           </button>
                           <button
                             type="button"
@@ -541,7 +544,7 @@ export default function FotoUpload() {
                             disabled={busy}
                             className="px-4 py-2 border border-haiti-red text-haiti-red hover:bg-haiti-red/10 disabled:opacity-50 text-sm font-semibold rounded-full transition-colors"
                           >
-                            Supprimer
+                            {t("common.delete")}
                           </button>
                         </div>
 
@@ -552,14 +555,14 @@ export default function FotoUpload() {
                             onClick={() => toggleAlbumPhotos(a.slug)}
                             className="text-haiti-blue text-sm font-semibold hover:text-haiti-red transition-colors"
                           >
-                            {openSlug === a.slug ? "Masquer les photos" : "Voir les photos"}
+                            {openSlug === a.slug ? t("fotoup.hidePhotos") : t("fotoup.showPhotos")}
                           </button>
 
                           {openSlug === a.slug &&
                             (openPhotos === null ? (
-                              <p className="text-muted text-xs mt-3">Chargement…</p>
+                              <p className="text-muted text-xs mt-3">{t("common.loading")}</p>
                             ) : openPhotos.length === 0 ? (
-                              <p className="text-muted text-xs mt-3">Aucune photo.</p>
+                              <p className="text-muted text-xs mt-3">{t("fotoup.noPhotos")}</p>
                             ) : (
                               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-3">
                                 {openPhotos.map((p) => {
@@ -575,7 +578,7 @@ export default function FotoUpload() {
                                         type="button"
                                         onClick={() => deletePhoto(p.path)}
                                         disabled={deletingPath === p.path}
-                                        aria-label="Supprimer cette photo"
+                                        aria-label={t("fotoup.deletePhotoAria")}
                                         className="absolute top-1 right-1 w-6 h-6 rounded-full bg-ink/70 hover:bg-haiti-red text-bg flex items-center justify-center disabled:opacity-50"
                                       >
                                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -585,17 +588,17 @@ export default function FotoUpload() {
 
                                       {isCover ? (
                                         <span className="absolute bottom-1 left-1 right-1 text-center text-[10px] font-bold uppercase tracking-wider bg-gold text-ink rounded px-1 py-0.5">
-                                          Couverture actuelle
+                                          {t("fotoup.currentCover")}
                                         </span>
                                       ) : (
                                         <button
                                           type="button"
                                           onClick={() => setCover(a.slug, p.path)}
                                           disabled={coverBusy === p.path}
-                                          aria-label="Définir comme couverture"
+                                          aria-label={t("fotoup.setCoverAria")}
                                           className="absolute bottom-1 left-1 right-1 text-center text-[10px] font-semibold uppercase tracking-wider bg-ink/70 hover:bg-haiti-blue text-bg rounded px-1 py-0.5 disabled:opacity-50"
                                         >
-                                          {coverBusy === p.path ? "…" : "Couverture"}
+                                          {coverBusy === p.path ? "…" : t("fotoup.cover")}
                                         </button>
                                       )}
                                     </div>

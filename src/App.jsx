@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
 import RouteHead from "./components/RouteHead";
 import { LangProvider } from "./lib/i18n";
+import { AuthProvider } from "./context/AuthContext";
 
 // ─── Eager routes (loaded on first paint) ────────────────────────────
 // Keep these synchronous — they're high-traffic, low-cost, and don't pull
@@ -33,9 +34,12 @@ const Penalty = lazy(() => import("./pages/Penalty"));
 const OnzeDepart = lazy(() => import("./pages/OnzeDepart"));
 const DevineGrenadier = lazy(() => import("./pages/DevineGrenadier"));
 const Mur = lazy(() => import("./pages/Mur"));
-const AdminMur = lazy(() => import("./pages/AdminMur"));
 const Foto = lazy(() => import("./pages/Foto"));
 const FotoUpload = lazy(() => import("./pages/FotoUpload"));
+const PartagerPhoto = lazy(() => import("./pages/PartagerPhoto"));
+const GalerieSupporters = lazy(() => import("./pages/GalerieSupporters"));
+const Admin = lazy(() => import("./pages/Admin"));
+const CadreGrenadiers = lazy(() => import("./pages/CadreGrenadiers"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Lightweight loading fallback while a lazy route's chunk downloads
@@ -47,18 +51,18 @@ function PageLoading() {
   );
 }
 
-// French-only site (independent, non-official; not affiliated with the FHF). No language picker.
-const LANG = "fr";
-
+// Langue active gérée par LangProvider (état + persistance localStorage,
+// résolution initiale sûre pour le prérendu). Voir src/lib/i18n.jsx.
 export default function App() {
   return (
-    <LangProvider lang={LANG}>
+    <LangProvider>
+      <AuthProvider>
       <MotionConfig reducedMotion="user">
       <ScrollToTop />
       <RouteHead />
       <Suspense fallback={<PageLoading />}>
         <Routes>
-          <Route element={<Layout lang={LANG} />}>
+          <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/squad" element={<Squad />} />
             <Route path="/matches" element={<Matches />} />
@@ -85,16 +89,24 @@ export default function App() {
             <Route path="/mur" element={<Mur />} />
             <Route path="/foto" element={<Foto />} />
             <Route path="/foto/upload" element={<FotoUpload />} />
+            <Route path="/partager-ta-photo" element={<PartagerPhoto />} />
+            <Route path="/galerie-supporters" element={<GalerieSupporters />} />
+            <Route path="/cadre-grenadiers" element={<CadreGrenadiers />} />
             <Route path="/foto/:slug" element={<Foto />} />
             <Route path="/about" element={<About />} />
             {/* Catch-all 404 — must be last */}
             <Route path="*" element={<NotFound />} />
           </Route>
-          {/* Admin (unlinked, standalone — no public nav/footer; passphrase-gated) */}
-          <Route path="/admin/mur" element={<AdminMur />} />
+          {/* Admin (unlinked, standalone — no public nav/footer; passphrase-gated).
+              Modération unifiée messages + photos sous une seule connexion. Les
+              anciens chemins redirigent pour ne pas casser les marque-pages. */}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/mur" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin/foto" element={<Navigate to="/admin" replace />} />
         </Routes>
       </Suspense>
       </MotionConfig>
+      </AuthProvider>
     </LangProvider>
   );
 }

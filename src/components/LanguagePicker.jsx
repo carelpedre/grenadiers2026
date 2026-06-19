@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { getStoredLang, setStoredLang, useT, LANGUAGES } from "../lib/i18n";
 
-// Storage key — once chosen, the picker doesn't show again for 30 days
-const STORAGE_KEY = "grenadiers-2026-lang";
-const STORAGE_TTL_DAYS = 30;
+// Stockage (clé + TTL) et état de langue gérés dans ../lib/i18n. Ce fichier
+// fournit l'écran d'accueil plein écran et le sélecteur compact (LanguageToggle).
 
 const languages = [
   {
@@ -27,31 +27,6 @@ const languages = [
     line2: "English",
   },
 ];
-
-function getStoredLang() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const { value, ts } = JSON.parse(raw);
-    const ageMs = Date.now() - ts;
-    const ttlMs = STORAGE_TTL_DAYS * 24 * 60 * 60 * 1000;
-    if (ageMs > ttlMs) return null;
-    return value;
-  } catch {
-    return null;
-  }
-}
-
-function setStoredLang(code) {
-  try {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ value: code, ts: Date.now() })
-    );
-  } catch {
-    // localStorage blocked — fail silently, picker will show again
-  }
-}
 
 export default function LanguagePicker({ onChoose }) {
   const [visible, setVisible] = useState(false);
@@ -167,15 +142,30 @@ export default function LanguagePicker({ onChoose }) {
   );
 }
 
-// Helper for other components to read/clear the current language
+// Lecture du choix courant (pour d'autres composants au besoin).
 export function getCurrentLang() {
   return getStoredLang();
 }
 
-export function clearLangChoice() {
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-  } catch {
-    /* ignore */
-  }
+// Sélecteur de langue compact (FR / EN / HT) pour la barre de navigation.
+// Change la langue via le contexte i18n et persiste le choix (clé + TTL).
+export function LanguageToggle({ className = "" }) {
+  const { lang, setLang } = useT();
+  return (
+    <div className={`flex items-center gap-1 ${className}`} role="group" aria-label="Choisir la langue">
+      {LANGUAGES.map((l) => (
+        <button
+          key={l.code}
+          type="button"
+          aria-pressed={lang === l.code}
+          onClick={() => setLang(l.code)}
+          className={`px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
+            lang === l.code ? "bg-haiti-blue text-bg" : "text-ink hover:text-haiti-blue"
+          }`}
+        >
+          {l.label}
+        </button>
+      ))}
+    </div>
+  );
 }

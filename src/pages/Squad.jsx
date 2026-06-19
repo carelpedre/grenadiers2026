@@ -75,24 +75,24 @@ export default function Squad() {
   return (
     <div>
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-ink text-bg min-h-[60vh] md:min-h-[70vh] flex items-center">
+      <section className="relative overflow-hidden bg-ink text-bg min-h-[60vh] md:min-h-[70vh] flex items-start">
         {/* Background team photo with dark overlay */}
         <div className="absolute inset-0">
           <ImagePlaceholder
-            src="/images/photos/squad-team-2026.jpg"
+            src="/images/photos/squad-group-2026.jpg"
             label="La sélection d'Haïti · Coupe du Monde 2026"
             rounded={false}
             className="w-full h-full"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-ink/85 via-ink/70 to-haiti-blue-dark/85"></div>
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink/90 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/35 to-transparent"></div>
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink/80 to-transparent"></div>
         </div>
 
         {/* Bicolor edge */}
         <motion.div className="absolute left-0 top-0 bottom-0 w-1.5 bg-haiti-blue" initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} style={{ originY: 0 }} />
         <motion.div className="absolute left-1.5 top-0 bottom-0 w-1.5 bg-haiti-red" initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }} style={{ originY: 0 }} />
 
-        <div className="relative max-w-content mx-auto px-5 py-20 md:py-28 w-full">
+        <div className="relative max-w-content mx-auto px-5 pt-8 md:pt-10 pb-20 md:pb-28 w-full">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,8 +107,8 @@ export default function Squad() {
             animate="show"
             variants={stagger(0.08, 0.3)}
           >
-            <motion.span variants={fadeUp} className="block">Vingt-six hommes.</motion.span>
-            <motion.span variants={fadeUp} className="block text-haiti-red">Une mission.</motion.span>
+            <motion.span variants={fadeUp} className="block">Joueurs et staff.</motion.span>
+            <motion.span variants={fadeUp} className="block text-haiti-red">Une seule mission.</motion.span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -116,8 +116,8 @@ export default function Squad() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-bg/85 text-lg md:text-xl max-w-2xl leading-relaxed"
           >
-            Cinquante-deux ans après Munich, Haïti retrouve la Coupe du Monde de la FIFA.
-            Liste officielle annoncée par la Fédération Haïtienne de Football le 16 mai 2026.
+            Cinquante-deux ans après Munich, les Grenadiers retrouvent la Coupe du Monde de la FIFA.
+            Les 26 joueurs retenus, dévoilés par la Fédération Haïtienne de Football le 16 mai 2026.
           </motion.p>
         </div>
       </section>
@@ -396,6 +396,11 @@ export default function Squad() {
             </Link>
           </div>
         </section>
+
+        {/* Source disclaimer · caps and stats come from third-party data */}
+        <p className="text-center text-xs text-muted">
+          Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels.
+        </p>
       </div>
 
       {/* Player modal */}
@@ -479,7 +484,7 @@ function LeaderCard({ role, name, detail, note, accent, photoLabel, photo }) {
         accent ? "bg-haiti-blue text-bg border-haiti-blue" : "bg-white border-line"
       }`}
     >
-      <ImagePlaceholder src={photo} label={photoLabel || name} aspect="16/9" rounded={false} />
+      <ImagePlaceholder src={photo} label={photoLabel || name} aspect="4/3" objectPosition="center top" rounded={false} />
       <div className="p-6 md:p-8">
         <p
           className={`text-xs uppercase tracking-wider font-bold mb-3 ${

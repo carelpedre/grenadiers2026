@@ -9,9 +9,17 @@
 //   title        : article title
 //   dek          : 1-2 sentence subtitle/standfirst
 //   cover        : hero image path
+//   coverAtEnd   : optional · when true, the cover is also shown full width
+//                  at the end of the article body
 //   body         : array of paragraphs
 //   source       : optional credit line shown below body
-//   sourceUrl    : optional URL — when present, the source line renders as a link
+//   sourceUrl    : optional URL · when present, the source line renders as a link
+//   type         : optional layout. "press-conference" adds L'article /
+//                  Transcription intégrale tabs (alias: format: "presser")
+//   transcript   : press-conference only · array of items, each one of:
+//                  { time?, topic?, q?, speaker, text } | { speaker, lines: [...] }
+//                  | { heading } (section title, e.g. a player's name)
+//   transcriptNote: optional italic note shown atop the transcript tab
 //   albums       : array of { title?, photos: [{src, alt}, ...] }
 //                  - If a single album has no title, it renders as a flat gallery.
 //                  - Multiple albums each render with their title as a subsection.
@@ -19,8 +27,189 @@
 
 export const diaryEntries = [
   {
-    slug: "gonaives-ferveur-grenadiers",
+    slug: "duke-lacroix-philadelphie",
+    date: "2026-06-18",
+    dateLabel: "18 juin 2026",
+    eyebrow: "Portrait · FIFA",
+    title: "Le conte de fées de Duke Lacroix, de Philadelphie face à Vinícius",
+    dek: "À la veille de Haïti-Brésil, la FIFA consacre un Team Feature au défenseur Duke Lacroix : élevé dans le New Jersey, formé à l'Université de Pennsylvanie, il retrouve Philadelphie pour défier Vinícius Jr et les stars brésiliennes.",
+    cover: "/images/journal/duke-lacroix.jpg",
+    video: "https://www.youtube.com/watch?v=jyu5HpdP1Os",
+    videoExternal: true, // contenu FIFA : intégration bloquée, ouvre sur YouTube
+    videoCaption: "Team Feature FIFA consacré à Duke Lacroix.",
+    body: [
+      "À l'approche du choc tant attendu entre Haïti et le Brésil au Philadelphia Stadium, l'attention se tourne vers un duel aux allures de « David contre Goliath ». Au cœur de cette épopée historique se trouve le défenseur haïtien Duke Lacroix, dont le parcours personnel croise de manière spectaculaire la grande histoire du football de son pays.",
+      "## Un retour aux sources chargé d'émotion",
+      "Pour Duke Lacroix, ce match à Philadelphie représente bien plus qu'une simple rencontre de Coupe du Monde. Élevé dans le New Jersey, il a passé quatre ans sur les bancs de l'Université de Pennsylvanie pour ses études de premier cycle. C'est là que sa carrière de footballeur a franchi des étapes cruciales. Revenir dans cette ville pour y disputer un match d'une telle envergure internationale est un véritable rêve d'enfant devenu réalité.",
+      "Le joueur exprime avec beaucoup de fierté ce que représente le fait de porter les couleurs de sa patrie d'origine :",
+      "« C'est définitivement un moment dont j'ai rêvé : jouer contre certaines des icônes de ce sport, dans la région où j'ai grandi, avec le pays auquel je m'identifie et où mes parents ont grandi. Je n'aurais pas pu écrire un meilleur scénario. »",
+      "L'émotion est tout aussi intense du côté de sa famille. Lacroix se rappelle avec tendresse la réaction de ses parents lors de sa première sélection, sa « première cape » : alors que l'hymne national retentissait, ses parents criaient de joie devant la télévision et son père en a même pleuré. L'annonce de sa convocation officielle avec les Grenadiers d'Haïti les a transportés de bonheur.",
+      "## De l'ombre à la lumière des projecteurs",
+      "Le parcours de la sélection haïtienne dans cette campagne de la Coupe du Monde 2026 est la définition même de la persévérance. Duke Lacroix rappelle qu'au tout début de leur aventure en 2024, l'équipe jouait devant à peine quelques centaines de spectateurs à la Barbade.",
+      "Le contraste est saisissant : lors de leur premier match de poule face à l'Écosse, soldé par une défaite serrée de 1-0, l'équipe a évolué devant une foule immense de 65 000 personnes. Pour le choc face aux stars brésiliennes comme Vinícius Júnior, le stade de Philadelphie affichera complet.",
+      "## Confiance et détermination face au géant brésilien",
+      "Malgré la pression grandissante et le statut d'immense favori du Brésil, le groupe haïtien aborde ce rendez-vous sans complexe. Lacroix souligne qu'il règne une forte culture de confiance en soi au sein de l'équipe. Les joueurs sont convaincus de leurs capacités et de ce qu'ils peuvent accomplir sur le rectangle vert.",
+      "Pour Haïti, ce match est l'occasion rêvée de prouver sa valeur aux yeux du monde entier, des supporters haïtiens, brésiliens et de tous les passionnés de football. Le rendez-vous est pris pour ce grand moment d'histoire.",
+    ],
+  },
+  {
+    slug: "grenadiers-bresil",
+    date: "2026-06-17",
+    dateLabel: "17 juin 2026",
+    eyebrow: "Avant-match · Brésil",
+    title: "Les Grenadiers face au Brésil de Neymar",
+    dek: "Après l'Écosse, place à la Seleção. Ce vendredi à Philadelphie, les Grenadiers défient le Brésil de Neymar, avec l'interdiction de perdre s'ils veulent garder vivant leur rêve de seizièmes de finale.",
+    cover: "/images/journal/grenadiers-bresil.jpg",
+    body: [
+      "Les Grenadiers, battus par l'Écosse samedi dernier au Gillette Stadium pour leur retour à la Coupe du monde après plus de cinq décennies d'absence, affrontent le Brésil de Neymar Jr ce vendredi 19 juin dans un match à tout casser où la défaite est plutôt déconseillée pour les Haïtiens s'ils veulent garder en vie leur rêve d'accéder aux seizièmes de finale.",
+      "L'Écosse, c'est du passé. Place maintenant à la Seleção, quintuple championne du monde, qui a brandi le prestigieux trophée pour la dernière fois en 2002 en Corée du Sud et au Japon. C'est cette équipe affamée, assoiffée de titre et quelque peu frustrée après son match nul (1-1) contre le Maroc lors de son entrée en lice, que les protégés de Sébastien Migné affrontent ce vendredi à Philadelphie.",
+      "La peur au ventre, les pieds tremblants ? Absolument pas. La tête haute et une confiance absolue !",
+      "Car au-delà de l'écart de niveau qui sépare les deux sélections, les Grenadiers savent qu'ils auront derrière eux tout un peuple prêt à rêver d'un exploit historique. Et quoi de plus symbolique que de le faire face à une équipe du Brésil qui occupe une place particulière dans le cœur des Haïtiens ?",
+      "Depuis des générations, la Seleção est sans doute l'équipe étrangère la plus populaire en Haïti. Des rues de Port-au-Prince aux plus petites localités du pays, les maillots jaunes et verts font partie du paysage lors des grandes compétitions internationales. Pelé, Romário, Ronaldo, Ronaldinho, Kaká, Neymar : autant de noms qui ont nourri la passion de millions d'Haïtiens pour le football brésilien.",
+      "Mais vendredi, l'admiration laissera place à la compétition. Les supporters haïtiens mettront de côté leur affection pour la Seleção afin de soutenir sans réserve les Grenadiers dans ce qui s'annonce comme l'un des plus grands défis de leur histoire récente.",
+      "Les statistiques, elles, ne jouent pas en faveur d'Haïti. La dernière confrontation entre les deux formations s'était soldée par une démonstration brésilienne, les Sud-Américains s'imposant sur le score sans appel de 7 buts à 1 (Copa America Centenario). Un résultat qui rappelle toute l'ampleur de la tâche qui attend les Grenadiers.",
+      "Toutefois, les Coupes du monde ont souvent été le théâtre de surprises mémorables. Dans un match où la pression reposera principalement sur les épaules des Brésiliens, contraints de gagner pour se replacer dans la course à la qualification, Haïti pourrait tenter de jouer sa carte à fond : solidarité, discipline tactique et efficacité devant le but. Une finition qui leur a fait faux bond contre les Écossais.",
+      "Les Grenadiers auront l'occasion d'écrire une nouvelle page de leur histoire face à l'une des nations les plus prestigieuses du football mondial. L'occasion également pour les Nazon, Pierrot, Isidor et autres de confirmer pourquoi ils sont des Grenadiers et du même coup choquer le monde en écœurant le Brésil.",
+      "Wilner Bossou",
+    ],
+  },
+  {
+    slug: "national-anthems-haiti-documentaire",
     featured: true,
+    date: "2026-06-14",
+    dateLabel: "14 juin 2026",
+    eyebrow: "Reportage · Documentaire",
+    title: "« Bien plus que du sport » : le rêve haïtien raconté par ses joueurs",
+    dek: "Dans la série documentaire National Anthems, deux internationaux haïtiens racontent ce que représente ce retour au Mondial : la fierté, la diaspora, et un pays qui se raccroche à son équipe. Un film à voir.",
+    cover: "/images/journal/national-anthems-haiti.jpg",
+    video: "https://www.youtube.com/watch?v=JR6prnbl3pw",
+    videoCaption: "« Haiti's World Cup Dream Is Bigger Than Sports », série National Anthems, sur la chaîne de la MLS.",
+    source: "Source : Major League Soccer · série National Anthems.",
+    sourceUrl: "https://www.youtube.com/watch?v=JR6prnbl3pw",
+    body: [
+      "Certains récits dépassent le terrain. National Anthems est une série documentaire en neuf épisodes, produite par Goodform Productions, qui explore l'identité et l'ADN culturel des sélections du Mondial 2026 à travers le regard de joueurs de Major League Soccer et de leurs supporters. Lancée en mai 2026, déclinée en formats courts d'une dizaine de minutes publiés au rythme des grandes affiches du tournoi et diffusée notamment sur Apple TV, Prime Video, Tubi, FOX et les plateformes de la MLS, la série a posé sa caméra sur Haïti. Le résultat est un film dense, où l'on entend directement les Grenadiers raconter ce que signifie représenter leur pays à ce moment de l'histoire.",
+      "Le film s'ouvre loin des stades, dans la culture : le pâté haïtien, la cuisine, la fierté d'une diaspora qui veut élever l'image d'Haïti au moment où la sélection accède à la scène mondiale. Car c'est bien de cela qu'il s'agit, une première qualification en Coupe du Monde depuis 52 ans, pour un pays traversé par l'instabilité politique, la violence et l'épreuve. Dans ce contexte, la qualification prend des allures d'éclaircie : une raison d'espérer et de se réjouir, ensemble.",
+      "Le documentaire rappelle l'ampleur du défi relevé. Faute de pouvoir jouer le moindre match de qualification à domicile, pour des raisons de sécurité, les Grenadiers ont disputé leurs rencontres « à domicile » à Curaçao. Et malgré ce handicap, ils ont terminé en tête de leur groupe et décroché leur billet.",
+      "À l'écran, les voix de Danley Jean-Jacques (Philadelphia Union) et Derrick Etienne Jr. (Toronto FC) racontent la même chose, sous des angles différents : la fierté du maillot, le poids de l'histoire, le rêve de faire mieux que tous ceux qui les ont précédés. Car Haïti n'a jamais gagné le moindre match en Coupe du Monde, et cette génération veut être celle qui change cela, même face à des géants comme le Brésil.",
+      "Mis en ligne par la chaîne YouTube de la MLS au lendemain du match d'ouverture, le film prend un relief particulier. Pour leur entrée dans le tournoi, à Foxborough près de Boston, où vit l'une des plus grandes communautés haïtiennes des États-Unis, les Grenadiers ont retrouvé cette atmosphère bouillante de vrai match à domicile loin de la maison, malgré la défaite concédée face à l'Écosse (1-0). La route se poursuit désormais à Philadelphie face au Brésil, puis à Atlanta face au Maroc.",
+      "Le film dit, mieux que des chiffres, pourquoi cette équipe compte autant : elle porte un pays tout entier.",
+    ],
+  },
+  {
+    slug: "lenny-joseph-ruben-providence-zone-mixte-ecosse",
+    featured: true,
+    type: "press-conference",
+    date: "2026-06-13",
+    dateLabel: "13 juin 2026",
+    eyebrow: "Zone mixte · Après-match",
+    title: "« On a perdu une bataille, pas la guerre » : Joseph et Providence refusent de céder au découragement",
+    dek: "En zone mixte après la défaite (1-0) face à l'Écosse, Lenny Joseph et Ruben Providence saluent le contenu d'un match maîtrisé, pointent le manque de réalisme dans les derniers mètres, et refusent déjà d'abandonner avant le Brésil.",
+    cover: "/images/journal/joseph-providence-zone-mixte.jpg",
+    video: "https://www.youtube.com/watch?v=56tHphNuNpA",
+    videoExternal: true, // contenu FIFA : intégration bloquée, ouvre sur YouTube
+    videoCaption: "Les réactions de Lenny Joseph et Ruben Providence en zone mixte.",
+    source: "Source : Fédération Haïtienne de Football.",
+    body: [
+      "La déception était visible sur les visages haïtiens au sortir de la défaite contre l'Écosse (1-0). Mais dans les couloirs du stade, ni Lenny Joseph ni Ruben Providence ne donnaient l'impression d'une équipe abattue. Frustrés par le résultat, les deux internationaux retenaient surtout une conviction : Haïti a démontré qu'elle pouvait rivaliser avec des adversaires de haut niveau et reste pleinement en course dans cette Coupe du monde.",
+      "Le sentiment dominant était celui d'une occasion manquée. Les Grenadiers ont longtemps tenu tête aux Écossais, se créant plusieurs situations dangereuses sans parvenir à faire trembler les filets. Pour Joseph, la différence s'est jouée dans les derniers mètres.",
+      "« On a eu beaucoup d'actions en première mi-temps, après le but aussi et même pendant toute la deuxième période. Il nous manque un peu de justesse dans les derniers mètres, trouver la bonne personne, le bon espace. On doit être plus précis et concrétiser nos actions. »",
+      "Même constat du côté de Ruben Providence. L'ailier estime que le contenu produit par les Grenadiers doit servir de base pour la suite de la compétition.",
+      "« On a créé pas mal d'occasions. Malheureusement, on n'a pas réussi à mettre le ballon au fond des filets. Mais c'est encourageant pour la suite. On a eu la possession, on a créé des situations, il va simplement falloir être plus concret dans les trente derniers mètres. »",
+      "Au-delà du score, les deux joueurs ont surtout insisté sur la qualité de la prestation collective. Longtemps présentée comme l'une des équipes les moins expérimentées du tournoi, la sélection haïtienne a montré qu'elle pouvait répondre au défi physique et tactique imposé par l'Écosse.",
+      "Joseph estime même que cette première sortie a envoyé un message au reste du groupe.",
+      "« Certains nous sous-estimaient peut-être un peu. Aujourd'hui, on a montré qu'on pouvait être dangereux contre une belle équipe d'Écosse. On a été solides défensivement, on a su les mettre en difficulté. Ce sont de très bons signaux pour l'avenir. »",
+      "Providence partage cette analyse. Selon lui, le scénario du match confirme davantage les qualités d'Haïti qu'il ne révèle ses limites.",
+      "« Les gens pensaient que ce serait beaucoup plus difficile pour nous. Mais nous connaissions nos qualités. Nous ne pensions pas que l'Écosse allait nous marcher dessus. Au contraire, nous avons montré ce dont nous étions capables. Bien sûr, vu le déroulement du match, nous aurions aimé repartir avec au moins un point. »",
+      "Cette confiance n'efface toutefois pas la déception du résultat. Les deux joueurs reconnaissent que débuter la compétition avec une défaite n'était pas le scénario espéré.",
+      "« Bien sûr que ça nous affecte », admet Providence. « Nous aurions aimé commencer avec des points. Mais ce n'est pas fini. Il reste deux matchs. Même face à de très grosses équipes, nous pouvons encore obtenir un résultat. »",
+      "Car désormais, les regards se tournent vers le Brésil et le Maroc, deux adversaires que beaucoup considèrent comme encore plus redoutables que l'Écosse. Une perspective qui ne semble pourtant pas entamer l'ambition du vestiaire haïtien.",
+      "« Aujourd'hui, nous avons surpris beaucoup de monde », affirme Providence. « Nous pouvons faire la même chose contre le Brésil ou le Maroc. Il n'y a aucune raison d'abandonner. »",
+      "Le même état d'esprit anime Lenny Joseph, qui a lancé l'un des messages les plus marquants de la soirée à destination des supporters haïtiens.",
+      "« On a perdu une bataille, mais pas la guerre. On va tout donner pour essayer de prendre un maximum de points jusqu'à la fin de la compétition. Aujourd'hui, on a vu qu'on pouvait mettre les équipes en danger. »",
+      "Les deux joueurs ont également tenu à remercier les milliers de supporters présents dans les tribunes de Boston. Dans un contexte où Haïti ne peut toujours pas accueillir ses matchs internationaux à domicile, leur présence a été ressentie comme un véritable avantage.",
+      "« Nous avons besoin d'eux », a insisté Joseph. « C'est très important qu'ils fassent du bruit dans les stades et qu'ils nous poussent pendant les matchs. »",
+      "Providence espère désormais retrouver la même ferveur lors du prochain rendez-vous à Philadelphie.",
+      "« Il y avait beaucoup de supporters aujourd'hui. C'est exactement ce dont nous avons besoin. Cela nous donne de la force sur le terrain et nous aide à continuer à tout donner. »",
+      "Pour les deux Grenadiers, cette Coupe du monde représente déjà un moment historique. Cinquante-deux ans après la dernière participation d'Haïti, entendre l'hymne national résonner avant le coup d'envoi a provoqué une émotion particulière.",
+      "« C'est quelque chose d'incroyable de représenter Haïti dans cette compétition », confie Joseph. « Pendant les hymnes, on a des frissons. On veut tout donner pour rendre notre peuple fier. »",
+      "Un sentiment partagé par Providence.",
+      "« Entendre l'hymne, voir tout le public chanter, cela donne beaucoup d'émotion. Cela nous pousse à nous battre et à tout donner sur le terrain. »",
+      "Le résultat n'a donc pas changé l'état d'esprit du groupe. Dans le vestiaire haïtien, la frustration est bien réelle. Mais la conviction l'est tout autant : malgré cette défaite inaugurale, les Grenadiers continuent de croire que leur histoire dans ce Mondial est loin d'être terminée.",
+    ],
+    transcript: [
+      { heading: "Lenny Joseph" },
+      { topic: "Sur le soutien des supporters", q: "Après cette défaite, quel est votre message à la communauté haïtienne qui viendra vous soutenir à Philadelphie et à Atlanta ?", speaker: "Lenny Joseph", text: "Nous voulons d'abord remercier tout le monde. Nous avons besoin d'eux dans cette compétition. Ils doivent donner de la force à l'équipe, nous aider. C'est très important qu'ils fassent du bruit dans le stade, qu'ils nous poussent pendant les matchs. Nous avons besoin d'eux." },
+      { topic: "Sur ce qui a manqué pour revenir au score", q: "À quel moment avez-vous senti que l'équipe pouvait revenir, et qu'est-ce qui l'a empêchée ?", speaker: "Lenny Joseph", text: "Nous avons eu beaucoup d'actions en première mi-temps, après le but, et même en deuxième période. Il nous manque un peu de justesse dans les derniers mètres, trouver la bonne personne, le bon espace. Nous devons être plus précis et concrétiser." },
+      { topic: "Sur l'Écosse", q: "Quelle est votre impression de l'adversaire ?", speaker: "Lenny Joseph", text: "Une équipe très solide, avec de très bons joueurs et une défense très forte. C'était un match difficile. Mais je pense que nous avons eu les espaces pour marquer et peut-être obtenir un nul." },
+      { topic: "Sur le retour d'Haïti à la Coupe du Monde", q: "Qu'avez-vous ressenti lors des hymnes, pour le premier match d'Haïti depuis 52 ans ?", speaker: "Lenny Joseph", text: "C'est quelque chose d'incroyable de représenter Haïti. Pendant les hymnes, nous avons des frissons. Nous sommes fiers de représenter ce pays et nous voulons tout donner pour rendre les gens fiers." },
+      { topic: "Sur la crédibilité de l'équipe", q: "Pensez-vous que cette prestation a renforcé la crédibilité d'Haïti ?", speaker: "Lenny Joseph", text: "Certains nous sous-estimaient un peu. Aujourd'hui, nous avons montré que nous pouvions être dangereux, solides défensivement, et mettre une équipe comme l'Écosse en difficulté. Ce sont de très bons signaux pour la suite." },
+      { topic: "Sur le plan de jeu", speaker: "Lenny Joseph", text: "L'objectif était d'abord de bien défendre, de ne pas encaisser rapidement, mais aussi de jouer les contre-attaques à fond. Nous savions qu'il y avait des espaces derrière leurs latéraux." },
+      { topic: "Sur Frantzdy Pierrot", speaker: "Lenny Joseph", text: "J'aime jouer avec Pierrot. C'est un très bon attaquant, très fort dos au but et dans le jeu aérien. Aujourd'hui il n'a pas marqué, mais son premier but dans cette Coupe du Monde arrivera." },
+      { topic: "Message final", speaker: "Lenny Joseph", text: "Merci à tous ceux qui sont venus nous soutenir. Nous avons perdu une bataille, mais pas la guerre. Nous allons tout donner pour prendre un maximum de points jusqu'à la fin." },
+      { heading: "Ruben Providence" },
+      { topic: "Sur ce qui a manqué", q: "Qu'est-ce qui a manqué pour revenir au score ?", speaker: "Ruben Providence", text: "Pas grand-chose. Nous avons créé beaucoup d'occasions mais nous n'avons pas réussi à mettre le ballon au fond. C'est encourageant, mais nous devons être plus efficaces dans les trente derniers mètres." },
+      { topic: "Sur l'impact de la défaite", speaker: "Ruben Providence", text: "Bien sûr que cela nous affecte. Nous aurions aimé commencer avec des points. Mais il reste deux matchs et nous pouvons encore obtenir un résultat." },
+      { topic: "Sur les regrets", speaker: "Ruben Providence", text: "Beaucoup pensaient que ce serait plus difficile pour nous, mais nous connaissions nos qualités. Nous avons montré ce dont nous étions capables. Vu le déroulement, nous aurions aimé repartir avec au moins un point." },
+      { topic: "Sur le Brésil et le Maroc", speaker: "Ruben Providence", text: "Ce sont de grands adversaires, mais nous n'allons pas leur laisser la victoire. Nous allons jouer avec nos qualités, comme aujourd'hui. Nous avons surpris beaucoup de monde et nous pouvons encore le faire." },
+      { topic: "Sur le soutien de la communauté", speaker: "Ruben Providence", text: "Il y avait beaucoup de supporters aujourd'hui. C'est exactement ce dont nous avons besoin. Nous espérons le même soutien à Philadelphie. Cela nous donne de la force sur le terrain." },
+      { topic: "Sur l'émotion de représenter Haïti", speaker: "Ruben Providence", text: "Entendre l'hymne national et voir tout le public chanter ensemble, cela fait chaud au cœur. Il y avait énormément d'émotion. Cela nous motive à tout donner pour le pays." },
+      { topic: "Sur les points forts d'Haïti", speaker: "Ruben Providence", text: "Notre agressivité a été notre meilleure qualité. Nous avons gagné beaucoup de duels, nous n'avons rien lâché, et cela montre que nous sommes une équipe difficile à battre." },
+      { topic: "Sur l'Écosse", speaker: "Ruben Providence", text: "Je ne pense pas qu'ils nous aient sous-estimés. Ils savaient que nous étions compétitifs. Ils ont beaucoup travaillé sur nous et repartent certainement très heureux avec les trois points." },
+    ],
+    albums: [],
+  },
+  {
+    slug: "sebastien-migne-conference-presse-ecosse-apres-match",
+    featured: true,
+    type: "press-conference",
+    date: "2026-06-13",
+    dateLabel: "13 juin 2026",
+    eyebrow: "Conférence de presse · Après-match",
+    title: "Résilience et fierté : Migné refuse le catastrophisme après la défaite face à l'Écosse",
+    dek: "Battus mais convaincants pour leur retour au Mondial après 52 ans, les Grenadiers ont poussé l'Écosse dans ses retranchements. En conférence de presse, le sélectionneur oscille entre déception et fierté, et regarde déjà vers le Brésil.",
+    cover: "/images/journal/migne-conference-apres-match-ecosse.jpg",
+    video: "https://www.youtube.com/watch?v=Y3LQyq_uKdU",
+    videoExternal: true, // contenu FIFA : intégration bloquée, ouvre sur YouTube
+    videoCaption: "La conférence de presse d'après-match de Sébastien Migné.",
+    source: "Source : Fédération Haïtienne de Football.",
+    body: [
+      "Le résultat est cruel. Pour son retour en Coupe du monde, cinquante-deux ans après l'épopée de 1974, Haïti a quitté le terrain battue par l'Écosse (1-0), vendredi soir, avec le sentiment d'être passée tout près d'un exploit. Les Grenadiers ont longtemps rivalisé avec une sélection écossaise mieux classée et plus habituée aux grands rendez-vous internationaux, sans toutefois parvenir à transformer leurs temps forts en but.",
+      "En conférence de presse, Sébastien Migné n'a pas cherché à masquer sa déception. Mais loin de toute forme de résignation, le sélectionneur a surtout retenu la capacité de son équipe à répondre présente sur la plus grande scène du football mondial.",
+      "« Quand on s'engage dans un match, c'est pour essayer de le gagner. Il nous en manque un peu ce soir », a-t-il reconnu. « Mais je suis très fier de ce qu'ont montré les garçons, de leur prestation et du jeu pratiqué. Quand on sait d'où on vient, être à la hauteur sur ce type d'événement, c'est d'autant plus rageant. »",
+      "Cette frustration est aussi le reflet des ambitions grandissantes d'une sélection qui refuse désormais de se contenter d'un rôle de figurante. Pendant de longues séquences, Haïti a démontré qu'elle avait les moyens de rivaliser avec une nation classée 42e au classement FIFA. Le but écossais, inscrit sur l'une des rares erreurs défensives haïtiennes, a finalement rappelé la réalité du très haut niveau : la moindre hésitation se paie immédiatement.",
+      "Pour autant, Migné refuse de considérer cette défaite comme un coup d'arrêt. Depuis le début de la préparation, le technicien français répète à ses joueurs que leur parcours sera semé d'obstacles et que la qualification, si elle doit arriver, ne pourra être obtenue que dans la difficulté.",
+      "Il a rappelé que même lors des qualifications, Haïti avait dû attendre les derniers instants pour valider son billet pour le Mondial. « Avec Haïti, rien n'est jamais facile », a-t-il insisté. « Je leur martèle depuis le début que si nous devons nous qualifier, cela se fera peut-être dans les dernières minutes du troisième match. »",
+      "Dans ce contexte, il refuse tout emballement, dans un sens comme dans l'autre.",
+      "« Si nous avions gagné, il aurait fallu éviter l'euphorie. Aujourd'hui, je ne vais certainement pas tomber dans un catastrophisme ambiant. Il y avait des choses très intéressantes dans cette rencontre. »",
+      "L'une de ces satisfactions réside dans la capacité des Grenadiers à construire leurs actions et à se créer des situations dangereuses. Le sélectionneur estime néanmoins que son équipe a manqué de justesse dans les derniers mètres. « Nous avons été très intéressants dans l'élaboration du jeu jusqu'à environ vingt-cinq mètres du but adverse. Ensuite, nous avons manqué un peu de spontanéité dans nos mouvements offensifs, dans le jeu combiné et dans nos prises de décision. »",
+      "Cette analyse vaut également pour Frantzdy Pierrot. L'attaquant, né à Boston, rêvait sans doute d'un scénario différent pour cette première Coupe du monde disputée dans sa ville natale. Auteur de plusieurs situations dangereuses, il a toutefois manqué l'efficacité qui aurait pu changer le cours de la rencontre.",
+      "Migné s'est montré protecteur envers son avant-centre. « Il s'est procuré des occasions, et c'est souvent le plus difficile pour un attaquant. Il lui a manqué un peu de réussite dans la finition, mais nous n'oublions pas tout ce qu'il apporte à l'équipe. »",
+      "Déjà, les regards se tournent vers le prochain défi. Dans cinq jours, Haïti croisera la route du Brésil, l'un des favoris du tournoi. Une affiche prestigieuse qui ne semble pas impressionner outre mesure le sélectionneur.",
+      "« Nos adversaires ont beaucoup plus à perdre que nous », a-t-il lancé. « Quelle belle chance pour mes gars de jouer dans ce type d'atmosphère. »",
+      "Le nouveau format de la compétition, qui ouvre la porte aux meilleurs troisièmes, entretient par ailleurs l'espoir haïtien. Malgré cette défaite inaugurale, les Grenadiers restent pleinement en vie dans la course à la qualification. Pour Migné, l'histoire de ce Mondial ne fait que commencer.",
+      "Et si son équipe a quitté le terrain battue face à l'Écosse, elle est aussi repartie avec une conviction nouvelle : celle d'avoir sa place parmi les meilleures nations du football mondial.",
+    ],
+    transcript: [
+      { speaker: "FIFA Official", text: "Hi, I welcome the head coach, Sébastien Migné, and the press officer. Simultaneous translation is available via the FIFA interpretation app. I hand over to Jeanty Tessieu for the questions." },
+      { speaker: "Jeanty Tessieu (attaché de presse)", text: "Merci. Bonsoir tout le monde. Nous avons avec nous le coach Sébastien Migné, qui va très certainement répondre à vos questions après le match que l'équipe haïtienne vient de perdre sur le score de 1 but à 0 face à l'Écosse. Nous sommes prêts pour les questions. Question, please ?" },
+      { speaker: "Vincent Duluc (L'Équipe)", text: "Oui, bonjour. Vincent Duluc, L'Équipe. Est-ce que vous n'êtes pas surpris, mais justement encore plus déçu d'être passé aussi près ?" },
+      { speaker: "Sébastien Migné", text: "Forcément, quand on s'engage dans un match, c'est pour essayer de le gagner, et on est obligé de constater que ce soir, il nous en manque un peu. D'un côté, très fier de ce qu'ont montré les garçons, de leur prestation, du jeu pratiqué. Quand on sait d'où on vient, être à la hauteur sur ce type d'événement, c'est d'autant plus rageant, il en manque un peu. J'espère qu'on va se servir de ça pour continuer à montrer de belles prestations et garder de l'espoir. On sait qu'avec Haïti, rien n'est jamais facile, il faut faire preuve de résilience. Même quand nous avons gagné notre dernier match contre le Nicaragua, il a fallu attendre quelques minutes avant d'être sûrs d'être qualifiés. J'ai l'impression que c'est la même chose. Je leur martèle depuis le début de notre préparation que ce serait trop facile d'être en tête ce soir après une victoire, que si on doit se qualifier, ça se fera dans la difficulté, peut-être sur les dernières minutes du troisième match. On est conditionnés pour ça. Si nous avions gagné, il n'aurait pas fallu tomber dans l'euphorie, il aurait fallu canaliser tout le monde. Et là, je ne vais pas tomber dans un catastrophisme ambiant. Il y avait des choses plutôt intéressantes. Au très haut niveau, il suffit d'un oubli pour se faire sanctionner, et ça a été le cas ce soir. J'attends de revoir les images sur un plus grand écran. Il y a des images un peu virales depuis quelques minutes dans le vestiaire, avec peut-être une main écossaise, je n'en sais rien. J'attends de revoir la situation, mais je suppose qu'avec la VAR et tout ce qui est en place, si vraiment il y avait eu penalty sur une frappe de Bellegarde, ça aurait été sifflé. Déçu, mais on est là. Maintenant, c'est une montagne qui arrive dans cinq jours avec le Brésil. On va essayer d'être à la hauteur. C'est de toute manière un match de prestige, et quand on a été absents 52 ans de ce type de compétition, on ne peut pas galvauder le plaisir d'être là. Il faudra savourer toutes les minutes, donner le maximum, faire les efforts nécessaires. Et même face au Brésil, il peut se passer beaucoup de choses. Je suis bien placé pour le savoir, puisqu'avec le Cameroun, nous leur avions fait mordre la poussière lors de la dernière édition. C'est ce qu'on va essayer de réaliser." },
+      { speaker: "Jeanty Tessieu", text: "Merci. Le prochain ?" },
+      { speaker: "Baptiste Desprez (Le Figaro)", text: "Bonsoir, Sébastien. Baptiste Desprez, Le Figaro. Tu as un peu répondu, mais qu'est-ce qu'on se dit quand on va affronter le Brésil et le Maroc, les deux plus costauds du groupe ? Tu parles de fierté, mais qu'est-ce que tu vas dire à tes garçons, et est-ce que tu crois encore à la qualification ?" },
+      { speaker: "Sébastien Migné", text: "Bien sûr, je viens de vous le dire. On est conditionnés depuis le départ en se disant que ce ne sera pas facile. Le nouveau règlement, avec les huit meilleurs troisièmes possiblement qualifiables, peut nous offrir la perspective d'être en course en cas de victoire au troisième match. Il était important aussi, alors c'est toujours délicat à 1-0, d'emballer la rencontre sans s'ouvrir complètement, parce qu'on sait qu'à la fin, ça peut se jouer à la différence de buts. On grandit, on apprend encore une fois, et ce sera compliqué. On sait que c'était déjà dur avec l'Écosse, 42e au classement FIFA, et là on va atteindre les sommets. Mais je dirais que nos adversaires ont beaucoup plus à perdre que nous. Et quelle belle chance de jouer dans ce type d'atmosphère pour mes gars ! Quand on sait qu'on n'a pas joué à domicile, qu'on a été privés de toute cette relation avec nos fans, et que là on puisse partager ça avec eux, c'était formidable. Je pense que ce sera le cas encore sur les prochains matchs. On ne va rien lâcher, et on va essayer d'écrire une histoire encore plus belle que celle que les garçons sont en train d'écrire." },
+      { speaker: "Jeanty Tessieu", text: "Question ? OK, allez-y, ici." },
+      { speaker: "Steph Solis (Axios Boston)", text: "Yes, thank you. Steph Solis, Axios Boston. I'm wondering if you've spoken with Frantzdy Pierrot at this point and had a sense of what was going through his mind, and what was going through your mind as he almost scored that goal in the second half but came up a little short ?" },
+      { speaker: "Sébastien Migné", text: "En premier lieu, je suis déçu pour lui, parce qu'il est natif de Boston. C'est formidable de ramener Haïti en Coupe du Monde, et en plus de jouer ce premier match chez lui, dans la ville où il a grandi. Il s'est procuré des occasions aujourd'hui, c'est le plus difficile pour un attaquant. Il en a manqué un peu dans la finition, mais on n'oublie pas tout ce qu'il nous apporte, dans le jeu et depuis le début. Je travaille avec lui depuis deux ans et demi. Il n'y a pas d'affolement à avoir, c'est le lot de tous les attaquants de haut niveau. Aujourd'hui, il lui en a manqué un petit peu. J'espère qu'il se réserve pour les deux prochaines rencontres." },
+      { speaker: "Jeanty Tessieu", text: "Merci. Ici ?" },
+      { speaker: "Enock E. Arismat", text: "Enock E. Arismat. Qu'est-ce qui a manqué aujourd'hui à Haïti pour obtenir un meilleur résultat ? Et est-ce que vous réfléchissez déjà aux ajustements que vous comptez apporter pour les prochains matchs, qui seront beaucoup plus difficiles ?" },
+      { speaker: "Sébastien Migné", text: "Je pense qu'on a été très intéressants dans l'élaboration du jeu jusqu'à 25 mètres du but adverse. Dans ces 25 derniers mètres, on a manqué un peu de spontanéité dans nos mouvements offensifs, dans le jeu combiné, dans nos prises de décision. La marge de progression et l'axe de travail sont tout trouvés. Quant aux changements, je vais me laisser le temps de revoir le match, de débriefer avec mon staff et mes gars dès demain, sur le retour. Et on verra quel réajustement on fera. J'ai effectué des changements parce qu'on a un groupe de plus en plus large, donc j'ai plusieurs options à ma disposition. J'ai confiance en mes garçons. On a un enchaînement de matchs, même si c'est dans cinq jours, donc il s'agit de garder de la fraîcheur offensive, puisque dans tous les cas, il faudra marquer des buts si on veut un espoir de se qualifier. Il faudra que mes attaquants soient suffisamment alertes. C'est tout l'enjeu des prochains jours. On va bien se projeter. On a déjà bossé sur le Brésil, mais on va analyser leur match de cet après-midi, que j'ai observé de loin puisque j'étais concentré sur notre rencontre. On va s'y mettre dès ce soir, analyser le nôtre, et trouver la parade pour contrarier le Brésil." },
+      { speaker: "Jeanty Tessieu", text: "OK, le coach vient de répondre à la toute dernière question. Nous vous disons merci." },
+      { speaker: "Sébastien Migné", text: "Merci, messieurs dames." },
+    ],
+    albums: [],
+  },
+  {
+    slug: "gonaives-ferveur-grenadiers",
     date: "2026-06-13",
     dateLabel: "13 juin 2026",
     eyebrow: "Au pays · Gonaïves",
@@ -49,6 +238,21 @@ export const diaryEntries = [
           };
         }),
       },
+    ],
+  },
+  {
+    slug: "maillot-grenadiers-mupanah",
+    date: "2026-06-13",
+    dateLabel: "13 juin 2026",
+    eyebrow: "Patrimoine · MUPANAH",
+    title: "Le maillot des Grenadiers entre au MUPANAH",
+    dek: "À quelques heures du premier match de la Coupe du monde 2026, le ministère de la Culture a confié le maillot officiel de la Sélection au Musée du Panthéon National Haïtien.",
+    cover: "/images/journal/mupanah-maillot.jpg",
+    coverAtEnd: true,
+    body: [
+      "Le 13 juin 2026, le maillot officiel de la Sélection nationale a fait son entrée dans les collections du Musée du Panthéon National Haïtien. Le ministre de la Culture et de la Communication, le Dr Emmanuel Ménard, a remis la pièce au musée lors d'une cérémonie organisée quelques heures avant le tout premier match des Grenadiers à la Coupe du monde de la FIFA 2026.",
+      "Le directeur général du MUPANAH, Jean-Claude Legagneur, entouré de plusieurs directeurs généraux, accompagnait le ministre pour ce geste hautement symbolique. En accueillant ce maillot, le musée qui veille sur la mémoire nationale consacre la portée historique du retour d'Haïti sur la plus grande scène du football mondial, cinquante-deux ans après l'unique participation de 1974.",
+      "La date n'a rien d'un hasard. Le 13 juin marque aussi l'anniversaire de la fondation de Port-au-Prince. En rejoignant les collections ce jour-là, le maillot des Grenadiers devient un témoin de l'histoire contemporaine du pays et de la fierté que la Sélection inspire à toute la nation.",
     ],
   },
   {
@@ -755,14 +959,11 @@ export function getEntryBySlug(slug) {
   return diaryEntries.find((e) => e.slug === slug) || null;
 }
 
-// Helper — get entries sorted by date desc (newest first), but any entry
-// flagged `featured: true` is pinned ahead of the rest (used to keep a chosen
-// article in the "À la une" slot even when a more recent entry is published).
+// Helper · get entries sorted by date desc (newest first). Tri purement
+// chronologique : l'entrée la plus récente passe toujours en tête (liste du
+// Journal, « à la une » de l'accueil, articles liés).
 export function getEntriesSorted() {
-  return [...diaryEntries].sort((a, b) => {
-    if (!!b.featured !== !!a.featured) return a.featured ? -1 : 1;
-    return b.date.localeCompare(a.date);
-  });
+  return [...diaryEntries].sort((a, b) => b.date.localeCompare(a.date));
 }
 
 // Helper — normalize entry to an array of albums.

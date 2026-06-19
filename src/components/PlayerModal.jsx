@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import ImagePlaceholder from "./ImagePlaceholder";
 import SocialIcons from "./SocialIcons";
 import PlayerShareCard from "./PlayerShareCard";
@@ -101,7 +102,7 @@ export default function PlayerModal({ player, stat, onClose }) {
             src={player.photo}
             label={player.name}
             aspect="4/3"
-            objectPosition="center 25%"
+            objectPosition="center top"
             rounded={false}
           />
           {identityOverlay}
@@ -116,7 +117,7 @@ export default function PlayerModal({ player, stat, onClose }) {
               src={player.photo}
               label={player.name}
               aspect="4/5"
-              objectPosition="center 22%"
+              objectPosition="center 8%"
               rounded={false}
             />
             {identityOverlay}
@@ -129,7 +130,14 @@ export default function PlayerModal({ player, stat, onClose }) {
           {!isStaff && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line">
               <Stat label="Âge" value={player.age ?? "–"} />
-              <Stat label="Sélections" value={player.caps ?? "–"} />
+              <Stat
+                label="Sélections"
+                value={player.caps ?? "–"}
+                info={{
+                  label: "À propos du nombre de sélections",
+                  text: "Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon.",
+                }}
+              />
               <Stat label="Buts (sél.)" value={player.goals ?? "–"} accent={player.goals > 0} />
               <Stat label="Club" value={player.club} subValue={player.league} small />
             </div>
@@ -253,7 +261,7 @@ export default function PlayerModal({ player, stat, onClose }) {
   );
 }
 
-function Stat({ label, value, subValue, accent, small }) {
+function Stat({ label, value, subValue, accent, small, info }) {
   return (
     <div className="bg-white p-4 text-center">
       <p
@@ -266,8 +274,93 @@ function Stat({ label, value, subValue, accent, small }) {
         {value}
       </p>
       {subValue && <p className="text-xs text-muted mt-1 truncate">{subValue}</p>}
-      <p className="text-xs uppercase tracking-wider text-muted font-semibold mt-1">{label}</p>
+      <p className="text-xs uppercase tracking-wider text-muted font-semibold mt-1">
+        {label}
+        {info && <InfoTip label={info.label} text={info.text} />}
+      </p>
     </div>
+  );
+}
+
+// Small accessible info affordance: a focusable "i" button that toggles a note.
+// The note is rendered in a body portal as a position:fixed popover, measured and
+// clamped to the viewport, so it never overflows the screen on mobile and is never
+// clipped by the modal's overflow:hidden. Tap the icon to toggle, tap outside or
+// press Escape to dismiss; scrolling or resizing also closes it.
+function InfoTip({ label, text }) {
+  const btnRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [box, setBox] = useState(null);
+
+  const place = () => {
+    const el = btnRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const width = Math.min(280, vw - 32); // never wider than viewport minus padding
+    let left = r.left + r.width / 2 - width / 2; // centered on the icon…
+    left = Math.max(16, Math.min(left, vw - width - 16)); // …then clamped to the edges
+    setBox({ top: r.bottom + 8, left, width });
+  };
+
+  const toggle = (e) => {
+    e.stopPropagation();
+    if (open) {
+      setOpen(false);
+      return;
+    }
+    place();
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    // Capture-phase Escape so it dismisses the tooltip only, not the whole modal.
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        setOpen(false);
+      }
+    };
+    window.addEventListener("scroll", close, true);
+    window.addEventListener("resize", close);
+    document.addEventListener("keydown", onKey, true);
+    return () => {
+      window.removeEventListener("scroll", close, true);
+      window.removeEventListener("resize", close);
+      document.removeEventListener("keydown", onKey, true);
+    };
+  }, [open]);
+
+  return (
+    <>
+      <button
+        ref={btnRef}
+        type="button"
+        aria-label={label}
+        aria-expanded={open}
+        onClick={toggle}
+        className="ml-1 inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border border-haiti-red/70 text-[8px] font-bold leading-none text-haiti-red align-[1px] hover:border-haiti-red hover:text-haiti-red-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-haiti-red"
+      >
+        i
+      </button>
+      {open &&
+        box &&
+        createPortal(
+          <div className="fixed inset-0 z-[120]" onClick={() => setOpen(false)}>
+            <div
+              role="tooltip"
+              onClick={(e) => e.stopPropagation()}
+              style={{ top: box.top, left: box.left, width: box.width, maxWidth: "calc(100vw - 32px)" }}
+              className="fixed rounded-lg bg-ink px-3 py-2.5 text-left text-[11px] font-normal normal-case leading-snug tracking-normal text-bg shadow-xl"
+            >
+              {text}
+            </div>
+          </div>,
+          document.body,
+        )}
+    </>
   );
 }
 

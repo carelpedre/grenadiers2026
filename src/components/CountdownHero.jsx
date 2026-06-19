@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { matches } from "../data/matches";
 import { getMatch } from "../data/liveMatches";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  COUNTDOWN HERO — prise de contrôle du héros pour le coup d'envoi ║
@@ -76,33 +77,34 @@ function localKickoff(kickoff) {
   }
 }
 
+// Réinjecte les fragments dynamiques (date, nombre de jours) en doré dans un
+// gabarit traduit contenant les marqueurs {date} et {days}.
+function renderStory(template, { date, days }) {
+  const out = [];
+  const re = /\{(date|days)\}/g;
+  let last = 0;
+  let i = 0;
+  let m;
+  while ((m = re.exec(template)) !== null) {
+    if (m.index > last) out.push(template.slice(last, m.index));
+    out.push(
+      <span key={i++} className="text-gold font-semibold">
+        {m[1] === "date" ? date : days}
+      </span>,
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < template.length) out.push(template.slice(last));
+  return out;
+}
+
 // Le fil narratif qui relie le soir de la qualification (la vidéo) au
 // compte à rebours. `daysSince` = jours depuis le 18 novembre 2025.
 function StoryLine({ stateKey, daysSince }) {
-  if (stateKey === "live") {
-    return (
-      <>
-        <span className="text-gold font-semibold">{daysSince} jours</span> après la
-        qualification, les Grenadiers sont enfin sur le terrain.
-      </>
-    );
-  }
-  if (stateKey === "matchday") {
-    return (
-      <>
-        Le <span className="text-gold font-semibold">18 novembre 2025</span>, tout un
-        peuple rêvait de ce jour. Il est arrivé.
-      </>
-    );
-  }
-  return (
-    <>
-      Le <span className="text-gold font-semibold">18 novembre 2025</span>, Haïti
-      décrochait son billet pour le Mondial.{" "}
-      <span className="text-gold font-semibold">{daysSince} jours</span> plus tard,
-      l'attente touche à sa fin.
-    </>
-  );
+  const { t } = useT();
+  const date = t("hero.qualifDate");
+  const days = t("hero.daysCount").replace("{n}", daysSince);
+  return <>{renderStory(t(`hero.story.${stateKey}`), { date, days })}</>;
 }
 
 function localTzName(kickoff) {
@@ -119,6 +121,7 @@ function localTzName(kickoff) {
 
 export default function CountdownHero() {
   const reduce = useReducedMotion();
+  const { t } = useT();
   // Initialisé en synchrone : le premier rendu (et le HTML pré-rendu) montre
   // déjà un état cohérent, pas de flash avant l'hydratation.
   const [now, setNow] = useState(() => Date.now());
@@ -184,7 +187,7 @@ export default function CountdownHero() {
               src="/images/photos/haiti-squad-hero-1920.jpg"
               srcSet="/images/photos/haiti-squad-hero-1280.jpg 1280w, /images/photos/haiti-squad-hero-1920.jpg 1920w"
               sizes="55vw"
-              alt="L'équipe d'Haïti pour la Coupe du Monde 2026"
+              alt={t("home.squadPhotoAlt")}
               fetchPriority="high"
               className="block w-full h-auto"
             />
@@ -196,6 +199,7 @@ export default function CountdownHero() {
 }
 
 function FocusContent({ match, now, reduce }) {
+  const { t } = useT();
   const opp = opponentOf(match);
   const slug = opp.country;
   const kickoffMs = new Date(match.kickoff).getTime();
@@ -226,7 +230,7 @@ function FocusContent({ match, now, reduce }) {
   const localTime = localKickoff(match.kickoff);
   const tz = localTzName(match.kickoff);
 
-  const overline = live ? null : isMatchDay ? "JOU A RIVE 🇭🇹" : "PROCHAIN MATCH";
+  const overline = live ? null : isMatchDay ? t("hero.overline.matchday") : t("hero.overline.next");
 
   return (
     <motion.div
@@ -246,7 +250,7 @@ function FocusContent({ match, now, reduce }) {
         <Link to={matchHref} className="group inline-flex items-center gap-3 mb-5">
           <span className="w-3 h-3 rounded-full bg-haiti-red motion-safe:animate-pulse" />
           <span className="font-display text-4xl sm:text-5xl md:text-6xl leading-none text-bg uppercase tracking-tight">
-            Match en cours
+            {t("hero.live")}
           </span>
         </Link>
       ) : (
@@ -255,15 +259,15 @@ function FocusContent({ match, now, reduce }) {
             cols={
               isMatchDay
                 ? [
-                    { v: h, label: "Heures" },
-                    { v: m, label: "Minutes" },
-                    { v: s, label: "Secondes" },
+                    { v: h, label: t("home.countdown.hours") },
+                    { v: m, label: t("home.countdown.minutes") },
+                    { v: s, label: t("home.countdown.seconds") },
                   ]
                 : [
-                    { v: d, label: "Jours" },
-                    { v: h, label: "Heures" },
-                    { v: m, label: "Minutes" },
-                    { v: s, label: "Secondes" },
+                    { v: d, label: t("home.countdown.days") },
+                    { v: h, label: t("home.countdown.hours") },
+                    { v: m, label: t("home.countdown.minutes") },
+                    { v: s, label: t("home.countdown.seconds") },
                   ]
             }
           />
@@ -296,8 +300,8 @@ function FocusContent({ match, now, reduce }) {
 
       {localTime && (
         <p className="mt-1 text-bg/60 text-xs sm:text-sm">
-          Coup d'envoi · <span className="text-bg/90 font-semibold">{localTime}</span>
-          {tz ? ` (${tz})` : ""}, votre heure locale
+          {t("hero.kickoff")} · <span className="text-bg/90 font-semibold">{localTime}</span>
+          {tz ? ` (${tz})` : ""}, {t("hero.localTime")}
         </p>
       )}
 
@@ -306,7 +310,7 @@ function FocusContent({ match, now, reduce }) {
           to="/matches"
           className="inline-flex items-center gap-2 mt-5 text-gold font-semibold hover:gap-3 transition-all"
         >
-          Calendrier complet →
+          {t("hero.fullSchedule")} →
         </Link>
       )}
       {live && (
@@ -314,7 +318,7 @@ function FocusContent({ match, now, reduce }) {
           to={matchHref}
           className="inline-flex items-center gap-2 mt-7 px-7 py-3.5 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors"
         >
-          Suivre le match →
+          {t("hero.followMatch")} →
         </Link>
       )}
     </motion.div>
@@ -322,6 +326,7 @@ function FocusContent({ match, now, reduce }) {
 }
 
 function FarewellContent({ reduce }) {
+  const { t } = useT();
   return (
     <motion.div
       className="max-w-3xl"
@@ -330,23 +335,23 @@ function FarewellContent({ reduce }) {
       transition={{ duration: 0.5, delay: 0.1 }}
     >
       <p className="text-gold text-xs md:text-sm uppercase tracking-[0.28em] font-bold mb-5">
-        Coupe du Monde 2026
+        {t("hero.farewell.eyebrow")}
       </p>
       <h1 className="font-display text-5xl sm:text-6xl md:text-8xl leading-[0.95] text-bg mb-6">
-        Mèsi Grenadye {FLAG.haiti}
+        {t("hero.farewell.title")}
       </h1>
       <div className="flex items-center gap-0 mb-6 max-w-xs">
         <span className="h-[3px] flex-1 bg-haiti-blue rounded-full" />
         <span className="h-[3px] flex-1 bg-haiti-red rounded-full" />
       </div>
       <p className="text-bg/75 text-lg leading-relaxed mb-7 max-w-xl">
-        Trois matchs. Un seul drapeau. Une fierté qui ne s'éteint pas.
+        {t("hero.farewell.body")}
       </p>
       <Link
         to="/journal"
         className="inline-flex items-center gap-2 text-gold font-semibold hover:gap-3 transition-all"
       >
-        Revivre l'aventure →
+        {t("hero.farewell.cta")} →
       </Link>
     </motion.div>
   );

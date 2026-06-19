@@ -16,6 +16,16 @@ import { composeCardBlob, saveImageSync, sharePngSync, imageToDataURL } from "..
 const W = 1080;
 const H = 1350; // Instagram portrait 4:5
 
+// Layout: the photo takes ~70% of the card so the face has room; the navy info
+// panel is the bottom ~30%. Number + name overlay the photo's faded bottom,
+// club + stats sit in the panel. Both renderers (preview SVG + export overlay)
+// use these so they stay in sync.
+const PHOTO_H = Math.floor(H * 0.7);
+const NUM_Y = Math.floor(H * 0.585);
+const NAME_Y = Math.floor(H * 0.685);
+const CLUB_Y = Math.floor(H * 0.795);
+const STATS_Y = Math.floor(H * 0.85);
+
 const HAITI_BLUE = "#00209F";
 const HAITI_BLUE_DARK = "#001770";
 const HAITI_RED = "#D21034";
@@ -65,7 +75,7 @@ export default function PlayerShareCard({ player, onClose }) {
           height: H,
           paintBackground: paintPlayerBg,
           photo: photoDataUrl
-            ? { dataUrl: photoDataUrl, x: 0, y: 0, w: W, h: Math.floor(H * 0.55) }
+            ? { dataUrl: photoDataUrl, x: 0, y: 0, w: W, h: PHOTO_H, focusY: 0.04 }
             : null,
           overlaySvg: buildOverlayString(player, !!photoDataUrl),
         });
@@ -188,7 +198,7 @@ function buildSvgInner(player, photoSrc) {
         <stop offset="100%" stop-color="${HAITI_BLUE_DARK}" stop-opacity="0.95"/>
       </linearGradient>
       <clipPath id="photo-clip">
-        <rect x="0" y="0" width="${W}" height="${Math.floor(H * 0.55)}"/>
+        <rect x="0" y="0" width="${W}" height="${PHOTO_H}"/>
       </clipPath>
     </defs>
 
@@ -196,18 +206,18 @@ function buildSvgInner(player, photoSrc) {
 
     ${photoSrc ? `
       <g clip-path="url(#photo-clip)">
-        <image href="${escapeXml(photoSrc)}" x="0" y="0" width="${W}" height="${Math.floor(H * 0.55)}" preserveAspectRatio="xMidYMid slice"/>
-        <rect x="0" y="0" width="${W}" height="${Math.floor(H * 0.55)}" fill="url(#photo-fade)"/>
+        <image href="${escapeXml(photoSrc)}" x="0" y="0" width="${W}" height="${PHOTO_H}" preserveAspectRatio="xMidYMin slice"/>
+        <rect x="0" y="0" width="${W}" height="${PHOTO_H}" fill="url(#photo-fade)"/>
       </g>
     ` : `
-      <rect x="0" y="0" width="${W}" height="${Math.floor(H * 0.55)}" fill="${HAITI_BLUE_DARK}"/>
+      <rect x="0" y="0" width="${W}" height="${PHOTO_H}" fill="${HAITI_BLUE_DARK}"/>
       <text x="${W / 2}" y="${Math.floor(H * 0.3)}" font-family="Plus Jakarta Sans, sans-serif" font-size="200" font-weight="800" fill="${BG}" text-anchor="middle" opacity="0.15">${escapeXml(player.name.split(" ").map(n => n[0]).join("").slice(0,2))}</text>
     `}
 
     <!-- Position pill -->
     <g transform="translate(60, 60)">
       <rect width="220" height="46" rx="23" fill="${BG}" fill-opacity="0.15"/>
-      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((player.positionFull || "PLAYER").toUpperCase())}</text>
+      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((player.positionFull || "Joueur").toUpperCase())}</text>
     </g>
 
     ${accent ? `
@@ -219,21 +229,21 @@ function buildSvgInner(player, photoSrc) {
 
     <!-- Player number -->
     ${player.number ? `
-      <text x="60" y="${Math.floor(H * 0.5)}" font-family="Plus Jakarta Sans, sans-serif" font-size="120" font-weight="800" fill="${GOLD}">${player.number}</text>
+      <text x="60" y="${NUM_Y}" font-family="Plus Jakarta Sans, sans-serif" font-size="120" font-weight="800" fill="${GOLD}">${player.number}</text>
     ` : ""}
 
     <!-- Name -->
-    <text x="60" y="${Math.floor(H * 0.62)}" font-family="Plus Jakarta Sans, sans-serif" font-size="84" font-weight="800" fill="${BG}">
-      ${wrapTspans(player.name, 60, Math.floor(H * 0.62), 84, 14)}
+    <text x="60" y="${NAME_Y}" font-family="Plus Jakarta Sans, sans-serif" font-size="84" font-weight="800" fill="${BG}">
+      ${wrapTspans(player.name, 60, NAME_Y, 84, 14)}
     </text>
 
     <!-- Club -->
-    <text x="60" y="${Math.floor(H * 0.74)}" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="500" fill="${BG}" opacity="0.85">
+    <text x="60" y="${CLUB_Y}" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="500" fill="${BG}" opacity="0.85">
       ${escapeXml(player.club || "")}${player.clubCountry ? ` · ${escapeXml(player.clubCountry)}` : ""}
     </text>
 
     <!-- Stats row -->
-    <g transform="translate(60, ${Math.floor(H * 0.81)})">
+    <g transform="translate(60, ${STATS_Y})">
       ${player.caps != null ? `
         <g transform="translate(0, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${escapeXml(player.caps)}</text>
@@ -291,13 +301,13 @@ function buildOverlayInner(player, hasPhoto) {
     </defs>
 
     ${hasPhoto
-      ? `<rect x="0" y="0" width="${W}" height="${Math.floor(H * 0.55)}" fill="url(#photo-fade)"/>`
+      ? `<rect x="0" y="0" width="${W}" height="${PHOTO_H}" fill="url(#photo-fade)"/>`
       : `<text x="${W / 2}" y="${Math.floor(H * 0.3)}" font-family="Plus Jakarta Sans, sans-serif" font-size="200" font-weight="800" fill="${BG}" text-anchor="middle" opacity="0.15">${escapeXml(player.name.split(" ").map((n) => n[0]).join("").slice(0, 2))}</text>`}
 
     <!-- Position pill -->
     <g transform="translate(60, 60)">
       <rect width="220" height="46" rx="23" fill="${BG}" fill-opacity="0.15"/>
-      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((player.positionFull || "PLAYER").toUpperCase())}</text>
+      <text x="110" y="30" font-family="Plus Jakarta Sans, sans-serif" font-size="20" font-weight="700" fill="${BG}" text-anchor="middle" letter-spacing="1.5">${escapeXml((player.positionFull || "Joueur").toUpperCase())}</text>
     </g>
 
     ${accent ? `
@@ -308,18 +318,18 @@ function buildOverlayInner(player, hasPhoto) {
     ` : ""}
 
     ${player.number ? `
-      <text x="60" y="${Math.floor(H * 0.5)}" font-family="Plus Jakarta Sans, sans-serif" font-size="120" font-weight="800" fill="${GOLD}">${player.number}</text>
+      <text x="60" y="${NUM_Y}" font-family="Plus Jakarta Sans, sans-serif" font-size="120" font-weight="800" fill="${GOLD}">${player.number}</text>
     ` : ""}
 
-    <text x="60" y="${Math.floor(H * 0.62)}" font-family="Plus Jakarta Sans, sans-serif" font-size="84" font-weight="800" fill="${BG}">
-      ${wrapTspans(player.name, 60, Math.floor(H * 0.62), 84, 14)}
+    <text x="60" y="${NAME_Y}" font-family="Plus Jakarta Sans, sans-serif" font-size="84" font-weight="800" fill="${BG}">
+      ${wrapTspans(player.name, 60, NAME_Y, 84, 14)}
     </text>
 
-    <text x="60" y="${Math.floor(H * 0.74)}" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="500" fill="${BG}" opacity="0.85">
+    <text x="60" y="${CLUB_Y}" font-family="Plus Jakarta Sans, sans-serif" font-size="28" font-weight="500" fill="${BG}" opacity="0.85">
       ${escapeXml(player.club || "")}${player.clubCountry ? ` · ${escapeXml(player.clubCountry)}` : ""}
     </text>
 
-    <g transform="translate(60, ${Math.floor(H * 0.81)})">
+    <g transform="translate(60, ${STATS_Y})">
       ${player.caps != null ? `
         <g transform="translate(0, 0)">
           <text font-family="Plus Jakarta Sans, sans-serif" font-size="64" font-weight="800" fill="${BG}">${escapeXml(player.caps)}</text>

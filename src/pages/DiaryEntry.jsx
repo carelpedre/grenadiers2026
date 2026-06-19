@@ -24,6 +24,7 @@ export default function DiaryEntry() {
   const { slug } = useParams();
   const entry = getEntryBySlug(slug);
   const [lightbox, setLightbox] = useState(null); // flat index across all albums, or null
+  const [presserTab, setPresserTab] = useState("article"); // onglets des entrées « conférence de presse »
 
   if (!entry) {
     return (
@@ -39,13 +40,30 @@ export default function DiaryEntry() {
   // Normalize the entry's photos into albums (handles legacy gallery field).
   const albums = getAlbums(entry);
 
-  // Flat photo list — used by the lightbox so prev/next navigates across all albums.
+  // Flat photo list · used by the lightbox so prev/next navigates across all albums.
   const flatPhotos = useMemo(() => albums.flatMap((a) => a.photos), [albums]);
 
   // Map each photo back to its flat index so clicking an album thumbnail opens the right slide.
   const flatIndexOf = (photo) => flatPhotos.indexOf(photo);
 
   const otherEntries = getEntriesSorted().filter((e) => e.slug !== slug).slice(0, 3);
+
+  // Entrée « conférence de presse » : onglets L'article / Transcription intégrale
+  // au-dessus du corps. N'affecte que les entrées qui optent via
+  // type: "press-conference" (ou l'ancien format: "presser").
+  const isPresser =
+    (entry.type === "press-conference" || entry.format === "presser") &&
+    Array.isArray(entry.transcript) &&
+    entry.transcript.length > 0;
+  const PRESSER_TABS = ["article", "transcription"];
+  function onPresserTabKey(e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    const i = PRESSER_TABS.indexOf(presserTab);
+    const next = PRESSER_TABS[(i + (e.key === "ArrowRight" ? 1 : PRESSER_TABS.length - 1)) % PRESSER_TABS.length];
+    setPresserTab(next);
+    document.getElementById(`presser-tab-${next}`)?.focus();
+  }
 
   return (
     <article>
@@ -79,7 +97,44 @@ export default function DiaryEntry() {
 
       {/* Article body */}
       <section className="bg-white">
-        <div className="max-w-4xl mx-auto px-5 py-12 space-y-6 text-ink text-lg leading-relaxed">
+        <div className="max-w-4xl mx-auto px-5 py-12">
+          {isPresser && (
+            <div
+              role="tablist"
+              aria-label="Format de l'article"
+              className="mb-8 flex w-full gap-1 rounded-full border border-line bg-bg p-1"
+            >
+              {PRESSER_TABS.map((id) => {
+                const label = id === "article" ? "L'article" : "Transcription intégrale";
+                const active = presserTab === id;
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    role="tab"
+                    id={`presser-tab-${id}`}
+                    aria-selected={active}
+                    aria-controls={`presser-panel-${id}`}
+                    tabIndex={active ? 0 : -1}
+                    onClick={() => setPresserTab(id)}
+                    onKeyDown={onPresserTabKey}
+                    className={`flex-1 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-colors ${
+                      active ? "bg-ink text-bg" : "text-ink hover:bg-white"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+          {(!isPresser || presserTab === "article") && (
+            <div
+              id="presser-panel-article"
+              role={isPresser ? "tabpanel" : undefined}
+              aria-labelledby={isPresser ? "presser-tab-article" : undefined}
+              className="space-y-6 text-ink text-lg leading-relaxed"
+            >
           {entry.fixtureOpponent && (
             <MatchResultCard
               opponentSlug={entry.fixtureOpponent}
@@ -173,6 +228,16 @@ export default function DiaryEntry() {
               <p key={i}>{paragraph}</p>
             )
           )}
+          {entry.coverAtEnd && entry.cover && (
+            <figure>
+              <img
+                src={entry.cover}
+                alt={entry.title}
+                loading="lazy"
+                className="w-full h-auto rounded-lg border border-line"
+              />
+            </figure>
+          )}
           {entry.source && (
             <p className="text-sm text-muted italic pt-4 border-t border-line">
               {entry.sourceUrl ? (
@@ -202,6 +267,59 @@ export default function DiaryEntry() {
                 entry.source
               )}
             </p>
+          )}
+            </div>
+          )}
+          {isPresser && presserTab === "transcription" && (
+            <div
+              id="presser-panel-transcription"
+              role="tabpanel"
+              aria-labelledby="presser-tab-transcription"
+              className="max-w-prose"
+            >
+              {entry.transcriptNote && (
+                <p className="text-sm text-muted italic mb-8">{entry.transcriptNote}</p>
+              )}
+              <div className="space-y-6 leading-relaxed">
+                {entry.transcript.map((t, i) =>
+                  t.heading ? (
+                    // Section header (e.g. a player's name in a zone-mixte transcript).
+                    <div key={i} className="pt-6 first:pt-0">
+                      <span className="flag-rule block w-8 rounded-full mb-2.5" />
+                      <p className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight text-ink">
+                        {t.heading}
+                      </p>
+                    </div>
+                  ) : (
+                    <div key={i}>
+                      {t.topic && (
+                        <p className="text-gold/80 text-xs font-semibold uppercase tracking-wider mb-2">
+                          {t.topic}
+                        </p>
+                      )}
+                      {t.q && <p className="text-muted italic mb-2">{t.q}</p>}
+                      <p className="mb-1.5 flex flex-wrap items-baseline gap-x-2.5">
+                        {t.time && (
+                          <span className="text-gold/80 text-xs font-semibold tabular-nums tracking-wider">
+                            {t.time}
+                          </span>
+                        )}
+                        <span className="font-bold text-ink">{t.speaker}</span>
+                      </p>
+                      {Array.isArray(t.lines) ? (
+                        <div className="space-y-3 text-ink/90 text-lg leading-relaxed">
+                          {t.lines.map((l, j) => (
+                            <p key={j}>{l}</p>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-ink/90 text-lg leading-relaxed">{t.text}</p>
+                      )}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
           )}
         </div>
       </section>
@@ -335,8 +453,8 @@ export default function DiaryEntry() {
 // Single album: optional title + grid of photo thumbnails.
 // Clicking a thumbnail opens the lightbox at the correct flat index.
 // Two layouts:
-//   • default  — fixed 3/4 thumbnails, mobile 2 / desktop 3 (compact, uniform).
-//   • masonry  — natural aspect, nothing cropped (CSS columns, break-inside-avoid,
+//   • default  · fixed 3/4 thumbnails, mobile 2 / desktop 3 (compact, uniform).
+//   • masonry  · natural aspect, nothing cropped (CSS columns, break-inside-avoid,
 //     w-full h-auto), mobile 2 / desktop 3. For large photo sets (e.g. a full
 //     reportage) where cropping would hurt. Opt in with `layout: "masonry"`.
 function Album({ album, flatIndexOf, onPhotoClick }) {

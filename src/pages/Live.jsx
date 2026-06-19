@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Flag } from "../components/Flag";
 import { fadeUp, stagger } from "../lib/motion";
 import { getMatch } from "../data/liveMatches";
 import CountdownClock from "../components/CountdownClock";
+import Wc26Mark from "../components/Wc26Mark";
+import MatchSectionHead from "../components/MatchSectionHead";
 import StadiumWeather from "../components/StadiumWeather";
 import GroupCTable from "../components/GroupCTable";
 import { useLiveFixtures } from "../lib/useLiveFixtures";
-import { fetchFixtureByOpponent, getOpponentScouting, isLive } from "../lib/fixturesApi";
+import { fetchFixtureByOpponent, fetchMatchPlayers, getOpponentScouting, isLive } from "../lib/fixturesApi";
 import ScoutingSection from "../components/ScoutingSection";
+import PlayerMatchStatsCard, { PlayerStatsContext, PlayerName } from "../components/PlayerMatchStatsCard";
 
 const HAITI_TEAM_ID = 2386;
 
 // ╔═══════════════════════════════════════════════════════════════════════╗
-// ║  LIVE MATCH CENTER — /live/:slug                                       ║
+// ║  LIVE MATCH CENTER · /live/:slug                                       ║
 // ║                                                                        ║
 // ║  One page per Haiti match. Updates manually during the game by         ║
 // ║  editing src/data/liveMatches.js and redeploying.                      ║
@@ -99,6 +102,39 @@ function LiveMatchView({ match }) {
     };
   }, [oppId, isPreMatch]);
 
+  // Per-player match stats (wc-match-players). Loaded once per fixture, and
+  // refreshed whenever `detail` reloads while live, cached in a Map so each card
+  // opens from memory with no per-click network call.
+  const [matchPlayers, setMatchPlayers] = useState(null);
+  const [selectedPlayerId, setSelectedPlayerId] = useState(null);
+  useEffect(() => {
+    const fid = detail?.fixture_id;
+    if (!fid) return;
+    let alive = true;
+    (async () => {
+      const d = await fetchMatchPlayers(fid);
+      if (alive) setMatchPlayers(d);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [detail?.fixture_id, detail?.updated_at]);
+
+  const playersAvailable = matchPlayers?.available === true;
+  const playersById = useMemo(() => {
+    const m = new Map();
+    const all = matchPlayers?.players
+      ? [...(matchPlayers.players.home || []), ...(matchPlayers.players.away || [])]
+      : [];
+    all.forEach((p) => {
+      if (p?.id != null) m.set(p.id, p);
+    });
+    return m;
+  }, [matchPlayers]);
+  // Only clickable when stats exist (no dead UI pre-match).
+  const openPlayer = playersAvailable ? (id) => setSelectedPlayerId(id) : null;
+  const selectedPlayer = selectedPlayerId != null ? playersById.get(selectedPlayerId) : null;
+
   const apiEvents = Array.isArray(detail?.events) ? detail.events : [];
   const lineups = Array.isArray(detail?.lineups) ? detail.lineups : [];
   const stats = Array.isArray(detail?.statistics) ? detail.statistics : [];
@@ -156,30 +192,57 @@ function LiveMatchView({ match }) {
     : detailTabs[0]?.id;
 
   return (
+    <PlayerStatsContext.Provider value={openPlayer}>
     <div>
-      {/* Live header banner */}
-      <header className="bg-ink text-bg">
-        <div className="max-w-content mx-auto px-5 py-8 md:py-12">
-          <div className="flex items-center justify-between mb-4">
-            <Link to="/matches" className="text-haiti-red text-xs uppercase tracking-wider font-bold hover:text-bg transition-colors">
+      {/* Live header banner · 2026 broadcast system, Haiti colorway */}
+      <header className="relative overflow-hidden bg-ink-deep text-bg">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 90% at 85% 8%, rgba(0,32,159,.45), transparent 60%), radial-gradient(85% 75% at 0% 100%, rgba(210,16,52,.28), transparent 55%)",
+          }}
+        />
+        {/* Structural "26" device, bleeding off the right edge, masked to fade. */}
+        <div
+          className="pointer-events-none absolute -right-4 -top-3 w-[58%] max-w-[440px] opacity-[0.16] md:opacity-25"
+          style={{
+            maskImage: "linear-gradient(to left, #000 35%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to left, #000 35%, transparent 100%)",
+          }}
+        >
+          <Wc26Mark className="w-full h-auto" />
+        </div>
+
+        <div className="relative max-w-content mx-auto px-5 py-8 md:py-12">
+          <div className="flex items-center justify-between mb-7">
+            <Link to="/matches" className="font-cond text-xs uppercase tracking-[0.18em] font-semibold text-bg/70 hover:text-bg transition-colors">
               ← Tous les matchs
             </Link>
             <StatusBadge status={effStatus} minute={effMinute} />
           </div>
 
-          <p className="text-bg/60 text-xs uppercase tracking-wider font-bold mb-1">{group}{match.matchNumber != null ? ` · Match ${match.matchNumber}` : ""}</p>
-          <p className="text-bg/60 text-sm mb-6">{dateLabel} · {timeLabel}</p>
+          {/* Competition labels */}
+          <p className="font-cond text-gold text-xs md:text-sm uppercase tracking-[0.28em] font-semibold">
+            Coupe du Monde FIFA 2026
+          </p>
+          <div className="mt-2 mb-7 flex items-center gap-3">
+            <span className="flag-rule w-10 rounded-full" />
+            <p className="font-cond text-bg/70 text-xs uppercase tracking-[0.2em] font-medium">
+              {group}{match.matchNumber != null ? ` · Match ${match.matchNumber}` : ""}
+            </p>
+          </div>
 
-          {/* Score line — teams left/right, score centered (mobile-friendly) */}
-          <div className="grid grid-cols-3 items-start gap-2 md:gap-6 mb-3">
+          {/* Score line · teams left/right, score centered (mobile-friendly) */}
+          <div className="grid grid-cols-3 items-center gap-2 md:gap-6 mb-3">
             <TeamHead name="Haïti" country="haiti" logo={live?.haitiLogo} />
-            <div className="text-center pt-1 md:pt-2">
+            <div className="text-center">
               {effStatus === "scheduled" ? (
-                <p className="font-display text-xl md:text-3xl text-bg/50">vs</p>
+                <p className="font-block text-3xl md:text-5xl text-bg/40 leading-none">VS</p>
               ) : (
-                <p className="font-display text-3xl md:text-6xl tabular-nums leading-none">
+                <p className="font-block text-6xl md:text-8xl tabular-nums leading-none">
                   {effHaiti}
-                  <span className="text-bg/30 mx-1.5 md:mx-3">-</span>
+                  <span className="text-gold mx-1.5 md:mx-3">:</span>
                   {effOpp}
                 </p>
               )}
@@ -192,7 +255,7 @@ function LiveMatchView({ match }) {
               <div className="text-right space-y-0.5">
                 {haitiScorers.map((s, i) => (
                   <p key={i}>
-                    {scorerLine(s)} <span className="text-haiti-red">⚽</span>
+                    {scorerLine(s)} <span className="text-gold">⚽</span>
                   </p>
                 ))}
               </div>
@@ -200,16 +263,22 @@ function LiveMatchView({ match }) {
               <div className="text-left space-y-0.5">
                 {oppScorers.map((s, i) => (
                   <p key={i}>
-                    <span className="text-haiti-red">⚽</span> {scorerLine(s)}
+                    <span className="text-gold">⚽</span> {scorerLine(s)}
                   </p>
                 ))}
               </div>
             </div>
           )}
 
+          <p className="mt-6 text-center font-cond text-bg/55 text-xs md:text-sm uppercase tracking-[0.18em]">
+            {dateLabel} · {timeLabel}
+          </p>
+
           {effStatus === "scheduled" && (
-            <div className="mt-8 pt-6 border-t border-bg/10">
-              <p className="text-bg/60 text-xs uppercase tracking-wider font-bold mb-3 text-center">Coup d'envoi dans</p>
+            <div className="mt-7 pt-6 border-t border-bg/10">
+              <p className="font-cond text-gold/90 text-xs uppercase tracking-[0.22em] font-semibold mb-3 text-center">
+                Coup d'envoi dans
+              </p>
               <div className="flex justify-center">
                 <CountdownClock target={kickoff} />
               </div>
@@ -218,13 +287,13 @@ function LiveMatchView({ match }) {
 
           {match.access && (
             <p className="text-center text-bg/50 text-sm mt-4">
-              <span className="text-bg/40">Accès :</span> {match.access}
+              <span className="font-cond uppercase tracking-wider text-bg/40 text-xs">Accès :</span> {match.access}
             </p>
           )}
 
           {broadcast && (
             <p className="text-center text-bg/50 text-sm mt-6">
-              <span className="text-bg/40">Diffusion :</span> {broadcast}
+              <span className="font-cond uppercase tracking-wider text-bg/40 text-xs">Diffusion :</span> {broadcast}
             </p>
           )}
 
@@ -232,7 +301,7 @@ function LiveMatchView({ match }) {
             <p className="text-center text-sm mt-6">
               <Link
                 to={match.journal}
-                className="text-haiti-red font-semibold uppercase tracking-wider text-xs hover:text-bg transition-colors"
+                className="font-cond text-gold font-semibold uppercase tracking-[0.18em] text-xs hover:text-bg transition-colors"
               >
                 Lire le résumé du match →
               </Link>
@@ -265,21 +334,21 @@ function LiveMatchView({ match }) {
       </div>
 
       <div className="max-w-content mx-auto px-5 py-8 md:py-12 space-y-12">
-        {/* Rich match data (tabbed) — or pre-match / manual fallback */}
+        {/* Rich match data (tabbed) · or pre-match / manual fallback */}
         <section>
           {detailTabs.length > 0 ? (
             <>
-              <div className="flex items-center gap-1 border-b border-line mb-6 overflow-x-auto">
+              <div className="mb-7 flex w-max max-w-full gap-1 overflow-x-auto rounded-full border border-line bg-bg p-1">
                 {detailTabs.map((t) => (
                   <button
                     key={t.id}
                     type="button"
                     onClick={() => setDetailTab(t.id)}
                     aria-selected={activeDetailTab === t.id}
-                    className={`shrink-0 px-4 py-2 text-sm font-semibold uppercase tracking-wider border-b-2 -mb-px transition-colors ${
+                    className={`shrink-0 rounded-full px-4 py-1.5 font-cond text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
                       activeDetailTab === t.id
-                        ? "border-haiti-red text-ink"
-                        : "border-transparent text-muted hover:text-ink"
+                        ? "bg-ink text-bg"
+                        : "text-muted hover:text-ink"
                     }`}
                   >
                     {t.label}
@@ -306,9 +375,9 @@ function LiveMatchView({ match }) {
             </>
           ) : (
             <>
-              <h2 className="font-display text-2xl mb-6">
+              <MatchSectionHead>
                 {effStatus === "scheduled" ? "Avant le match" : "Mises à jour en direct"}
-              </h2>
+              </MatchSectionHead>
               {effStatus === "scheduled" ? (
                 <div className="space-y-8">
                   <p className="text-ink/80 leading-relaxed">
@@ -316,13 +385,13 @@ function LiveMatchView({ match }) {
                     <strong>chronologie</strong> des buts et cartons, les{" "}
                     <strong>compositions</strong> avec les notes des joueurs, les{" "}
                     <strong>statistiques</strong> comparées et les{" "}
-                    <strong>notes individuelles</strong>. Inutile de rafraîchir — tout
+                    <strong>notes individuelles</strong>. Inutile de rafraîchir, tout
                     apparaît en direct.
                   </p>
                   {group === "Groupe C" && (
                     <GroupCTable
                       standings={standings}
-                      title="Classement — Groupe C"
+                      title="Classement · Groupe C"
                       subtitle="Avant le match · actualisé automatiquement"
                       footnote={false}
                     />
@@ -350,13 +419,13 @@ function LiveMatchView({ match }) {
           )}
         </section>
 
-        {/* Scouting adversaire — avant-match uniquement (masqué dès le coup d'envoi) */}
+        {/* Scouting adversaire · avant-match uniquement (masqué dès le coup d'envoi) */}
         {isPreMatch && scouting && <ScoutingSection data={scouting} />}
 
         {/* Recent form */}
         {recentForm.length > 0 && (
           <section>
-            <h2 className="font-display text-xl md:text-2xl mb-4">Forme récente · Haïti</h2>
+            <MatchSectionHead>Forme récente · Haïti</MatchSectionHead>
             <div className="flex flex-wrap items-stretch gap-3">
               {recentForm.map((f, i) => (
                 <FormChip key={i} fixture={f} />
@@ -367,7 +436,7 @@ function LiveMatchView({ match }) {
 
         {/* Other matches */}
         <section>
-          <h2 className="font-display text-xl md:text-2xl mb-4">Autres matchs</h2>
+          <MatchSectionHead>Autres matchs</MatchSectionHead>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {["scotland", "brazil", "morocco"]
               .filter((s) => s !== match.slug)
@@ -381,7 +450,7 @@ function LiveMatchView({ match }) {
                   >
                     <Flag country={s} size="lg" />
                     <div className="min-w-0">
-                      <p className="font-display text-base md:text-lg truncate">Haïti — {m.opponent.name}</p>
+                      <p className="font-display text-base md:text-lg truncate">Haïti · {m.opponent.name}</p>
                       <p className="text-muted text-sm">{m.dateLabel.replace(" 2026", "")}</p>
                     </div>
                   </Link>
@@ -391,6 +460,10 @@ function LiveMatchView({ match }) {
         </section>
       </div>
     </div>
+    {selectedPlayer && (
+      <PlayerMatchStatsCard player={selectedPlayer} onClose={() => setSelectedPlayerId(null)} />
+    )}
+    </PlayerStatsContext.Provider>
   );
 }
 
@@ -432,12 +505,12 @@ function TeamCrest({ country, logo }) {
   return null;
 }
 
-// Stacked team header (crest on top, name below) — fits narrow screens.
+// Stacked team header (crest on top, name below) · fits narrow screens.
 function TeamHead({ name, country, logo }) {
   return (
-    <div className="flex flex-col items-center text-center gap-2 min-w-0">
+    <div className="flex flex-col items-center text-center gap-2.5 min-w-0">
       <TeamCrest country={country} logo={logo} />
-      <p className="font-display text-sm md:text-2xl uppercase tracking-tight leading-tight break-words">
+      <p className="font-cond text-base md:text-3xl font-bold uppercase tracking-tight leading-none break-words">
         {name}
       </p>
     </div>
@@ -454,8 +527,8 @@ function TimelineEvent({ event, match }) {
     red: "🟥",
     sub: "🔄",
     kickoff: "▶︎",
-    ht: "—",
-    ft: "—",
+    ht: "·",
+    ft: "·",
     note: "•",
   };
 
@@ -471,10 +544,10 @@ function TimelineEvent({ event, match }) {
         <span className="text-lg flex-shrink-0">{icons[type] || "•"}</span>
         <div className="flex-1 min-w-0">
           {type === "goal" && (
-            <p className="text-ink"><strong className="font-display">BUT · {sideName}</strong> {scorer}{note ? ` — ${note}` : ""}</p>
+            <p className="text-ink"><strong className="font-display">BUT · {sideName}</strong> {scorer}{note ? ` · ${note}` : ""}</p>
           )}
           {(type === "yellow" || type === "red") && (
-            <p className="text-ink"><strong>{type === "yellow" ? "Carton jaune" : "Carton rouge"} · {sideName}</strong> — {player}{note ? `. ${note}` : ""}</p>
+            <p className="text-ink"><strong>{type === "yellow" ? "Carton jaune" : "Carton rouge"} · {sideName}</strong> · {player}{note ? `. ${note}` : ""}</p>
           )}
           {type === "sub" && (
             <p className="text-ink"><strong>Changement · {sideName}</strong> entrée de {on}, sortie de {off}</p>
@@ -503,7 +576,7 @@ const FORM_FR = {
 };
 const frFormName = (n) => FORM_FR[n?.toLowerCase()] || n;
 
-// Forme récente — carte : bande de résultat, logo, NOM de l'adversaire, score, résultat.
+// Forme récente · carte : bande de résultat, logo, NOM de l'adversaire, score, résultat.
 function FormChip({ fixture }) {
   const { haitiGoals, oppGoals, oppName, oppLogo } = fixture;
   const win = haitiGoals > oppGoals;
@@ -573,28 +646,28 @@ function ApiEvent({ e }) {
     const tag = e.detail === "Penalty" ? " (pén.)" : e.detail === "Own Goal" ? " (csc)" : "";
     label = (
       <>
-        <strong className="font-display">But</strong> · {e.player?.name}
+        <strong className="font-display">But</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
         {tag}
-        {e.assist?.name ? <span className="text-muted"> (passe : {e.assist.name})</span> : null}
+        {e.assist?.name ? <span className="text-muted"> (passe : <PlayerName id={e.assist?.id} name={e.assist.name} className="text-muted" />)</span> : null}
       </>
     );
   } else if (e.type === "Card") {
     label = (
       <>
-        <strong>{e.detail?.includes("Red") ? "Carton rouge" : "Carton jaune"}</strong> · {e.player?.name}
+        <strong>{e.detail?.includes("Red") ? "Carton rouge" : "Carton jaune"}</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
       </>
     );
   } else if (e.type === "subst") {
     label = (
       <>
-        <strong>Changement</strong> · {e.player?.name}
-        {e.assist?.name ? ` ↔ ${e.assist.name}` : ""}
+        <strong>Changement</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
+        {e.assist?.name ? <> ↔ <PlayerName id={e.assist?.id} name={e.assist.name} /></> : null}
       </>
     );
   } else {
     label = (
       <>
-        {e.detail || e.type} · {e.player?.name}
+        {e.detail || e.type} · <PlayerName id={e.player?.id} name={e.player?.name} />
       </>
     );
   }
@@ -633,13 +706,17 @@ function teamDots(lineup, side) {
     );
     const n = players.length;
     const f = maxRow > 1 ? (r - 1) / (maxRow - 1) : 0; // 0 = GK, 1 = attack
-    const xHalf = 6 + f * 40;
     players.forEach((player, idx) => {
-      dots.push({
-        player,
-        x: side === "left" ? xHalf : 100 - xHalf,
-        y: ((idx + 1) / (n + 1)) * 100,
-      });
+      const spread = ((idx + 1) / (n + 1)) * 100; // position within the row
+      if (side === "vertical") {
+        // Portrait, single team attacking UP: GK at his own goal (bottom),
+        // forwards stop in front of the attacking box (not inside the net).
+        dots.push({ player, x: spread, y: 88 - f * 70 });
+      } else {
+        // Two teams packed onto one landscape field (left / right halves).
+        const x = side === "left" ? 6 + f * 40 : 100 - (6 + f * 40);
+        dots.push({ player, x, y: spread });
+      }
     });
   });
   return dots;
@@ -705,36 +782,42 @@ function PitchPlayer({ player, x, y, color, rating, offMinute }) {
           </span>
         )}
       </span>
-      <span className="text-[9px] md:text-xs text-white mt-1 max-w-[5.5rem] truncate drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-        {player?.number} {lastName(player?.name)}
+      <span className="text-[9px] md:text-xs text-white mt-1 max-w-[4.5rem] md:max-w-[5.5rem] truncate drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+        {player?.number} <PlayerName id={player?.id} name={lastName(player?.name)} />
       </span>
     </div>
   );
 }
 
-function PitchTeam({ lineup, side, color, ratingById, subMinById }) {
-  return teamDots(lineup, side).map((d, i) => (
-    <PitchPlayer
-      key={i}
-      player={d.player}
-      x={d.x}
-      y={d.y}
-      color={color}
-      rating={ratingById?.[d.player?.id]}
-      offMinute={subMinById?.[d.player?.id]}
-    />
-  ));
-}
-
-function Pitch({ haiti, opp, ratingById, subMinById }) {
+// One team on a portrait pitch, attacking upward · the keeper sits in his own
+// goal (bottom), the team spreads over its own half and into midfield, forwards
+// stop in front of the attacking box. Roomy on mobile, football-correct.
+function SingleTeamPitch({ lineup, color, ratingById, subMinById }) {
   return (
-    <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden bg-gradient-to-r from-green-700 to-green-600">
-      {/* pitch markings */}
-      <div className="absolute inset-2 border border-white/25 rounded" />
-      <div className="absolute inset-y-2 left-1/2 w-px bg-white/25" />
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-24 md:h-24 rounded-full border border-white/25" />
-      <PitchTeam lineup={haiti} side="left" color="bg-haiti-blue" ratingById={ratingById} subMinById={subMinById} />
-      <PitchTeam lineup={opp} side="right" color="bg-haiti-red" ratingById={ratingById} subMinById={subMinById} />
+    <div className="relative mx-auto w-full max-w-sm sm:max-w-md aspect-[68/100] overflow-hidden rounded-lg bg-gradient-to-b from-green-600 to-green-700">
+      {/* outer line + halfway line + center circle */}
+      <div className="absolute inset-2 rounded-sm border border-white/25" />
+      <div className="absolute inset-x-2 top-1/2 h-px bg-white/25" />
+      <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/25" />
+      {/* attacking goal (top): penalty box + goal mouth */}
+      <div className="absolute left-1/2 top-2 h-[15%] w-1/2 -translate-x-1/2 rounded-b-sm border-x border-b border-white/25" />
+      <div className="absolute left-1/2 top-2 h-[6%] w-1/4 -translate-x-1/2 rounded-b-sm border-x border-b border-white/25" />
+      <div className="absolute left-1/2 top-1 h-1.5 w-14 -translate-x-1/2 rounded-b-sm bg-white/35" />
+      {/* own goal (bottom): penalty box + goal mouth where the keeper stands */}
+      <div className="absolute bottom-2 left-1/2 h-[15%] w-1/2 -translate-x-1/2 rounded-t-sm border-x border-t border-white/25" />
+      <div className="absolute bottom-2 left-1/2 h-[6%] w-1/4 -translate-x-1/2 rounded-t-sm border-x border-t border-white/25" />
+      <div className="absolute bottom-1 left-1/2 h-1.5 w-14 -translate-x-1/2 rounded-t-sm bg-white/35" />
+      {teamDots(lineup, "vertical").map((d, i) => (
+        <PitchPlayer
+          key={i}
+          player={d.player}
+          x={d.x}
+          y={d.y}
+          color={color}
+          rating={ratingById?.[d.player?.id]}
+          offMinute={subMinById?.[d.player?.id]}
+        />
+      ))}
     </div>
   );
 }
@@ -754,8 +837,8 @@ function TeamLineupList({ lineup, name, showXI }) {
             <li key={j} className="flex items-center gap-2">
               <span className="text-muted tabular-nums w-5 text-right flex-shrink-0">{player?.number}</span>
               <PlayerAvatar id={player?.id} className="w-6 h-6" />
-              <span className="text-ink truncate">{player?.name}</span>
-              {player?.pos && <span className="text-muted text-xs ml-auto flex-shrink-0">{player.pos}</span>}
+              <span className="text-ink truncate"><PlayerName id={player?.id} name={player?.name} /></span>
+              {player?.pos && <span className="text-muted text-xs ml-auto flex-shrink-0">{posFr(player.pos)}</span>}
             </li>
           ))}
         </ol>
@@ -768,7 +851,7 @@ function TeamLineupList({ lineup, name, showXI }) {
               <li key={j} className="flex items-center gap-2 text-ink/70">
                 <span className="text-muted tabular-nums w-5 text-right flex-shrink-0">{player?.number}</span>
                 <PlayerAvatar id={player?.id} className="w-6 h-6" />
-                <span className="truncate">{player?.name}</span>
+                <span className="truncate"><PlayerName id={player?.id} name={player?.name} /></span>
               </li>
             ))}
           </ol>
@@ -784,10 +867,23 @@ function TeamLineupList({ lineup, name, showXI }) {
 }
 
 const POS_FR = { G: "Gardien", D: "Défenseur", M: "Milieu", F: "Attaquant" };
-const posFr = (p) => POS_FR[p] || p || "";
+const POS_WORDS = {
+  goalkeeper: "Gardien",
+  keeper: "Gardien",
+  defender: "Défenseur",
+  midfielder: "Milieu",
+  attacker: "Attaquant",
+  forward: "Attaquant",
+  striker: "Attaquant",
+};
+const posFr = (p) => {
+  if (!p) return "";
+  const s = String(p).trim();
+  return POS_FR[s.toUpperCase()] || POS_WORDS[s.toLowerCase()] || s;
+};
 
 // A sub "came on" if it has minutes (player stats) OR appears in a substitution
-// event — so it works even when the API has no per-player stats for the match.
+// event · so it works even when the API has no per-player stats for the match.
 function splitSubs(lineup, pstatById, subMinById) {
   const played = [];
   const bench = [];
@@ -812,7 +908,7 @@ function SubRow({ player, stat, onMinute }) {
       )}
       <span className="text-muted tabular-nums text-xs w-5 text-right flex-shrink-0">{player?.number}</span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm text-ink">{player?.name}</span>
+        <span className="block truncate text-sm text-ink"><PlayerName id={player?.id} name={player?.name} /></span>
         <span className="block text-[11px] text-muted">{posFr(player?.pos)}</span>
       </span>
       <span className="flex items-center gap-1.5 text-xs flex-shrink-0">
@@ -825,78 +921,88 @@ function SubRow({ player, stat, onMinute }) {
   );
 }
 
-function SubsColumn({ name, players, pstatById, subMinById }) {
-  if (players.length === 0) return <div className="hidden md:block" />;
-  return (
-    <div>
-      <p className="text-[11px] uppercase tracking-wider text-muted font-semibold mb-1">{name}</p>
-      <ol>
-        {players.map((p, i) => (
-          <SubRow key={i} player={p} stat={pstatById[p?.id]} onMinute={subMinById[p?.id]} />
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-function SubsSection({ title, haitiPlayers, oppPlayers, oppName, pstatById, subMinById }) {
-  if (haitiPlayers.length === 0 && oppPlayers.length === 0) return null;
-  return (
-    <div>
-      <h3 className="font-display text-lg mb-3">{title}</h3>
-      <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
-        <SubsColumn name="Haïti" players={haitiPlayers} pstatById={pstatById} subMinById={subMinById} />
-        <SubsColumn name={oppName} players={oppPlayers} pstatById={pstatById} subMinById={subMinById} />
+// One team's subs (entered the game) and bench, single column.
+function TeamSubs({ played, bench, pstatById, subMinById }) {
+  if (played.length === 0 && bench.length === 0) return null;
+  const block = (title, players) =>
+    players.length === 0 ? null : (
+      <div>
+        <h3 className="font-display text-lg mb-2">{title}</h3>
+        <ol className="grid sm:grid-cols-2 gap-x-8">
+          {players.map((p, i) => (
+            <SubRow key={i} player={p} stat={pstatById[p?.id]} onMinute={subMinById[p?.id]} />
+          ))}
+        </ol>
       </div>
+    );
+  return (
+    <div className="space-y-6">
+      {block("Remplaçants", played)}
+      {block("Banc", bench)}
     </div>
   );
 }
 
 function Lineups({ haiti, opp, oppName, ratingById, pstatById, subMinById }) {
+  // One team at a time · the full pitch is too crowded on mobile with photos.
+  const [team, setTeam] = useState("haiti");
+  const sel = team === "haiti" ? haiti : opp;
+  const selName = team === "haiti" ? "Haïti" : oppName;
+  const selColor = team === "haiti" ? "bg-haiti-blue" : "bg-haiti-red";
+
+  const toggle = (
+    <div className="mb-6 flex w-max max-w-full gap-1 rounded-full border border-line bg-bg p-1">
+      {[
+        { id: "haiti", label: "Haïti", logo: haiti?.team?.logo },
+        { id: "opp", label: oppName, logo: opp?.team?.logo },
+      ].map((t) => (
+        <button
+          key={t.id}
+          type="button"
+          onClick={() => setTeam(t.id)}
+          aria-selected={team === t.id}
+          className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-1.5 font-cond text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
+            team === t.id ? "bg-ink text-bg" : "text-muted hover:text-ink"
+          }`}
+        >
+          {t.logo && <img src={t.logo} alt="" loading="lazy" className="h-4 w-4 object-contain" />}
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+
   const hasGrid = (l) => (l?.startXI || []).some((p) => p.player?.grid);
   const pitch = hasGrid(haiti) && hasGrid(opp);
 
-  // Fallback for matches without pitch coordinates: plain lists.
+  // Fallback for matches without pitch coordinates: plain list.
   if (!pitch) {
     return (
-      <div className="grid md:grid-cols-2 gap-6">
-        <TeamLineupList lineup={haiti} name="Haïti" showXI />
-        <TeamLineupList lineup={opp} name={oppName} showXI />
+      <div>
+        {toggle}
+        <TeamLineupList lineup={sel} name={selName} showXI />
       </div>
     );
   }
 
-  const h = splitSubs(haiti, pstatById, subMinById);
-  const o = splitSubs(opp, pstatById, subMinById);
+  const s = splitSubs(sel, pstatById, subMinById);
   return (
-    <div className="space-y-8">
-      <Pitch haiti={haiti} opp={opp} ratingById={ratingById} subMinById={subMinById} />
-      <SubsSection
-        title="Remplaçants"
-        haitiPlayers={h.played}
-        oppPlayers={o.played}
-        oppName={oppName}
-        pstatById={pstatById}
-        subMinById={subMinById}
-      />
-      <SubsSection
-        title="Banc"
-        haitiPlayers={h.bench}
-        oppPlayers={o.bench}
-        oppName={oppName}
-        pstatById={pstatById}
-        subMinById={subMinById}
-      />
-      {(haiti?.coach?.name || opp?.coach?.name) && (
-        <p className="text-xs text-muted pt-2 border-t border-line">
-          Sélectionneurs : Haïti — {haiti?.coach?.name || "—"} · {oppName} — {opp?.coach?.name || "—"}
-        </p>
-      )}
+    <div>
+      {toggle}
+      <div className="space-y-8">
+        <SingleTeamPitch lineup={sel} color={selColor} ratingById={ratingById} subMinById={subMinById} />
+        <TeamSubs played={s.played} bench={s.bench} pstatById={pstatById} subMinById={subMinById} />
+        {sel?.coach?.name && (
+          <p className="text-xs text-muted pt-2 border-t border-line">
+            Sélectionneur : {sel.coach.name}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
 
-// ─── Joueurs — tableau de stats par joueur (note, min, buts, passes D…) ──
+// ─── Joueurs · tableau de stats par joueur (note, min, buts, passes D…) ──
 function normPlayer(p, isHaiti) {
   const st = p.statistics?.[0] || {};
   const r = st.games?.rating;
@@ -949,7 +1055,10 @@ function PlayerStats({ haiti, opp, oppName }) {
                   <span className="flex items-center gap-2 min-w-0">
                     <span className={`w-1 h-6 rounded-full flex-shrink-0 ${p.isHaiti ? "bg-haiti-blue" : "bg-haiti-red"}`} />
                     <PlayerAvatar id={p.id} className="w-6 h-6" />
-                    <span className="truncate">{p.name}{p.captain ? " (C)" : ""}</span>
+                    <span className="truncate text-ink">
+                      <PlayerName id={p.id} name={p.name} />
+                      {p.captain ? <span className="text-muted"> (C)</span> : null}
+                    </span>
                   </span>
                 </td>
                 <td className="text-center px-1.5">
@@ -1023,6 +1132,8 @@ function StatBars({ haiti, opp, oppName }) {
   const top = TOP_STATS.filter((t) => types.includes(t));
   const rest = types.filter((t) => !top.includes(t));
 
+  // Two bars meeting in the middle (Haïti grows left, opponent grows right);
+  // the leading side stays vivid, the trailing side dims.
   const Bar = ({ t }) => {
     const hRaw = hVal(t);
     const aRaw = aVal(t);
@@ -1030,54 +1141,64 @@ function StatBars({ haiti, opp, oppName }) {
     const a = parseStat(aRaw);
     const total = h + a;
     const hPct = total > 0 ? (h / total) * 100 : 50;
+    const aPct = 100 - hPct;
+    const hLead = h > a;
+    const aLead = a > h;
     return (
-      <div>
-        <div className="flex items-center justify-between text-sm mb-1">
-          <span className="font-semibold tabular-nums">{hRaw ?? "—"}</span>
-          <span className="text-muted text-xs uppercase tracking-wide text-center px-2">{statFr(t)}</span>
-          <span className="font-semibold tabular-nums">{aRaw ?? "—"}</span>
+      <div className="py-2.5">
+        <div className="mb-1.5 flex items-baseline justify-between gap-3">
+          <span className={`font-block text-lg leading-none tabular-nums ${hLead ? "text-haiti-blue" : "text-ink/60"}`}>
+            {hRaw ?? "·"}
+          </span>
+          <span className="font-cond text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+            {statFr(t)}
+          </span>
+          <span className={`font-block text-lg leading-none tabular-nums ${aLead ? "text-haiti-red" : "text-ink/60"}`}>
+            {aRaw ?? "·"}
+          </span>
         </div>
-        <div className="flex h-2 rounded-full overflow-hidden bg-line">
-          <div className="bg-haiti-blue" style={{ width: `${hPct}%` }} />
-          <div className="bg-haiti-red flex-1" />
+        <div className="flex items-center gap-1">
+          <div className="flex h-2 flex-1 justify-end overflow-hidden rounded-full bg-line/70">
+            <div className={`h-full rounded-full bg-haiti-blue ${hLead ? "" : "opacity-40"}`} style={{ width: `${hPct}%` }} />
+          </div>
+          <div className="flex h-2 flex-1 overflow-hidden rounded-full bg-line/70">
+            <div className={`h-full rounded-full bg-haiti-red ${aLead ? "" : "opacity-40"}`} style={{ width: `${aPct}%` }} />
+          </div>
         </div>
       </div>
     );
   };
 
-  return (
-    <div>
-      {/* Legend */}
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-wider text-muted mb-4">
-        <span className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-haiti-blue" /> Haïti
-        </span>
-        <span className="flex items-center gap-1.5">
-          {oppName} <span className="w-2.5 h-2.5 rounded-full bg-haiti-red" />
-        </span>
+  const Section = ({ title, items }) =>
+    items.length === 0 ? null : (
+      <div>
+        <div className="mb-3 flex items-center gap-3">
+          <h3 className="font-cond text-sm font-semibold uppercase tracking-[0.18em] text-gold">{title}</h3>
+          <span className="flag-rule flex-1 rounded-full opacity-60" />
+        </div>
+        <div className="divide-y divide-line/70 rounded-2xl border border-line bg-bg px-4 py-1">
+          {items.map((t) => (
+            <Bar key={t} t={t} />
+          ))}
+        </div>
       </div>
+    );
 
-      {top.length > 0 && (
-        <>
-          <p className="font-display text-lg mb-3">Top stats</p>
-          <div className="space-y-4">
-            {top.map((t) => (
-              <Bar key={t} t={t} />
-            ))}
-          </div>
-        </>
-      )}
+  const TeamTag = ({ logo, name, align }) => (
+    <span className={`flex items-center gap-2 ${align === "right" ? "flex-row-reverse" : ""}`}>
+      {logo && <img src={logo} alt="" loading="lazy" className="h-6 w-6 object-contain" />}
+      <span className="font-cond text-sm font-semibold uppercase tracking-[0.1em] text-ink">{name}</span>
+    </span>
+  );
 
-      {rest.length > 0 && (
-        <>
-          <p className="font-display text-lg mt-8 mb-3">Toutes les statistiques</p>
-          <div className="space-y-4">
-            {rest.map((t) => (
-              <Bar key={t} t={t} />
-            ))}
-          </div>
-        </>
-      )}
+  return (
+    <div className="space-y-7">
+      <div className="flex items-center justify-between">
+        <TeamTag logo={haiti?.team?.logo} name="Haïti" align="left" />
+        <TeamTag logo={opp?.team?.logo} name={oppName} align="right" />
+      </div>
+      <Section title="Statistiques clés" items={top} />
+      <Section title="Toutes les statistiques" items={rest} />
     </div>
   );
 }

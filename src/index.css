@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Saira+Condensed:wght@500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -21,6 +21,26 @@ body {
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.05;
+}
+
+/* ─── Match-page display faces (evoke the 2026 broadcast system) ─────────
+   font-block : Anton, the blocky monolithic numeral / big caps face.
+   font-cond  : Saira Condensed, condensed caps for headers and labels.
+   Scoped to the match surfaces only; the rest of the site keeps Jakarta. */
+.font-block {
+  font-family: "Anton", "Plus Jakarta Sans", system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+}
+.font-cond {
+  font-family: "Saira Condensed", "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* Thin two-tone Haiti flag rule, used as a precise divider on match cards. */
+.flag-rule {
+  height: 3px;
+  background: linear-gradient(to right, #00209f 0 50%, #d21034 50% 100%);
 }
 
 @keyframes modal-in {

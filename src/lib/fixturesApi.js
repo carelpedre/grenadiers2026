@@ -149,6 +149,23 @@ export async function fetchFixtureByOpponent(slug) {
   }
 }
 
+// Statistiques par joueur d'un match (fonction edge wc-match-players). Renvoie
+// tous les joueurs des deux équipes pour un fixture donné. On les charge une
+// seule fois, puis chaque carte lit la map par id (aucun appel réseau au clic).
+// Réponse : { ok, available, players: { home: [...], away: [...] } }. Retourne
+// null en cas d'erreur réseau.
+export async function fetchMatchPlayers(fixtureId) {
+  if (!backendReady || !fixtureId) return null;
+  try {
+    const q = `${SUPABASE_URL}/functions/v1/wc-match-players?id=${encodeURIComponent(fixtureId)}`;
+    const res = await fetch(q, { headers: headers() });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 // Classement du groupe C (vue publique), trié par rang croissant.
 // Retourne un tableau de lignes, ou null si le backend est indisponible.
 export async function fetchGroupCStandings() {

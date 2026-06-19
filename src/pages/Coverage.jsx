@@ -11,6 +11,8 @@ import {
   shortFilms,
   ferronDocumentary,
   chokarellaProductions,
+  supporterPoem,
+  downloads,
 } from "../data/coverage";
 
 // ╔══════════════════════════════════════════════════════════════════════╗
@@ -126,6 +128,30 @@ export default function Coverage() {
           />
 
           <CreativeTributesExhibit />
+        </>
+      )}
+
+      {/* ─── CHAPTER VI · POÉSIE ───────────────────────────────────── */}
+      {activeTab === "poesie" && (
+        <>
+          <ChapterMarker
+            title="Poésie"
+            anchorId="poesie"
+            wallText="Au-delà des images et des sons, la qualification inspire aussi les mots. Un supporter signe ici un hommage en vers, sur la liberté, l'unité et cinquante-deux ans d'attente enfin récompensés."
+          />
+          <PoemExhibit />
+        </>
+      )}
+
+      {/* ─── CHAPTER VII · À TÉLÉCHARGER ───────────────────────────── */}
+      {activeTab === "telecharger" && (
+        <>
+          <ChapterMarker
+            title="À télécharger"
+            anchorId="telecharger"
+            wallText="Des visuels aux couleurs des Grenadiers, à emporter et à partager."
+          />
+          <DownloadsGrid />
         </>
       )}
 
@@ -251,6 +277,8 @@ const CHAPTERS = [
   { id: "films", label: "Films" },
   { id: "art", label: "Art" },
   { id: "objets", label: "Objets & emblèmes" },
+  { id: "poesie", label: "Poésie" },
+  { id: "telecharger", label: "À télécharger" },
 ];
 
 function ChapterNav({ active, onSelect }) {
@@ -364,6 +392,64 @@ function MusicVideoExhibit({ video }) {
               {video.note}
             </p>
           )}
+        </div>
+      </motion.div>
+    </article>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════
+//  POEM EXHIBIT · a supporter's poem, set in a literary register
+// ════════════════════════════════════════════════════════════════════════
+
+function PoemExhibit() {
+  return (
+    <article id="poeme" className="scroll-mt-24 max-w-content mx-auto px-5 pb-20 md:pb-28">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* Plate caption */}
+        <div className="max-w-3xl mx-auto mb-8 md:mb-10 text-center">
+          <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
+            Hommage littéraire · Poème
+          </p>
+          <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05]">
+            {supporterPoem.title}
+          </h3>
+        </div>
+
+        {/* The poem's own dedicated image */}
+        <div className="max-w-md mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md mb-10 md:mb-12">
+          <ImagePlaceholder
+            src={supporterPoem.image}
+            label={supporterPoem.imageLabel}
+            aspect="1/1"
+            rounded={false}
+          />
+        </div>
+
+        {/* The poem · serif, centered, generous line height, clearly set apart */}
+        <div className="max-w-2xl mx-auto">
+          <div className="relative rounded-lg border border-line bg-white px-6 py-10 md:px-12 md:py-14 shadow-sm">
+            <span aria-hidden="true" className="flag-rule block w-12 mx-auto mb-8 rounded-full" />
+            <p
+              className="font-serif italic text-ink/90 text-lg md:text-xl text-center whitespace-pre-line"
+              style={{ lineHeight: 1.9 }}
+            >
+              {supporterPoem.lines.join("\n")}
+            </p>
+            <p className="mt-10 text-center text-sm text-muted">
+              Texte : {supporterPoem.author}
+            </p>
+          </div>
+
+          {/* Toussaint framing · quiet note */}
+          <p className="mt-6 max-w-xl mx-auto text-center text-sm text-muted leading-relaxed">
+            {supporterPoem.note}
+          </p>
         </div>
       </motion.div>
     </article>
@@ -732,8 +818,12 @@ function TributeExhibit({ work }) {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Portrait object (stamp, poster…) — contained so edges aren't cropped */}
-        <div className="max-w-sm mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md">
+        {/* Portrait object (stamp, poster, illustration…) — contained so edges
+            aren't cropped. `large` works (where the art IS the tribute) get a
+            roomier frame. */}
+        <div
+          className={`${work.large ? "max-w-lg" : "max-w-sm"} mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md`}
+        >
           <ImagePlaceholder
             src={work.image}
             label={work.imageLabel}
@@ -789,11 +879,19 @@ function TributeExhibit({ work }) {
               {work.description}
             </p>
           )}
+
+          {/* Pull-quote · highlighted, set apart from the body */}
+          {work.quote && (
+            <blockquote className="mx-auto my-6 max-w-xl border-y border-line py-5 font-display text-xl md:text-2xl italic leading-snug text-ink">
+              «&nbsp;{work.quote}&nbsp;»
+            </blockquote>
+          )}
+
           <p className="text-xs text-muted italic">
             {work.credit}
             {work.creditUrl && (
               <>
-                {" · "}
+                {work.creditInline ? " " : " · "}
                 <a
                   href={work.creditUrl}
                   target="_blank"
@@ -808,6 +906,64 @@ function TributeExhibit({ work }) {
         </figcaption>
       </motion.figure>
     </article>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════════════
+//  À TÉLÉCHARGER · visuels à emporter (bloc indépendant du poème)
+// ════════════════════════════════════════════════════════════════════════
+
+function DownloadsGrid() {
+  return (
+    <div className="max-w-content mx-auto px-5 pb-20 md:pb-28">
+      <div className="grid sm:grid-cols-2 gap-6 max-w-3xl items-start">
+        {downloads.map((item) => (
+          <DownloadCard key={item.file} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DownloadCard({ item }) {
+  return (
+    <motion.a
+      href={item.file}
+      download
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="group block overflow-hidden rounded-lg border border-line bg-white shadow-sm transition-all hover:border-haiti-blue/40 hover:shadow-md"
+    >
+      <ImagePlaceholder
+        src={item.file}
+        label={item.label}
+        aspect={item.aspect || "3/4"}
+        fit="contain"
+        rounded={false}
+      />
+      <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="min-w-0">
+          <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-haiti-red mb-1">
+            {item.kind}
+          </p>
+          <p className="font-display text-lg text-ink leading-tight truncate">
+            {item.label}
+          </p>
+        </div>
+        <span
+          aria-hidden="true"
+          className="shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-full bg-haiti-blue text-white transition-colors group-hover:bg-haiti-blue-dark"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" />
+          </svg>
+        </span>
+      </div>
+    </motion.a>
   );
 }
 

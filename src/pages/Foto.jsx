@@ -2,11 +2,13 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import { fetchAlbums, fetchAlbum, backendReady } from "../lib/galleryApi";
+import { videos, DEFAULT_VIDEO_CREDIT } from "../data/videos";
+import { useT } from "../lib/i18n";
 
 const TITLE_SUFFIX = "Galerie photos · Grenadiers 2026";
 
 // ╔══════════════════════════════════════════════════════════════════╗
-// ║  /foto — galerie photo publique.                                   ║
+// ║  /foto · galerie photo publique.                                   ║
 // ║  Grille d'albums -> grille de photos -> visionneuse (lightbox).    ║
 // ║  Date d'événement et crédit viennent de chaque album (peuvent      ║
 // ║  être absents : on n'affiche rien dans ce cas).                    ║
@@ -57,12 +59,15 @@ function ImgWithFallback({ src, fallback, alt, className }) {
 export default function Foto() {
   // The open album is driven by the URL: /foto (grid) vs /foto/<slug> (album),
   // so albums are deep-linkable and shareable (and prerendered for crawlers).
+  const { t } = useT();
   const { slug } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [albums, setAlbums] = useState(null); // null = chargement
   const [albumData, setAlbumData] = useState(null); // réponse fetchAlbum (null = chargement)
   const [lightbox, setLightbox] = useState(-1); // index, -1 = fermé
+  const [view, setView] = useState("photos"); // "photos" (albums) | "videos"
+  const [activeVideo, setActiveVideo] = useState(null); // clip ouvert dans la visionneuse
 
   // Legacy ?album=<slug> deep links redirect to the canonical /foto/<slug> path.
   useEffect(() => {
@@ -137,9 +142,9 @@ export default function Foto() {
   return (
     <div>
       <PageHeader
-        eyebrow="Galerie"
-        title="Photos"
-        subtitle="La route des Grenadiers vers la Coupe du Monde 2026, en images."
+        eyebrow={t("nav.gallery")}
+        title={t("nav.photos")}
+        subtitle={t("media.subtitle")}
       />
 
       <div className="max-w-content mx-auto px-5 py-12 md:py-16">
@@ -155,7 +160,14 @@ export default function Foto() {
             onOpen={(i) => setLightbox(i)}
           />
         ) : (
-          <AlbumGrid albums={albums} onOpen={openAlbum} />
+          <>
+            <ViewToggle view={view} onChange={setView} />
+            {view === "photos" ? (
+              <AlbumGrid albums={albums} onOpen={openAlbum} />
+            ) : (
+              <VideoGrid videos={videos} onOpen={setActiveVideo} />
+            )}
+          </>
         )}
       </div>
 
@@ -167,20 +179,162 @@ export default function Foto() {
           onChange={(i) => setLightbox(i)}
         />
       )}
+
+      {activeVideo && <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />}
+    </div>
+  );
+}
+
+// Bascule Photos / Vidéos (mêmes pastilles que le filtre de la galerie).
+function ViewToggle({ view, onChange }) {
+  const { t } = useT();
+  const tabs = [
+    { id: "photos", label: t("media.tabPhotos") },
+    { id: "videos", label: t("media.tabVideos") },
+  ];
+  return (
+    <div className="flex gap-2 mb-8">
+      {tabs.map((t) => (
+        <button
+          key={t.id}
+          type="button"
+          aria-pressed={view === t.id}
+          onClick={() => onChange(t.id)}
+          className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors whitespace-nowrap ${
+            view === t.id ? "bg-haiti-blue text-bg" : "bg-bg text-ink hover:bg-line border border-line"
+          }`}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Grille de clips. Posters en object-cover (grille uniforme), indicateur de
+// lecture et crédit FHF. Clic -> visionneuse vidéo. État vide gracieux.
+function VideoGrid({ videos, onOpen }) {
+  const { t } = useT();
+  if (!videos || videos.length === 0) {
+    return (
+      <div className="bg-bg border border-line rounded-lg p-10 text-center">
+        <h2 className="font-display text-xl text-ink mb-2">{t("media.videoEmptyTitle")}</h2>
+        <p className="text-muted text-sm max-w-prose mx-auto">
+          {t("media.videoEmptyBody")}
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 items-start">
+      {videos.map((v) => {
+        const date = frEventDate(v.date);
+        const credit = v.credit || DEFAULT_VIDEO_CREDIT;
+        return (
+          <button
+            key={v.slug ?? v.id}
+            type="button"
+            onClick={() => onOpen(v)}
+            className="group text-left rounded-lg overflow-hidden border border-line bg-white hover:border-haiti-red transition-colors"
+          >
+            <div className="aspect-[9/16] bg-bg overflow-hidden relative">
+              {v.poster ? (
+                <img
+                  src={v.poster}
+                  alt={v.title || ""}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-muted text-xs">{t("media.videoFallback")}</div>
+              )}
+              <span className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                <span className="w-14 h-14 rounded-full bg-ink/55 group-hover:bg-haiti-red/85 transition-colors flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-bg ml-0.5">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div className="p-3">
+              <p className="font-display text-base text-ink break-words">{v.title}</p>
+              <p className="text-muted text-xs mt-0.5">
+                {date && <span>{date} · </span>}
+                {credit}
+              </p>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// Visionneuse vidéo : reprend les conventions d'overlay de la Lightbox photo
+// (plein écran, fond ink, fermeture Échap / clic / bouton). Lecture native du
+// mp4 à son ratio d'origine ; preload="none" pour ne rien télécharger d'avance.
+function VideoModal({ video, onClose }) {
+  const { t } = useT();
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const credit = video.credit || DEFAULT_VIDEO_CREDIT;
+
+  return (
+    <div
+      className="fixed inset-0 z-[95] bg-ink/95 flex items-center justify-center"
+      style={{ height: "100dvh" }}
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label={t("a11y.close")}
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-bg/15 hover:bg-bg/30 text-bg flex items-center justify-center"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div className="max-w-[92vw]" onClick={(e) => e.stopPropagation()}>
+        <video
+          src={video.src}
+          poster={video.poster}
+          controls
+          playsInline
+          preload="none"
+          className="max-w-[92vw] max-h-[82dvh] w-auto h-auto rounded-md bg-black"
+        />
+        <p className="mt-3 text-center text-bg/70 text-xs">
+          {video.title}
+          {credit ? ` · ${credit}` : ""}
+        </p>
+      </div>
     </div>
   );
 }
 
 function AlbumGrid({ albums, onOpen }) {
+  const { t } = useT();
   if (albums === null) {
-    return <p className="text-muted text-sm text-center py-16">Chargement des albums…</p>;
+    return <p className="text-muted text-sm text-center py-16">{t("media.loadingAlbums")}</p>;
   }
   if (albums.length === 0) {
     return (
       <div className="bg-bg border border-line rounded-lg p-10 text-center">
-        <h2 className="font-display text-xl text-ink mb-2">Bientôt en images</h2>
+        <h2 className="font-display text-xl text-ink mb-2">{t("media.albumEmptyTitle")}</h2>
         <p className="text-muted text-sm max-w-prose mx-auto">
-          Aucun album pour le moment. Les premières photos arrivent très vite.
+          {t("media.albumEmptyBody")}
         </p>
       </div>
     );
@@ -206,7 +360,7 @@ function AlbumGrid({ albums, onOpen }) {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-muted text-xs">
-                  Album
+                  {t("media.albumFallback")}
                 </div>
               )}
             </div>
@@ -225,6 +379,7 @@ function AlbumGrid({ albums, onOpen }) {
 }
 
 function AlbumView({ name, eventDate, credit, creditUrl, description, photos, onBack, onOpen }) {
+  const { t } = useT();
   const date = frEventDate(eventDate);
   return (
     <div>
@@ -234,13 +389,13 @@ function AlbumView({ name, eventDate, credit, creditUrl, description, photos, on
           onClick={onBack}
           className="text-haiti-red text-xs uppercase tracking-wider font-bold hover:text-ink transition-colors"
         >
-          ← Tous les albums
+          ← {t("media.backToAlbums")}
         </button>
         <h2 className="font-display text-xl md:text-3xl text-ink mt-3">{name}</h2>
         {date && <p className="text-muted text-sm mt-1">{date}</p>}
         {credit && (
           <p className="text-muted text-xs mt-1">
-            Photos :{" "}
+            {t("media.photosBy")}{" "}
             {creditUrl ? (
               <a
                 href={creditUrl}
@@ -274,9 +429,9 @@ function AlbumView({ name, eventDate, credit, creditUrl, description, photos, on
       <AlbumDescription description={description} />
 
       {photos === null ? (
-        <p className="text-muted text-sm text-center py-16">Chargement des photos…</p>
+        <p className="text-muted text-sm text-center py-16">{t("media.loadingPhotos")}</p>
       ) : photos.length === 0 ? (
-        <p className="text-muted text-sm text-center py-16">Cet album est vide pour le moment.</p>
+        <p className="text-muted text-sm text-center py-16">{t("media.albumEmpty")}</p>
       ) : (
         // Masonry (CSS columns): thumbs keep their natural aspect ratio so
         // portrait and landscape shots both show whole, never cropped. The
@@ -326,6 +481,7 @@ function AlbumDescription({ description }) {
 }
 
 function Lightbox({ photos, index, onClose, onChange }) {
+  const { t } = useT();
   const prev = useCallback(
     () => onChange((index - 1 + photos.length) % photos.length),
     [index, photos.length, onChange],
@@ -371,7 +527,7 @@ function Lightbox({ photos, index, onClose, onChange }) {
       <button
         type="button"
         onClick={onClose}
-        aria-label="Fermer"
+        aria-label={t("a11y.close")}
         className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-bg/15 hover:bg-bg/30 text-bg flex items-center justify-center"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -384,7 +540,7 @@ function Lightbox({ photos, index, onClose, onChange }) {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); prev(); }}
-            aria-label="Photo précédente"
+            aria-label={t("media.prevPhoto")}
             className="absolute left-2 md:left-4 z-10 w-11 h-11 rounded-full bg-bg/15 hover:bg-bg/30 text-bg flex items-center justify-center"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -394,7 +550,7 @@ function Lightbox({ photos, index, onClose, onChange }) {
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); next(); }}
-            aria-label="Photo suivante"
+            aria-label={t("media.nextPhoto")}
             className="absolute right-2 md:right-4 z-10 w-11 h-11 rounded-full bg-bg/15 hover:bg-bg/30 text-bg flex items-center justify-center"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

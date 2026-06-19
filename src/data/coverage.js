@@ -191,6 +191,22 @@ export const lyneLucien = {
 // affiché tel quel (pas de crédit hérité). Nouvelles entrées en tête.
 export const creativeTributes = [
   {
+    slug: "the-winner-khami-ken",
+    title: "The WINNER",
+    chapter: "art",
+    medium: "Illustration",
+    large: true, // l'œuvre EST l'hommage : on l'affiche en grand, non rognée
+    image: "/images/tribute/the-winner-khami-ken.jpg",
+    imageLabel: "The WINNER · illustration de Khami_ken",
+    description:
+      "Cette illustration symbolise la passion, la force et la détermination des Grenadiers. Le joueur, illuminé par la lumière du soleil, représente l'espoir et la fierté de toute une nation. Son cri incarne le courage, le sacrifice et l'esprit de combat nécessaires pour atteindre les plus grands sommets, alimenté par une soif de victoire. Elle a pour objectif de refléter l'équipe nationale et le peuple haïtien à travers une seule chair, et de porter haut les couleurs d'Haïti sur la scène internationale.",
+    quote: "Chaque cri de victoire est l'aboutissement d'années de sacrifice.",
+    credit: "Illustration :",
+    creditInline: true, // « Illustration : Khami_ken » (espace, pas de middot)
+    creditHandle: "Khami_ken",
+    creditUrl: "https://www.instagram.com/khami_ken/",
+  },
+  {
     slug: "lento-ayizan-tanbou-2026",
     title: "Ayiti nan Mondyal 2026 : Tanbou viktwa a deja frape",
     credit: "Lento Ayizan",
@@ -240,6 +256,63 @@ LEANDRE Loodwens aka LENTO AYIZAN`,
     imageLabel: "Timbre commémoratif des Grenadiers — 1000 gourdes",
     description:
       "À l'occasion de la qualification d'Haïti pour la Coupe du Monde 2026, Dubicart Gallery et l'Office des Postes d'Haïti ont fait émettre un timbre commémoratif officiel d'une valeur de 1000 gourdes, autorisé par un arrêté du Conseil des ministres le 6 mai 2026. La vignette réunit en une seule image les Grenadiers en bleu, le gardien en jaune et le drapeau national porté à bout de bras, au milieu d'une foule en liesse. Plus qu'un objet de collection, ce timbre devient un document officiel appelé à circuler à travers le monde, témoin durable de la résilience et du talent haïtiens. Une initiative portée par le juriste Wolff Dubic, fondateur de Dubicart Gallery, qui inscrit l'exploit des Grenadiers dans la grande tradition philatélique des Mondiaux.",
+  },
+];
+
+// ─── Hommage littéraire · poème d'un supporter ──────────────────────────
+// Rendu en fin de chapitre « Clips musicaux », dans un style typographique
+// distinct (serif, centré). Le texte est en anglais : NE PAS traduire, et
+// conserver les sauts de ligne tels quels (une entrée = une ligne).
+export const supporterPoem = {
+  title: "L'arbre de la liberté",
+  image: "/images/tribute/hommage-poeme.jpg",
+  imageLabel: "L'arbre de la liberté · hommage poétique aux Grenadiers",
+  author: "un supporter haïtien", // remplacer par le nom fourni, le cas échéant
+  lines: [
+    "52 years of waiting to see the world stage",
+    "52 years of a nation rooting for others",
+    "52 years of lost hope",
+    "222 years of freedom",
+    "What is freedom?",
+    "Freedom is unity",
+    "Freedom is coming together",
+    "Freedom is fighting the enemy, come what may",
+    "Freedom is establishing ourselves as the first free black nation",
+    "Freedom is taken not given",
+    "We are free, yet our freedom is questioned",
+    "We don't have the freedom of expression",
+    "We don't have the freedom to roam in our own land",
+    "We don't have the freedom to show pride in our uniform",
+    "We don't have the freedom to be",
+    "But again, freedom is taken not given",
+    "We did it in 1803",
+    "We did it in 1804",
+    "We have done it countless times",
+    "We did it in 2025",
+    "We will do it again",
+    "We will show out, we will reign on the world stage",
+    "We are a free and united people",
+    "We will soar again without anyone seeing it coming",
+  ],
+  note:
+    "Inspiré par la demande de refonte du maillot national et par cette phrase de Toussaint Louverture : « En me renversant, on n'a abattu à Saint-Domingue que le tronc de l'arbre de la liberté ; il repoussera par les racines, car elles sont profondes et nombreuses. » L'union fait la force.",
+};
+
+// ─── À télécharger · visuels aux couleurs des Grenadiers ────────────────
+// Bloc indépendant du poème. Chaque entrée est un fichier statique servi
+// depuis public/downloads/ (téléchargement direct, voir DownloadsSection).
+export const downloads = [
+  {
+    label: "Affiche des Grenadiers",
+    kind: "Affiche",
+    file: "/downloads/grenadiers-2026-affiche.jpg",
+    aspect: "16/9",
+  },
+  {
+    label: "Fond d'écran (téléphone)",
+    kind: "Fond d'écran",
+    file: "/downloads/grenadiers-2026-fond-ecran.jpg",
+    aspect: "3/4",
   },
 ];
 

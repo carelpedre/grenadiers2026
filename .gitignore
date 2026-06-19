@@ -6,6 +6,10 @@ dist/
 dist-ssr/
 *.local
 
+# Temporary photo backups created by tools/swap-squad-photos.mjs (revert aid).
+.photos-backup-*/
+public/images/photos-backup-*/
+
 # ─── Environment / secrets ───────────────────────────────────────────
 .env
 .env.*
