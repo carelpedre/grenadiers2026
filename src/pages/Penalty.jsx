@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════════╗
 // ║  TIRE PENALTY  ·  /jeux/penalty                                        ║
@@ -109,10 +110,8 @@ async function copyText(text) {
   }
 }
 
-const SHARE_TEXT =
-  "J'ai éliminé l'Écosse, le Brésil et le Maroc aux tirs au but 🇭🇹 Joue aussi : grenadiers2026.com/jeux/penalty";
-
 export default function Penalty() {
+  const { t } = useT();
   const reduced = useMemo(
     () =>
       typeof window !== "undefined" &&
@@ -276,15 +275,15 @@ export default function Penalty() {
       goodForYou = scored;
       if (scored) {
         stats.current.goals += 1;
-        text = "But !";
-      } else if (over) text = "Au-dessus !";
-      else text = "Arrêt !";
+        text = t("penalty.goal");
+      } else if (over) text = t("penalty.over");
+      else text = t("penalty.save");
     } else {
       goodForYou = saved;
       if (saved) {
         stats.current.saves += 1;
-        text = "Arrêt ! 🧤";
-      } else text = "Ils marquent...";
+        text = t("penalty.saveYou");
+      } else text = t("penalty.theyScore");
     }
 
     if (goodForYou && !reduced) {
@@ -366,15 +365,15 @@ export default function Penalty() {
   };
 
   const onShare = async () => {
-    const ok = await copyText(SHARE_TEXT);
+    const ok = await copyText(t("penalty.shareText"));
     setCopied(ok);
     if (ok) later(() => setCopied(false), 2500);
   };
 
   // current "Tir X / 5" label
   const kickLabel = sudden
-    ? "Mort subite"
-    : `Tir ${Math.min((phase === "dive" || phase === "defend" ? aKicks.length : pKicks.length) + 1, 5)} / 5`;
+    ? t("penalty.suddenDeath")
+    : t("penalty.kickLabel").replace("{n}", Math.min((phase === "dive" || phase === "defend" ? aKicks.length : pKicks.length) + 1, 5));
 
   const showField = !["champion"].includes(phase);
 
@@ -408,7 +407,7 @@ export default function Penalty() {
               <div className="mt-3 flex items-center justify-between">
                 <ScoreDots kicks={pKicks} align="start" />
                 <span className="text-[11px] uppercase tracking-wider font-bold text-muted px-2 text-center">
-                  {phase === "dive" || phase === "defend" ? "Défense" : kickLabel}
+                  {phase === "dive" || phase === "defend" ? t("penalty.defense") : kickLabel}
                 </span>
                 <ScoreDots kicks={aKicks} align="end" />
               </div>
@@ -454,7 +453,7 @@ export default function Penalty() {
               )}
 
               {phase === "aim" && (
-                <Instruction title="À toi de tirer" text="Tape une zone du but pour viser. Vise les coins, mais attention au gardien." />
+                <Instruction title={t("penalty.aimTitle")} text={t("penalty.aimText")} />
               )}
 
               {phase === "power" && (
@@ -466,7 +465,7 @@ export default function Penalty() {
               )}
 
               {phase === "dive" && (
-                <Instruction title="À toi d'arrêter" text="Tape la zone où tu plonges. Devine le tireur." />
+                <Instruction title={t("penalty.diveTitle")} text={t("penalty.diveText")} />
               )}
 
               {phase === "review" && banner && (
@@ -478,9 +477,9 @@ export default function Penalty() {
 
               {phase === "won" && (
                 <ResultPanel
-                  title="Victoire ! 🎉"
-                  text={`Tu as battu ${opp.nameArt}. Au suivant !`}
-                  cta="Continuer"
+                  title={t("penalty.winTitle")}
+                  text={t("penalty.winText").replace("{opponent}", opp.nameArt)}
+                  cta={t("penalty.continue")}
                   onCta={nextOpponent}
                   celebrate={!reduced}
                 />
@@ -488,9 +487,9 @@ export default function Penalty() {
 
               {phase === "lost" && (
                 <ResultPanel
-                  title="Éliminé..."
-                  text={`Tu n'as pas passé ${opp.nameArt} cette fois. Réessaie.`}
-                  cta="Rejouer"
+                  title={t("penalty.lostTitle")}
+                  text={t("penalty.lostText").replace("{opponent}", opp.nameArt)}
+                  cta={t("penalty.replay")}
                   onCta={restartOpponent}
                 />
               )}
@@ -506,6 +505,7 @@ export default function Penalty() {
 //  PITCH (goal + zones + keeper + ball)
 // ─────────────────────────────────────────────────────────────────────────
 function Pitch({ phase, aim, onZone, ball, keeper, keeperColor, ripple, reduced }) {
+  const { t } = useT();
   const interactive = phase === "aim" || phase === "dive";
   return (
     <div
@@ -578,7 +578,7 @@ function Pitch({ phase, aim, onZone, ball, keeper, keeperColor, ripple, reduced 
             type="button"
             disabled={!interactive}
             onClick={() => onZone && onZone(id)}
-            aria-label={`Zone ${id + 1}`}
+            aria-label={t("penalty.zoneAria").replace("{n}", id + 1)}
             className="m-0.5 rounded-lg transition-colors"
             style={{
               minWidth: 44,
@@ -676,34 +676,36 @@ function Instruction({ title, text, muted }) {
 }
 
 function IntroPanel({ opp, onStart }) {
+  const { t } = useT();
   return (
     <div className="text-center rounded-2xl bg-white border border-line p-5 shadow-sm">
-      <p className="text-[11px] uppercase tracking-[0.2em] font-bold text-haiti-red">Tirs au but</p>
+      <p className="text-[11px] uppercase tracking-[0.2em] font-bold text-haiti-red">{t("penalty.eyebrow")}</p>
       <h2 className="font-display text-2xl text-ink mt-1">
         Haïti <span className="text-muted">vs</span> {opp.name} {opp.flag}
       </h2>
-      <p className="text-muted text-sm mt-2">Le meilleur des 5. Tu tires d'abord, puis tu arrêtes. Égalité = mort subite.</p>
+      <p className="text-muted text-sm mt-2">{t("penalty.introText")}</p>
       <button
         type="button"
         onClick={onStart}
         className="mt-4 inline-flex items-center justify-center min-h-[44px] px-8 rounded-full bg-haiti-blue text-white font-display text-lg hover:bg-haiti-blue/90 active:scale-95 transition"
       >
-        Commencer
+        {t("penalty.start")}
       </button>
     </div>
   );
 }
 
 function PowerControl({ power, onStop }) {
+  const { t } = useT();
   // sweet spot band 35%..65%
   return (
     <div className="text-center">
-      <p className="font-display text-xl text-ink mb-3">Tape pour frapper !</p>
+      <p className="font-display text-xl text-ink mb-3">{t("penalty.powerTitle")}</p>
       <button
         type="button"
         onClick={onStop}
         className="relative w-full h-12 rounded-full overflow-hidden border border-line bg-white active:scale-[0.99] transition"
-        aria-label="Frapper"
+        aria-label={t("penalty.strikeAria")}
       >
         {/* sweet spot zone */}
         <span className="absolute top-0 bottom-0 bg-emerald-200/70" style={{ left: "35%", width: "30%" }} />
@@ -715,7 +717,7 @@ function PowerControl({ power, onStop }) {
           style={{ left: `calc(${power * 100}% - 3px)` }}
         />
         <span className="absolute inset-0 flex items-center justify-center font-display text-base text-ink/70 pointer-events-none">
-          Frappe au centre
+          {t("penalty.strikeCenter")}
         </span>
       </button>
     </div>
@@ -740,6 +742,7 @@ function ResultPanel({ title, text, cta, onCta, celebrate }) {
 }
 
 function ChampionCard({ stats, onShare, copied, onReplay }) {
+  const { t } = useT();
   return (
     <div className="relative mt-5 text-center rounded-2xl bg-ink text-bg p-6 overflow-hidden">
       <Confetti />
@@ -749,16 +752,16 @@ function ChampionCard({ stats, onShare, copied, onReplay }) {
       </div>
       <p className="relative text-5xl">🏆</p>
       <h2 className="relative font-display text-2xl md:text-3xl mt-3 leading-tight">
-        Tu as éliminé trois grandes équipes aux tirs au but 🇭🇹
+        {t("penalty.championTitle")}
       </h2>
       <div className="relative mt-5 flex items-center justify-center gap-8">
         <div>
           <p className="font-display text-3xl">{stats.goals}</p>
-          <p className="text-bg/60 text-xs uppercase tracking-wider">Buts</p>
+          <p className="text-bg/60 text-xs uppercase tracking-wider">{t("penalty.goalsStat")}</p>
         </div>
         <div>
           <p className="font-display text-3xl">{stats.saves}</p>
-          <p className="text-bg/60 text-xs uppercase tracking-wider">Arrêts</p>
+          <p className="text-bg/60 text-xs uppercase tracking-wider">{t("penalty.savesStat")}</p>
         </div>
       </div>
       <div className="relative mt-6 flex flex-col gap-3">
@@ -767,14 +770,14 @@ function ChampionCard({ stats, onShare, copied, onReplay }) {
           onClick={onShare}
           className="inline-flex items-center justify-center min-h-[44px] px-8 rounded-full bg-haiti-blue text-white font-display text-lg active:scale-95 transition"
         >
-          {copied ? "Copié ✓" : "Partager"}
+          {copied ? t("penalty.copied") : t("penalty.share")}
         </button>
         <button
           type="button"
           onClick={onReplay}
           className="inline-flex items-center justify-center min-h-[44px] px-8 rounded-full border border-bg/30 text-bg font-display text-lg active:scale-95 transition"
         >
-          Rejouer
+          {t("penalty.replay")}
         </button>
       </div>
     </div>

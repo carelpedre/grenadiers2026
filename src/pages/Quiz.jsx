@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { quizThemes, quizQuestions } from "../data/quizQuestions";
 import QuizShareCard from "../components/QuizShareCard";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  QUIZ GRENADIER                                                   ║
@@ -47,6 +48,7 @@ function writeBest(themeId, score, total) {
 }
 
 export default function Quiz() {
+  const { t } = useT();
   const [phase, setPhase] = useState("intro"); // intro | play | results
   const [themeId, setThemeId] = useState(null);
   const [round, setRound] = useState([]); // array of question objects
@@ -90,10 +92,10 @@ export default function Quiz() {
       <section className="bg-ink text-bg">
         <div className="max-w-content mx-auto px-5 py-10 md:py-14">
           <Link to="/jeux" className="text-bg/50 hover:text-bg text-xs uppercase tracking-wider font-bold transition-colors">
-            ← Jouez
+            ← {t("games.backToHub")}
           </Link>
-          <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3 mt-4">Jeu · Connaissances</p>
-          <h1 className="font-display text-4xl md:text-5xl">Quiz Grenadier</h1>
+          <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3 mt-4">{t("quiz.eyebrow")}</p>
+          <h1 className="font-display text-4xl md:text-5xl">{t("jeux.quiz.title")}</h1>
         </div>
       </section>
 
@@ -132,6 +134,7 @@ export default function Quiz() {
 
 // ─── INTRO ───────────────────────────────────────────────────────────
 function Intro({ onStart }) {
+  const { t } = useT();
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -140,7 +143,7 @@ function Intro({ onStart }) {
       transition={{ duration: 0.4 }}
     >
       <p className="text-ink text-lg leading-relaxed mb-8">
-        Huit questions, quatre réponses possibles. Choisissez un thème — ou mélangez tout. Votre meilleur score est conservé sur cet appareil.
+        {t("quiz.intro")}
       </p>
 
       <div className="space-y-3">
@@ -160,7 +163,7 @@ function Intro({ onStart }) {
                 <div className="text-right shrink-0">
                   {best && (
                     <p className="text-xs text-muted">
-                      Record <span className="font-bold text-gold">{best.score}/{best.total}</span>
+                      {t("quiz.record")} <span className="font-bold text-gold">{best.score}/{best.total}</span>
                     </p>
                   )}
                   <span className="text-haiti-red text-2xl leading-none">→</span>
@@ -174,7 +177,7 @@ function Intro({ onStart }) {
           onClick={() => onStart("all")}
           className="w-full text-center bg-haiti-blue text-bg rounded-xl p-5 font-display text-xl hover:bg-haiti-blue-dark transition-colors mt-2"
         >
-          Tout mélanger
+          {t("quiz.mixAll")}
         </button>
       </div>
     </motion.div>
@@ -183,6 +186,7 @@ function Intro({ onStart }) {
 
 // ─── PLAY ────────────────────────────────────────────────────────────
 function Play({ question, index, total, selected, onAnswer, onNext }) {
+  const { t } = useT();
   const answered = selected !== null;
   const progress = ((index + (answered ? 1 : 0)) / total) * 100;
 
@@ -195,7 +199,7 @@ function Play({ question, index, total, selected, onAnswer, onNext }) {
     >
       {/* Progress */}
       <div className="flex items-center justify-between mb-2">
-        <p className="text-xs uppercase tracking-wider font-bold text-muted">Question {index + 1} / {total}</p>
+        <p className="text-xs uppercase tracking-wider font-bold text-muted">{t("quiz.questionProgress").replace("{n}", index + 1).replace("{total}", total)}</p>
       </div>
       <div className="h-1.5 bg-line rounded-full overflow-hidden mb-8">
         <motion.div
@@ -254,7 +258,7 @@ function Play({ question, index, total, selected, onAnswer, onNext }) {
               onClick={onNext}
               className="w-full mt-5 bg-ink text-bg rounded-xl p-4 font-display text-lg hover:bg-ink-deep transition-colors"
             >
-              {index + 1 >= total ? "Voir mon score" : "Question suivante →"}
+              {index + 1 >= total ? t("quiz.seeScore") : `${t("quiz.nextQuestion")} →`}
             </button>
           </motion.div>
         )}
@@ -265,20 +269,21 @@ function Play({ question, index, total, selected, onAnswer, onNext }) {
 
 // ─── RESULTS ─────────────────────────────────────────────────────────
 function Results({ themeId, score, total, results, onReplay, onChange }) {
+  const { t } = useT();
   const [showShare, setShowShare] = useState(false);
   const pct = Math.round((score / total) * 100);
 
   const themeLabel = useMemo(() => {
-    if (themeId === "all") return "Tout mélanger";
-    return quizThemes.find((t) => t.id === themeId)?.title || "Quiz";
-  }, [themeId]);
+    if (themeId === "all") return t("quiz.mixAll");
+    return quizThemes.find((th) => th.id === themeId)?.title || "Quiz";
+  }, [themeId, t]);
 
   const verdict = useMemo(() => {
-    if (pct === 100) return "Sans-faute. Un vrai Grenadier.";
-    if (pct >= 75) return "Solide. Vous connaissez votre histoire.";
-    if (pct >= 50) return "Pas mal — il reste des pages à relire.";
-    return "Le maillot s'apprend. Rejouez !";
-  }, [pct]);
+    if (pct === 100) return t("quiz.verdict100");
+    if (pct >= 75) return t("quiz.verdict75");
+    if (pct >= 50) return t("quiz.verdict50");
+    return t("quiz.verdict0");
+  }, [pct, t]);
 
   const grid = results.map((r) => (r ? "🟩" : "🟥")).join("");
 
@@ -297,7 +302,7 @@ function Results({ themeId, score, total, results, onReplay, onChange }) {
       </div>
       <p className="font-display text-xl text-ink mb-6">{verdict}</p>
 
-      <div className="text-2xl tracking-widest mb-8" aria-label={`${score} sur ${total}`}>
+      <div className="text-2xl tracking-widest mb-8" aria-label={t("quiz.scoreAria").replace("{score}", score).replace("{total}", total)}>
         {grid}
       </div>
 
@@ -306,24 +311,24 @@ function Results({ themeId, score, total, results, onReplay, onChange }) {
           onClick={() => setShowShare(true)}
           className="w-full bg-haiti-red text-bg rounded-xl p-4 font-display text-lg hover:bg-red-700 transition-colors"
         >
-          Partager mon score
+          {t("quiz.share")}
         </button>
         <button
           onClick={onReplay}
           className="w-full bg-haiti-blue text-bg rounded-xl p-4 font-display text-lg hover:bg-haiti-blue-dark transition-colors"
         >
-          Rejouer ce thème
+          {t("quiz.replayTheme")}
         </button>
         <button
           onClick={onChange}
           className="w-full bg-white border border-line text-ink rounded-xl p-4 font-medium hover:border-haiti-blue transition-colors"
         >
-          Changer de thème
+          {t("quiz.changeTheme")}
         </button>
       </div>
 
       <p className="text-muted text-sm mt-8">
-        Envie d'aller plus loin ? <Link to="/history-1974" className="text-haiti-blue hover:text-haiti-red underline underline-offset-4 transition-colors">Relisez le récit de 1974</Link>.
+        {t("quiz.goFurther")} <Link to="/history-1974" className="text-haiti-blue hover:text-haiti-red underline underline-offset-4 transition-colors">{t("quiz.read1974")}</Link>.
       </p>
 
       {showShare && (

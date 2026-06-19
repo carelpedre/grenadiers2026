@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PageHeader from "../components/PageHeader";
 import OnzeShareCard from "../components/OnzeShareCard";
 import { squad as rawSquad } from "../data/squad";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  TON ONZE DE DÉPART — Grenadiers 2026 (/jeux/onze)                ║
@@ -14,8 +15,6 @@ import { squad as rawSquad } from "../data/squad";
 
 const STORE_KEY = "grenadiers_onze_v2";
 const STORE_KEY_V1 = "grenadiers_onze_v1";
-const ROLE_LABEL = { GK: "Gardien", DEF: "Défenseur", MID: "Milieu", FWD: "Attaquant" };
-const ROLE_SHORT = { GK: "GAR", DEF: "DÉF", MID: "MIL", FWD: "ATT" };
 const GOLD = "#C8A45C";
 
 // ── Formations: slots en coords % (y : 0 = attaque, 100 = but) ──
@@ -86,6 +85,7 @@ function normalizeSquad(raw) {
 const surname = (name) => (name || "").trim().split(/\s+/).slice(-1)[0] || name;
 
 export default function OnzeDepart() {
+  const { t } = useT();
   const squad = useMemo(() => normalizeSquad(rawSquad), []);
   const allPlayers = useMemo(
     () => [...squad.GK, ...squad.DEF, ...squad.MID, ...squad.FWD],
@@ -154,9 +154,9 @@ export default function OnzeDepart() {
   return (
     <div className="bg-bg min-h-screen">
       <PageHeader
-        eyebrow="Espace supporters"
-        title="Ton Onze de Départ"
-        subtitle="Composez votre onze de départ pour les Grenadiers, puis partagez-le avec votre groupe."
+        eyebrow={t("jeux.eyebrow")}
+        title={t("jeux.onze.title")}
+        subtitle={t("onze.subtitle")}
       />
 
       <div className="max-w-content mx-auto px-5 py-12 md:py-16">
@@ -193,14 +193,14 @@ export default function OnzeDepart() {
 
         {/* Progression */}
         <div className="mt-5 flex items-center justify-between">
-          <span className="text-muted text-sm">{filled}/{slots.length} joueurs</span>
-          <button onClick={() => setPicks({})} className="text-muted text-sm underline">Tout effacer</button>
+          <span className="text-muted text-sm">{filled}/{slots.length} {t("squad.players")}</span>
+          <button onClick={() => setPicks({})} className="text-muted text-sm underline">{t("onze.clearAll")}</button>
         </div>
 
         {/* Nom du sélectionneur (optionnel) — apparaît sur la carte de partage */}
         <div className="mt-4">
           <label htmlFor="coach-name" className="block text-muted text-sm mb-1.5">
-            Votre nom de sélectionneur <span className="text-muted/60">(optionnel)</span>
+            {t("onze.coachLabel")} <span className="text-muted/60">{t("onze.optional")}</span>
           </label>
           <input
             id="coach-name"
@@ -208,7 +208,7 @@ export default function OnzeDepart() {
             value={coach}
             onChange={(e) => setCoach(e.target.value.replace(/\s+/g, " ").trimStart().slice(0, 20))}
             maxLength={20}
-            placeholder="Ex. Sébastien Migné"
+            placeholder={t("onze.coachPlaceholder")}
             className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted/60 focus:border-haiti-blue focus:outline-none"
           />
         </div>
@@ -220,11 +220,11 @@ export default function OnzeDepart() {
             complete ? "bg-haiti-red text-white" : "bg-surface text-muted/70"
           }`}
         >
-          {complete ? "Partager mon onze →" : `Complétez votre onze (${slots.length - filled} à placer)`}
+          {complete ? `${t("onze.share")} →` : t("onze.completeRemaining").replace("{n}", slots.length - filled)}
         </button>
 
         <div className="mt-10 border-t border-line pt-6">
-          <Link to="/jeux" className="text-muted text-sm underline">← Tous les jeux</Link>
+          <Link to="/jeux" className="text-muted text-sm underline">← {t("games.allGames")}</Link>
         </div>
       </div>
 
@@ -285,6 +285,7 @@ function PlayerDisc({ player, size, badge, ring }) {
 }
 
 function Slot({ slot, player, onTap }) {
+  const { t } = useT();
   const filled = !!player;
   return (
     <button
@@ -306,7 +307,7 @@ function Slot({ slot, player, onTap }) {
         className="mt-1 max-w-[64px] truncate text-center text-[11px] font-semibold leading-tight text-white"
         style={{ textShadow: "0 1px 2px rgba(0,0,0,0.55)" }}
       >
-        {filled ? surname(player.name) : ROLE_SHORT[slot.role]}
+        {filled ? surname(player.name) : t(`onze.roleShort.${slot.role}`)}
       </span>
     </button>
   );
@@ -325,6 +326,7 @@ function PitchLines() {
 }
 
 function Picker({ role, players, current, showAll, onToggleAll, onPick, onClear, onClose }) {
+  const { t } = useT();
   return (
     <div
       className="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
@@ -337,24 +339,24 @@ function Picker({ role, players, current, showAll, onToggleAll, onPick, onClear,
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 pt-4">
-          <h3 className="font-display text-xl text-ink">Choisir un {ROLE_LABEL[role].toLowerCase()}</h3>
-          <button onClick={onClose} className="text-muted text-sm">Fermer</button>
+          <h3 className="font-display text-xl text-ink">{t("onze.pickerTitle").replace("{role}", t(`onze.role.${role}`).toLowerCase())}</h3>
+          <button onClick={onClose} className="text-muted text-sm">{t("onze.close")}</button>
         </div>
 
         <div className="flex items-center justify-between px-5 py-3">
           <button onClick={onToggleAll} className="text-haiti-blue text-xs font-semibold underline">
-            {showAll ? "Filtrer par poste" : "Voir tous les joueurs"}
+            {showAll ? t("onze.filterByPosition") : t("onze.seeAllPlayers")}
           </button>
           {current && (
             <button onClick={onClear} className="text-haiti-red text-xs font-semibold">
-              Retirer
+              {t("onze.remove")}
             </button>
           )}
         </div>
 
         <div className="overflow-y-auto px-3 pb-5" style={{ maxHeight: "56vh" }}>
           {players.length === 0 ? (
-            <p className="text-muted px-2 py-6 text-center text-sm">Aucun joueur disponible à ce poste.</p>
+            <p className="text-muted px-2 py-6 text-center text-sm">{t("onze.noPlayers")}</p>
           ) : (
             <ul className="space-y-1">
               {players.map((p) => (

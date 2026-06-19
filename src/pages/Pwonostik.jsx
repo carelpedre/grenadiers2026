@@ -6,6 +6,7 @@ import { matches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { backendReady, submitEntry, fetchLeaderboard } from "../lib/pwonostikApi";
 import PwonostikShareCard from "../components/PwonostikShareCard";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  PWONOSTIK — pronostics de la phase de groupes (Groupe C)        ║
@@ -83,6 +84,7 @@ function sumPoints(picks) {
 }
 
 export default function Pwonostik() {
+  const { t } = useT();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [league, setLeague] = useState("");
@@ -185,12 +187,12 @@ export default function Pwonostik() {
       <section className="bg-ink text-bg">
         <div className="max-w-content mx-auto px-5 py-10 md:py-14">
           <Link to="/jeux" className="text-bg/50 hover:text-bg text-xs uppercase tracking-wider font-bold transition-colors">
-            ← Jouez
+            ← {t("games.backToHub")}
           </Link>
-          <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3 mt-4">Jeu · Pronostics</p>
-          <h1 className="font-display text-4xl md:text-5xl">Pwonostik</h1>
+          <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3 mt-4">{t("pwonostik.eyebrow")}</p>
+          <h1 className="font-display text-4xl md:text-5xl">{t("jeux.pwonostik.title")}</h1>
           <p className="text-bg/70 text-lg mt-3 max-w-prose">
-            Pronostiquez le score des trois matchs d'Haïti en phase de groupes. 3 points pour le score exact, 1 point pour le bon résultat. Chaque match se verrouille au coup d'envoi.
+            {t("pwonostik.intro")}
           </p>
         </div>
       </section>
@@ -199,13 +201,13 @@ export default function Pwonostik() {
         {/* Name */}
         <div className="mb-6">
           <label className="block text-xs uppercase tracking-wider font-bold text-muted mb-2">
-            Votre nom <span className="text-muted/60 normal-case tracking-normal">(pour le classement)</span>
+            {t("pwonostik.nameLabel")} <span className="text-muted/60 normal-case tracking-normal">{t("pwonostik.nameHint")}</span>
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => { setName(e.target.value); setSaved(false); }}
-            placeholder="Ex. Carel"
+            placeholder={t("pwonostik.namePlaceholder")}
             maxLength={24}
             className="w-full bg-white border border-line rounded-xl p-3.5 text-ink focus:border-haiti-blue focus:outline-none transition-colors"
           />
@@ -214,13 +216,13 @@ export default function Pwonostik() {
         {/* Email (optional) */}
         <div className="mb-6">
           <label className="block text-xs uppercase tracking-wider font-bold text-muted mb-2">
-            E-mail <span className="text-muted/60 normal-case tracking-normal">(optionnel — pour recevoir les résultats)</span>
+            {t("pwonostik.emailLabel")} <span className="text-muted/60 normal-case tracking-normal">{t("pwonostik.emailHint")}</span>
           </label>
           <input
             type="email"
             value={email}
             onChange={(e) => { setEmail(e.target.value); setSaved(false); }}
-            placeholder="vous@exemple.com"
+            placeholder={t("pwonostik.emailPlaceholder")}
             className="w-full bg-white border border-line rounded-xl p-3.5 text-ink focus:border-haiti-blue focus:outline-none transition-colors"
           />
         </div>
@@ -228,25 +230,25 @@ export default function Pwonostik() {
         {/* League (optional) */}
         <div className="mb-8">
           <label className="block text-xs uppercase tracking-wider font-bold text-muted mb-2">
-            Code de ligue <span className="text-muted/60 normal-case tracking-normal">(optionnel — créez-en un, partagez-le)</span>
+            {t("pwonostik.leagueLabel")} <span className="text-muted/60 normal-case tracking-normal">{t("pwonostik.leagueHint")}</span>
           </label>
           <input
             type="text"
             value={league}
             onChange={(e) => { setLeague(e.target.value.toUpperCase()); setSaved(false); }}
-            placeholder="Ex. FANMI-CAREL"
+            placeholder={t("pwonostik.leaguePlaceholder")}
             maxLength={24}
             className="w-full bg-white border border-line rounded-xl p-3.5 text-ink uppercase tracking-wide focus:border-haiti-blue focus:outline-none transition-colors"
           />
           <p className="text-muted/70 text-xs mt-1.5 leading-snug">
-            Tapez le même code entre amis pour vous comparer dans un classement privé.
+            {t("pwonostik.leagueNote")}
           </p>
         </div>
 
         {/* Points banner (after results start coming in) */}
         {anyResult && (
           <div className="mb-8 bg-haiti-blue text-bg rounded-2xl p-6 text-center">
-            <p className="text-xs uppercase tracking-wider font-bold text-bg/70 mb-1">Votre total</p>
+            <p className="text-xs uppercase tracking-wider font-bold text-bg/70 mb-1">{t("pwonostik.yourTotal")}</p>
             <p className="font-display text-5xl">{totalPts} <span className="text-2xl text-bg/70">pts</span></p>
           </div>
         )}
@@ -266,9 +268,9 @@ export default function Pwonostik() {
                 <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-line">
                   <p className="text-xs uppercase tracking-wider font-bold text-muted">{m.date} · {m.timeET}</p>
                   {locked ? (
-                    <span className="text-[10px] uppercase tracking-wider font-bold text-haiti-red bg-red-50 px-2 py-0.5 rounded-full">Verrouillé</span>
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-haiti-red bg-red-50 px-2 py-0.5 rounded-full">{t("pwonostik.locked")}</span>
                   ) : (
-                    <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Ouvert</span>
+                    <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">{t("pwonostik.open")}</span>
                   )}
                 </div>
 
@@ -298,13 +300,13 @@ export default function Pwonostik() {
                   <div className="px-5 pb-5">
                     <div className="flex items-center justify-between bg-surface rounded-xl px-4 py-3">
                       <span className="text-sm text-muted">
-                        Résultat&nbsp;:&nbsp;
+                        {t("pwonostik.resultLabel")}&nbsp;
                         <span className="text-ink font-semibold">
                           {hHome ? result.haiti : result.opp}–{hHome ? result.opp : result.haiti}
                         </span>
                       </span>
                       <span className={`text-sm font-bold ${pts === 3 ? "text-emerald-600" : pts === 1 ? "text-gold" : "text-muted"}`}>
-                        {pts === 3 ? "Score exact · +3" : pts === 1 ? "Bon résultat · +1" : "0 pt"}
+                        {pts === 3 ? t("pwonostik.exactScore") : pts === 1 ? t("pwonostik.rightResult") : t("pwonostik.zeroPt")}
                       </span>
                     </div>
                   </div>
@@ -327,7 +329,7 @@ export default function Pwonostik() {
             onClick={save}
             className="w-full bg-haiti-blue text-bg rounded-xl p-4 font-display text-lg hover:bg-haiti-blue-dark transition-colors"
           >
-            {saved ? "Pronostics enregistrés ✓" : "Enregistrer mes pronostics"}
+            {saved ? t("pwonostik.saved") : t("pwonostik.save")}
           </button>
           <button
             onClick={() => setShowShare(true)}
@@ -336,7 +338,7 @@ export default function Pwonostik() {
               allFilled ? "bg-haiti-red text-bg hover:bg-red-700" : "bg-surface text-muted/70"
             }`}
           >
-            Partager mon pronostic →
+            {t("pwonostik.share")} →
           </button>
         </div>
 
@@ -352,10 +354,10 @@ export default function Pwonostik() {
           />
         ) : (
           <div className="mt-10 bg-surface border border-line rounded-2xl p-6 text-center">
-            <p className="text-xs uppercase tracking-wider font-bold text-muted mb-1">Classement</p>
-            <p className="text-ink font-display text-xl mb-1">Bientôt</p>
+            <p className="text-xs uppercase tracking-wider font-bold text-muted mb-1">{t("pwonostik.leaderboard")}</p>
+            <p className="text-ink font-display text-xl mb-1">{t("jeux.soon")}</p>
             <p className="text-muted text-sm leading-relaxed">
-              Le classement s'activera dès la connexion du backend. Vos pronostics sont déjà sauvegardés sur cet appareil.
+              {t("pwonostik.leaderboardSoon")}
             </p>
           </div>
         )}
@@ -370,6 +372,7 @@ export default function Pwonostik() {
 
 // ─── Leaderboard ─────────────────────────────────────────────────────
 function Leaderboard({ scope, onScope, rows, loading, hasLeague, anyResult }) {
+  const { t } = useT();
   const ranked = (rows || [])
     .map((r) => ({ ...r, pts: sumPoints(r.picks) }))
     .sort((a, b) => b.pts - a.pts || new Date(b.updated_at) - new Date(a.updated_at))
@@ -378,37 +381,39 @@ function Leaderboard({ scope, onScope, rows, loading, hasLeague, anyResult }) {
   return (
     <div className="mt-12">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-display text-2xl text-ink">Classement</h2>
+        <h2 className="font-display text-2xl text-ink">{t("pwonostik.leaderboard")}</h2>
         <div className="flex gap-1 bg-surface rounded-full p-1">
           <button
             onClick={() => onScope("global")}
             className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${scope === "global" ? "bg-haiti-blue text-bg" : "text-muted"}`}
           >
-            Mondial
+            {t("pwonostik.global")}
           </button>
           <button
             onClick={() => onScope("league")}
             disabled={!hasLeague}
             className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${scope === "league" ? "bg-haiti-blue text-bg" : "text-muted"} ${!hasLeague ? "opacity-40 cursor-not-allowed" : ""}`}
           >
-            Ma ligue
+            {t("pwonostik.myLeague")}
           </button>
         </div>
       </div>
 
       {loading ? (
-        <p className="text-muted text-sm py-8 text-center">Chargement…</p>
+        <p className="text-muted text-sm py-8 text-center">{t("common.loading")}</p>
       ) : ranked.length === 0 ? (
         <p className="text-muted text-sm py-8 text-center">
           {scope === "league"
-            ? "Personne dans cette ligue pour l'instant. Partagez votre code !"
-            : "Soyez le premier à enregistrer vos pronostics."}
+            ? t("pwonostik.emptyLeague")
+            : t("pwonostik.emptyGlobal")}
         </p>
       ) : (
         <>
           {!anyResult && (
             <p className="text-muted text-sm mb-4 leading-relaxed">
-              {ranked.length} {ranked.length > 1 ? "joueurs ont" : "joueur a"} déjà soumis {ranked.length > 1 ? "leurs" : "ses"} pronostics. Les points s'afficheront après le premier match.
+              {ranked.length > 1
+                ? t("pwonostik.boardCountPlural").replace("{n}", ranked.length)
+                : t("pwonostik.boardCountSingular").replace("{n}", ranked.length)}
             </p>
           )}
           <ol className="space-y-1.5">
@@ -432,6 +437,7 @@ function Leaderboard({ scope, onScope, rows, loading, hasLeague, anyResult }) {
   );
 }
 function SideStepper({ country, name, highlight, value, locked, onBump }) {
+  const { t } = useT();
   return (
     <div className="flex flex-col items-center text-center gap-2">
       <Flag country={country} size="lg" />
@@ -442,7 +448,7 @@ function SideStepper({ country, name, highlight, value, locked, onBump }) {
         <button
           onClick={() => onBump(-1)}
           disabled={locked || value <= 0}
-          aria-label={`Moins un but ${name}`}
+          aria-label={t("pwonostik.minusGoalAria").replace("{name}", name)}
           className="w-9 h-9 rounded-full border border-line text-ink text-xl leading-none flex items-center justify-center disabled:opacity-30 hover:border-haiti-blue transition-colors"
         >
           −
@@ -451,7 +457,7 @@ function SideStepper({ country, name, highlight, value, locked, onBump }) {
         <button
           onClick={() => onBump(1)}
           disabled={locked || value >= 9}
-          aria-label={`Plus un but ${name}`}
+          aria-label={t("pwonostik.plusGoalAria").replace("{name}", name)}
           className="w-9 h-9 rounded-full border border-line text-ink text-xl leading-none flex items-center justify-center disabled:opacity-30 hover:border-haiti-blue transition-colors"
         >
           +

@@ -1,56 +1,59 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageHeader from "../components/PageHeader";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  JOUEZ — l'espace supporters (hub des jeux)                       ║
 // ╚══════════════════════════════════════════════════════════════════╝
 
-const games = [
-  {
-    title: "Tire Penalty",
-    blurb: "Élimine l'Écosse, le Brésil et le Maroc aux tirs au but.",
-    to: "/jeux/penalty",
-    status: "live",
-    cta: "Jouer",
-  },
-  {
-    title: "Quiz Grenadier",
-    blurb: "Huit questions sur 1974, la sélection 2026 et la Fédération. Score partageable.",
-    to: "/jeux/quiz",
-    status: "live",
-    cta: "Jouer",
-  },
-  {
-    title: "Pwonostik",
-    blurb: "Pronostiquez le score des trois matchs d'Haïti. Score exact = 3 pts, bon résultat = 1 pt.",
-    to: "/jeux/pwonostik",
-    status: "live",
-    cta: "Jouer",
-  },
-  {
-    title: "Devine le Grenadier",
-    blurb: "Un joueur mystère chaque jour. Six essais, des indices, un résultat à partager.",
-    to: "/jeux/devine",
-    status: "live",
-    cta: "Jouer",
-  },
-  {
-    title: "Ton Onze de Départ",
-    blurb: "Composez votre onze de départ parmi les 26 Grenadiers, puis partagez-le avec votre groupe.",
-    to: "/jeux/onze",
-    status: "live",
-    cta: "Jouer",
-  },
-];
-
 export default function Jeux() {
+  const { t } = useT();
+
+  const games = [
+    {
+      title: t("jeux.penalty.title"),
+      blurb: t("jeux.penalty.blurb"),
+      to: "/jeux/penalty",
+      status: "live",
+      cta: t("jeux.play"),
+    },
+    {
+      title: t("jeux.quiz.title"),
+      blurb: t("jeux.quiz.blurb"),
+      to: "/jeux/quiz",
+      status: "live",
+      cta: t("jeux.play"),
+    },
+    {
+      title: t("jeux.pwonostik.title"),
+      blurb: t("jeux.pwonostik.blurb"),
+      to: "/jeux/pwonostik",
+      status: "live",
+      cta: t("jeux.play"),
+    },
+    {
+      title: t("jeux.devine.title"),
+      blurb: t("jeux.devine.blurb"),
+      to: "/jeux/devine",
+      status: "live",
+      cta: t("jeux.play"),
+    },
+    {
+      title: t("jeux.onze.title"),
+      blurb: t("jeux.onze.blurb"),
+      to: "/jeux/onze",
+      status: "live",
+      cta: t("jeux.play"),
+    },
+  ];
+
   return (
     <div className="bg-bg min-h-screen">
       <PageHeader
-        eyebrow="Espace supporters"
-        title="Jouez."
-        subtitle="Des jeux pour vivre la route des Grenadiers vers la Coupe du Monde — et la partager."
+        eyebrow={t("jeux.eyebrow")}
+        title={t("jeux.title")}
+        subtitle={t("jeux.subtitle")}
       />
 
       <div className="max-w-content mx-auto px-5 py-12 md:py-16">
@@ -77,11 +80,11 @@ export default function Jeux() {
                 <div className="flex items-center gap-2 mb-3">
                   {g.status === "live" ? (
                     <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                      Disponible
+                      {t("jeux.available")}
                     </span>
                   ) : (
                     <span className="text-[10px] uppercase tracking-wider font-bold text-muted bg-line/60 px-2 py-0.5 rounded-full">
-                      Bientôt
+                      {t("jeux.soon")}
                     </span>
                   )}
                 </div>
@@ -114,7 +117,7 @@ export default function Jeux() {
         </div>
 
         <p className="text-muted text-sm text-center mt-12 max-w-prose mx-auto">
-          D'autres jeux arrivent avant et pendant le tournoi. Revenez régulièrement — ou suivez Chokarella Media pour ne rien manquer.
+          {t("jeux.footer")}
         </p>
       </div>
     </div>

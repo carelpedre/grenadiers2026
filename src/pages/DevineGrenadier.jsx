@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PageHeader from "../components/PageHeader";
 import DevineShareCard from "../components/DevineShareCard";
 import { squad as rawSquad } from "../data/squad";
+import { useT } from "../lib/i18n";
 
 // ╔══════════════════════════════════════════════════════════════════╗
 // ║  DEVINE LE GRENADIER — un joueur mystère par jour (/jeux/devine)  ║
@@ -16,7 +17,6 @@ const STORE_KEY = "grenadiers_devine_v1";
 const MAX_TRIES = 6;
 const REF_YEAR = 2026;
 const EPOCH = Date.UTC(2026, 5, 1); // 1er juin 2026 = énigme nº 1
-const ROLE_SHORT = { GK: "GAR", DEF: "DÉF", MID: "MIL", FWD: "ATT" };
 
 // ── Normalise squad.js en une liste plate avec poste ──
 function roleFromPosition(p) {
@@ -72,6 +72,7 @@ function todayPuzzle() {
 }
 
 export default function DevineGrenadier() {
+  const { t } = useT();
   const players = useMemo(() => flatten(rawSquad), []);
   const n = players.length;
   const puzzle = todayPuzzle();
@@ -84,11 +85,11 @@ export default function DevineGrenadier() {
   );
 
   const attrs = useMemo(() => {
-    const a = [{ key: "poste", label: "Poste" }];
-    if (hasAge) a.push({ key: "age", label: "Âge" });
-    a.push({ key: "pays", label: "Pays du club" }, { key: "club", label: "Club" });
+    const a = [{ key: "poste", label: t("devine.attrPoste") }];
+    if (hasAge) a.push({ key: "age", label: t("devine.attrAge") });
+    a.push({ key: "pays", label: t("devine.attrPays") }, { key: "club", label: t("devine.attrClub") });
     return a;
-  }, [hasAge]);
+  }, [hasAge, t]);
 
   const [guesses, setGuesses] = useState([]); // array of player names
   const [query, setQuery] = useState("");
@@ -146,7 +147,7 @@ export default function DevineGrenadier() {
   // ── per-attribute comparison ──
   function compare(p, key) {
     if (key === "poste")
-      return { status: p._role === target._role ? "hit" : "miss", text: ROLE_SHORT[p._role] || "—" };
+      return { status: p._role === target._role ? "hit" : "miss", text: t(`onze.roleShort.${p._role}`) || "—" };
     if (key === "pays")
       return { status: norm(country(p)) === norm(country(target)) && country(p) ? "hit" : "miss", text: country(p) || "—" };
     if (key === "club")
@@ -173,15 +174,15 @@ export default function DevineGrenadier() {
   return (
     <div className="bg-bg min-h-screen">
       <PageHeader
-        eyebrow="Espace supporters"
-        title="Devine le Grenadier"
-        subtitle="Un joueur mystère de la sélection chaque jour. Six essais pour le trouver."
+        eyebrow={t("jeux.eyebrow")}
+        title={t("jeux.devine.title")}
+        subtitle={t("devine.subtitle")}
       />
 
       <div className="max-w-content mx-auto px-5 py-12 md:py-16">
         <div className="flex items-center justify-between">
-          <span className="text-muted text-sm">Énigme nº{puzzle} · {Math.min(guesses.length, MAX_TRIES)}/{MAX_TRIES} essais</span>
-          {streak > 0 && <span className="text-muted text-sm">Série : {streak} 🔥</span>}
+          <span className="text-muted text-sm">{t("devine.puzzleProgress").replace("{n}", puzzle).replace("{tries}", Math.min(guesses.length, MAX_TRIES)).replace("{max}", MAX_TRIES)}</span>
+          {streak > 0 && <span className="text-muted text-sm">{t("devine.streak").replace("{n}", streak)}</span>}
         </div>
 
         {/* Comment jouer — repliable (déplié pour les nouveaux joueurs) */}
@@ -192,37 +193,35 @@ export default function DevineGrenadier() {
             className="flex w-full items-center justify-between px-4 py-3 text-left"
           >
             <span className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold">
-              Comment jouer
+              {t("devine.howToPlay")}
             </span>
-            <span className="text-muted text-xs font-semibold">{howOpen ? "Masquer ▾" : "Afficher ▸"}</span>
+            <span className="text-muted text-xs font-semibold">{howOpen ? t("devine.hide") : t("devine.show")}</span>
           </button>
 
           {howOpen && (
             <div className="px-4 pb-4">
               <p className="text-ink text-sm leading-relaxed">
-                Un Grenadier mystère se cache dans la sélection. Devinez des joueurs du groupe : à chaque
-                essai, le jeu révèle ce que votre choix partage avec le joueur recherché — poste, âge, pays du
-                club et club. Six essais pour le démasquer.
+                {t("devine.howText")}
               </p>
 
               <div className="mt-4 border-t border-line pt-3">
-                <p className="text-[10px] uppercase tracking-wider font-bold text-muted mb-2.5">Légende</p>
+                <p className="text-[10px] uppercase tracking-wider font-bold text-muted mb-2.5">{t("devine.legend")}</p>
                 <div className="flex flex-col gap-2 text-xs">
                   <span className="inline-flex items-center gap-2">
                     <span className="h-4 w-4 shrink-0 rounded bg-emerald-500"></span>
-                    <span className="text-ink"><strong>Vert</strong> — identique : bon poste, bon pays, bon club, ou âge exact.</span>
+                    <span className="text-ink"><strong>{t("devine.legendGreenLabel")}</strong> · {t("devine.legendGreen")}</span>
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <span className="h-4 w-4 shrink-0 rounded bg-amber-400"></span>
-                    <span className="text-ink"><strong>Jaune</strong> — âge proche : à 2 ans près du joueur mystère.</span>
+                    <span className="text-ink"><strong>{t("devine.legendYellowLabel")}</strong> · {t("devine.legendYellow")}</span>
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <span className="h-4 w-4 shrink-0 rounded bg-slate-200 border border-line"></span>
-                    <span className="text-ink"><strong>Gris</strong> — aucune correspondance.</span>
+                    <span className="text-ink"><strong>{t("devine.legendGrayLabel")}</strong> · {t("devine.legendGray")}</span>
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <span className="flex h-4 w-4 shrink-0 items-center justify-center font-bold text-ink">↑↓</span>
-                    <span className="text-ink"><strong>Flèches sur l'âge</strong> — le Grenadier mystère est plus âgé (↑) ou plus jeune (↓) que votre essai.</span>
+                    <span className="text-ink"><strong>{t("devine.legendArrowsLabel")}</strong> · {t("devine.legendArrows")}</span>
                   </span>
                 </div>
               </div>
@@ -236,7 +235,7 @@ export default function DevineGrenadier() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Tapez le nom d'un joueur…"
+              placeholder={t("devine.searchPlaceholder")}
               className="w-full rounded-xl border border-line bg-white px-4 py-3 text-ink text-sm outline-none focus:border-haiti-blue"
             />
             {suggestions.length > 0 && (
@@ -248,7 +247,7 @@ export default function DevineGrenadier() {
                       className="flex w-full items-center justify-between px-4 py-2.5 text-left hover:bg-surface"
                     >
                       <span className="text-ink font-semibold">{p.name}</span>
-                      <span className="text-muted text-xs">{ROLE_SHORT[p._role]}</span>
+                      <span className="text-muted text-xs">{t(`onze.roleShort.${p._role}`)}</span>
                     </button>
                   </li>
                 ))}
@@ -269,7 +268,7 @@ export default function DevineGrenadier() {
             >
               <div className="flex items-center justify-between">
                 <span className="font-display text-lg text-ink">{p.name}</span>
-                {p.name === target.name && <span className="text-emerald-600 text-sm font-bold">Trouvé !</span>}
+                {p.name === target.name && <span className="text-emerald-600 text-sm font-bold">{t("devine.found")}</span>}
               </div>
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {attrs.map((a) => {
@@ -289,15 +288,15 @@ export default function DevineGrenadier() {
         {done && (
           <div className="mt-6 rounded-2xl border border-line bg-surface p-6 text-center">
             <p className="font-display text-2xl text-ink">
-              {won ? `Bravo — trouvé en ${guesses.length} !` : "Raté pour aujourd'hui."}
+              {won ? t("devine.win").replace("{n}", guesses.length) : t("devine.lose")}
             </p>
             <p className="text-muted mt-1 text-sm">
-              Le Grenadier mystère était <span className="text-ink font-semibold">{target.name}</span>.
+              {t("devine.answerPrefix")} <span className="text-ink font-semibold">{target.name}</span>.
             </p>
             <button onClick={() => setShareOpen(true)} className="mt-4 w-full rounded-xl bg-haiti-red py-3 font-display text-lg text-white">
-              Partager mon résultat →
+              {t("devine.share")} →
             </button>
-            <p className="text-muted mt-3 text-xs">Un nouveau joueur mystère demain.</p>
+            <p className="text-muted mt-3 text-xs">{t("devine.tomorrow")}</p>
           </div>
         )}
 
@@ -313,7 +312,7 @@ export default function DevineGrenadier() {
         )}
 
         <div className="mt-10 border-t border-line pt-6">
-          <Link to="/jeux" className="text-muted text-sm underline">← Tous les jeux</Link>
+          <Link to="/jeux" className="text-muted text-sm underline">← {t("games.allGames")}</Link>
         </div>
       </div>
     </div>

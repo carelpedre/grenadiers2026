@@ -727,6 +727,753 @@ const dict = {
     ht: "pour signaler le problème.",
   },
 
+  // ─── GAMES HUB (Jeux) Phase 2 ────────────────────────────────────────
+  "jeux.eyebrow": {
+    en: "Fan zone",
+    fr: "Espace supporters",
+    ht: "Espace supporters",
+  },
+  "jeux.title": {
+    en: "Play.",
+    fr: "Jouez.",
+    ht: "Jouez.",
+  },
+  "jeux.subtitle": {
+    en: "Games to live the Grenadiers' road to the World Cup, and share it.",
+    fr: "Des jeux pour vivre la route des Grenadiers vers la Coupe du Monde, et la partager.",
+    ht: "Des jeux pour vivre la route des Grenadiers vers la Coupe du Monde, et la partager.",
+  },
+  "jeux.available": {
+    en: "Available",
+    fr: "Disponible",
+    ht: "Disponible",
+  },
+  "jeux.soon": {
+    en: "Soon",
+    fr: "Bientôt",
+    ht: "Bientôt",
+  },
+  "jeux.play": {
+    en: "Play",
+    fr: "Jouer",
+    ht: "Jouer",
+  },
+  "jeux.footer": {
+    en: "More games are coming before and during the tournament. Check back often, or follow Chokarella Media so you don't miss anything.",
+    fr: "D'autres jeux arrivent avant et pendant le tournoi. Revenez régulièrement, ou suivez Chokarella Media pour ne rien manquer.",
+    ht: "D'autres jeux arrivent avant et pendant le tournoi. Revenez régulièrement, ou suivez Chokarella Media pour ne rien manquer.",
+  },
+  "jeux.penalty.title": {
+    en: "Penalty Shootout",
+    fr: "Tire Penalty",
+    ht: "Tire Penalty",
+  },
+  "jeux.penalty.blurb": {
+    en: "Knock out Scotland, Brazil, and Morocco in a shootout.",
+    fr: "Élimine l'Écosse, le Brésil et le Maroc aux tirs au but.",
+    ht: "Élimine l'Écosse, le Brésil et le Maroc aux tirs au but.",
+  },
+  "jeux.quiz.title": {
+    en: "Grenadier Quiz",
+    fr: "Quiz Grenadier",
+    ht: "Quiz Grenadier",
+  },
+  "jeux.quiz.blurb": {
+    en: "Eight questions on 1974, the 2026 squad, and the Federation. Shareable score.",
+    fr: "Huit questions sur 1974, la sélection 2026 et la Fédération. Score partageable.",
+    ht: "Huit questions sur 1974, la sélection 2026 et la Fédération. Score partageable.",
+  },
+  "jeux.pwonostik.title": {
+    en: "Pwonostik",
+    fr: "Pwonostik",
+    ht: "Pwonostik",
+  },
+  "jeux.pwonostik.blurb": {
+    en: "Predict the score of Haiti's three matches. Exact score = 3 pts, right result = 1 pt.",
+    fr: "Pronostiquez le score des trois matchs d'Haïti. Score exact = 3 pts, bon résultat = 1 pt.",
+    ht: "Pronostiquez le score des trois matchs d'Haïti. Score exact = 3 pts, bon résultat = 1 pt.",
+  },
+  "jeux.devine.title": {
+    en: "Guess the Grenadier",
+    fr: "Devine le Grenadier",
+    ht: "Devine le Grenadier",
+  },
+  "jeux.devine.blurb": {
+    en: "A mystery player every day. Six tries, hints, a result to share.",
+    fr: "Un joueur mystère chaque jour. Six essais, des indices, un résultat à partager.",
+    ht: "Un joueur mystère chaque jour. Six essais, des indices, un résultat à partager.",
+  },
+  "jeux.onze.title": {
+    en: "Your Starting XI",
+    fr: "Ton Onze de Départ",
+    ht: "Ton Onze de Départ",
+  },
+  "jeux.onze.blurb": {
+    en: "Build your starting eleven from the 26 Grenadiers, then share it with your group.",
+    fr: "Composez votre onze de départ parmi les 26 Grenadiers, puis partagez-le avec votre groupe.",
+    ht: "Composez votre onze de départ parmi les 26 Grenadiers, puis partagez-le avec votre groupe.",
+  },
+  "games.backToHub": {
+    en: "Games",
+    fr: "Jouez",
+    ht: "Jouez",
+  },
+
+  // ─── QUIZ GAME (Phase 2) ─────────────────────────────────────────────
+  "quiz.eyebrow": {
+    en: "Game · Knowledge",
+    fr: "Jeu · Connaissances",
+    ht: "Jeu · Connaissances",
+  },
+  "quiz.intro": {
+    en: "Eight questions, four possible answers. Pick a theme, or mix everything. Your best score is kept on this device.",
+    fr: "Huit questions, quatre réponses possibles. Choisissez un thème, ou mélangez tout. Votre meilleur score est conservé sur cet appareil.",
+    ht: "Huit questions, quatre réponses possibles. Choisissez un thème, ou mélangez tout. Votre meilleur score est conservé sur cet appareil.",
+  },
+  "quiz.record": {
+    en: "Best",
+    fr: "Record",
+    ht: "Record",
+  },
+  "quiz.mixAll": {
+    en: "Mix it all",
+    fr: "Tout mélanger",
+    ht: "Tout mélanger",
+  },
+  "quiz.questionProgress": {
+    en: "Question {n} / {total}",
+    fr: "Question {n} / {total}",
+    ht: "Question {n} / {total}",
+  },
+  "quiz.seeScore": {
+    en: "See my score",
+    fr: "Voir mon score",
+    ht: "Voir mon score",
+  },
+  "quiz.nextQuestion": {
+    en: "Next question",
+    fr: "Question suivante",
+    ht: "Question suivante",
+  },
+  "quiz.verdict100": {
+    en: "Flawless. A true Grenadier.",
+    fr: "Sans-faute. Un vrai Grenadier.",
+    ht: "Sans-faute. Un vrai Grenadier.",
+  },
+  "quiz.verdict75": {
+    en: "Solid. You know your history.",
+    fr: "Solide. Vous connaissez votre histoire.",
+    ht: "Solide. Vous connaissez votre histoire.",
+  },
+  "quiz.verdict50": {
+    en: "Not bad, there are still pages to revisit.",
+    fr: "Pas mal, il reste des pages à relire.",
+    ht: "Pas mal, il reste des pages à relire.",
+  },
+  "quiz.verdict0": {
+    en: "The shirt takes learning. Play again!",
+    fr: "Le maillot s'apprend. Rejouez !",
+    ht: "Le maillot s'apprend. Rejouez !",
+  },
+  "quiz.scoreAria": {
+    en: "{score} out of {total}",
+    fr: "{score} sur {total}",
+    ht: "{score} sur {total}",
+  },
+  "quiz.share": {
+    en: "Share my score",
+    fr: "Partager mon score",
+    ht: "Partager mon score",
+  },
+  "quiz.replayTheme": {
+    en: "Replay this theme",
+    fr: "Rejouer ce thème",
+    ht: "Rejouer ce thème",
+  },
+  "quiz.changeTheme": {
+    en: "Change theme",
+    fr: "Changer de thème",
+    ht: "Changer de thème",
+  },
+  "quiz.goFurther": {
+    en: "Want to go further?",
+    fr: "Envie d'aller plus loin ?",
+    ht: "Envie d'aller plus loin ?",
+  },
+  "quiz.read1974": {
+    en: "Revisit the 1974 story",
+    fr: "Relisez le récit de 1974",
+    ht: "Relisez le récit de 1974",
+  },
+
+  // ─── PWONOSTIK GAME (Phase 2) ────────────────────────────────────────
+  "pwonostik.eyebrow": {
+    en: "Game · Predictions",
+    fr: "Jeu · Pronostics",
+    ht: "Jeu · Pronostics",
+  },
+  "pwonostik.intro": {
+    en: "Predict the score of Haiti's three group-stage matches. 3 points for the exact score, 1 point for the right result. Each match locks at kickoff.",
+    fr: "Pronostiquez le score des trois matchs d'Haïti en phase de groupes. 3 points pour le score exact, 1 point pour le bon résultat. Chaque match se verrouille au coup d'envoi.",
+    ht: "Pronostiquez le score des trois matchs d'Haïti en phase de groupes. 3 points pour le score exact, 1 point pour le bon résultat. Chaque match se verrouille au coup d'envoi.",
+  },
+  "pwonostik.nameLabel": {
+    en: "Your name",
+    fr: "Votre nom",
+    ht: "Votre nom",
+  },
+  "pwonostik.nameHint": {
+    en: "(for the leaderboard)",
+    fr: "(pour le classement)",
+    ht: "(pour le classement)",
+  },
+  "pwonostik.namePlaceholder": {
+    en: "e.g. Carel",
+    fr: "Ex. Carel",
+    ht: "Ex. Carel",
+  },
+  "pwonostik.emailLabel": {
+    en: "Email",
+    fr: "E-mail",
+    ht: "E-mail",
+  },
+  "pwonostik.emailHint": {
+    en: "(optional, to receive the results)",
+    fr: "(optionnel, pour recevoir les résultats)",
+    ht: "(optionnel, pour recevoir les résultats)",
+  },
+  "pwonostik.emailPlaceholder": {
+    en: "you@example.com",
+    fr: "vous@exemple.com",
+    ht: "vous@exemple.com",
+  },
+  "pwonostik.leagueLabel": {
+    en: "League code",
+    fr: "Code de ligue",
+    ht: "Code de ligue",
+  },
+  "pwonostik.leagueHint": {
+    en: "(optional, create one, share it)",
+    fr: "(optionnel, créez-en un, partagez-le)",
+    ht: "(optionnel, créez-en un, partagez-le)",
+  },
+  "pwonostik.leaguePlaceholder": {
+    en: "e.g. FANMI-CAREL",
+    fr: "Ex. FANMI-CAREL",
+    ht: "Ex. FANMI-CAREL",
+  },
+  "pwonostik.leagueNote": {
+    en: "Type the same code with friends to compare yourselves in a private leaderboard.",
+    fr: "Tapez le même code entre amis pour vous comparer dans un classement privé.",
+    ht: "Tapez le même code entre amis pour vous comparer dans un classement privé.",
+  },
+  "pwonostik.yourTotal": {
+    en: "Your total",
+    fr: "Votre total",
+    ht: "Votre total",
+  },
+  "pwonostik.locked": {
+    en: "Locked",
+    fr: "Verrouillé",
+    ht: "Verrouillé",
+  },
+  "pwonostik.open": {
+    en: "Open",
+    fr: "Ouvert",
+    ht: "Ouvert",
+  },
+  "pwonostik.resultLabel": {
+    en: "Result:",
+    fr: "Résultat :",
+    ht: "Résultat :",
+  },
+  "pwonostik.exactScore": {
+    en: "Exact score · +3",
+    fr: "Score exact · +3",
+    ht: "Score exact · +3",
+  },
+  "pwonostik.rightResult": {
+    en: "Right result · +1",
+    fr: "Bon résultat · +1",
+    ht: "Bon résultat · +1",
+  },
+  "pwonostik.zeroPt": {
+    en: "0 pts",
+    fr: "0 pt",
+    ht: "0 pt",
+  },
+  "pwonostik.saved": {
+    en: "Predictions saved ✓",
+    fr: "Pronostics enregistrés ✓",
+    ht: "Pronostics enregistrés ✓",
+  },
+  "pwonostik.save": {
+    en: "Save my predictions",
+    fr: "Enregistrer mes pronostics",
+    ht: "Enregistrer mes pronostics",
+  },
+  "pwonostik.share": {
+    en: "Share my prediction",
+    fr: "Partager mon pronostic",
+    ht: "Partager mon pronostic",
+  },
+  "pwonostik.leaderboard": {
+    en: "Leaderboard",
+    fr: "Classement",
+    ht: "Classement",
+  },
+  "pwonostik.leaderboardSoon": {
+    en: "The leaderboard will switch on as soon as the backend connects. Your predictions are already saved on this device.",
+    fr: "Le classement s'activera dès la connexion du backend. Vos pronostics sont déjà sauvegardés sur cet appareil.",
+    ht: "Le classement s'activera dès la connexion du backend. Vos pronostics sont déjà sauvegardés sur cet appareil.",
+  },
+  "pwonostik.global": {
+    en: "Global",
+    fr: "Mondial",
+    ht: "Mondial",
+  },
+  "pwonostik.myLeague": {
+    en: "My league",
+    fr: "Ma ligue",
+    ht: "Ma ligue",
+  },
+  "pwonostik.emptyLeague": {
+    en: "No one in this league yet. Share your code!",
+    fr: "Personne dans cette ligue pour l'instant. Partagez votre code !",
+    ht: "Personne dans cette ligue pour l'instant. Partagez votre code !",
+  },
+  "pwonostik.emptyGlobal": {
+    en: "Be the first to save your predictions.",
+    fr: "Soyez le premier à enregistrer vos pronostics.",
+    ht: "Soyez le premier à enregistrer vos pronostics.",
+  },
+  "pwonostik.boardCountPlural": {
+    en: "{n} players have already submitted their predictions. Points will appear after the first match.",
+    fr: "{n} joueurs ont déjà soumis leurs pronostics. Les points s'afficheront après le premier match.",
+    ht: "{n} joueurs ont déjà soumis leurs pronostics. Les points s'afficheront après le premier match.",
+  },
+  "pwonostik.boardCountSingular": {
+    en: "{n} player has already submitted their predictions. Points will appear after the first match.",
+    fr: "{n} joueur a déjà soumis ses pronostics. Les points s'afficheront après le premier match.",
+    ht: "{n} joueur a déjà soumis ses pronostics. Les points s'afficheront après le premier match.",
+  },
+  "pwonostik.minusGoalAria": {
+    en: "Minus one goal {name}",
+    fr: "Moins un but {name}",
+    ht: "Moins un but {name}",
+  },
+  "pwonostik.plusGoalAria": {
+    en: "Plus one goal {name}",
+    fr: "Plus un but {name}",
+    ht: "Plus un but {name}",
+  },
+
+  // ─── PENALTY GAME (Phase 2) ──────────────────────────────────────────
+  "penalty.shareText": {
+    en: "I knocked out Scotland, Brazil, and Morocco in a shootout 🇭🇹 Play too: grenadiers2026.com/jeux/penalty",
+    fr: "J'ai éliminé l'Écosse, le Brésil et le Maroc aux tirs au but 🇭🇹 Joue aussi : grenadiers2026.com/jeux/penalty",
+    ht: "J'ai éliminé l'Écosse, le Brésil et le Maroc aux tirs au but 🇭🇹 Joue aussi : grenadiers2026.com/jeux/penalty",
+  },
+  "penalty.goal": {
+    en: "Goal!",
+    fr: "But !",
+    ht: "But !",
+  },
+  "penalty.over": {
+    en: "Over the bar!",
+    fr: "Au-dessus !",
+    ht: "Au-dessus !",
+  },
+  "penalty.save": {
+    en: "Saved!",
+    fr: "Arrêt !",
+    ht: "Arrêt !",
+  },
+  "penalty.saveYou": {
+    en: "Saved! 🧤",
+    fr: "Arrêt ! 🧤",
+    ht: "Arrêt ! 🧤",
+  },
+  "penalty.theyScore": {
+    en: "They score...",
+    fr: "Ils marquent...",
+    ht: "Ils marquent...",
+  },
+  "penalty.suddenDeath": {
+    en: "Sudden death",
+    fr: "Mort subite",
+    ht: "Mort subite",
+  },
+  "penalty.kickLabel": {
+    en: "Kick {n} / 5",
+    fr: "Tir {n} / 5",
+    ht: "Tir {n} / 5",
+  },
+  "penalty.defense": {
+    en: "Defense",
+    fr: "Défense",
+    ht: "Défense",
+  },
+  "penalty.aimTitle": {
+    en: "Your shot",
+    fr: "À toi de tirer",
+    ht: "À toi de tirer",
+  },
+  "penalty.aimText": {
+    en: "Tap a zone of the goal to aim. Go for the corners, but watch the keeper.",
+    fr: "Tape une zone du but pour viser. Vise les coins, mais attention au gardien.",
+    ht: "Tape une zone du but pour viser. Vise les coins, mais attention au gardien.",
+  },
+  "penalty.diveTitle": {
+    en: "Your save",
+    fr: "À toi d'arrêter",
+    ht: "À toi d'arrêter",
+  },
+  "penalty.diveText": {
+    en: "Tap the zone where you dive. Read the shooter.",
+    fr: "Tape la zone où tu plonges. Devine le tireur.",
+    ht: "Tape la zone où tu plonges. Devine le tireur.",
+  },
+  "penalty.winTitle": {
+    en: "Win! 🎉",
+    fr: "Victoire ! 🎉",
+    ht: "Victoire ! 🎉",
+  },
+  "penalty.winText": {
+    en: "You beat {opponent}. On to the next!",
+    fr: "Tu as battu {opponent}. Au suivant !",
+    ht: "Tu as battu {opponent}. Au suivant !",
+  },
+  "penalty.continue": {
+    en: "Continue",
+    fr: "Continuer",
+    ht: "Continuer",
+  },
+  "penalty.lostTitle": {
+    en: "Out...",
+    fr: "Éliminé...",
+    ht: "Éliminé...",
+  },
+  "penalty.lostText": {
+    en: "You didn't get past {opponent} this time. Try again.",
+    fr: "Tu n'as pas passé {opponent} cette fois. Réessaie.",
+    ht: "Tu n'as pas passé {opponent} cette fois. Réessaie.",
+  },
+  "penalty.replay": {
+    en: "Play again",
+    fr: "Rejouer",
+    ht: "Rejouer",
+  },
+  "penalty.eyebrow": {
+    en: "Shootout",
+    fr: "Tirs au but",
+    ht: "Tirs au but",
+  },
+  "penalty.introText": {
+    en: "Best of 5. You shoot first, then you save. A tie means sudden death.",
+    fr: "Le meilleur des 5. Tu tires d'abord, puis tu arrêtes. Égalité = mort subite.",
+    ht: "Le meilleur des 5. Tu tires d'abord, puis tu arrêtes. Égalité = mort subite.",
+  },
+  "penalty.start": {
+    en: "Start",
+    fr: "Commencer",
+    ht: "Commencer",
+  },
+  "penalty.powerTitle": {
+    en: "Tap to strike!",
+    fr: "Tape pour frapper !",
+    ht: "Tape pour frapper !",
+  },
+  "penalty.strikeAria": {
+    en: "Strike",
+    fr: "Frapper",
+    ht: "Frapper",
+  },
+  "penalty.strikeCenter": {
+    en: "Strike the center",
+    fr: "Frappe au centre",
+    ht: "Frappe au centre",
+  },
+  "penalty.championTitle": {
+    en: "You knocked out three great teams in a shootout 🇭🇹",
+    fr: "Tu as éliminé trois grandes équipes aux tirs au but 🇭🇹",
+    ht: "Tu as éliminé trois grandes équipes aux tirs au but 🇭🇹",
+  },
+  "penalty.goalsStat": {
+    en: "Goals",
+    fr: "Buts",
+    ht: "Buts",
+  },
+  "penalty.savesStat": {
+    en: "Saves",
+    fr: "Arrêts",
+    ht: "Arrêts",
+  },
+  "penalty.copied": {
+    en: "Copied ✓",
+    fr: "Copié ✓",
+    ht: "Copié ✓",
+  },
+  "penalty.share": {
+    en: "Share",
+    fr: "Partager",
+    ht: "Partager",
+  },
+  "penalty.zoneAria": {
+    en: "Zone {n}",
+    fr: "Zone {n}",
+    ht: "Zone {n}",
+  },
+
+  // ─── ONZE DE DÉPART GAME (Phase 2) ───────────────────────────────────
+  "games.allGames": {
+    en: "All games",
+    fr: "Tous les jeux",
+    ht: "Tous les jeux",
+  },
+  "onze.subtitle": {
+    en: "Build your starting eleven for the Grenadiers, then share it with your group.",
+    fr: "Composez votre onze de départ pour les Grenadiers, puis partagez-le avec votre groupe.",
+    ht: "Composez votre onze de départ pour les Grenadiers, puis partagez-le avec votre groupe.",
+  },
+  "onze.clearAll": {
+    en: "Clear all",
+    fr: "Tout effacer",
+    ht: "Tout effacer",
+  },
+  "onze.coachLabel": {
+    en: "Your manager name",
+    fr: "Votre nom de sélectionneur",
+    ht: "Votre nom de sélectionneur",
+  },
+  "onze.optional": {
+    en: "(optional)",
+    fr: "(optionnel)",
+    ht: "(optionnel)",
+  },
+  "onze.coachPlaceholder": {
+    en: "e.g. Sébastien Migné",
+    fr: "Ex. Sébastien Migné",
+    ht: "Ex. Sébastien Migné",
+  },
+  "onze.share": {
+    en: "Share my XI",
+    fr: "Partager mon onze",
+    ht: "Partager mon onze",
+  },
+  "onze.completeRemaining": {
+    en: "Complete your XI ({n} left to place)",
+    fr: "Complétez votre onze ({n} à placer)",
+    ht: "Complétez votre onze ({n} à placer)",
+  },
+  "onze.role.GK": {
+    en: "Goalkeeper",
+    fr: "Gardien",
+    ht: "Gardien",
+  },
+  "onze.role.DEF": {
+    en: "Defender",
+    fr: "Défenseur",
+    ht: "Défenseur",
+  },
+  "onze.role.MID": {
+    en: "Midfielder",
+    fr: "Milieu",
+    ht: "Milieu",
+  },
+  "onze.role.FWD": {
+    en: "Forward",
+    fr: "Attaquant",
+    ht: "Attaquant",
+  },
+  "onze.roleShort.GK": {
+    en: "GK",
+    fr: "GAR",
+    ht: "GAR",
+  },
+  "onze.roleShort.DEF": {
+    en: "DEF",
+    fr: "DÉF",
+    ht: "DÉF",
+  },
+  "onze.roleShort.MID": {
+    en: "MID",
+    fr: "MIL",
+    ht: "MIL",
+  },
+  "onze.roleShort.FWD": {
+    en: "FWD",
+    fr: "ATT",
+    ht: "ATT",
+  },
+  "onze.pickerTitle": {
+    en: "Choose a {role}",
+    fr: "Choisir un {role}",
+    ht: "Choisir un {role}",
+  },
+  "onze.close": {
+    en: "Close",
+    fr: "Fermer",
+    ht: "Fermer",
+  },
+  "onze.filterByPosition": {
+    en: "Filter by position",
+    fr: "Filtrer par poste",
+    ht: "Filtrer par poste",
+  },
+  "onze.seeAllPlayers": {
+    en: "See all players",
+    fr: "Voir tous les joueurs",
+    ht: "Voir tous les joueurs",
+  },
+  "onze.remove": {
+    en: "Remove",
+    fr: "Retirer",
+    ht: "Retirer",
+  },
+  "onze.noPlayers": {
+    en: "No players available for this position.",
+    fr: "Aucun joueur disponible à ce poste.",
+    ht: "Aucun joueur disponible à ce poste.",
+  },
+
+  // ─── DEVINE LE GRENADIER GAME (Phase 2) ──────────────────────────────
+  "devine.subtitle": {
+    en: "A mystery player from the squad every day. Six tries to find them.",
+    fr: "Un joueur mystère de la sélection chaque jour. Six essais pour le trouver.",
+    ht: "Un joueur mystère de la sélection chaque jour. Six essais pour le trouver.",
+  },
+  "devine.puzzleProgress": {
+    en: "Puzzle no.{n} · {tries}/{max} tries",
+    fr: "Énigme nº{n} · {tries}/{max} essais",
+    ht: "Énigme nº{n} · {tries}/{max} essais",
+  },
+  "devine.streak": {
+    en: "Streak: {n} 🔥",
+    fr: "Série : {n} 🔥",
+    ht: "Série : {n} 🔥",
+  },
+  "devine.howToPlay": {
+    en: "How to play",
+    fr: "Comment jouer",
+    ht: "Comment jouer",
+  },
+  "devine.hide": {
+    en: "Hide ▾",
+    fr: "Masquer ▾",
+    ht: "Masquer ▾",
+  },
+  "devine.show": {
+    en: "Show ▸",
+    fr: "Afficher ▸",
+    ht: "Afficher ▸",
+  },
+  "devine.howText": {
+    en: "A mystery Grenadier is hiding in the squad. Guess players from the group: with each try, the game reveals what your pick shares with the player you're after (position, age, club country, and club). Six tries to unmask them.",
+    fr: "Un Grenadier mystère se cache dans la sélection. Devinez des joueurs du groupe : à chaque essai, le jeu révèle ce que votre choix partage avec le joueur recherché (poste, âge, pays du club et club). Six essais pour le démasquer.",
+    ht: "Un Grenadier mystère se cache dans la sélection. Devinez des joueurs du groupe : à chaque essai, le jeu révèle ce que votre choix partage avec le joueur recherché (poste, âge, pays du club et club). Six essais pour le démasquer.",
+  },
+  "devine.legend": {
+    en: "Legend",
+    fr: "Légende",
+    ht: "Légende",
+  },
+  "devine.legendGreenLabel": {
+    en: "Green",
+    fr: "Vert",
+    ht: "Vert",
+  },
+  "devine.legendGreen": {
+    en: "exact match: right position, right country, right club, or exact age.",
+    fr: "identique : bon poste, bon pays, bon club, ou âge exact.",
+    ht: "identique : bon poste, bon pays, bon club, ou âge exact.",
+  },
+  "devine.legendYellowLabel": {
+    en: "Yellow",
+    fr: "Jaune",
+    ht: "Jaune",
+  },
+  "devine.legendYellow": {
+    en: "close age: within 2 years of the mystery player.",
+    fr: "âge proche : à 2 ans près du joueur mystère.",
+    ht: "âge proche : à 2 ans près du joueur mystère.",
+  },
+  "devine.legendGrayLabel": {
+    en: "Gray",
+    fr: "Gris",
+    ht: "Gris",
+  },
+  "devine.legendGray": {
+    en: "no match.",
+    fr: "aucune correspondance.",
+    ht: "aucune correspondance.",
+  },
+  "devine.legendArrowsLabel": {
+    en: "Age arrows",
+    fr: "Flèches sur l'âge",
+    ht: "Flèches sur l'âge",
+  },
+  "devine.legendArrows": {
+    en: "the mystery Grenadier is older (↑) or younger (↓) than your guess.",
+    fr: "le Grenadier mystère est plus âgé (↑) ou plus jeune (↓) que votre essai.",
+    ht: "le Grenadier mystère est plus âgé (↑) ou plus jeune (↓) que votre essai.",
+  },
+  "devine.searchPlaceholder": {
+    en: "Type a player's name…",
+    fr: "Tapez le nom d'un joueur…",
+    ht: "Tapez le nom d'un joueur…",
+  },
+  "devine.found": {
+    en: "Found!",
+    fr: "Trouvé !",
+    ht: "Trouvé !",
+  },
+  "devine.attrPoste": {
+    en: "Position",
+    fr: "Poste",
+    ht: "Poste",
+  },
+  "devine.attrAge": {
+    en: "Age",
+    fr: "Âge",
+    ht: "Âge",
+  },
+  "devine.attrPays": {
+    en: "Club country",
+    fr: "Pays du club",
+    ht: "Pays du club",
+  },
+  "devine.attrClub": {
+    en: "Club",
+    fr: "Club",
+    ht: "Club",
+  },
+  "devine.win": {
+    en: "Nice, found in {n}!",
+    fr: "Bravo, trouvé en {n} !",
+    ht: "Bravo, trouvé en {n} !",
+  },
+  "devine.lose": {
+    en: "Missed it for today.",
+    fr: "Raté pour aujourd'hui.",
+    ht: "Raté pour aujourd'hui.",
+  },
+  "devine.answerPrefix": {
+    en: "The mystery Grenadier was",
+    fr: "Le Grenadier mystère était",
+    ht: "Le Grenadier mystère était",
+  },
+  "devine.share": {
+    en: "Share my result",
+    fr: "Partager mon résultat",
+    ht: "Partager mon résultat",
+  },
+  "devine.tomorrow": {
+    en: "A new mystery player tomorrow.",
+    fr: "Un nouveau joueur mystère demain.",
+    ht: "Un nouveau joueur mystère demain.",
+  },
+
   // ─── STORIES ──────────────────────────────────────────────────────────
   "stories.eyebrow": {
     en: "Chokarella editorial",
