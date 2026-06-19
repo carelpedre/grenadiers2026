@@ -345,3 +345,24 @@ PENDING Creole only (English now authored; Creole still falls back to French):
 - `player.bio` for all 26 players → `bioEn` DONE; needs a Creole sibling later
 - `staff[].bio` for all 8 staff → `bioEn` DONE; needs a Creole sibling later
 - forfait `player.statusLabel` / `player.statusNote` (Leverton Pierre) → `statusLabelEn` / `statusNoteEn` DONE; Creole pending
+
+## Recent top scorers (Phase 2)
+
+translations.js keys (ht = French placeholder):
+- `topScorers.title` · fr "Top buteurs récents"
+- `topScorers.sinceYear` · fr "En sélection depuis {year}" (keep {year})
+- `topScorers.recentWindow` · fr "Fenêtre récente"
+- `topScorers.matchesCount` · fr "{n} matchs" (keep {n})
+- `topScorers.note` · fr "Totaux récents, hors statistiques de carrière."
+- `topScorers.goalSingular` / `goalPlural` · fr "but" / "buts"
+- `topScorers.assistSingular` / `assistPlural` · fr "passe déc." / "passes déc."
+- `topScorers.capSingular` / `capPlural` · fr "sélection" / "sélections"
+
+## Training bases (Phase 2 content)
+
+friendlies.js `trainingCamp` data fields (have fr + En; need a Creole sibling later):
+- `phase1.name` / `phase1.purpose`
+- `phase2.name` / `phase2.purpose` / `phase2.selectedBy`
+- `phase2.localTies[].connection` (×2)
+- `notes`
+(Left as data per scope, still French in all languages: `dates`, `city`, `facility` for both phases.)

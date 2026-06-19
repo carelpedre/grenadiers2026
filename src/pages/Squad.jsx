@@ -263,7 +263,7 @@ export default function Squad() {
             <div className="p-6 md:p-8">
               <div className="flex items-baseline justify-between gap-4 flex-wrap mb-3">
                 <p className="text-haiti-red text-xs uppercase tracking-wider font-bold">
-                  {trainingCamp.phase1.name}
+                  {pick(trainingCamp.phase1.name, trainingCamp.phase1.nameEn)}
                 </p>
                 <p className="text-xs text-muted uppercase tracking-wider font-semibold">
                   {trainingCamp.phase1.dates}
@@ -271,7 +271,7 @@ export default function Squad() {
               </div>
               <h3 className="font-display text-2xl mb-1">{trainingCamp.phase1.base}</h3>
               <p className="text-sm text-muted mb-4">{trainingCamp.phase1.city}</p>
-              <p className="text-ink leading-relaxed">{trainingCamp.phase1.purpose}</p>
+              <p className="text-ink leading-relaxed">{pick(trainingCamp.phase1.purpose, trainingCamp.phase1.purposeEn)}</p>
             </div>
           </div>
 
@@ -286,7 +286,7 @@ export default function Squad() {
             <div className="p-6 md:p-8">
               <div className="flex items-baseline justify-between gap-4 flex-wrap mb-3">
                 <p className="text-haiti-red text-xs uppercase tracking-wider font-bold">
-                  {trainingCamp.phase2.name}
+                  {pick(trainingCamp.phase2.name, trainingCamp.phase2.nameEn)}
                 </p>
                 <p className="text-xs text-bg/60 uppercase tracking-wider font-semibold">
                   {trainingCamp.phase2.dates}
@@ -296,7 +296,7 @@ export default function Squad() {
               <p className="text-sm text-bg/60 mb-4">
                 {trainingCamp.phase2.facility} · {trainingCamp.phase2.city}
               </p>
-              <p className="text-bg/90 leading-relaxed mb-6">{trainingCamp.phase2.purpose}</p>
+              <p className="text-bg/90 leading-relaxed mb-6">{pick(trainingCamp.phase2.purpose, trainingCamp.phase2.purposeEn)}</p>
               <div className="grid md:grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="text-xs uppercase tracking-wider text-bg/60 font-semibold mb-1">
@@ -308,7 +308,7 @@ export default function Squad() {
                   <p className="text-xs uppercase tracking-wider text-bg/60 font-semibold mb-1">
                     {t("squad.selectedBy")}
                   </p>
-                  <p className="text-bg">{trainingCamp.phase2.selectedBy}</p>
+                  <p className="text-bg">{pick(trainingCamp.phase2.selectedBy, trainingCamp.phase2.selectedByEn)}</p>
                 </div>
               </div>
             </div>
@@ -319,17 +319,17 @@ export default function Squad() {
             <div>
               <h3 className="font-display text-lg mb-3">{t("squad.localTies")}</h3>
               <div className="grid md:grid-cols-2 gap-4">
-                {trainingCamp.phase2.localTies.map((t) => (
-                  <div key={t.player} className="bg-white border border-line rounded-lg p-5">
-                    <p className="font-display text-lg mb-2">{t.player}</p>
-                    <p className="text-sm text-ink leading-relaxed">{t.connection}</p>
+                {trainingCamp.phase2.localTies.map((tie) => (
+                  <div key={tie.player} className="bg-white border border-line rounded-lg p-5">
+                    <p className="font-display text-lg mb-2">{tie.player}</p>
+                    <p className="text-sm text-ink leading-relaxed">{pick(tie.connection, tie.connectionEn)}</p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          <p className="text-xs text-muted leading-relaxed">{trainingCamp.notes}</p>
+          <p className="text-xs text-muted leading-relaxed">{pick(trainingCamp.notes, trainingCamp.notesEn)}</p>
         </section>
 
         <SponsorPanel placement="squad-page" />

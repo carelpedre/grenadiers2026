@@ -12,6 +12,25 @@ const POS_ROLE = {
   Gardien: "GK", "Défenseur": "DEF", Milieu: "MID", Attaquant: "FWD",
 };
 
+// Birth dates are stored as French strings ("29 janvier 1988"). Parse to a real
+// Date and locale-format so English shows English month names. If the string is
+// not in the expected "DD month YYYY" French shape, it is returned unchanged.
+const FR_MONTHS = {
+  janvier: 0, février: 1, mars: 2, avril: 3, mai: 4, juin: 5,
+  juillet: 6, août: 7, septembre: 8, octobre: 9, novembre: 10, décembre: 11,
+};
+function formatFrenchDate(str, lang) {
+  if (!str) return str;
+  const m = String(str).trim().match(/^(\d{1,2})\s+([A-Za-zÀ-ÿ]+)\s+(\d{4})$/);
+  if (!m) return str;
+  const month = FR_MONTHS[m[2].toLowerCase()];
+  if (month == null) return str;
+  const d = new Date(Date.UTC(parseInt(m[3], 10), month, parseInt(m[1], 10)));
+  return d.toLocaleDateString(lang === "en" ? "en-US" : "fr-FR", {
+    day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+  });
+}
+
 // Modale joueur — s'ouvre au clic sur une fiche.
 // Se ferme via : clic sur l'arrière-plan, bouton X, touche Échap.
 // Verrouille le défilement du corps pendant l'ouverture.
@@ -175,12 +194,12 @@ export default function PlayerModal({ player, stat, onClose }) {
             {/* Faits physiques compacts — dans le premier écran */}
             {!isStaff && (
               <div className="grid grid-cols-2 gap-x-5 gap-y-3 text-sm">
-                {player.born && <Fact label={t("squad.label.bornOn")} value={player.born} />}
+                {player.born && <Fact label={t("squad.label.bornOn")} value={formatFrenchDate(player.born, lang)} />}
                 {player.birthplace && <Fact label={t("squad.label.birthplace")} value={player.birthplace} />}
                 {player.height && (
                   <Fact label={t("squad.label.height")} value={`${(player.height / 100).toFixed(2)} m`} />
                 )}
-                {player.debut && <Fact label={t("squad.label.debut")} value={player.debut} />}
+                {player.debut && <Fact label={t("squad.label.debut")} value={formatFrenchDate(player.debut, lang)} />}
                 {player.positionTags && player.positionTags.length > 0 && (
                   <div className="col-span-2 flex flex-wrap items-baseline gap-2">
                     <span className="text-xs uppercase tracking-wider text-muted font-semibold">

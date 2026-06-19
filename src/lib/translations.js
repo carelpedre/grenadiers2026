@@ -2453,6 +2453,63 @@ const dict = {
     ht: "{name} · Haïti à la Coupe du Monde 2026 🇭🇹",
   },
 
+  // ─── RECENT TOP SCORERS (Phase 2 content) ────────────────────────────
+  "topScorers.title": {
+    en: "Recent top scorers",
+    fr: "Top buteurs récents",
+    ht: "Top buteurs récents",
+  },
+  "topScorers.sinceYear": {
+    en: "Capped since {year}",
+    fr: "En sélection depuis {year}",
+    ht: "En sélection depuis {year}",
+  },
+  "topScorers.recentWindow": {
+    en: "Recent window",
+    fr: "Fenêtre récente",
+    ht: "Fenêtre récente",
+  },
+  "topScorers.matchesCount": {
+    en: "{n} matches",
+    fr: "{n} matchs",
+    ht: "{n} matchs",
+  },
+  "topScorers.note": {
+    en: "Recent totals, excluding career stats.",
+    fr: "Totaux récents, hors statistiques de carrière.",
+    ht: "Totaux récents, hors statistiques de carrière.",
+  },
+  "topScorers.goalSingular": {
+    en: "goal",
+    fr: "but",
+    ht: "but",
+  },
+  "topScorers.goalPlural": {
+    en: "goals",
+    fr: "buts",
+    ht: "buts",
+  },
+  "topScorers.assistSingular": {
+    en: "assist",
+    fr: "passe déc.",
+    ht: "passe déc.",
+  },
+  "topScorers.assistPlural": {
+    en: "assists",
+    fr: "passes déc.",
+    ht: "passes déc.",
+  },
+  "topScorers.capSingular": {
+    en: "cap",
+    fr: "sélection",
+    ht: "sélection",
+  },
+  "topScorers.capPlural": {
+    en: "caps",
+    fr: "sélections",
+    ht: "sélections",
+  },
+
   // ─── STORIES (additions) ─────────────────────────────────────────────
   "stories.eyebrow": {
     en: "Stories",

@@ -15,6 +15,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getRecentScorers, backendReady } from "../lib/fixturesApi";
 import { squad } from "../data/squad";
+import { useT } from "../lib/i18n";
+
+// Position code (GB/DF/MT/AT) → shared role key for t("onze.roleShort.*").
+const CODE_ROLE = { GB: "GK", DF: "DEF", MT: "MID", AT: "FWD" };
 
 // Index apiId -> joueur de l'effectif, enrichi du poste (pour ouvrir la modale).
 const SQUAD_BY_API_ID = (() => {
@@ -39,8 +43,6 @@ function initials(name) {
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
-const plural = (n, sing, plur) => `${n} ${n > 1 ? plur : sing}`;
-
 function Avatar({ photo, name }) {
   const [broken, setBroken] = useState(false);
   if (photo && !broken) {
@@ -62,6 +64,10 @@ function Avatar({ photo, name }) {
 }
 
 export default function TopScorers({ onSelectPlayer }) {
+  const { t, lang } = useT();
+  // French pluralizes 0 and 1 as singular; English only 1.
+  const plural = (n, sing, plur) =>
+    `${n} ${(lang === "en" ? n === 1 : n <= 1) ? sing : plur}`;
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
@@ -85,13 +91,13 @@ export default function TopScorers({ onSelectPlayer }) {
   return (
     <section className="scroll-mt-20">
       <div className="border-b border-line pb-3 mb-6">
-        <h2 className="font-display text-2xl md:text-3xl">Top buteurs récents</h2>
+        <h2 className="font-display text-2xl md:text-3xl">{t("topScorers.title")}</h2>
         <p className="text-muted text-sm mt-1">
-          {fromYear ? `En sélection depuis ${fromYear}` : "Fenêtre récente"}
-          {matchesCounted ? ` · ${matchesCounted} matchs` : ""}
+          {fromYear ? t("topScorers.sinceYear").replace("{year}", fromYear) : t("topScorers.recentWindow")}
+          {matchesCounted ? ` · ${t("topScorers.matchesCount").replace("{n}", matchesCounted)}` : ""}
         </p>
         <p className="text-muted/80 text-xs mt-1">
-          Totaux récents, hors statistiques de carrière.
+          {t("topScorers.note")}
         </p>
       </div>
 
@@ -104,12 +110,12 @@ export default function TopScorers({ onSelectPlayer }) {
       >
         {rows.map((r, i) => {
           const sq = SQUAD_BY_API_ID[r.player_id] || null;
-          const name = sq ? sq.name : r.player_name || "Joueur";
+          const name = sq ? sq.name : r.player_name || t("squad.playerGeneric");
           const photo = sq ? sq.photo : r.photo || null;
           const secondary = [
-            plural(r.goals ?? 0, "but", "buts"),
-            plural(r.assists ?? 0, "passe déc.", "passes déc."),
-            plural(r.appearances ?? 0, "sélection", "sélections"),
+            plural(r.goals ?? 0, t("topScorers.goalSingular"), t("topScorers.goalPlural")),
+            plural(r.assists ?? 0, t("topScorers.assistSingular"), t("topScorers.assistPlural")),
+            plural(r.appearances ?? 0, t("topScorers.capSingular"), t("topScorers.capPlural")),
           ].join(" · ");
 
           const inner = (
@@ -122,14 +128,14 @@ export default function TopScorers({ onSelectPlayer }) {
                 <p className="font-display text-base md:text-lg text-ink truncate">
                   {name}
                   {sq?.position && (
-                    <span className="text-muted text-xs font-sans ml-2 align-middle">{sq.position}</span>
+                    <span className="text-muted text-xs font-sans ml-2 align-middle">{CODE_ROLE[sq.position] ? t(`onze.roleShort.${CODE_ROLE[sq.position]}`) : sq.position}</span>
                   )}
                 </p>
                 <p className="text-xs text-muted truncate">{secondary}</p>
               </div>
               <span className="font-display text-2xl md:text-3xl text-haiti-blue tabular-nums shrink-0">
                 {r.goals ?? 0}
-                <span className="text-muted text-xs font-sans ml-1">buts</span>
+                <span className="text-muted text-xs font-sans ml-1">{t("squad.goalsUnit")}</span>
               </span>
             </>
           );
