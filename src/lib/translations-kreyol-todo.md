@@ -341,7 +341,7 @@ squad.js data fields (have fr + En; need a Creole sibling later):
 - `squadStats.announcedDate` (used in roster summary)
 - `staff[].role` (8 entries; English sibling `roleEn` added, Creole pending)
 
-PENDING English + Creole content (NOT yet translated, render French via fallback):
-- `player.bio` for all 26 players → needs `bioEn` (modal already selects `bioEn` when present)
-- `staff[].bio` for all 8 staff → needs `bioEn`
-- forfait `player.statusLabel` / `player.statusNote` → need `statusLabelEn` / `statusNoteEn` (modal already selects them when present)
+PENDING Creole only (English now authored; Creole still falls back to French):
+- `player.bio` for all 26 players → `bioEn` DONE; needs a Creole sibling later
+- `staff[].bio` for all 8 staff → `bioEn` DONE; needs a Creole sibling later
+- forfait `player.statusLabel` / `player.statusNote` (Leverton Pierre) → `statusLabelEn` / `statusNoteEn` DONE; Creole pending

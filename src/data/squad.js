@@ -14,6 +14,7 @@ export const squad = {
     {
       name: "Johny Placide",
       slug: "johny-placide",
+      bioEn: "Born in Montfermeil, in the Paris region, on January 29, 1988, Johny Placide is the captain of the Grenadiers and the most capped player in the current national team with 81 caps. Trained at Le Havre, where he made his professional debut in 2008, he then defended the colors of Stade de Reims, Guingamp, and Oldham Athletic in England, before continuing his career in Bulgaria at Tsarsko Selo. He has played since 2021 for SC Bastia, where he has established himself as the first-choice goalkeeper in Ligue 2. At 38, the 2026 World Cup will most likely be his last major international competition.",
       apiId: 87789,
       photo: "/images/photos/johny-placide.jpg?v=20260614",
       number: 1,
@@ -35,6 +36,7 @@ export const squad = {
     {
       name: "Alexandre Pierre",
       slug: "alexandre-pierre",
+      bioEn: "Born in Aubervilliers, in the Paris region, on February 25, 2001, Alexandre Pierre came through the youth academies of Stade Lavallois, Angers SCO, and then RC Strasbourg, where he signed his first professional contract in 2021. Loaned to FC Annecy in early 2022, he earned his first cap with the Grenadiers there against Bermuda, a clean sheet that launched his international career. He has played since 2024 for FC Sochaux-Montbéliard, which he joined from Racing and with which he extended his contract until 2028. The second choice in the national team's goalkeeping hierarchy, he has thirteen caps.",
       apiId: 174768,
       photo: "/images/photos/alexandre-pierre.jpg?v=20260614",
       number: 12,
@@ -53,6 +55,7 @@ export const squad = {
     {
       name: "Josue Duverger",
       slug: "josue-duverger",
+      bioEn: "Born on April 27, 2000, in Montréal, Canada, of Haitian descent, Josué Duverger did most of his training in Portugal within the academies of Sporting CP and Vitória Setúbal. After a spell at União de Santarém, he joined FC Cosmos Koblenz in Germany in 2024, where he currently plays. A Haiti international since 2017, he rounds out the Grenadiers' goalkeeping corps for the 2026 World Cup.",
       apiId: 123742,
       photo: "/images/photos/josue-duverger.jpg?v=20260614",
       number: 23,
@@ -73,6 +76,7 @@ export const squad = {
     {
       name: "Ricardo Adé",
       slug: "ricardo-ade",
+      bioEn: "Born in Saint-Marc, Ricardo Adé has established himself as the most capped defender in the current national team and one of the leaders of the Grenadiers. Captain of the team from 2021 to 2024 before handing the armband to Johny Placide, he now serves as vice-captain and remains a pillar of the central defense. At club level, he has played for LDU Quito since 2023, after a first Ecuadorian league title won with Aucas in 2022. With LDU, he lifted two more consecutive Serie A titles in 2023 and 2024. His 57 caps span nearly a decade of CONCACAF qualifying campaigns.",
       apiId: 12303,
       photo: "/images/photos/ricardo-ade.jpg?v=20260614",
       number: 4,
@@ -94,6 +98,7 @@ export const squad = {
     {
       name: "Carlens Arcus",
       slug: "carlens-arcus",
+      bioEn: "Born on June 28, 1996, Carlens Arcus is a right back with 53 caps for the Grenadiers. After a path that took him from Racing Club Haïtien to France and then the Netherlands with Vitesse Arnhem, he joined Angers SCO in summer 2024 and immediately established himself as a starter on the right side of the Ligue 1 defense. The club extended his contract until June 2027. During 2026 World Cup qualifying, he provided the assist on the goal that sealed qualification against Nicaragua.",
       apiId: 20850,
       photo: "/images/photos/carlens-arcus.jpg?v=20260614",
       number: 2,
@@ -113,6 +118,7 @@ export const squad = {
     {
       name: "Martin Experience",
       slug: "martin-experience",
+      bioEn: "Born on March 9, 1999, in Châteaubriant, France, Martin Expérience is a versatile left back who can also play as a central defender. Trained at Stade Rennais, he then spent time in Spain at Xerez before returning to France, where his path took him to US Changé, US Avranches, and then SO Cholet in the National. He joined AS Nancy-Lorraine in 2024 and currently plays there in Ligue 2. A Grenadiers international since 2021, he has played in the Gold Cup in 2021 and 2025 as well as the successful 2026 World Cup qualifiers.",
       apiId: 190747,
       photo: "/images/photos/martin-experience.jpg?v=20260614",
       number: 8,
@@ -131,6 +137,7 @@ export const squad = {
     {
       name: "Jean-Kévin Duverne",
       slug: "jean-kevin-duverne",
+      bioEn: "Born on July 12, 1997, in Paris, Jean-Kévin Duverne is a versatile defender who can play centrally or out wide. Trained at RC Lens, where he made his professional debut in 2016, he then spent four seasons at Stade Brestois before joining FC Nantes in 2023, where he is under contract until 2027. He currently plays for KAA Gent in Belgium on loan, after a first spell at KV Courtrai in early 2025. A Haiti international since June 2024, he has fifteen caps with the Grenadiers.",
       apiId: 20655,
       photo: "/images/photos/jean-kevin-duverne.jpg?v=20260614",
       number: 22,
@@ -149,6 +156,7 @@ export const squad = {
     {
       name: "Duke Lacroix",
       slug: "duke-lacroix",
+      bioEn: "Born on October 14, 1993, in New Egypt, New Jersey, Markhus « Duke » Lacroix is a versatile defender who can play at left back, right back, or center back. Having attended The Lawrenceville School and then the University of Pennsylvania, where he played for the Penn Quakers from 2011 to 2014 and was named All-Ivy League four times, he continued his professional career in the USL Championship, the North American second tier. He has played since 2023 for the Colorado Springs Switchbacks, with whom he won the USL Championship in 2024. A Grenadiers international since 2024, Lacroix is among the first two players from the USL Championship to play in a World Cup final tournament.",
       apiId: 102505,
       photo: "/images/photos/duke-lacroix.jpg?v=20260614",
       number: 13,
@@ -168,6 +176,7 @@ export const squad = {
     {
       name: "Wilguens Paugain",
       slug: "wilguens-paugain",
+      bioEn: "Born on August 24, 2001, in Thomazeau, Haiti, Wilguens Paugain is a right back with an unusual path. Trained at AS Nancy-Lorraine after a spell with the Épinal youth side, he left France in 2022 to sign his first professional contract at Akritas Chlorakas in Cyprus. Spells followed at FK Auda in Latvia and SKN St. Pölten in Austria, where he broke through as a starter in the second division. Spotted by Zulte Waregem, he joined the Belgian club on loan in February 2025 and then signed permanently in summer 2025, under contract until 2028 in the Jupiler Pro League. A former France under-18 international, he chose to represent Haiti from 2025 and now has six caps with the Grenadiers.",
       apiId: 275367,
       photo: "/images/photos/wilguens-paugain.jpg?v=20260614",
       number: 24,
@@ -186,6 +195,7 @@ export const squad = {
     {
       name: "Hannes Delcroix",
       slug: "hannes-delcroix",
+      bioEn: "Born on February 28, 1999, in Petite-Rivière-de-l'Artibonite and raised in Belgium, Hannes Delcroix is a versatile central defender who can also play at left back. Trained at RSC Anderlecht, where he spent most of his youth career before his professional debut in 2017, he joined Burnley in 2023 and then FC Lugano in January 2026, under contract until 2028 in the Swiss Super League. Capped once by Belgium's Red Devils in a friendly in 2020, he chose to represent Haiti in 2025 and took part in the Grenadiers' final World Cup 2026 qualifiers.",
       apiId: 1411,
       photo: "/images/photos/hannes-delcroix.jpg?v=20260614",
       number: 5,
@@ -205,6 +215,7 @@ export const squad = {
     {
       name: "Keeto Thermoncy",
       slug: "keeto-thermoncy",
+      bioEn: "Born on March 29, 2006, in Marly, in the canton of Fribourg, to a Haitian father and a Swiss mother, Keeto Thermoncy is the youngest defender in the national team at 20. Trained at Team AFF-FFV and then Young Boys of Bern, where he has played since 2020, he currently plays with the Young Boys U21 reserve team in the Promotion League, the Swiss third tier. Registered in the Young Boys professional squad for the 2025-2026 UEFA Europa League campaign, he discovered the Haiti national team in autumn 2025 and has one cap with the Grenadiers.",
       apiId: 573613,
       photo: "/images/photos/keeto-thermoncy.jpg?v=20260614",
       number: 3,
@@ -224,6 +235,7 @@ export const squad = {
     {
       name: "Garven Metusala",
       slug: "garven-metusala",
+      bioEn: "Born in Terrebonne, Québec, to a Haitian mother, Garven Metusala made his name at Forge FC, where he lifted two Canadian championship titles before joining the Colorado Springs Switchbacks. An international since 2022, this central defender, strong in duels, took part in the World Cup qualifiers. Called up as reinforcement on the eve of the World Cup, he embodies the depth of a group where everyone stays ready.",
       apiId: 318930,
       photo: "/images/photos/garven-metusala.jpg?v=20260614",
       number: 14,
@@ -245,9 +257,12 @@ export const squad = {
     {
       name: "Leverton Pierre",
       slug: "leverton-pierre",
+      bioEn: "Born on March 9, 1998, in Tabarre, Haiti, Leverton Pierre is a defensive midfielder with a rich European career. Trained at CS Saint-Louis before signing in France at SC Bastia in 2017, he made his professional debut with AC Ajaccio in 2018, before spells at Metz, Dunkerque, Avranches, and then Châteauroux. Since July 2025, he has played for FC Vizela in Liga Portugal 2, under contract until 2026 with the option of an additional year. A Haiti international since 2021, he has 31 caps with the Grenadiers and has played in three Gold Cups (2021, 2023, and 2025) as well as the successful 2026 World Cup qualifiers.",
       status: "forfait",
       statusLabel: "Forfait · blessure",
+      statusLabelEn: "Out · injury",
       statusNote: "Lésion aux adducteurs · remplacé par Garven Metusala",
+      statusNoteEn: "Adductor injury · replaced by Garven Metusala",
       apiId: 20538,
       photo: "/images/photos/leverton-pierre.jpg?v=20260614",
       positionTags: ["DM", "CM"],
@@ -265,6 +280,7 @@ export const squad = {
     {
       name: "Danley Jean Jacques",
       slug: "danley-jean-jacques",
+      bioEn: "Born on May 20, 2000, in Petit-Goâve, Danley Jean-Jacques is a defensive midfielder trained in Haiti at Don Bosco FC, where he broke through between 2015 and 2021. Signed by FC Metz in 2021, he first played with the reserves before establishing himself in the first team, playing 69 matches including 33 in Ligue 1. In August 2024, he left France to join Philadelphia Union in Major League Soccer, where he quickly became a starter. A Haiti international since March 2023, he has 30 caps and 8 goals with the Grenadiers.",
       apiId: 338367,
       photo: "/images/photos/danley-jean-jacques.jpg?v=20260614",
       number: 17,
@@ -285,6 +301,7 @@ export const squad = {
     {
       name: "Carl Sainté",
       slug: "carl-sainte",
+      bioEn: "Born on August 9, 2002, in Grand-Goâve, Carl-Frédéric Sainté is a central midfielder trained in Haiti, where he made his professional debut in 2020 with Violette Athletic Club, contributing to its Ligue Haïtienne title in 2020-2021. He then moved to the United States in December 2021, where he played successively for New Mexico United, North Texas SC, FC Dallas, and Phoenix Rising before signing with El Paso Locomotive FC for the 2026 season in the USL Championship. An international since March 2022, he has 25 caps with the Grenadiers and is, along with Duke Lacroix, among the first two USL Championship players selected for a World Cup final tournament.",
       apiId: 237142,
       photo: "/images/photos/carl-sainte.jpg?v=20260614",
       number: 6,
@@ -303,6 +320,7 @@ export const squad = {
     {
       name: "Jean-Ricner Bellegarde",
       slug: "jean-ricner-bellegarde",
+      bioEn: "Born on June 27, 1998, in Colombes, in the Paris region, Jean-Ricner Bellegarde is the attacking midfielder of Wolverhampton Wanderers, now in the Championship after the club's relegation, where he has played since September 2023 following a fifteen-million-euro transfer from RC Strasbourg. Trained at RC Lens, he had established himself in Ligue 1 there before joining Strasbourg in 2019, where he played nearly 130 matches in the French top flight. A former France under-19, under-20, and under-21 international, he opted for Haitian sporting nationality in August 2025, becoming the first player selected by the Grenadiers to play in the Premier League. His first cap came on September 5, 2025, against Honduras, and he played the entire decisive match against Nicaragua that sealed qualification for the 2026 World Cup.",
       apiId: 20665,
       photo: "/images/photos/jean-ricner-bellegarde.jpg?v=20260614",
       number: 10,
@@ -324,6 +342,7 @@ export const squad = {
     {
       name: "Woodensky Pierre",
       slug: "woodensky-pierre",
+      bioEn: "Born on December 30, 2004, in Cité Soleil, Olivier Woodensky Pierre is the only player in the group who plays in the Haitian league. Trained at Violette AC, the oldest of the national clubs, he made his name at the 2022 CONCACAF U20 Championship, notably in a historic draw against Mexico. After a spell at Real Hope FA of Cap-Haïtien between 2023 and 2025, he won the Haitian championship in May 2024 before returning to Violette AC. A modern defensive midfielder, able to play with both feet, he made his international debut in 2026 and has one cap with the Grenadiers.",
       apiId: 371050,
       photo: "/images/photos/woodensky-pierre.jpg?v=20260614",
       number: 26,
@@ -345,6 +364,7 @@ export const squad = {
     {
       name: "Dominique Simon",
       slug: "dominique-simon",
+      bioEn: "Born on July 29, 2000, in Pontoise, France, Dominique Célidor Simon is a defensive midfielder playing in the Slovak first division. Under contract with the Czech club FK Pardubice, he has been on loan since August 2025 at FC Tatran Prešov in the Niké Liga, with a purchase option. Called up to the national team for the first time, he discovers the Grenadiers at the 2026 World Cup.",
       apiId: 194242,
       photo: "/images/photos/dominique-simon.jpg?v=20260614",
       number: 25,
@@ -365,6 +385,7 @@ export const squad = {
     {
       name: "Duckens Nazon",
       slug: "duckens-nazon",
+      bioEn: "Born on April 7, 1994, in Châtenay-Malabry, in the Paris suburbs, to Haitian parents, Duckens Nazon is the all-time top scorer in the history of the Haitian national team with 44 goals in 76 caps. A center forward with a rich European career, he has played notably for FC Lorient in France, Coventry City, Oldham Athletic, and Wolverhampton in England, Sint-Truiden in Belgium, St Mirren in Scotland, as well as Kayserispor in Turkey and CSKA Sofia in Bulgaria. He has played since 2024 for Esteghlal FC in the Persian Gulf Pro League, the Iranian league. A mainstay of the national team since 2014, he scored a decisive hat-trick against Costa Rica in September 2025 during 2026 World Cup qualifying.",
       apiId: 45020,
       photo: "/images/photos/duckens-nazon.jpg?v=20260614",
       number: 9,
@@ -386,6 +407,7 @@ export const squad = {
     {
       name: "Frantzdy Pierrot",
       slug: "frantzdy-pierrot",
+      bioEn: "Born on March 29, 1995, in Cap-Haïtien and raised in Melrose, Massachusetts, from the age of eleven, Frantzdy Pierrot is the tallest forward in the group at 1.94 m. After his college years at Northeastern and then Coastal Carolina, he began his professional career at Royal Excel Mouscron in Belgium before playing in the French Ligue 2 with Guingamp, then at Maccabi Haïfa in Israel where he scored 28 goals in 66 matches over three seasons. In September 2024, he joined AEK Athens in the Greek Super League, then was loaned in February 2026 to Çaykur Rizespor in the Turkish Süper Lig. With the Grenadiers, he has 34 goals in 51 caps and scored the only goal of the win against Costa Rica on November 13, 2025, a result that opens the way to qualification.",
       apiId: 8601,
       photo: "/images/photos/frantzdy-pierrot.jpg?v=20260614",
       number: 20,
@@ -407,6 +429,7 @@ export const squad = {
     {
       name: "Derrick Etienne Jr.",
       slug: "derrick-etienne",
+      bioEn: "Born on November 25, 1996, in Richmond, Virginia, and raised in Paterson, New Jersey, Derrick Etienne Jr. is a winger with a unique family background: his father Derrick Sr. and his uncle Darrell, twin brothers, also wore the colors of the Grenadiers, while his sister Danielle represented Haiti at the 2023 Women's World Cup. A product of the New York Red Bulls academy, which he joined as a homegrown player in 2015, he notably lifted the MLS Cup with Columbus Crew in 2020, before spells at Atlanta United and then Toronto FC since April 2024. An international since 2016, he has 48 caps and 8 goals with the Grenadiers.",
       apiId: 50958,
       photo: "/images/photos/derrick-etienne.jpg?v=20260614",
       number: 7,
@@ -427,6 +450,7 @@ export const squad = {
     {
       name: "Louicius Deedson",
       slug: "louicius-deedson",
+      bioEn: "Born on February 11, 2001, in Tabarre, Haiti, Don Deedson Louicius is a left-footed right winger with an explosive profile. After breaking through in local academies in Haiti, he continued his development in the United States at the Atlanta United academy and then the Kalonji Soccer Academy, where he won the under-18 championship in 2019. He then began his professional career in Denmark, first at Hobro IK (2019-2023, 22 goals in 82 matches) and then at Odense Boldklub, which he helped earn promotion to the Superliga in 2025. He joined FC Dallas in July 2025 in Major League Soccer, under contract until 2028. An international since March 2021, he has 30 caps and 10 goals with the Grenadiers, and he scored the opening goal in the 2-0 win against Nicaragua on November 18, 2025, that sealed qualification for the 2026 World Cup.",
       apiId: 128766,
       photo: "/images/photos/louicius-deedson.jpg?v=20260614",
       number: 11,
@@ -446,6 +470,7 @@ export const squad = {
     {
       name: "Ruben Providence",
       slug: "ruben-providence",
+      bioEn: "Born on July 7, 2001, in Lagny-sur-Marne, of Haitian and Laotian descent, Ruben Fritzner Providence is a versatile winger who can play on either flank or up front. Trained at the Paris Saint-Germain academy, which he joined in 2010, he continued his progress at AS Roma from 2019, where he made his professional debut. After loans at Club Bruges in Belgium and Estoril in Portugal, he broke through at TSV Hartberg in the Austrian first division, scoring 17 goals in 54 matches over two seasons. He has played since August 2024 for Almere City FC in the Netherlands, under contract until 2027. A former France under-19 international, he opted for the Grenadiers in March 2025 and scored the second goal in the 2-0 win against Nicaragua on November 18, 2025, that sealed qualification.",
       apiId: 162733,
       photo: "/images/photos/ruben-providence.jpg?v=20260614",
       number: 15,
@@ -465,6 +490,7 @@ export const squad = {
     {
       name: "Josué Casimir",
       slug: "josue-casimir",
+      bioEn: "Born on September 24, 2001, in Baie-Mahault, Guadeloupe, to Haitian parents, Josué Casimir is a versatile right winger who can also play as a right back. Leaving his native island at fifteen to join the Havre AC academy, he spent most of his career there, playing more than a hundred professional matches and helping the club earn promotion to Ligue 1. He joined AJ Auxerre in June 2025, under contract until 2028. A former Guadeloupe under-20 international and younger brother of Gwada Boys defender Stevenson Casimir, he chose Haiti in 2025 and provided the assist on the winning goal against Nicaragua on November 18, 2025, that sealed qualification.",
       apiId: 174915,
       photo: "/images/photos/josue-casimir.jpg?v=20260614",
       number: 21,
@@ -484,6 +510,7 @@ export const squad = {
     {
       name: "Yassin Fortune",
       slug: "yassin-fortune",
+      bioEn: "Born on January 30, 1999, in Aubervilliers, in Seine-Saint-Denis, Yassin Fortuné is a center forward with an imposing frame. A former France under-17 international, he played successively for Quevilly-Rouen in France, Polissya Zhytomyr in Ukraine, FC Sion in Switzerland, then Cholet and Angers in France, before joining FC Vizela in August 2025 in Liga Portugal 2, where he is under contract until 2027 alongside his club teammate Leverton Pierre. He discovered the Grenadiers national team in 2025.",
       apiId: 48535,
       photo: "/images/photos/yassin-fortune.jpg?v=20260614",
       number: 19,
@@ -502,6 +529,7 @@ export const squad = {
     {
       name: "Wilson Isidor",
       slug: "wilson-isidor",
+      bioEn: "Born on August 27, 2000, in Rennes, in Brittany, to Haitian and Malagasy parents, Wilson Isidor has been the striker of Sunderland AFC in the Premier League since summer 2024, first on loan and then permanently. Trained at Stade Rennais without breaking into the first team, he made his professional debut with AS Monaco in November 2018, before loans at Laval and then Bastia-Borgo where he broke out as a prolific scorer with 16 goals in 29 matches. He then played for Lokomotiv Moscou, matching the Russian record by scoring in each of his first six matches, then for Zénith Saint-Pétersbourg, with whom he won the league and the Russian Cup. A former France under-17, under-18, under-19, and under-20 international, he opted for Haitian sporting nationality in March 2026 and scored his first international goal on March 31, 2026, against Iceland, in a friendly played in Toronto.",
       apiId: 84087,
       photo: "/images/photos/wilson-isidor.jpg?v=20260614",
       number: 18,
@@ -523,6 +551,7 @@ export const squad = {
     {
       name: "Lenny Joseph",
       slug: "lenny-joseph",
+      bioEn: "Born on October 12, 2000, in Paris, of Haitian and Congolese descent, Lenny Alvin Pico Joseph is a center forward who trained for nine seasons at the Paris Saint-Germain academy before continuing his progress at Montferrand, Le Puy-en-Velay, and Boulogne-sur-Mer in the reserves. Revealed in the 2020-2021 Coupe de France with Le Puy in National 2, he signed his first professional contract at FC Metz in 2021 where he experienced Ligue 1, before a transfer to GF Grenoble in 2023. Since January 2025, he has played for Ferencvárosi TC in the Nemzeti Bajnokság I, the Hungarian league, under contract until 2028. He discovers the Grenadiers at the 2026 World Cup, where he earns his first cap.",
       apiId: 21613,
       photo: "/images/photos/lenny-joseph.jpg?v=20260614",
       number: 16,
@@ -593,6 +622,7 @@ export const staff = [
     roleEn: "Head coach",
     photo: "/images/photos/sebastien-migne.jpg?v=20260614",
     bio: "Technicien français né à La Roche-sur-Yon en 1972, il a été joueur (notamment en Angleterre, à Leyton Orient) avant de devenir entraîneur. Adjoint de Jean-Pierre Papin puis de Claude Le Roy sur plusieurs sélections, il a dirigé le Congo, le Kenya et la Guinée équatoriale, et a vécu le Mondial 2022 comme adjoint de Rigobert Song avec le Cameroun. Sélectionneur d'Haïti depuis mars 2024, il a mené les Grenadiers à leur première qualification en Coupe du Monde depuis 1974.",
+    bioEn: "A French coach born in La Roche-sur-Yon in 1972, he was a player (notably in England, at Leyton Orient) before becoming a coach. An assistant to Jean-Pierre Papin and then Claude Le Roy on several national teams, he managed Congo, Kenya, and Equatorial Guinea, and experienced the 2022 World Cup as Rigobert Song's assistant with Cameroon. Haiti's head coach since March 2024, he led the Grenadiers to their first World Cup qualification since 1974.",
   },
   {
     name: "Sébastien Rabault",
@@ -603,6 +633,11 @@ export const staff = [
       "Entraîneur adjoint de la sélection haïtienne de football masculin depuis août 2025.",
       "Entraîneur adjoint à l'US Orléans depuis juin 2025, club évoluant en National.",
       "Co-fondateur de We-Form, structure privée offrant des services d'accompagnement à des structures sportives dans leur développement, leur organisation et la montée en compétence de leurs staffs.",
+    ],
+    bioEn: [
+      "Assistant coach of the Haiti men's national football team since August 2025.",
+      "Assistant coach at US Orléans since June 2025, a club playing in the National.",
+      "Co-founder of We-Form, a private company providing support services to sports organizations in their development, their organization, and the upskilling of their staffs.",
     ],
   },
   {
@@ -616,6 +651,12 @@ export const staff = [
       "Préparateur physique / fitness coach de l'équipe d'Algérie de football (sélection A) d'août 2018 à septembre 2019.",
       "Préparateur physique et responsable de la performance à l'OGC Nice de juillet 2012 à juillet 2018.",
     ],
+    bioEn: [
+      "Fitness coach of the Haiti men's national football team since January 2024.",
+      "Fitness and rehabilitation consultant at the Flammes de Charleville, a professional basketball club in the French women's league.",
+      "Fitness coach for the Algeria national football team (senior side) from August 2018 to September 2019.",
+      "Fitness coach and head of performance at OGC Nice from July 2012 to July 2018.",
+    ],
   },
   {
     name: "Guillaume Coffy",
@@ -626,6 +667,11 @@ export const staff = [
       "Diplôme d'enseignement supérieur à Clairefontaine en entraînement sportif.",
       "Entraîneur adjoint de l'équipe nationale de Guinée équatoriale de septembre 2019 à février 2026.",
       "Entraîneur des gardiens de la sélection haïtienne de football masculin depuis mars 2024.",
+    ],
+    bioEn: [
+      "Higher education diploma in sports coaching at Clairefontaine.",
+      "Assistant coach of the Equatorial Guinea national team from September 2019 to February 2026.",
+      "Goalkeeping coach of the Haiti men's national football team since March 2024.",
     ],
   },
   {
@@ -641,6 +687,14 @@ export const staff = [
       "Entraîneur adjoint au FC Martigues de juillet 2024 à juin 2025.",
       "Et surtout, membre du staff technique de la sélection haïtienne de football masculin depuis janvier 2026 comme analyste vidéo.",
     ],
+    bioEn: [
+      "Head coach at ASC Biesheim from July 2009 to June 2011.",
+      "Head coach at FCSR Obernai from July 2011 to June 2015.",
+      "Several roles at Racing Club de Strasbourg from 2011 to 2021: assistant coach in charge of video analysis, assistant coach in charge of the recruitment unit, and head of fitness.",
+      "Assistant coach in charge of video at FC Metz from July 2021 to July 2024.",
+      "Assistant coach at FC Martigues from July 2024 to June 2025.",
+      "And above all, a member of the technical staff of the Haiti men's national football team since January 2026 as video analyst.",
+    ],
   },
   {
     name: "Olivier Henneuse",
@@ -650,6 +704,10 @@ export const staff = [
     bio: [
       "Kinésithérapeute de la sélection haïtienne de football masculin depuis 2024 ; kiné du sport depuis septembre 2016.",
       "Sélection nationale du Congo-Brazzaville de mars 2017 à avril 2018.",
+    ],
+    bioEn: [
+      "Physiotherapist of the Haiti men's national football team since 2024; sports physiotherapist since September 2016.",
+      "Congo-Brazzaville national team from March 2017 to April 2018.",
     ],
   },
   {
@@ -661,6 +719,10 @@ export const staff = [
       "Ostéopathe au pôle de santé d'Auross depuis janvier 2013, également masseur-kinésithérapeute libéral.",
       "Il fait partie du staff de Sébastien Migné depuis mars 2024.",
     ],
+    bioEn: [
+      "Osteopath at the Auross health center since January 2013, and also a self-employed physiotherapist.",
+      "He has been part of Sébastien Migné's staff since March 2024.",
+    ],
   },
   {
     name: "Jérémy Guedj",
@@ -670,6 +732,10 @@ export const staff = [
     bio: [
       "Jérémy prépare les athlètes ambitieux à transformer leurs émotions en puissance mentale pour exploser leur niveau, performer sous pression et inspirer sans jamais craindre l'échec.",
       "Il a travaillé avec la Fédération Française de Football pendant plus de 14 ans comme chargé de la détection des potentiels et de la formation des cadres pour le district de la Côte d'Azur.",
+    ],
+    bioEn: [
+      "Jérémy prepares ambitious athletes to turn their emotions into mental strength, to break through their level, perform under pressure, and inspire without ever fearing failure.",
+      "He worked with the French Football Federation for more than 14 years as the person in charge of talent identification and coach education for the Côte d'Azur district.",
     ],
   },
 ];
