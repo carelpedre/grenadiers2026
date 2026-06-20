@@ -382,3 +382,11 @@ federation.js data fields (have fr + En; need a Creole sibling later):
 - `currentLeadership.members[].role` (9)
 - `competitionsOrganized` (5), `notableMilestones[].event` (25)
 - (Left as data, still French in all languages: `featured.since` date, image labels, person/venue names.)
+
+## Match cards + nav share-photo (Phase 2)
+
+translations.js keys (ht = French placeholder):
+- `nav.sharePhoto` (ht "Partage ta photo")
+- `matches.statusUpcoming` (ht "À venir")
+- `matches.details` (ht "Détails")
+- `layout.shareTitle` (ht "Grenadiers 2026 · Haïti à la Coupe du Monde 2026")

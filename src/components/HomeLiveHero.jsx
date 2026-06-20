@@ -5,7 +5,7 @@ import { Flag } from "./Flag";
 import { useLiveFixtures } from "../lib/useLiveFixtures";
 import { getMatch } from "../data/liveMatches";
 import { getEntriesSorted } from "../data/diary";
-import { frName } from "../lib/teamNames";
+import { frName, enName } from "../lib/teamNames";
 import { useT } from "../lib/i18n";
 
 // Palette
@@ -378,8 +378,28 @@ export function RouteMondial() {
 }
 
 function RouteCard({ slug, match, data, index }) {
-  const dateShort = match?.dateLabel ? match.dateLabel.replace(/ 2026$/, "") : "";
-  const oppLabel = match?.opponent?.name || frName(slug);
+  const { t, lang } = useT();
+  const dateShort =
+    lang === "en" && match?.date
+      ? new Date(`${match.date}T00:00:00Z`).toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          timeZone: "UTC",
+        })
+      : match?.dateLabel
+        ? match.dateLabel.replace(/ 2026$/, "")
+        : "";
+  const haitiLabel = lang === "en" ? enName("haiti") : "Haïti";
+  const oppLabel =
+    lang === "en"
+      ? enName(match?.opponent?.country || slug)
+      : match?.opponent?.name || frName(slug);
+
+  // Clé de résultat dérivée localement (matches.win/draw/loss) pour rester
+  // localisée sans modifier resultMeta, partagé avec HomeMatchHero.
+  const outcomeKey = (haiti, opp) =>
+    haiti > opp ? "matches.win" : haiti < opp ? "matches.loss" : "matches.draw";
 
   let pill;
   if (data?.isLive) {
@@ -393,13 +413,13 @@ function RouteCard({ slug, match, data, index }) {
     const r = resultMeta(data.haitiGoals, data.oppGoals);
     pill = (
       <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${r.cls}`}>
-        {data.haitiGoals}–{data.oppGoals} · {r.label}
+        {data.haitiGoals}–{data.oppGoals} · {t(outcomeKey(data.haitiGoals, data.oppGoals))}
       </span>
     );
   } else {
     pill = (
       <span className="inline-flex items-center px-2.5 py-1 bg-bg border border-line text-muted rounded-full text-[11px] font-bold uppercase tracking-wider">
-        À venir
+        {t("matches.statusUpcoming")}
       </span>
     );
   }
@@ -423,7 +443,7 @@ function RouteCard({ slug, match, data, index }) {
         </div>
         <div className="flex items-center gap-3 mb-3">
           <Flag country="haiti" size="sm" />
-          <span className="font-display text-base md:text-lg leading-none">Haïti</span>
+          <span className="font-display text-base md:text-lg leading-none">{haitiLabel}</span>
           <span className="text-muted text-sm">—</span>
           <span className="font-display text-base md:text-lg leading-none truncate">{oppLabel}</span>
           <span className="ml-auto">
@@ -432,7 +452,7 @@ function RouteCard({ slug, match, data, index }) {
         </div>
         <div className="flex items-center justify-between gap-2">
           {pill}
-          <span className="text-xs font-semibold text-haiti-blue">Détails →</span>
+          <span className="text-xs font-semibold text-haiti-blue">{t("matches.details")} →</span>
         </div>
       </Link>
     </motion.div>

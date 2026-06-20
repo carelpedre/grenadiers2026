@@ -25,7 +25,7 @@ const navItems = [
 const supporterItems = [
   { to: "/mur", labelKey: "nav.fanwall" },
   { to: "/galerie-supporters", labelKey: "nav.gallery" },
-  { to: "/partager-ta-photo", label: "Partage ta photo" },
+  { to: "/partager-ta-photo", labelKey: "nav.sharePhoto" },
 ];
 
 // Libellé d'un item : clé i18n si présente, sinon libellé brut (français).
@@ -210,7 +210,7 @@ export default function Layout() {
         className="fixed right-5 z-40"
         style={{ bottom: "max(env(safe-area-inset-bottom), 16px)" }}
       >
-        <ShareButton floating title="Grenadiers 2026 · Haïti à la Coupe du Monde 2026" />
+        <ShareButton floating title={t("layout.shareTitle")} />
       </div>
       <div
         className="fixed right-5 z-40"

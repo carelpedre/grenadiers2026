@@ -87,6 +87,11 @@ const dict = {
     fr: "Mur des supporters",
     ht: "Mi sipòtè yo",
   },
+  "nav.sharePhoto": {
+    en: "Share your photo",
+    fr: "Partage ta photo",
+    ht: "Partage ta photo",
+  },
   "nav.photos": {
     en: "Média",
     fr: "Média",
@@ -517,6 +522,16 @@ const dict = {
     en: "Loss",
     fr: "Défaite",
     ht: "Pèdi",
+  },
+  "matches.statusUpcoming": {
+    en: "Upcoming",
+    fr: "À venir",
+    ht: "À venir",
+  },
+  "matches.details": {
+    en: "Details",
+    fr: "Détails",
+    ht: "Détails",
   },
 
   // ─── WATCH PARTIES ────────────────────────────────────────────────────
@@ -2973,6 +2988,11 @@ const dict = {
   // ─── Mise en page (Layout) · ht = placeholder fr ──
   "layout.skipToContent": { en: "Skip to content", fr: "Aller au contenu", ht: "Aller au contenu" },
   "layout.supportersMenu": { en: "Supporters", fr: "Espace Supporters", ht: "Espace Supporters" },
+  "layout.shareTitle": {
+    en: "Grenadiers 2026 · Haiti at the 2026 World Cup",
+    fr: "Grenadiers 2026 · Haïti à la Coupe du Monde 2026",
+    ht: "Grenadiers 2026 · Haïti à la Coupe du Monde 2026",
+  },
   "layout.language": { en: "Language", fr: "Langue", ht: "Langue" },
   "layout.footer.tagline": {
     en: "FIFA World Cup 2026",
