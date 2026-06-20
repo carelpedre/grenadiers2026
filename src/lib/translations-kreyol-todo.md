@@ -176,27 +176,6 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 ## matches.* (22)
 
 - `matches.match`
-- `matches.statusUpcoming`  _(not in pack)_
-- `matches.details`  _(not in pack)_
-- `matches.tabOverview`
-- `matches.tabStandings`
-- `matches.wcSub`
-- `matches.liveCenterAria`
-- `matches.prepSub`
-- `matches.groupCTeams`
-- `matches.qualifyNote`
-- `matches.matchCenter`
-- `matches.groupCMatch`
-- `matches.wcFifa2026`
-- `matches.pitch`
-- `matches.naturalGrass`
-- `matches.broadcastLabel`
-- `matches.liveCenter`
-- `matches.prepUpcoming`
-- `matches.prepResult`
-- `matches.ticketsTicketmaster`
-- `matches.recap`
-- `matches.viewMatch`
 
 ## media.* (16)
 
@@ -569,25 +548,3 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 - `journal.lightboxNext`
 
 (journal.unitPhoto / journal.unitPhotos already have Kreyòl "foto".)
-
-## matches.* (Matches page standings/fixtures/status, added for EN i18n)
-
-- `matches.statusFinished`, `matches.statusLive`, `matches.statusHalftime`, `matches.statusExtraTime`, `matches.statusBreak`, `matches.statusPenalties`, `matches.statusSuspended`, `matches.statusInterrupted`, `matches.statusPostponed`, `matches.statusCancelled`, `matches.statusAbandoned`, `matches.statusAwarded`
-- `matches.calReminder`, `matches.calAdded`
-- `matches.weatherInCity`, `matches.weatherLoading`
-- `matches.standingsAuto`, `matches.standingsPrematch`, `matches.standingsEmptyBody`, `matches.standingsFootnote`
-- `matches.std.team|played|playedFull|won|wonFull|drawn|drawnFull|lost|lostFull|gf|gfFull|ga|gaFull|gd|gdFull|pts`
-- `matches.recentForm`, `matches.recentFormSub`, `matches.last5`, `matches.venueHome`, `matches.venueAway`
-- `matches.compWcQual`, `matches.compNationsLeague`, `matches.compGoldCup`, `matches.compFriendly`, `matches.compWorldCup`
-
-## live.* (Live match center, added for EN i18n)
-
-- `live.backToMatches`, `live.kickoffIn`, `live.accessLabel`, `live.broadcastLabel`, `live.readRecap`, `live.seats`
-- `live.statusFullTime`
-- `live.tabTimeline`, `live.tabLineups`, `live.tabStats`, `live.tabPlayers`
-- `live.preMatch`, `live.liveUpdates`, `live.endedMsg`, `live.startedMsg`, `live.otherMatches`
-- `live.evGoalUpper`, `live.evGoal`, `live.evYellow`, `live.evRed`, `live.evSub`, `live.subInOut`, `live.assistLabel`, `live.tagPen`, `live.tagOwnGoal`
-- `live.subsTitle`, `live.benchTitle`, `live.coachLabel`
-- `live.statsKey`, `live.statsAll`
-- `live.colPlayer|colRating|colMin|colMinFull|colGoals|colGoalsFull|colAssists|colAssistsFull|colShots|colShotsFull|colShotsOn|colShotsOnFull`
-- `live.cdDays`, `live.theOpponent`, `live.scoutingTitle`, `live.scoutingSub`, `live.scoutingForm`, `live.scoutingFormOf`, `live.scoutingFormUnavail`, `live.scoutingVsHaiti`, `live.scoutingFirstMeeting`, `live.meetingSingular`, `live.meetingsPlural`, `live.goalsWord`

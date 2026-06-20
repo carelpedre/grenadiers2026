@@ -168,128 +168,128 @@ Generated from `src/lib/translations.js`. Every key below still has `ht === fr` 
 
 | Key | Français | Kreyòl |
 |---|---|---|
-| `matches.statusUpcoming` | À venir |  |
-| `matches.statusFinished` | Terminé |  |
-| `matches.statusLive` | En direct |  |
-| `matches.statusHalftime` | Mi-temps |  |
-| `matches.statusExtraTime` | Prolongation |  |
-| `matches.statusBreak` | Pause |  |
-| `matches.statusPenalties` | Tirs au but |  |
-| `matches.statusSuspended` | Suspendu |  |
-| `matches.statusInterrupted` | Interrompu |  |
-| `matches.statusPostponed` | Reporté |  |
-| `matches.statusCancelled` | Annulé |  |
-| `matches.statusAbandoned` | Abandonné |  |
-| `matches.statusAwarded` | Sur tapis vert |  |
-| `matches.calReminder` | 📅 Rappel agenda |  |
-| `matches.calAdded` | ✓ Ajouté à l'agenda |  |
-| `matches.weatherInCity` | à {city} |  |
-| `matches.weatherLoading` | Chargement de la météo… |  |
-| `matches.standingsAuto` | Mis à jour automatiquement pendant le Mondial. |  |
-| `matches.standingsPrematch` | Avant le match · actualisé automatiquement |  |
-| `matches.standingsEmptyBody` | Le classement du Groupe C s'affichera ici. Il s'actualise automatiquement pendant le tournoi. |  |
-| `matches.standingsFootnote` | Les deux premières équipes accèdent aux 16es de finale, avec les huit meilleures troisièmes des douze groupes. Classement actualisé automatiquement. |  |
-| `matches.std.team` | Équipe |  |
-| `matches.std.played` | J |  |
-| `matches.std.playedFull` | Joués |  |
-| `matches.std.won` | G |  |
-| `matches.std.wonFull` | Gagnés |  |
-| `matches.std.drawn` | N |  |
-| `matches.std.drawnFull` | Nuls |  |
-| `matches.std.lost` | P |  |
-| `matches.std.lostFull` | Perdus |  |
-| `matches.std.gf` | BP |  |
-| `matches.std.gfFull` | Buts pour |  |
-| `matches.std.ga` | BC |  |
-| `matches.std.gaFull` | Buts contre |  |
-| `matches.std.gd` | Diff |  |
-| `matches.std.gdFull` | Différence |  |
-| `matches.recentForm` | Forme récente |  |
-| `matches.recentFormSub` | Les derniers matchs des Grenadiers. |  |
-| `matches.last5` | 5 derniers |  |
-| `matches.venueHome` | Dom. |  |
-| `matches.venueAway` | Ext. |  |
-| `matches.compWcQual` | Éliminatoires CDM |  |
-| `matches.compNationsLeague` | Ligue des Nations |  |
-| `matches.compFriendly` | Amical |  |
-| `matches.compWorldCup` | Coupe du Monde |  |
-| `matches.details` | Détails |  |
-| `matches.tabOverview` | Aperçu |  |
-| `matches.tabStandings` | Classement · Groupe C |  |
-| `matches.wcSub` | Trois adversaires. Trois villes. Un seul drapeau. |  |
-| `matches.liveCenterAria` | Centre match en direct · {home} contre {away} |  |
-| `matches.prepSub` | Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF. |  |
-| `matches.groupCTeams` | Les équipes du Groupe C |  |
-| `matches.qualifyNote` | Les deux premières équipes du groupe accèdent aux 16es de finale. Les huit meilleures troisièmes des douze groupes complètent le tableau des 32. |  |
-| `matches.matchCenter` | Centre du match |  |
-| `matches.groupCMatch` | Groupe C · Match {n} |  |
-| `matches.wcFifa2026` | Coupe du Monde FIFA 2026 |  |
-| `matches.pitch` | Pelouse |  |
-| `matches.naturalGrass` | Gazon naturel |  |
-| `matches.broadcastLabel` | Diffusion |  |
-| `matches.liveCenter` | Centre match en direct |  |
-| `matches.prepUpcoming` | Préparation · À venir |  |
-| `matches.prepResult` | Préparation · Résultat |  |
-| `matches.ticketsTicketmaster` | Billetterie sur Ticketmaster |  |
-| `matches.recap` | Résumé |  |
-| `matches.viewMatch` | Voir le match |  |
+| `matches.statusUpcoming` | À venir | Ap vini |
+| `matches.statusFinished` | Terminé | Fini |
+| `matches.statusLive` | En direct | An dirèk |
+| `matches.statusHalftime` | Mi-temps | Mitan match |
+| `matches.statusExtraTime` | Prolongation | Pwolongasyon |
+| `matches.statusBreak` | Pause | Poz |
+| `matches.statusPenalties` | Tirs au but | Tir o bi |
+| `matches.statusSuspended` | Suspendu | Sispann |
+| `matches.statusInterrupted` | Interrompu | Entèwonp |
+| `matches.statusPostponed` | Reporté | Ranvwaye |
+| `matches.statusCancelled` | Annulé | Anile |
+| `matches.statusAbandoned` | Abandonné | Abandone |
+| `matches.statusAwarded` | Sur tapis vert | Sou desizyon |
+| `matches.calReminder` | 📅 Rappel agenda | 📅 Mete nan ajanda |
+| `matches.calAdded` | ✓ Ajouté à l'agenda | ✓ Antre nan ajanda |
+| `matches.weatherInCity` | à {city} | nan {city} |
+| `matches.weatherLoading` | Chargement de la météo… | Meteyo a ap chaje… |
+| `matches.standingsAuto` | Mis à jour automatiquement pendant le Mondial. | L ap mete ajou otomatikman pandan Mondyal la. |
+| `matches.standingsPrematch` | Avant le match · actualisé automatiquement | Anvan match la · l ap mete ajou otomatikman |
+| `matches.standingsEmptyBody` | Le classement du Groupe C s'affichera ici. Il s'actualise automatiquement pendant le tournoi. | Klasman Gwoup C la ap parèt isit la. L ap mete ajou otomatikman pandan tounwa a. |
+| `matches.standingsFootnote` | Les deux premières équipes accèdent aux 16es de finale, avec les huit meilleures troisièmes des douze groupes. Classement actualisé automatiquement. | De premye ekip yo pase nan 16yèm final yo, ansanm ak uit pi bon twazyèm nan douz gwoup yo. Klasman an mete ajou otomatikman. |
+| `matches.std.team` | Équipe | Ekip |
+| `matches.std.played` | J | J |
+| `matches.std.playedFull` | Joués | Jwe |
+| `matches.std.won` | G | G |
+| `matches.std.wonFull` | Gagnés | Genyen |
+| `matches.std.drawn` | N | N |
+| `matches.std.drawnFull` | Nuls | Nil |
+| `matches.std.lost` | P | P |
+| `matches.std.lostFull` | Perdus | Pèdi |
+| `matches.std.gf` | BP | BP |
+| `matches.std.gfFull` | Buts pour | Gòl pou |
+| `matches.std.ga` | BC | BC |
+| `matches.std.gaFull` | Buts contre | Gòl kont |
+| `matches.std.gd` | Diff | Dif |
+| `matches.std.gdFull` | Différence | Diferans |
+| `matches.recentForm` | Forme récente | Dènye fòm |
+| `matches.recentFormSub` | Les derniers matchs des Grenadiers. | Dènye match Grenadye yo. |
+| `matches.last5` | 5 derniers | 5 dènye yo |
+| `matches.venueHome` | Dom. | Lak. |
+| `matches.venueAway` | Ext. | Dey. |
+| `matches.compWcQual` | Éliminatoires CDM | Eliminatwa Mondyal |
+| `matches.compNationsLeague` | Ligue des Nations | Lig Nasyon yo |
+| `matches.compFriendly` | Amical | Amikal |
+| `matches.compWorldCup` | Coupe du Monde | Koup di Mond |
+| `matches.details` | Détails | Detay |
+| `matches.tabOverview` | Aperçu | Apèsi |
+| `matches.tabStandings` | Classement · Groupe C | Klasman · Gwoup C |
+| `matches.wcSub` | Trois adversaires. Trois villes. Un seul drapeau. | Twa advèsè. Twa vil. Yon sèl drapo. |
+| `matches.liveCenterAria` | Centre match en direct · {home} contre {away} | Sant match an dirèk · {home} kont {away} |
+| `matches.prepSub` | Derniers réglages en Floride du Sud, sous l'égide de l'Inter Miami CF. | Dènye reglaj nan Sid Florida, ak sipò Inter Miami CF. |
+| `matches.groupCTeams` | Les équipes du Groupe C | Ekip Gwoup C yo |
+| `matches.qualifyNote` | Les deux premières équipes du groupe accèdent aux 16es de finale. Les huit meilleures troisièmes des douze groupes complètent le tableau des 32. | De premye ekip nan gwoup la pase nan 16yèm final yo. Uit pi bon twazyèm nan douz gwoup yo konplete tablo 32 a. |
+| `matches.matchCenter` | Centre du match | Sant match la |
+| `matches.groupCMatch` | Groupe C · Match {n} | Gwoup C · Match {n} |
+| `matches.wcFifa2026` | Coupe du Monde FIFA 2026 | Koup di Mond FIFA 2026 |
+| `matches.pitch` | Pelouse | Teren |
+| `matches.naturalGrass` | Gazon naturel | Gazon natirèl |
+| `matches.broadcastLabel` | Diffusion | Difizyon |
+| `matches.liveCenter` | Centre match en direct | Sant match an dirèk |
+| `matches.prepUpcoming` | Préparation · À venir | Preparasyon · Ap vini |
+| `matches.prepResult` | Préparation · Résultat | Preparasyon · Rezilta |
+| `matches.ticketsTicketmaster` | Billetterie sur Ticketmaster | Tikè sou Ticketmaster |
+| `matches.recap` | Résumé | Rezime |
+| `matches.viewMatch` | Voir le match | Gade match la |
 
 ## live.* (52)
 
 | Key | Français | Kreyòl |
 |---|---|---|
-| `live.backToMatches` | ← Tous les matchs |  |
-| `live.kickoffIn` | Coup d'envoi dans |  |
-| `live.accessLabel` | Accès : |  |
-| `live.broadcastLabel` | Diffusion : |  |
-| `live.readRecap` | Lire le résumé du match → |  |
-| `live.seats` | places |  |
-| `live.statusFullTime` | Fin de match |  |
-| `live.tabTimeline` | Chronologie |  |
-| `live.tabLineups` | Compositions |  |
-| `live.tabStats` | Statistiques |  |
-| `live.tabPlayers` | Joueurs |  |
-| `live.preMatch` | Avant le match |  |
-| `live.liveUpdates` | Mises à jour en direct |  |
-| `live.endedMsg` | Match terminé. Le score final est affiché ci-dessus. |  |
-| `live.startedMsg` | Le match a commencé. Le score est mis à jour automatiquement ci-dessus. |  |
-| `live.otherMatches` | Autres matchs |  |
-| `live.evGoalUpper` | BUT |  |
-| `live.evGoal` | But |  |
-| `live.evYellow` | Carton jaune |  |
-| `live.evRed` | Carton rouge |  |
-| `live.evSub` | Changement |  |
-| `live.subInOut` | entrée de {on}, sortie de {off} |  |
-| `live.assistLabel` | passe : |  |
-| `live.tagPen` | (pén.) |  |
-| `live.tagOwnGoal` | (csc) |  |
-| `live.subsTitle` | Remplaçants |  |
-| `live.benchTitle` | Banc |  |
-| `live.coachLabel` | Sélectionneur : |  |
-| `live.statsKey` | Statistiques clés |  |
-| `live.statsAll` | Toutes les statistiques |  |
-| `live.colPlayer` | Joueur |  |
-| `live.colRating` | Note |  |
-| `live.colGoals` | B |  |
-| `live.colGoalsFull` | Buts |  |
-| `live.colAssists` | PD |  |
-| `live.colAssistsFull` | Passes décisives |  |
-| `live.colShots` | T |  |
-| `live.colShotsFull` | Tirs |  |
-| `live.colShotsOn` | TC |  |
-| `live.colShotsOnFull` | Tirs cadrés |  |
-| `live.cdDays` | jours |  |
-| `live.scoutingSub` | Avant le coup d'envoi : la forme du moment et le bilan face à Haïti. |  |
-| `live.scoutingForm` | Forme récente |  |
-| `live.scoutingVsHaiti` | Face à Haïti |  |
-| `live.scoutingFirstMeeting` | Première confrontation entre les deux nations. |  |
-| `live.theOpponent` | l'adversaire |  |
-| `live.scoutingTitle` | Scouting adversaire |  |
-| `live.scoutingFormOf` | Forme récente de {name} |  |
-| `live.scoutingFormUnavail` | Forme récente indisponible. |  |
-| `live.meetingSingular` | rencontre |  |
-| `live.meetingsPlural` | rencontres |  |
-| `live.goalsWord` | buts |  |
+| `live.backToMatches` | ← Tous les matchs | ← Tout match yo |
+| `live.kickoffIn` | Coup d'envoi dans | Match la kòmanse nan |
+| `live.accessLabel` | Accès : | Aksè : |
+| `live.broadcastLabel` | Diffusion : | Difizyon : |
+| `live.readRecap` | Lire le résumé du match → | Li rezime match la → |
+| `live.seats` | places | plas |
+| `live.statusFullTime` | Fin de match | Match fini |
+| `live.tabTimeline` | Chronologie | Kronoloji |
+| `live.tabLineups` | Compositions | Konpozisyon |
+| `live.tabStats` | Statistiques | Estatistik |
+| `live.tabPlayers` | Joueurs | Jwè yo |
+| `live.preMatch` | Avant le match | Anvan match la |
+| `live.liveUpdates` | Mises à jour en direct | Mizajou an dirèk |
+| `live.endedMsg` | Match terminé. Le score final est affiché ci-dessus. | Match la fini. Eskò final la parèt anwo a. |
+| `live.startedMsg` | Le match a commencé. Le score est mis à jour automatiquement ci-dessus. | Match la kòmanse. Eskò a ap mete ajou otomatikman anwo a. |
+| `live.otherMatches` | Autres matchs | Lòt match yo |
+| `live.evGoalUpper` | BUT | GÒL |
+| `live.evGoal` | But | Gòl |
+| `live.evYellow` | Carton jaune | Kat jòn |
+| `live.evRed` | Carton rouge | Kat wouj |
+| `live.evSub` | Changement | Chanjman |
+| `live.subInOut` | entrée de {on}, sortie de {off} | {on} antre, {off} soti |
+| `live.assistLabel` | passe : | pas : |
+| `live.tagPen` | (pén.) | (pen.) |
+| `live.tagOwnGoal` | (csc) | (otogòl) |
+| `live.subsTitle` | Remplaçants | Ranplasan yo |
+| `live.benchTitle` | Banc | Ban an |
+| `live.coachLabel` | Sélectionneur : | Antrenè : |
+| `live.statsKey` | Statistiques clés | Estatistik kle yo |
+| `live.statsAll` | Toutes les statistiques | Tout estatistik yo |
+| `live.colPlayer` | Joueur | Jwè |
+| `live.colRating` | Note | Nòt |
+| `live.colGoals` | B | G |
+| `live.colGoalsFull` | Buts | Gòl |
+| `live.colAssists` | PD | PD |
+| `live.colAssistsFull` | Passes décisives | Pas desizif |
+| `live.colShots` | T | T |
+| `live.colShotsFull` | Tirs | Tir |
+| `live.colShotsOn` | TC | TK |
+| `live.colShotsOnFull` | Tirs cadrés | Tir kadre |
+| `live.cdDays` | jours | jou |
+| `live.scoutingSub` | Avant le coup d'envoi : la forme du moment et le bilan face à Haïti. | Anvan match la kòmanse : fòm aktyèl la ak bilan an fas ak Ayiti. |
+| `live.scoutingForm` | Forme récente | Dènye fòm |
+| `live.scoutingVsHaiti` | Face à Haïti | Fas ak Ayiti |
+| `live.scoutingFirstMeeting` | Première confrontation entre les deux nations. | Premye fwa de nasyon yo ap jwe youn kont lòt. |
+| `live.theOpponent` | l'adversaire | advèsè a |
+| `live.scoutingTitle` | Scouting adversaire | Etid advèsè a |
+| `live.scoutingFormOf` | Forme récente de {name} | Dènye fòm {name} |
+| `live.scoutingFormUnavail` | Forme récente indisponible. | Dènye fòm pa disponib. |
+| `live.meetingSingular` | rencontre | rankont |
+| `live.meetingsPlural` | rencontres | rankont |
+| `live.goalsWord` | buts | gòl |
 
 ## federation.* (26)
 
