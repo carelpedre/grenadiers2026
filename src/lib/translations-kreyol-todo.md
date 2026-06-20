@@ -70,32 +70,6 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 ## federation.* (27)
 
 - `federation.team.institution`
-- `federation.team.menA`
-- `federation.team.womenA`
-- `federation.team.menU17`
-- `federation.team.menU20`
-- `federation.team.womenU20`
-- `federation.team.womenU17`
-- `federation.logoAlt`
-- `federation.governingBody`
-- `federation.identityLine`
-- `federation.statFounded`
-- `federation.statYears`
-- `federation.statFifaMember`
-- `federation.newsEyebrow`
-- `federation.newsTitle`
-- `federation.newsBody1`
-- `federation.newsBody2`
-- `federation.pioneer`
-- `federation.currentLeadership`
-- `federation.inOffice`
-- `federation.keyMoments`
-- `federation.restOfCommittee`
-- `federation.homeStadiumEyebrow`
-- `federation.competitionsTitle`
-- `federation.timelineTitle`
-- `federation.timelineSubtext`
-- `federation.visitSite`
 
 ## fotoup.* (42)
 
@@ -161,61 +135,12 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 
 ## hero.* (16)
 
-- `hero.overline.next`
-- `hero.overline.matchday`
-- `hero.live`
-- `hero.qualifDate`
-- `hero.daysCount`
-- `hero.story.pre`
-- `hero.story.matchday`
-- `hero.story.live`
-- `hero.kickoff`
-- `hero.localTime`
-- `hero.fullSchedule`
-- `hero.followMatch`
-- `hero.farewell.eyebrow`
-- `hero.farewell.title`
-- `hero.farewell.body`
-- `hero.farewell.cta`
 
 ## home.* (36)
 
 - `home.matchLabels.match2`
-- `home.routeTitle`
-- `home.fanwall.title`
-- `home.fanwall.subtitle`
-- `home.fanwall.leaveCta`
-- `home.fanwall.viewCta`
-- `home.fanwall.empty`
-- `home.squadPhotoAlt`
-- `home.poster.ariaOpen`
-- `home.cta.murTitle`
-- `home.cta.murAction`
-- `home.cta.journalTitle`
-- `home.cta.journalAction`
-- `home.gallery.eyebrow`
-- `home.gallery.title`
-- `home.gallery.subtitle`
-- `home.gallery.viewLink`
-- `home.gallery.shareCta`
-- `home.gallery.viewAllCta`
-- `home.gallery.photoAlt`
-- `home.gallery.matchScotland`
-- `home.gallery.matchBrazil`
-- `home.gallery.matchMorocco`
-- `home.gallery.ctxStadium`
 - `home.gallery.ctxWatch`
-- `home.gallery.ctxHome`
-- `home.journal.title`
-- `home.journal.allLink`
-- `home.journal.readCta`
-- `home.munich.eyebrow`
-- `home.munich.title1`
-- `home.munich.title2`
-- `home.munich.body1`
 - `home.munich.minutes`
-- `home.munich.body2`
-- `home.munich.cta`
 
 ## jeux.* (17)
 
@@ -304,22 +229,9 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 ## nav.* (3)
 
 - `nav.history`
-- `nav.sharePhoto`  _(not in pack)_
-- `nav.photos`
 
 ## newsletter.* (11)
 
-- `newsletter.eyebrow`
-- `newsletter.heroTitle`
-- `newsletter.heroSubtitle`
-- `newsletter.footerTitle`
-- `newsletter.footerSubtitle`
-- `newsletter.placeholder`
-- `newsletter.submit`
-- `newsletter.success`
-- `newsletter.invalidEmail`
-- `newsletter.generic`
-- `newsletter.emailAria`
 
 ## notFound.* (5)
 

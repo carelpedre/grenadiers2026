@@ -90,12 +90,12 @@ const dict = {
   "nav.sharePhoto": {
     en: "Share your photo",
     fr: "Partage ta photo",
-    ht: "Partage ta photo",
+    ht: "Pataje foto ou",
   },
   "nav.photos": {
     en: "Media",
     fr: "Média",
-    ht: "Média",
+    ht: "Medya",
   },
 
   // ─── GALLERY PAGE ────────────────────────────────────────────────────
@@ -2717,32 +2717,32 @@ const dict = {
   "home.routeTitle": {
     en: "The World Cup begins.",
     fr: "Le Mondial commence.",
-    ht: "Le Mondial commence.",
+    ht: "Mondyal la kòmanse.",
   },
   "home.fanwall.title": {
     en: "The fan wall.",
     fr: "Le mur des supporters.",
-    ht: "Le mur des supporters.",
+    ht: "Miray sipòtè yo.",
   },
   "home.fanwall.subtitle": {
     en: "Messages from Haiti and the diaspora, from all over the world, for the team.",
     fr: "Des messages d'Haïti et de la diaspora, du monde entier, pour la sélection.",
-    ht: "Des messages d'Haïti et de la diaspora, du monde entier, pour la sélection.",
+    ht: "Mesaj soti Ayiti ak dyaspora a, soti toupatou nan mond lan, pou seleksyon an.",
   },
   "home.fanwall.leaveCta": {
     en: "Leave a message",
     fr: "Laisser un message",
-    ht: "Laisser un message",
+    ht: "Kite yon mesaj",
   },
   "home.fanwall.viewCta": {
     en: "See the wall",
     fr: "Voir le mur",
-    ht: "Voir le mur",
+    ht: "Gade miray la",
   },
   "home.fanwall.empty": {
     en: "Be the first to leave a message for the Grenadiers.",
     fr: "Soyez le premier à laisser un message pour Les Grenadiers.",
-    ht: "Soyez le premier à laisser un message pour Les Grenadiers.",
+    ht: "Se ou ki pou premye moun ki kite yon mesaj pou Grenadye yo.",
   },
   "wall.message": {
     en: "message",
@@ -2774,57 +2774,57 @@ const dict = {
   "newsletter.eyebrow": {
     en: "The Grenadier Brief",
     fr: "Le Brief Grenadier",
-    ht: "Le Brief Grenadier",
+    ht: "Brief Grenadye a",
   },
   "newsletter.heroTitle": {
     en: "One email before each match. One after. Nothing more.",
     fr: "Un e-mail avant chaque match. Un après. Rien de plus.",
-    ht: "Un e-mail avant chaque match. Un après. Rien de plus.",
+    ht: "Yon imèl anvan chak match. Yon lòt apre. Anyen anplis.",
   },
   "newsletter.heroSubtitle": {
     en: "The Grenadiers newsletter, in French.",
     fr: "La newsletter des Grenadiers, en français.",
-    ht: "La newsletter des Grenadiers, en français.",
+    ht: "Bilten Grenadye yo, an franse.",
   },
   "newsletter.footerTitle": {
     en: "One email per match. That's it.",
     fr: "Un e-mail par match. C'est tout.",
-    ht: "Un e-mail par match. C'est tout.",
+    ht: "Yon imèl pou chak match. Se sa.",
   },
   "newsletter.footerSubtitle": {
     en: "Get a short recap before and after each Haiti match.",
     fr: "Recevez un court résumé avant et après chaque rencontre d'Haïti.",
-    ht: "Recevez un court résumé avant et après chaque rencontre d'Haïti.",
+    ht: "Resevwa yon ti rezime anvan ak apre chak match Ayiti.",
   },
   "newsletter.placeholder": {
     en: "you@email.com",
     fr: "votre@email.com",
-    ht: "votre@email.com",
+    ht: "imel.ou@egzanp.com",
   },
   "newsletter.submit": {
     en: "Subscribe",
     fr: "S'abonner",
-    ht: "S'abonner",
+    ht: "Abòne",
   },
   "newsletter.success": {
     en: "✓ You're in. Welcome to the Grenadier Brief.",
     fr: "✓ Inscription confirmée. Bienvenue au Brief Grenadier.",
-    ht: "✓ Inscription confirmée. Bienvenue au Brief Grenadier.",
+    ht: "✓ Enskripsyon konfime. Byenveni nan Brief Grenadye a.",
   },
   "newsletter.invalidEmail": {
     en: "Please enter a valid email address.",
     fr: "Veuillez saisir une adresse e-mail valide.",
-    ht: "Veuillez saisir une adresse e-mail valide.",
+    ht: "Tanpri antre yon adrès imèl ki valab.",
   },
   "newsletter.generic": {
     en: "Something went wrong. Please try again.",
     fr: "Une erreur est survenue. Veuillez réessayer.",
-    ht: "Une erreur est survenue. Veuillez réessayer.",
+    ht: "Gen yon erè ki rive. Tanpri eseye ankò.",
   },
   "newsletter.emailAria": {
     en: "Email address",
     fr: "Adresse e-mail",
-    ht: "Adresse e-mail",
+    ht: "Adrès imèl",
   },
 
   // ─── FEDERATION: team-category tags (Phase 2) ────────────────────────
@@ -2836,32 +2836,32 @@ const dict = {
   "federation.team.menA": {
     en: "Men A",
     fr: "Hommes A",
-    ht: "Hommes A",
+    ht: "Gason A",
   },
   "federation.team.womenA": {
     en: "Women A",
     fr: "Femmes A",
-    ht: "Femmes A",
+    ht: "Fanm A",
   },
   "federation.team.menU17": {
     en: "Men U-17",
     fr: "Hommes U-17",
-    ht: "Hommes U-17",
+    ht: "Gason U-17",
   },
   "federation.team.menU20": {
     en: "Men U-20",
     fr: "Hommes U-20",
-    ht: "Hommes U-20",
+    ht: "Gason U-20",
   },
   "federation.team.womenU20": {
     en: "Women U-20",
     fr: "Femmes U-20",
-    ht: "Femmes U-20",
+    ht: "Fanm U-20",
   },
   "federation.team.womenU17": {
     en: "Women U-17",
     fr: "Femmes U-17",
-    ht: "Femmes U-17",
+    ht: "Fanm U-17",
   },
 
   // ─── STORIES (additions) ─────────────────────────────────────────────
@@ -2919,102 +2919,102 @@ const dict = {
   "federation.logoAlt": {
     en: "Crest of the Haitian Football Federation",
     fr: "Écusson de la Fédération Haïtienne de Football",
-    ht: "Écusson de la Fédération Haïtienne de Football",
+    ht: "Ekison Federasyon Ayisyen Foutbòl la",
   },
   "federation.governingBody": {
     en: "The governing body",
     fr: "L'instance dirigeante",
-    ht: "L'instance dirigeante",
+    ht: "Enstans dirijan an",
   },
   "federation.identityLine": {
     en: "Founded in {founded}. Headquartered in {hq}. A FIFA member since {fifa}, a founding member of CONCACAF since {concacaf}.",
     fr: "Fondée en {founded}. Siège à {hq}. Membre de la FIFA depuis {fifa}, membre fondateur de la CONCACAF depuis {concacaf}.",
-    ht: "Fondée en {founded}. Siège à {hq}. Membre de la FIFA depuis {fifa}, membre fondateur de la CONCACAF depuis {concacaf}.",
+    ht: "Fonde an {founded}. Syèj li nan {hq}. Manm FIFA depi {fifa}, manm fondatè CONCACAF depi {concacaf}.",
   },
   "federation.statFounded": {
     en: "Founded",
     fr: "Fondation",
-    ht: "Fondation",
+    ht: "Fondasyon",
   },
   "federation.statYears": {
     en: "Years of existence",
     fr: "Années d'existence",
-    ht: "Années d'existence",
+    ht: "Ane depi li egziste",
   },
   "federation.statFifaMember": {
     en: "FIFA member",
     fr: "Membre FIFA",
-    ht: "Membre FIFA",
+    ht: "Manm FIFA",
   },
   "federation.newsEyebrow": {
     en: "Top story · May 31, 2026",
     fr: "À la une · 31 mai 2026",
-    ht: "À la une · 31 mai 2026",
+    ht: "Aktyalite · 31 me 2026",
   },
   "federation.newsTitle": {
     en: "FHF's new statutes adopted unanimously.",
     fr: "Adoption à l'unanimité des nouveaux statuts de la FHF.",
-    ht: "Adoption à l'unanimité des nouveaux statuts de la FHF.",
+    ht: "Yo adopte nouvo estati FHF yo alinanimite.",
   },
   "federation.newsBody1": {
     en: "Meeting in special congress, twenty delegates representing the men's and women's clubs and the leagues unanimously adopted the new statutes of the Haitian Football Federation. These statutes, the result of several years of work between the FHF and the figures of Haitian football, give the institution a new legal foundation.",
     fr: "Réunis en congrès extraordinaire, vingt délégués représentant les clubs masculins, féminins et les ligues ont adopté à l'unanimité les nouveaux statuts de la Fédération Haïtienne de Football. Ces statuts, fruit de plusieurs années de travail entre la FHF et les acteurs du mouvement footballistique haïtien, dotent l'institution d'une nouvelle fondation légale.",
-    ht: "Réunis en congrès extraordinaire, vingt délégués représentant les clubs masculins, féminins et les ligues ont adopté à l'unanimité les nouveaux statuts de la Fédération Haïtienne de Football. Ces statuts, fruit de plusieurs années de travail entre la FHF et les acteurs du mouvement footballistique haïtien, dotent l'institution d'une nouvelle fondation légale.",
+    ht: "Reyini nan yon kongrè ekstraòdinè, ven delege ki reprezante klèb gason, klèb fanm ak lig yo adopte nouvo estati Federasyon Ayisyen Foutbòl la alinanimite. Estati sa yo, ki se rezilta plizyè ane travay ant FHF ak aktè mouvman foutbòl ayisyen an, bay enstitisyon an yon nouvo fondasyon legal.",
   },
   "federation.newsBody2": {
     en: "The session was held under the supervision of the Normalization Committee (Yvon Sévère and Gally Amazan) and FIFA representatives: Ms. Salomé Tally, online, and Mr. Belval Juventino, present in Port-au-Prince. Adopting these statutes was among the main objectives FIFA had assigned to the Normalization Committee.",
     fr: "La session s'est tenue sous la supervision du Comité de Normalisation (Yvon Sévère et Gally Amazan) et des représentants de la FIFA : Mme Salomé Tally, en ligne, et M. Belval Juventino, présent à Port-au-Prince. L'adoption de ces statuts figurait parmi les principaux objectifs confiés au Comité de Normalisation par la FIFA.",
-    ht: "La session s'est tenue sous la supervision du Comité de Normalisation (Yvon Sévère et Gally Amazan) et des représentants de la FIFA : Mme Salomé Tally, en ligne, et M. Belval Juventino, présent à Port-au-Prince. L'adoption de ces statuts figurait parmi les principaux objectifs confiés au Comité de Normalisation par la FIFA.",
+    ht: "Sesyon an te fèt anba sipèvizyon Komite Nòmalizasyon an (Yvon Sévère ak Gally Amazan) ak reprezantan FIFA yo : Madan Salomé Tally, an liy, ak Mesye Belval Juventino, ki te prezan nan Pòtoprens. Adopsyon estati sa yo te pami pi gwo objektif FIFA te bay Komite Nòmalizasyon an.",
   },
   "federation.pioneer": {
     en: "The pioneer · 1904",
     fr: "Le pionnier · 1904",
-    ht: "Le pionnier · 1904",
+    ht: "Pyonye a · 1904",
   },
   "federation.currentLeadership": {
     en: "Current leadership",
     fr: "La direction actuelle",
-    ht: "La direction actuelle",
+    ht: "Direksyon aktyèl la",
   },
   "federation.inOffice": {
     en: "In office · Since {since}",
     fr: "En fonction · Depuis le {since}",
-    ht: "En fonction · Depuis le {since}",
+    ht: "An fonksyon · Depi {since}",
   },
   "federation.keyMoments": {
     en: "Key moments",
     fr: "Moments clés",
-    ht: "Moments clés",
+    ht: "Moman kle yo",
   },
   "federation.restOfCommittee": {
     en: "And the rest of the committee",
     fr: "Et le reste du comité",
-    ht: "Et le reste du comité",
+    ht: "Ak rès komite a",
   },
   "federation.homeStadiumEyebrow": {
     en: "The home ground",
     fr: "Le stade fétiche",
-    ht: "Le stade fétiche",
+    ht: "Estad fetich la",
   },
   "federation.competitionsTitle": {
     en: "Competitions organized by the FHF",
     fr: "Les compétitions organisées par la FHF",
-    ht: "Les compétitions organisées par la FHF",
+    ht: "Konpetisyon FHF òganize yo",
   },
   "federation.timelineTitle": {
     en: "Timeline",
     fr: "Chronologie",
-    ht: "Chronologie",
+    ht: "Kronoloji",
   },
   "federation.timelineSubtext": {
     en: "Men's and women's national teams, plus youth levels: the FHF's milestones.",
     fr: "Sélection nationale masculine, féminine, et catégories de jeunes : les jalons de la FHF.",
-    ht: "Sélection nationale masculine, féminine, et catégories de jeunes : les jalons de la FHF.",
+    ht: "Seleksyon nasyonal gason, fanm, ak kategori jèn yo : gwo etap FHF yo.",
   },
   "federation.visitSite": {
     en: "Visit the official FHF website",
     fr: "Visiter le site officiel de la FHF",
-    ht: "Visiter le site officiel de la FHF",
+    ht: "Vizite sit ofisyèl FHF la",
   },
 
   // ─── COVERAGE / L'HOMMAGE ────────────────────────────────────────────
@@ -3069,49 +3069,49 @@ const dict = {
   },
 
   // ─── Héros du compte à rebours (CountdownHero) · ht = placeholder fr ──
-  "hero.overline.next": { en: "NEXT MATCH", fr: "PROCHAIN MATCH", ht: "PROCHAIN MATCH" },
+  "hero.overline.next": { en: "NEXT MATCH", fr: "PROCHAIN MATCH", ht: "PWOCHEN MATCH" },
   "hero.overline.matchday": { en: "MATCHDAY 🇭🇹", fr: "JOU A RIVE 🇭🇹", ht: "JOU A RIVE 🇭🇹" },
-  "hero.live": { en: "Match in progress", fr: "Match en cours", ht: "Match en cours" },
-  "hero.qualifDate": { en: "November 18, 2025", fr: "18 novembre 2025", ht: "18 novembre 2025" },
-  "hero.daysCount": { en: "{n} days", fr: "{n} jours", ht: "{n} jours" },
+  "hero.live": { en: "Match in progress", fr: "Match en cours", ht: "Match ap jwe" },
+  "hero.qualifDate": { en: "November 18, 2025", fr: "18 novembre 2025", ht: "18 novanm 2025" },
+  "hero.daysCount": { en: "{n} days", fr: "{n} jours", ht: "{n} jou" },
   "hero.story.pre": {
     en: "On {date}, Haiti booked its ticket to the World Cup. {days} later, the wait is almost over.",
     fr: "Le {date}, Haïti décrochait son billet pour le Mondial. {days} plus tard, l'attente touche à sa fin.",
-    ht: "Le {date}, Haïti décrochait son billet pour le Mondial. {days} plus tard, l'attente touche à sa fin.",
+    ht: "{date}, Ayiti te pran tikè li pou Mondyal la. {days} apre, tann nan prèske fini.",
   },
   "hero.story.matchday": {
     en: "On {date}, a whole nation dreamed of this day. Now it is here.",
     fr: "Le {date}, tout un peuple rêvait de ce jour. Il est arrivé.",
-    ht: "Le {date}, tout un peuple rêvait de ce jour. Il est arrivé.",
+    ht: "{date}, tout yon pèp t ap reve jou sa a. Li rive.",
   },
   "hero.story.live": {
     en: "{days} after qualifying, the Grenadiers are finally on the pitch.",
     fr: "{days} après la qualification, les Grenadiers sont enfin sur le terrain.",
-    ht: "{days} après la qualification, les Grenadiers sont enfin sur le terrain.",
+    ht: "{days} apre kalifikasyon an, Grenadye yo anfen sou teren an.",
   },
-  "hero.kickoff": { en: "Kick-off", fr: "Coup d'envoi", ht: "Coup d'envoi" },
-  "hero.localTime": { en: "your local time", fr: "votre heure locale", ht: "votre heure locale" },
-  "hero.fullSchedule": { en: "Full schedule", fr: "Calendrier complet", ht: "Calendrier complet" },
-  "hero.followMatch": { en: "Follow the match", fr: "Suivre le match", ht: "Suivre le match" },
-  "hero.farewell.eyebrow": { en: "FIFA World Cup 2026", fr: "Coupe du Monde 2026", ht: "Coupe du Monde 2026" },
+  "hero.kickoff": { en: "Kick-off", fr: "Coup d'envoi", ht: "Lè match la kòmanse" },
+  "hero.localTime": { en: "your local time", fr: "votre heure locale", ht: "lè lakay ou" },
+  "hero.fullSchedule": { en: "Full schedule", fr: "Calendrier complet", ht: "Pwogram konplè a" },
+  "hero.followMatch": { en: "Follow the match", fr: "Suivre le match", ht: "Swiv match la" },
+  "hero.farewell.eyebrow": { en: "FIFA World Cup 2026", fr: "Coupe du Monde 2026", ht: "Koup di Mond 2026" },
   "hero.farewell.title": { en: "Thank you, Grenadiers 🇭🇹", fr: "Mèsi Grenadye 🇭🇹", ht: "Mèsi Grenadye 🇭🇹" },
   "hero.farewell.body": {
     en: "Three matches. One flag. A pride that never fades.",
     fr: "Trois matchs. Un seul drapeau. Une fierté qui ne s'éteint pas.",
-    ht: "Trois matchs. Un seul drapeau. Une fierté qui ne s'éteint pas.",
+    ht: "Twa match. Yon sèl drapo. Yon fyète ki pa janm etenn.",
   },
-  "hero.farewell.cta": { en: "Relive the adventure", fr: "Revivre l'aventure", ht: "Revivre l'aventure" },
+  "hero.farewell.cta": { en: "Relive the adventure", fr: "Revivre l'aventure", ht: "Reviv avanti a" },
 
   // ─── Accueil · partagé / poster (Home) · ht = placeholder fr ──
   "home.squadPhotoAlt": {
     en: "Haiti's team for the 2026 FIFA World Cup",
     fr: "L'équipe d'Haïti pour la Coupe du Monde 2026",
-    ht: "L'équipe d'Haïti pour la Coupe du Monde 2026",
+    ht: "Ekip Ayiti a pou Koup di Mond 2026 la",
   },
   "home.poster.ariaOpen": {
     en: "View the team poster full size",
     fr: "Voir le poster de l'équipe en grand",
-    ht: "Voir le poster de l'équipe en grand",
+    ht: "Gade gwo pòtre ekip la",
   },
 
   // ─── Accueil · cartes d'appel à l'action ──
@@ -3120,58 +3120,58 @@ const dict = {
     fr: "Voye mesaj ou anvan match la",
     ht: "Voye mesaj ou anvan match la",
   },
-  "home.cta.murAction": { en: "Sign the wall", fr: "Signer le mur", ht: "Signer le mur" },
+  "home.cta.murAction": { en: "Sign the wall", fr: "Signer le mur", ht: "Siyen miray la" },
   "home.cta.journalTitle": {
     en: "Follow the Grenadiers day by day",
     fr: "Suivez les Grenadiers jour après jour",
-    ht: "Suivez les Grenadiers jour après jour",
+    ht: "Swiv Grenadye yo jou apre jou",
   },
-  "home.cta.journalAction": { en: "Read the stories", fr: "Lire les chroniques", ht: "Lire les chroniques" },
+  "home.cta.journalAction": { en: "Read the stories", fr: "Lire les chroniques", ht: "Li kwonik yo" },
 
   // ─── Accueil · galerie des supporters ──
-  "home.gallery.eyebrow": { en: "Supporter photos", fr: "Photos des supporters", ht: "Photos des supporters" },
-  "home.gallery.title": { en: "The supporters' gallery.", fr: "La galerie des supporters.", ht: "La galerie des supporters." },
+  "home.gallery.eyebrow": { en: "Supporter photos", fr: "Photos des supporters", ht: "Foto sipòtè yo" },
+  "home.gallery.title": { en: "The supporters' gallery.", fr: "La galerie des supporters.", ht: "Galri sipòtè yo." },
   "home.gallery.subtitle": {
     en: "The Grenadiers seen by their people: at the stadium, at watch parties, and at home. Show us how you live the World Cup.",
     fr: "Les Grenadiers vus par leur peuple : au stade, en watch party et à la maison. Montre comment tu vis le Mondial.",
-    ht: "Les Grenadiers vus par leur peuple : au stade, en watch party et à la maison. Montre comment tu vis le Mondial.",
+    ht: "Grenadye yo jan pèp yo wè yo : nan estad la, nan watch party ak lakay. Montre kijan w ap viv Mondyal la.",
   },
   "home.gallery.viewLink": {
     en: "See the supporters' gallery",
     fr: "Voir la galerie des supporters",
-    ht: "Voir la galerie des supporters",
+    ht: "Gade galri sipòtè yo",
   },
-  "home.gallery.shareCta": { en: "Share your photo", fr: "Partage ta photo", ht: "Partage ta photo" },
-  "home.gallery.viewAllCta": { en: "See the full gallery", fr: "Voir toute la galerie", ht: "Voir toute la galerie" },
-  "home.gallery.photoAlt": { en: "Supporter photo", fr: "Photo de supporter", ht: "Photo de supporter" },
-  "home.gallery.matchScotland": { en: "vs Scotland", fr: "vs Écosse", ht: "vs Écosse" },
-  "home.gallery.matchBrazil": { en: "vs Brazil", fr: "vs Brésil", ht: "vs Brésil" },
-  "home.gallery.matchMorocco": { en: "vs Morocco", fr: "vs Maroc", ht: "vs Maroc" },
-  "home.gallery.ctxStadium": { en: "At the stadium", fr: "Au stade", ht: "Au stade" },
+  "home.gallery.shareCta": { en: "Share your photo", fr: "Partage ta photo", ht: "Pataje foto ou" },
+  "home.gallery.viewAllCta": { en: "See the full gallery", fr: "Voir toute la galerie", ht: "Gade tout galri a" },
+  "home.gallery.photoAlt": { en: "Supporter photo", fr: "Photo de supporter", ht: "Foto yon sipòtè" },
+  "home.gallery.matchScotland": { en: "vs Scotland", fr: "vs Écosse", ht: "vs Eskòs" },
+  "home.gallery.matchBrazil": { en: "vs Brazil", fr: "vs Brésil", ht: "vs Brezil" },
+  "home.gallery.matchMorocco": { en: "vs Morocco", fr: "vs Maroc", ht: "vs Mawòk" },
+  "home.gallery.ctxStadium": { en: "At the stadium", fr: "Au stade", ht: "Nan estad la" },
   "home.gallery.ctxWatch": { en: "Watch party", fr: "Watch party", ht: "Watch party" },
-  "home.gallery.ctxHome": { en: "At home", fr: "À la maison", ht: "À la maison" },
+  "home.gallery.ctxHome": { en: "At home", fr: "À la maison", ht: "Lakay" },
 
   // ─── Accueil · Journal ──
-  "home.journal.title": { en: "The team, day by day.", fr: "La sélection, jour après jour.", ht: "La sélection, jour après jour." },
-  "home.journal.allLink": { en: "All stories", fr: "Toutes les chroniques", ht: "Toutes les chroniques" },
-  "home.journal.readCta": { en: "Read the story", fr: "Lire la chronique", ht: "Lire la chronique" },
+  "home.journal.title": { en: "The team, day by day.", fr: "La sélection, jour après jour.", ht: "Seleksyon an, jou apre jou." },
+  "home.journal.allLink": { en: "All stories", fr: "Toutes les chroniques", ht: "Tout kwonik yo" },
+  "home.journal.readCta": { en: "Read the story", fr: "Lire la chronique", ht: "Li kwonik la" },
 
   // ─── Accueil · 1974 (Munich) · ht = placeholder fr ──
-  "home.munich.eyebrow": { en: "1974 · West Germany", fr: "1974 · Allemagne de l'Ouest", ht: "1974 · Allemagne de l'Ouest" },
-  "home.munich.title1": { en: "The men who", fr: "Les hommes qui ont", ht: "Les hommes qui ont" },
-  "home.munich.title2": { en: "opened the road.", fr: "ouvert la route.", ht: "ouvert la route." },
+  "home.munich.eyebrow": { en: "1974 · West Germany", fr: "1974 · Allemagne de l'Ouest", ht: "1974 · Almay Lwès" },
+  "home.munich.title1": { en: "The men who", fr: "Les hommes qui ont", ht: "Mesye ki te" },
+  "home.munich.title2": { en: "opened the road.", fr: "ouvert la route.", ht: "louvri wout la." },
   "home.munich.body1": {
     en: "On June 15, 1974, in Munich, 53,000 fans watched a Caribbean side take on Italy. Henri Françillon held the Azzurri in the first half. Then Manno Sanon opened the scoring, the first goal Dino Zoff had conceded in",
     fr: "Le 15 juin 1974, à Munich, 53 000 spectateurs voient une équipe caribéenne défier l'Italie. Henri Françillon tient les Azzurri en échec en première période. Puis Manno Sanon ouvre le score, premier but encaissé par Dino Zoff depuis",
-    ht: "Le 15 juin 1974, à Munich, 53 000 spectateurs voient une équipe caribéenne défier l'Italie. Henri Françillon tient les Azzurri en échec en première période. Puis Manno Sanon ouvre le score, premier but encaissé par Dino Zoff depuis",
+    ht: "15 jen 1974, nan Munich, 53 000 espektatè wè yon ekip karayibeyen defye Itali. Henri Françillon kenbe Azzurri yo an echèk nan premye peryòd la. Apre sa Manno Sanon louvri make a, premye gòl Dino Zoff pran depi",
   },
   "home.munich.minutes": { en: "minutes.", fr: "minutes.", ht: "minutes." },
   "home.munich.body2": {
     en: "Twenty-two Haitians. Three matches. The road that leads all the way to 2026.",
     fr: "Vingt-deux Haïtiens. Trois matchs. La route qui mène jusqu'en 2026.",
-    ht: "Vingt-deux Haïtiens. Trois matchs. La route qui mène jusqu'en 2026.",
+    ht: "Vennde Ayisyen. Twa match. Wout ki mennen jiska 2026 la.",
   },
-  "home.munich.cta": { en: "Read the full story", fr: "Lire le récit complet", ht: "Lire le récit complet" },
+  "home.munich.cta": { en: "Read the full story", fr: "Lire le récit complet", ht: "Li tout istwa a" },
 
   // ─── Mise en page (Layout) · ht = placeholder fr ──
   "layout.skipToContent": { en: "Skip to content", fr: "Aller au contenu", ht: "Aller au contenu" },
