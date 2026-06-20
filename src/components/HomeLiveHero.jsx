@@ -444,7 +444,7 @@ function RouteCard({ slug, match, data, index }) {
         <div className="flex items-center gap-3 mb-3">
           <Flag country="haiti" size="sm" />
           <span className="font-display text-base md:text-lg leading-none">{haitiLabel}</span>
-          <span className="text-muted text-sm">—</span>
+          <span className="text-muted text-sm">·</span>
           <span className="font-display text-base md:text-lg leading-none truncate">{oppLabel}</span>
           <span className="ml-auto">
             <Flag country={slug} size="sm" />
