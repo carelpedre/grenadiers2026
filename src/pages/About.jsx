@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
+import { useT } from "../lib/i18n";
 
 export default function About() {
+  const { lang } = useT();
+  return lang === "en" ? <AboutEN /> : <AboutFR />;
+}
+
+function AboutFR() {
   return (
     <div>
       <PageHeader
@@ -84,6 +90,100 @@ export default function About() {
 
           <p>
             13 juin. Foxborough. L'attente s'achève.
+          </p>
+
+          <p className="font-display text-haiti-red text-xl mt-8">
+            Ann ale, Grenadye.
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+function AboutEN() {
+  return (
+    <div>
+      <PageHeader
+        eyebrow="About"
+        title="An independent, unofficial site about the Grenadiers at the 2026 FIFA World Cup, designed and built by Carel Pedre."
+        subtitle="grenadiers2026.com follows the Haitian national team throughout its preparation and its World Cup run."
+      />
+
+      <article className="bg-white">
+        <div className="max-w-prose mx-auto px-5 py-12 space-y-6 text-ink text-lg leading-relaxed">
+          <p>
+            For fifty-two years, Haitian fans waited. From 1974 in West Germany (Sanon, Francillon, Vorbe) to November 18, 2025, the day the Grenadiers beat Nicaragua 2-0 in Curaçao to claim their place at the 2026 FIFA World Cup, the country lived through a long absence. An entire generation was born and grew up without seeing Haiti on the biggest sporting stage in the world.
+          </p>
+
+          <p>
+            The wait ends in June. And this site exists to be part of the moment.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Why this site exists</h2>
+
+          <p>
+            Grenadiers 2026 is an independent project, designed and built by Carel Pedre. The platform gathers the news of the Haitian national team during the 2026 World Cup campaign: the match schedule, the squad, editorial content, and daily coverage during the tournament.
+          </p>
+
+          <p>
+            The site is aimed first at Haitian fans, in Haiti and across the diaspora. The squad page presents each of the twenty-six players selected by Sébastien Migné. The match pages detail the games against Scotland, Brazil, and Morocco. The 1974 section tells the story of the Grenadiers' first and only World Cup appearance, and the section devoted to the Federation highlights the institution that has carried Haitian football since 1904.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">One language, one nation</h2>
+
+          <p>
+            The site is published in French, one of the official languages of the Republic of Haiti. A Haitian Creole version of the main editorial content is under consideration.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">What the site offers</h2>
+
+          <ul className="space-y-3 list-disc list-inside">
+            <li><Link to="/squad" className="text-haiti-blue hover:text-haiti-red underline">The squad of 26</Link> : each player, their club, their journey</li>
+            <li><Link to="/matches" className="text-haiti-blue hover:text-haiti-red underline">The schedule</Link> : Scotland, Brazil, Morocco. Group C. Three dates in June.</li>
+            <li><Link to="/journal" className="text-haiti-blue hover:text-haiti-red underline">The Journal</Link> : behind the scenes of the team, day after day</li>
+            <li><Link to="/history-1974" className="text-haiti-blue hover:text-haiti-red underline">1974</Link> : Sanon's goal, the men who made it possible, and the survivors honored in May 2026</li>
+            <li><Link to="/the-tribute" className="text-haiti-blue hover:text-haiti-red underline">Creative tribute</Link> : the team's thanks to the Haitian artists rallying around the Grenadiers</li>
+            <li><Link to="/federation" className="text-haiti-blue hover:text-haiti-red underline">The Federation</Link> : the FHF, its history and its current leadership</li>
+          </ul>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Thanks</h2>
+
+          <p>
+            Grenadiers 2026 is an independent project, designed and built by Carel Pedre. It benefits from the contribution of a few devotees of Haitian football:
+          </p>
+
+          <ul className="space-y-3 list-disc list-inside">
+            <li>
+              <a href="https://www.facebook.com/CalebFootHaiti" target="_blank" rel="noopener noreferrer" className="text-haiti-blue hover:text-haiti-red underline">Caleb Jephté Pierre</a>{" "}of{" "}
+              <a href="https://haititempo.com/author/caleb/" target="_blank" rel="noopener noreferrer" className="text-haiti-blue hover:text-haiti-red underline">haititempo.com</a>
+            </li>
+            <li>
+              <a href="https://www.footkoleht.com/" target="_blank" rel="noopener noreferrer" className="text-haiti-blue hover:text-haiti-red underline">Lutherson Leon</a>{" "}of footkoleht.com
+            </li>
+            <li>Rubens Etienne</li>
+          </ul>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Photo credits</h2>
+
+          <p>
+            Some images used on the site come from Ticket Magazine and the Facebook page of the Haitian Football Federation.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Corrections and contact</h2>
+
+          <p>
+            To report a factual error, suggest an event or a piece of content, or get in touch with the editorial team, email <a href="mailto:contact@grenadiers2026.com" className="text-haiti-blue hover:text-haiti-red underline">contact@grenadiers2026.com</a>.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">In closing</h2>
+
+          <p>
+            Haitian football deserved a digital space worthy of its history and of this moment. An independent, dedicated platform, where the story of the Grenadiers is told with passion and care.
+          </p>
+
+          <p>
+            June 13. Foxborough. The wait ends.
           </p>
 
           <p className="font-display text-haiti-red text-xl mt-8">
