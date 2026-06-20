@@ -1,5 +1,6 @@
-import { frName } from "../lib/teamNames";
+import { teamName } from "../lib/teamNames";
 import MatchSectionHead from "./MatchSectionHead";
+import { useT } from "../lib/i18n";
 
 // Classement du Groupe C (données live, actualisées automatiquement).
 // Réutilisé par /matches (onglet Classement) et /live/:slug (aperçu avant-match).
@@ -11,20 +12,23 @@ import MatchSectionHead from "./MatchSectionHead";
 //   footnote    · afficher la légende qualification (défaut true)
 export default function GroupCTable({
   standings,
-  title = "Classement · Groupe C",
-  subtitle = "Mis à jour automatiquement pendant le Mondial.",
+  title,
+  subtitle,
   footnote = true,
 }) {
+  const { t, lang } = useT();
+  const heading = title !== undefined ? title : t("matches.tabStandings");
+  const sub = subtitle !== undefined ? subtitle : t("matches.standingsAuto");
   if (!standings || standings.length === 0) {
     return (
       <section>
-        {title && <MatchSectionHead sub={subtitle}>{title}</MatchSectionHead>}
+        {heading && <MatchSectionHead sub={sub}>{heading}</MatchSectionHead>}
         <div className="rounded-xl border border-line bg-white p-8 text-center">
           <p className="font-cond text-xs uppercase tracking-[0.22em] text-gold font-semibold mb-2">
-            À venir
+            {t("matches.statusUpcoming")}
           </p>
           <p className="text-ink/70 text-sm">
-            Le classement du Groupe C s'affichera ici. Il s'actualise automatiquement pendant le tournoi.
+            {t("matches.standingsEmptyBody")}
           </p>
         </div>
       </section>
@@ -33,21 +37,21 @@ export default function GroupCTable({
   const th = "text-center py-3 px-1.5 font-semibold";
   return (
     <section>
-      {(title || subtitle) && <MatchSectionHead sub={subtitle}>{title}</MatchSectionHead>}
+      {(heading || sub) && <MatchSectionHead sub={sub}>{heading}</MatchSectionHead>}
       <div className="overflow-x-auto rounded-xl border border-line bg-white">
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="font-cond text-muted text-[11px] md:text-xs uppercase tracking-[0.1em] border-b border-line">
               <th className="text-center py-3 w-9 font-semibold">#</th>
-              <th className="text-left py-3 px-2 font-semibold">Équipe</th>
-              <th className={th} title="Joués">J</th>
-              <th className={th} title="Gagnés">G</th>
-              <th className={th} title="Nuls">N</th>
-              <th className={th} title="Perdus">P</th>
-              <th className={`${th} hidden sm:table-cell`} title="Buts pour">BP</th>
-              <th className={`${th} hidden sm:table-cell`} title="Buts contre">BC</th>
-              <th className={th} title="Différence">Diff</th>
-              <th className="text-center py-3 pl-1.5 pr-3 font-semibold">Pts</th>
+              <th className="text-left py-3 px-2 font-semibold">{t("matches.std.team")}</th>
+              <th className={th} title={t("matches.std.playedFull")}>{t("matches.std.played")}</th>
+              <th className={th} title={t("matches.std.wonFull")}>{t("matches.std.won")}</th>
+              <th className={th} title={t("matches.std.drawnFull")}>{t("matches.std.drawn")}</th>
+              <th className={th} title={t("matches.std.lostFull")}>{t("matches.std.lost")}</th>
+              <th className={`${th} hidden sm:table-cell`} title={t("matches.std.gfFull")}>{t("matches.std.gf")}</th>
+              <th className={`${th} hidden sm:table-cell`} title={t("matches.std.gaFull")}>{t("matches.std.ga")}</th>
+              <th className={th} title={t("matches.std.gdFull")}>{t("matches.std.gd")}</th>
+              <th className="text-center py-3 pl-1.5 pr-3 font-semibold">{t("matches.std.pts")}</th>
             </tr>
           </thead>
           <tbody>
@@ -83,7 +87,7 @@ export default function GroupCTable({
                           isHaiti ? "font-bold text-ink" : "font-semibold text-ink/90"
                         }`}
                       >
-                        {frName(r.team_name)}
+                        {teamName(r.team_name, lang)}
                       </span>
                     </span>
                   </td>
@@ -108,8 +112,7 @@ export default function GroupCTable({
       {footnote && (
         <p className="text-xs text-muted mt-4 leading-relaxed">
           <span className="inline-block w-2.5 h-2.5 rounded-sm bg-haiti-blue align-middle mr-1.5" />
-          Les deux premières équipes accèdent aux 16es de finale, avec les huit meilleures
-          troisièmes des douze groupes. Classement actualisé automatiquement.
+          {t("matches.standingsFootnote")}
         </p>
       )}
     </section>

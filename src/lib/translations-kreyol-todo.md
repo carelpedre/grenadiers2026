@@ -657,3 +657,13 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 - `journal.lightboxNext`
 
 (journal.unitPhoto / journal.unitPhotos already have Kreyòl "foto".)
+
+## matches.* (Matches page standings/fixtures/status, added for EN i18n)
+
+- `matches.statusFinished`, `matches.statusLive`, `matches.statusHalftime`, `matches.statusExtraTime`, `matches.statusBreak`, `matches.statusPenalties`, `matches.statusSuspended`, `matches.statusInterrupted`, `matches.statusPostponed`, `matches.statusCancelled`, `matches.statusAbandoned`, `matches.statusAwarded`
+- `matches.calReminder`, `matches.calAdded`
+- `matches.weatherInCity`, `matches.weatherLoading`
+- `matches.standingsAuto`, `matches.standingsPrematch`, `matches.standingsEmptyBody`, `matches.standingsFootnote`
+- `matches.std.team|played|playedFull|won|wonFull|drawn|drawnFull|lost|lostFull|gf|gfFull|ga|gaFull|gd|gdFull|pts`
+- `matches.recentForm`, `matches.recentFormSub`, `matches.last5`, `matches.venueHome`, `matches.venueAway`
+- `matches.compWcQual`, `matches.compNationsLeague`, `matches.compGoldCup`, `matches.compFriendly`, `matches.compWorldCup`

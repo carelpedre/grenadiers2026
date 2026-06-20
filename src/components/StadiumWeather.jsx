@@ -2,6 +2,7 @@
 // Shows current temperature, conditions, and a simple icon for the stadium location.
 
 import { useEffect, useState } from "react";
+import { useT } from "../lib/i18n";
 
 // Weather code descriptions (subset of WMO codes)
 const weatherCodes = {
@@ -29,6 +30,7 @@ const weatherCodes = {
 };
 
 export default function StadiumWeather({ lat, lng, city, compact = false }) {
+  const { t } = useT();
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(false);
 
@@ -55,7 +57,7 @@ export default function StadiumWeather({ lat, lng, city, compact = false }) {
   if (!weather) {
     return (
       <div className={compact ? "text-xs text-muted" : "text-sm text-muted"}>
-        Chargement de la météo…
+        {t("matches.weatherLoading")}
       </div>
     );
   }
@@ -67,7 +69,7 @@ export default function StadiumWeather({ lat, lng, city, compact = false }) {
       <span className="inline-flex items-center gap-1.5 text-xs text-muted">
         <span>{condition.icon}</span>
         <span className="tabular-nums">{weather.temp}°C</span>
-        <span className="text-muted/70">à {city}</span>
+        <span className="text-muted/70">{t("matches.weatherInCity").replace("{city}", city)}</span>
       </span>
     );
   }

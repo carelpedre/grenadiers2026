@@ -12,24 +12,28 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getRecentResults, backendReady } from "../lib/fixturesApi";
-import { frName } from "../lib/teamNames";
-import ResultPill, { RESULT } from "./ResultPill";
+import { teamName } from "../lib/teamNames";
+import { useT } from "../lib/i18n";
+import ResultPill from "./ResultPill";
 
 const HAITI_TEAM_ID = 2386;
 
-// Libellés courts FR des compétitions.
-const COMP_FR = {
-  "World Cup - Qualification CONCACAF": "Éliminatoires CDM",
-  "CONCACAF Nations League": "Ligue des Nations",
-  "CONCACAF Gold Cup": "Gold Cup",
-  Friendlies: "Amical",
-  "World Cup": "Coupe du Monde",
+// Compétition → clé i18n du libellé court.
+const COMP_KEY = {
+  "World Cup - Qualification CONCACAF": "matches.compWcQual",
+  "CONCACAF Nations League": "matches.compNationsLeague",
+  "CONCACAF Gold Cup": "matches.compGoldCup",
+  Friendlies: "matches.compFriendly",
+  "World Cup": "matches.compWorldCup",
 };
-const compLabel = (name) => COMP_FR[name] || name || "";
+const compLabel = (name, t) => (COMP_KEY[name] ? t(COMP_KEY[name]) : name || "");
 
-function frDate(iso) {
+// Clé i18n du résultat (réutilise matches.win/draw/loss).
+const RES_KEY = { V: "matches.win", N: "matches.draw", D: "matches.loss" };
+
+function fmtDate(iso, lang) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("fr-FR", {
+  return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -51,6 +55,7 @@ function derive(f) {
 }
 
 export default function RecentForm() {
+  const { t, lang } = useT();
   const [rows, setRows] = useState(null);
 
   useEffect(() => {
@@ -83,16 +88,16 @@ export default function RecentForm() {
   return (
     <section>
       <div className="border-b border-line pb-3 mb-6">
-        <h2 className="font-display text-2xl md:text-3xl">Forme récente</h2>
+        <h2 className="font-display text-2xl md:text-3xl">{t("matches.recentForm")}</h2>
         <p className="text-muted text-sm mt-1">
-          Les derniers matchs des Grenadiers.
+          {t("matches.recentFormSub")}
         </p>
       </div>
 
       {/* Bande de forme — 5 derniers, le plus récent à droite */}
       <div className="flex items-center gap-3 mb-8">
         <span className="text-xs uppercase tracking-wider text-muted font-semibold">
-          5 derniers
+          {t("matches.last5")}
         </span>
         <div className="flex items-center gap-1.5">
           {strip.map((r) => (
@@ -100,7 +105,7 @@ export default function RecentForm() {
               key={r.id}
               res={r.res}
               size="lg"
-              title={`${RESULT[r.res].full} · Haïti ${r.gf}-${r.ga} ${frName(r.opponent)}`}
+              title={`${t(RES_KEY[r.res] || "matches.draw")} · ${teamName("haiti", lang)} ${r.gf}-${r.ga} ${teamName(r.opponent, lang)}`}
             />
           ))}
         </div>
@@ -121,12 +126,12 @@ export default function RecentForm() {
 
             <div className="min-w-0 flex-1">
               <p className="text-[11px] uppercase tracking-wider text-muted font-semibold truncate">
-                {frDate(r.kickoff)}
-                {r.league ? <span className="text-muted/70"> · {compLabel(r.league)}</span> : null}
-                <span className="text-muted/70"> · {r.venue === "dom" ? "Dom." : "Ext."}</span>
+                {fmtDate(r.kickoff, lang)}
+                {r.league ? <span className="text-muted/70"> · {compLabel(r.league, t)}</span> : null}
+                <span className="text-muted/70"> · {r.venue === "dom" ? t("matches.venueHome") : t("matches.venueAway")}</span>
               </p>
               <p className="font-display text-base md:text-lg text-ink flex items-center gap-2 mt-0.5 min-w-0">
-                <span className="shrink-0">Haïti</span>
+                <span className="shrink-0">{teamName("haiti", lang)}</span>
                 <span className="tabular-nums shrink-0">
                   {r.gf}
                   <span className="text-muted mx-1">-</span>
@@ -140,7 +145,7 @@ export default function RecentForm() {
                     className="w-5 h-5 object-contain shrink-0"
                   />
                 )}
-                <span className="truncate">{frName(r.opponent)}</span>
+                <span className="truncate">{teamName(r.opponent, lang)}</span>
               </p>
             </div>
           </li>

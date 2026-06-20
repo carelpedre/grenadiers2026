@@ -10,7 +10,7 @@ import GroupCTable from "../components/GroupCTable";
 import MatchSectionHead from "../components/MatchSectionHead";
 import Wc26Mark from "../components/Wc26Mark";
 import RecentForm from "../components/RecentForm";
-import { frName } from "../lib/teamNames";
+import { teamName } from "../lib/teamNames";
 import { friendlies } from "../data/friendlies";
 import { matches } from "../data/matches";
 import { liveMatches } from "../data/liveMatches";
@@ -20,7 +20,7 @@ import { useLiveFixtures } from "../lib/useLiveFixtures";
 import { fadeUp, slideInLeft, slideInRight, stagger } from "../lib/motion";
 
 export default function Matches() {
-  const { t } = useT();
+  const { t, lang } = useT();
   const { byOpponent, feature, standings } = useLiveFixtures();
   const [tab, setTab] = useState("apercu");
   // Le match mis en avant dans le bandeau n'est pas répété en « préparation ».
@@ -72,7 +72,7 @@ export default function Matches() {
                   key={m.matchNumber}
                   to={`/live/${liveSlug}`}
                   className="block group cursor-pointer rounded-lg"
-                  aria-label={t("matches.liveCenterAria").replace("{home}", m.home.name).replace("{away}", m.away.name)}
+                  aria-label={t("matches.liveCenterAria").replace("{home}", teamName(m.home.country, lang)).replace("{away}", teamName(m.away.country, lang))}
                 >
                   <MatchCard match={m} live={live} />
                 </Link>
@@ -112,16 +112,16 @@ export default function Matches() {
           <h3 className="font-cond text-xl font-bold uppercase tracking-tight mb-4">{t("matches.groupCTeams")}</h3>
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-4">
             <li className="flex items-center gap-2">
-              <Flag country="brazil" size="sm" /> Brésil
+              <Flag country="brazil" size="sm" /> {teamName("brazil", lang)}
             </li>
             <li className="flex items-center gap-2">
-              <Flag country="morocco" size="sm" /> Maroc
+              <Flag country="morocco" size="sm" /> {teamName("morocco", lang)}
             </li>
             <li className="flex items-center gap-2 font-semibold">
-              <Flag country="haiti" size="sm" /> Haïti
+              <Flag country="haiti" size="sm" /> {teamName("haiti", lang)}
             </li>
             <li className="flex items-center gap-2">
-              <Flag country="scotland" size="sm" /> Écosse
+              <Flag country="scotland" size="sm" /> {teamName("scotland", lang)}
             </li>
           </ul>
           <p className="text-xs text-muted">
@@ -150,22 +150,59 @@ function TabPill({ active, onClick, children }) {
   );
 }
 
-// Coup d'envoi à l'heure de Miami (Est).
-function miamiKickoff(iso) {
+// Coup d'envoi à l'heure de Miami (Est). Locale selon la langue active.
+function miamiKickoff(iso, lang) {
   if (!iso) return { date: "", time: "" };
+  const loc = lang === "en" ? "en-US" : "fr-FR";
   const d = new Date(iso);
-  const date = new Intl.DateTimeFormat("fr-FR", {
+  const date = new Intl.DateTimeFormat(loc, {
     timeZone: "America/New_York",
     weekday: "long",
     day: "numeric",
     month: "long",
   }).format(d);
-  const time = new Intl.DateTimeFormat("fr-FR", {
+  const time = new Intl.DateTimeFormat(loc, {
     timeZone: "America/New_York",
     hour: "2-digit",
     minute: "2-digit",
   }).format(d);
   return { date, time };
+}
+
+// Date affichée sur la carte de match : en anglais, dérivée de l'ISO kickoff
+// (format abrégé « Sat, Jun 13, 2026 ») ; en français, le libellé stocké.
+function fixtureDate(match, lang) {
+  if (lang === "en" && match?.kickoff) {
+    return new Date(match.kickoff).toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "America/New_York",
+    });
+  }
+  return match?.date;
+}
+
+// Libellé localisé d'un statut de match en direct, depuis le code de statut.
+function liveLabel(t, live) {
+  const map = {
+    HT: "matches.statusHalftime",
+    ET: "matches.statusExtraTime",
+    BT: "matches.statusBreak",
+    P: "matches.statusPenalties",
+    SUSP: "matches.statusSuspended",
+    INT: "matches.statusInterrupted",
+    PST: "matches.statusPostponed",
+    CANC: "matches.statusCancelled",
+    ABD: "matches.statusAbandoned",
+    AWD: "matches.statusAwarded",
+  };
+  const k = map[live?.status];
+  if (k) return t(k);
+  if (live?.isFinished) return t("matches.statusFinished");
+  if (live?.isLive) return t("matches.statusLive");
+  return t("matches.statusUpcoming");
 }
 
 function HeroTeam({ name, logo }) {
@@ -183,10 +220,10 @@ function HeroTeam({ name, logo }) {
 
 // Bandeau en tête de /matches : le match en direct, sinon le prochain à venir.
 function NextMatchHero({ feature }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   if (!feature) return null;
   const { homeName, awayName, homeLogo, awayLogo, kickoff, slug, isLive, homeIsHaiti, haitiGoals, oppGoals } = feature;
-  const { date, time } = miamiKickoff(kickoff);
+  const { date, time } = miamiKickoff(kickoff, lang);
   const homeScore = homeIsHaiti ? haitiGoals : oppGoals;
   const awayScore = homeIsHaiti ? oppGoals : haitiGoals;
 
@@ -217,9 +254,9 @@ function NextMatchHero({ feature }) {
             )}
           </div>
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 md:gap-x-3">
-            <HeroTeam name={frName(homeName)} logo={homeLogo} />
+            <HeroTeam name={teamName(homeName, lang)} logo={homeLogo} />
             <span className="text-gold/70 font-block text-sm">VS</span>
-            <HeroTeam name={frName(awayName)} logo={awayLogo} />
+            <HeroTeam name={teamName(awayName, lang)} logo={awayLogo} />
           </div>
         </div>
 
@@ -260,6 +297,7 @@ function NextMatchHero({ feature }) {
 }
 
 function LiveScoreBadge({ live }) {
+  const { t } = useT();
   if (!live) return null;
   if (live.isLive) {
     return (
@@ -269,7 +307,7 @@ function LiveScoreBadge({ live }) {
           animate={{ opacity: [1, 0.3, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
-        {live.label}
+        {liveLabel(t, live)}
         {live.isRunning && live.elapsed ? ` · ${live.elapsed}'` : ""}
       </span>
     );
@@ -277,7 +315,7 @@ function LiveScoreBadge({ live }) {
   if (live.isFinished) {
     return (
       <span className="inline-flex items-center px-2.5 py-1 bg-ink/60 text-bg text-[10px] font-bold uppercase tracking-wider rounded-full">
-        {live.label}
+        {liveLabel(t, live)}
       </span>
     );
   }
@@ -285,8 +323,11 @@ function LiveScoreBadge({ live }) {
 }
 
 function MatchCard({ match, live }) {
-  const { t } = useT();
-  const { home, away, date, time, timeET, stadium, broadcast, diaspora, matchNumber } = match;
+  const { t, lang } = useT();
+  const { home, away, time, timeET, stadium, broadcast, diaspora, matchNumber } = match;
+  const date = fixtureDate(match, lang);
+  const city = lang === "en" && stadium.cityEn ? stadium.cityEn : stadium.city;
+  const diasporaText = lang === "en" && match.diasporaEn ? match.diasporaEn : diaspora;
   const showLive = Boolean(live && (live.isLive || live.isFinished));
   const homeScore = home.country === "haiti" ? live?.haitiGoals : live?.oppGoals;
   const awayScore = away.country === "haiti" ? live?.haitiGoals : live?.oppGoals;
@@ -303,7 +344,7 @@ function MatchCard({ match, live }) {
         <ImagePlaceholder
           src={stadium.photo}
           aspect="21/9"
-          label={`${stadium.fifaName} · ${stadium.city}`}
+          label={`${stadium.fifaName} · ${city}`}
           rounded={false}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent"></div>
@@ -322,7 +363,7 @@ function MatchCard({ match, live }) {
               <Flag country={home.country} size="responsive" />
             </div>
             <p className="font-cond font-bold text-base md:text-4xl uppercase tracking-tight leading-none md:order-1">
-              {home.name}
+              {teamName(home.country, lang)}
             </p>
           </motion.div>
 
@@ -351,7 +392,7 @@ function MatchCard({ match, live }) {
           <motion.div className="flex flex-col items-center text-center md:flex-row md:items-center md:justify-start md:gap-5 gap-2" variants={slideInRight}>
             <Flag country={away.country} size="responsive" />
             <p className="font-cond font-bold text-base md:text-4xl uppercase tracking-tight leading-none">
-              {away.name}
+              {teamName(away.country, lang)}
             </p>
           </motion.div>
         </div>
@@ -365,7 +406,7 @@ function MatchCard({ match, live }) {
             {stadium.realName && stadium.realName !== stadium.fifaName ? ` (${stadium.realName})` : ""}
           </span>
           <span className="text-muted">·</span>
-          <span className="text-ink">{stadium.city}</span>
+          <span className="text-ink">{city}</span>
         </div>
       </div>
 
@@ -391,7 +432,7 @@ function MatchCard({ match, live }) {
           <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">
             {t("matches.weather")}
           </p>
-          <StadiumWeather lat={stadium.lat} lng={stadium.lng} city={stadium.city.split(",")[0]} compact />
+          <StadiumWeather lat={stadium.lat} lng={stadium.lng} city={city.split(",")[0]} compact />
         </div>
       </div>
 
@@ -414,9 +455,9 @@ function MatchCard({ match, live }) {
       </div>
 
       {/* Diaspora note */}
-      {diaspora && (
+      {diasporaText && (
         <div className="bg-haiti-blue text-bg px-6 py-4 text-sm">
-          <span className="font-semibold">{diaspora}</span>
+          <span className="font-semibold">{diasporaText}</span>
         </div>
       )}
     </motion.div>

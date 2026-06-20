@@ -18,8 +18,10 @@
 // ╚═══════════════════════════════════════════════════════════════════════╝
 
 import { useState } from "react";
+import { useT } from "../lib/i18n";
 
 export default function MatchReminder({ match }) {
+  const { t } = useT();
   const [downloaded, setDownloaded] = useState(false);
 
   function handleDownload() {
@@ -42,7 +44,7 @@ export default function MatchReminder({ match }) {
       onClick={handleDownload}
       className="inline-flex items-center gap-2 px-4 py-2 bg-haiti-blue hover:bg-haiti-blue-dark text-bg text-sm font-semibold rounded-full transition-colors"
     >
-      {downloaded ? "✓ Ajouté à l'agenda" : "📅 Rappel agenda"}
+      {downloaded ? t("matches.calAdded") : t("matches.calReminder")}
     </button>
   );
 }

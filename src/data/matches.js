@@ -19,6 +19,7 @@ export const matches = [
     stadium: stadiums.gillette,
     broadcast: ["FS1", "Telemundo", "Tele Haiti", "Canal+ Haiti"],
     diaspora: "Boston · l'équivalent le plus proche d'un match à domicile",
+    diasporaEn: "Boston · the closest thing to a home match",
   },
   {
     matchNumber: 27,
@@ -32,6 +33,7 @@ export const matches = [
     stadium: stadiums.lincoln,
     broadcast: ["FOX", "Telemundo", "Tele Haiti", "Canal+ Haiti"],
     diaspora: "Philadelphie · à 24 km du Subaru Park, où Danley Jean-Jacques évolue avec le Philadelphia Union",
+    diasporaEn: "Philadelphia · 15 miles from Subaru Park, where Danley Jean-Jacques plays for the Philadelphia Union",
   },
   {
     matchNumber: 50,
@@ -45,5 +47,6 @@ export const matches = [
     stadium: stadiums.mercedesBenz,
     broadcast: ["FOX", "Telemundo", "Tele Haiti", "Canal+ Haiti"],
     diaspora: "Atlanta · une communauté haïtienne en pleine croissance dans le Sud-Est américain",
+    diasporaEn: "Atlanta · a growing Haitian community in the American Southeast",
   },
 ];
