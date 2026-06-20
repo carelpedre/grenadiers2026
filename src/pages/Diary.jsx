@@ -4,6 +4,27 @@ import { motion } from "framer-motion";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import { getEntriesSorted, getAlbums } from "../data/diary";
 import { fadeUp, stagger } from "../lib/motion";
+import { useT } from "../lib/i18n";
+
+// Sélecteur de langue pour les champs d'une entrée : renvoie le champ anglais
+// en mode "en" quand il existe, sinon le français (ht retombe sur le français).
+function makePick(lang) {
+  return (fr, en) => (lang === "en" && en ? en : fr);
+}
+
+// Date affichée : en anglais, formatée depuis l'ISO `date` ; sinon le
+// dateLabel français stocké (sortie française inchangée).
+function journalDate(entry, lang) {
+  if (lang === "en" && entry?.date) {
+    return new Date(`${entry.date}T00:00:00Z`).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  }
+  return entry?.dateLabel;
+}
 
 // ╔══════════════════════════════════════════════════════════════════════╗
 // ║  Le Journal : editorial front page (index of /journal).                ║
@@ -12,11 +33,13 @@ import { fadeUp, stagger } from "../lib/motion";
 // ╚══════════════════════════════════════════════════════════════════════╝
 
 export default function Diary() {
+  const { t, lang } = useT();
+  const pick = makePick(lang);
   const entries = getEntriesSorted();
   const hero = entries[0];
   const grid = entries.slice(1, 7); // entries[1..6]
   const archive = entries.slice(7); // entries[7+]
-  const edition = useEditionLine();
+  const edition = useEditionLine(lang, t);
 
   return (
     <div className="bg-bg">
@@ -25,7 +48,7 @@ export default function Diary() {
         <div className="max-w-content mx-auto px-5 pt-14 pb-10 md:pt-24 md:pb-14">
           <motion.div variants={fadeUp} initial="hidden" animate="show">
             <h1 className="font-display text-ink text-5xl md:text-7xl leading-[0.95]">
-              Le Journal
+              {t("journal.mastheadTitle")}
             </h1>
             {/* thin flag double-rule */}
             <div className="mt-5 w-28">
@@ -33,7 +56,7 @@ export default function Diary() {
               <div className="h-[2px] bg-haiti-red mt-[3px]" />
             </div>
             <p className="mt-5 text-muted text-lg md:text-xl">
-              Chronique de la sélection nationale
+              {t("journal.mastheadSub")}
             </p>
             {edition && (
               <p className="mt-4 text-gold text-xs md:text-sm uppercase tracking-[0.2em] font-semibold">
@@ -47,7 +70,7 @@ export default function Diary() {
       {entries.length === 0 ? (
         <section className="max-w-content mx-auto px-5 py-24 text-center">
           <p className="text-muted text-lg">
-            Premières chroniques à paraître prochainement.
+            {t("journal.empty")}
           </p>
         </section>
       ) : (
@@ -78,20 +101,20 @@ export default function Diary() {
                   <div className="hidden md:flex md:flex-col absolute inset-x-0 bottom-0 p-6 md:p-10 max-h-[55%] overflow-hidden">
                     {hero.eyebrow && (
                       <p className="text-gold text-sm uppercase tracking-[0.18em] font-bold mb-3">
-                        {hero.eyebrow}
+                        {pick(hero.eyebrow, hero.eyebrowEn)}
                       </p>
                     )}
                     <h2 className="font-display text-bg text-5xl leading-[1.05] max-w-3xl line-clamp-2">
-                      {hero.title}
+                      {pick(hero.title, hero.titleEn)}
                     </h2>
                     <div className="h-[3px] w-0 bg-haiti-red mt-3 transition-all duration-500 ease-out group-hover:w-24" />
                     {hero.dek && (
                       <p className="text-bg/80 text-lg mt-4 max-w-2xl line-clamp-2">
-                        {hero.dek}
+                        {pick(hero.dek, hero.dekEn)}
                       </p>
                     )}
                     <p className="text-bg/60 text-sm uppercase tracking-wider mt-4">
-                      {hero.dateLabel}
+                      {journalDate(hero, lang)}
                     </p>
                   </div>
                 </div>
@@ -100,19 +123,19 @@ export default function Diary() {
                 <div className="md:hidden pt-4">
                   {hero.eyebrow && (
                     <p className="text-gold text-xs uppercase tracking-[0.18em] font-bold mb-2">
-                      {hero.eyebrow}
+                      {pick(hero.eyebrow, hero.eyebrowEn)}
                     </p>
                   )}
                   <h2 className="font-display text-ink text-2xl leading-[1.12]">
-                    {hero.title}
+                    {pick(hero.title, hero.titleEn)}
                   </h2>
                   {hero.dek && (
                     <p className="text-muted text-sm leading-relaxed mt-2 line-clamp-2">
-                      {hero.dek}
+                      {pick(hero.dek, hero.dekEn)}
                     </p>
                   )}
                   <p className="text-muted text-xs uppercase tracking-wider mt-3">
-                    {hero.dateLabel}
+                    {journalDate(hero, lang)}
                   </p>
                 </div>
               </Link>
@@ -141,7 +164,7 @@ export default function Diary() {
             <section className="max-w-content mx-auto px-5 pt-16 md:pt-20 pb-20">
               <div className="flex items-center gap-4 mb-4">
                 <h2 className="text-gold text-xs uppercase tracking-[0.2em] font-bold shrink-0">
-                  Archives
+                  {t("journal.archives")}
                 </h2>
                 <div className="flex-1 h-px bg-line" />
               </div>
@@ -162,15 +185,15 @@ export default function Diary() {
                       className="group flex flex-col gap-1 py-4 md:flex-row md:items-baseline md:gap-5"
                     >
                       <span className="text-muted text-xs md:text-sm uppercase tracking-wider md:w-32 md:shrink-0">
-                        {entry.dateLabel}
+                        {journalDate(entry, lang)}
                       </span>
                       {entry.eyebrow && (
                         <span className="text-gold text-xs uppercase tracking-wider font-bold md:w-52 md:shrink-0">
-                          {entry.eyebrow}
+                          {pick(entry.eyebrow, entry.eyebrowEn)}
                         </span>
                       )}
                       <span className="font-display text-ink text-lg md:text-xl leading-snug transition-colors group-hover:text-haiti-blue">
-                        {entry.title}
+                        {pick(entry.title, entry.titleEn)}
                       </span>
                     </Link>
                   </motion.li>
@@ -186,6 +209,8 @@ export default function Diary() {
 
 // ───────── Grid card ─────────
 function GridCard({ entry }) {
+  const { lang } = useT();
+  const pick = makePick(lang);
   return (
     <motion.div variants={fadeUp}>
       <Link to={`/journal/${entry.slug}`} className="group block">
@@ -194,7 +219,7 @@ function GridCard({ entry }) {
             <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
               <ImagePlaceholder
                 src={entry.cover}
-                alt={entry.title}
+                alt={pick(entry.title, entry.titleEn)}
                 aspect="16/10"
                 rounded={false}
               />
@@ -205,20 +230,20 @@ function GridCard({ entry }) {
         <div className="pt-5">
           {entry.eyebrow && (
             <span className="inline-block text-gold text-[11px] uppercase tracking-[0.16em] font-bold border border-line rounded-full px-3 py-1">
-              {entry.eyebrow}
+              {pick(entry.eyebrow, entry.eyebrowEn)}
             </span>
           )}
           <h3 className="font-display text-ink text-2xl md:text-[1.7rem] leading-snug mt-4 line-clamp-2">
-            {entry.title}
+            {pick(entry.title, entry.titleEn)}
           </h3>
           <div className="h-[3px] w-0 bg-haiti-red mt-2 transition-all duration-500 ease-out group-hover:w-16" />
           {entry.dek && (
             <p className="text-muted text-sm md:text-base leading-relaxed mt-3 line-clamp-2">
-              {entry.dek}
+              {pick(entry.dek, entry.dekEn)}
             </p>
           )}
           <p className="text-muted text-xs uppercase tracking-wider mt-4">
-            {entry.dateLabel}
+            {journalDate(entry, lang)}
           </p>
         </div>
       </Link>
@@ -264,21 +289,22 @@ function CoverBadges({ entry }) {
 }
 
 // ───────── "Édition du <date>" line, computed client-side ─────────
-function useEditionLine() {
+function useEditionLine(lang, t) {
   const [line, setLine] = useState("");
   useEffect(() => {
     const now = new Date();
-    const dateStr = new Intl.DateTimeFormat("fr-FR", {
+    const locale = lang === "en" ? "en-US" : "fr-FR";
+    const dateStr = new Intl.DateTimeFormat(locale, {
       day: "numeric",
       month: "long",
       year: "numeric",
     }).format(now);
-    let s = `Édition du ${dateStr}`;
+    let s = t("journal.edition").replace("{date}", dateStr);
     const target = new Date(2026, 5, 13); // 13 June 2026 (local)
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const days = Math.round((target - today) / 86400000);
-    if (days > 0) s += ` · J-${days} avant Ayiti vs Écosse`;
+    if (days > 0) s += ` · ${t("journal.countdown").replace("{days}", days)}`;
     setLine(s);
-  }, []);
+  }, [lang, t]);
   return line;
 }

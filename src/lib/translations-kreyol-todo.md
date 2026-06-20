@@ -632,3 +632,28 @@ the pack's Haitian Creole column (or are not in the pack at all). Total: 538 key
 - `watchParties.venue`
 - `watchParties.venues`
 
+
+## journal.* (chrome, added for journal i18n plumbing)
+
+- `journal.mastheadTitle`
+- `journal.mastheadSub`
+- `journal.archives`
+- `journal.empty`
+- `journal.edition`
+- `journal.countdown`
+- `journal.tabArticle`
+- `journal.tabTranscript`
+- `journal.formatAria`
+- `journal.notFound`
+- `journal.backToJournal`
+- `journal.watchYoutube`
+- `journal.galleryEyebrow`
+- `journal.inImages`
+- `journal.photosCredit`
+- `journal.alsoRead`
+- `journal.otherEntries`
+- `journal.allJournal`
+- `journal.lightboxPrev`
+- `journal.lightboxNext`
+
+(journal.unitPhoto / journal.unitPhotos already have Kreyòl "foto".)

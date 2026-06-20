@@ -5,6 +5,33 @@ import ImagePlaceholder from "../components/ImagePlaceholder";
 import MatchResultCard from "../components/MatchResultCard";
 import ShareButton from "../components/ShareButton";
 import { getEntryBySlug, getEntriesSorted, getAlbums } from "../data/diary";
+import { useT } from "../lib/i18n";
+
+// Sélecteur de langue pour les champs d'une entrée : renvoie le champ anglais
+// en mode "en" quand il existe, sinon le français (ht retombe sur le français).
+function makePick(lang) {
+  return (fr, en) => (lang === "en" && en ? en : fr);
+}
+
+// Date affichée : en anglais, formatée depuis l'ISO `date` ; sinon le
+// dateLabel français stocké (sortie française inchangée).
+function journalDate(entry, lang) {
+  if (lang === "en" && entry?.date) {
+    return new Date(`${entry.date}T00:00:00Z`).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  }
+  return entry?.dateLabel;
+}
+
+// Corps de l'article selon la langue : bodyEn en anglais s'il existe, sinon
+// le corps français (même convention "## " pour les titres).
+function pickBody(entry, lang) {
+  return lang === "en" && Array.isArray(entry?.bodyEn) ? entry.bodyEn : entry.body;
+}
 
 function getYouTubeId(input) {
   if (!input) return "";
@@ -21,6 +48,8 @@ function isSelfHostedVideo(entry) {
 }
 
 export default function DiaryEntry() {
+  const { t, lang } = useT();
+  const pick = makePick(lang);
   const { slug } = useParams();
   const entry = getEntryBySlug(slug);
   const [lightbox, setLightbox] = useState(null); // flat index across all albums, or null
@@ -29,9 +58,9 @@ export default function DiaryEntry() {
   if (!entry) {
     return (
       <div className="max-w-content mx-auto px-5 py-20 text-center">
-        <p className="font-display text-4xl mb-4">Chronique introuvable.</p>
+        <p className="font-display text-4xl mb-4">{t("journal.notFound")}</p>
         <Link to="/journal" className="text-haiti-blue underline hover:no-underline">
-          ← Retour au Journal
+          {t("journal.backToJournal")}
         </Link>
       </div>
     );
@@ -70,21 +99,21 @@ export default function DiaryEntry() {
       {/* Hero */}
       <header className="relative bg-ink text-bg overflow-hidden">
         <div className="absolute inset-0">
-          <ImagePlaceholder src={entry.cover} label={entry.title} aspect="16/9" rounded={false} className="w-full h-full object-cover opacity-40" />
+          <ImagePlaceholder src={entry.cover} label={pick(entry.title, entry.titleEn)} aspect="16/9" rounded={false} className="w-full h-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/70 to-ink"></div>
         </div>
         <div className="relative max-w-content mx-auto px-5 py-20 md:py-28">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5 text-xs">
               <span className="text-haiti-red uppercase tracking-wider font-bold">
-                {entry.eyebrow}
+                {pick(entry.eyebrow, entry.eyebrowEn)}
               </span>
-              <span className="text-bg/60">{entry.dateLabel}</span>
+              <span className="text-bg/60">{journalDate(entry, lang)}</span>
             </div>
-            <h1 className="font-display text-4xl md:text-6xl mb-5 leading-tight">{entry.title}</h1>
-            <p className="text-bg/80 text-lg md:text-xl leading-relaxed">{entry.dek}</p>
+            <h1 className="font-display text-4xl md:text-6xl mb-5 leading-tight">{pick(entry.title, entry.titleEn)}</h1>
+            <p className="text-bg/80 text-lg md:text-xl leading-relaxed">{pick(entry.dek, entry.dekEn)}</p>
             <div className="mt-6">
-              <ShareButton dark title={entry.title} text={entry.dek} />
+              <ShareButton dark title={pick(entry.title, entry.titleEn)} text={pick(entry.dek, entry.dekEn)} />
             </div>
           </div>
         </div>
@@ -101,11 +130,11 @@ export default function DiaryEntry() {
           {isPresser && (
             <div
               role="tablist"
-              aria-label="Format de l'article"
+              aria-label={t("journal.formatAria")}
               className="mb-8 flex w-full gap-1 rounded-full border border-line bg-bg p-1"
             >
               {PRESSER_TABS.map((id) => {
-                const label = id === "article" ? "L'article" : "Transcription intégrale";
+                const label = id === "article" ? t("journal.tabArticle") : t("journal.tabTranscript");
                 const active = presserTab === id;
                 return (
                   <button
@@ -165,7 +194,7 @@ export default function DiaryEntry() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative block w-full overflow-hidden rounded-xl aspect-video bg-ink"
-                  aria-label={`${entry.videoCaption || entry.title} · regarder sur YouTube`}
+                  aria-label={`${entry.videoCaption || pick(entry.title, entry.titleEn)} · ${t("journal.watchYoutube")}`}
                 >
                   {entry.cover && (
                     <img
@@ -182,7 +211,7 @@ export default function DiaryEntry() {
                       </svg>
                     </span>
                     <span className="rounded-full bg-ink/85 px-4 py-1.5 text-sm font-semibold text-white">
-                      Regarder sur YouTube
+                      {t("journal.watchYoutube")}
                     </span>
                   </span>
                 </a>
@@ -219,7 +248,7 @@ export default function DiaryEntry() {
               </a>
             </div>
           )}
-          {entry.body.map((paragraph, i) =>
+          {pickBody(entry, lang).map((paragraph, i) =>
             typeof paragraph === "string" && paragraph.startsWith("## ") ? (
               <h2 key={i} className="font-display text-2xl md:text-3xl text-ink leading-snug pt-4">
                 {paragraph.slice(3)}
@@ -232,7 +261,7 @@ export default function DiaryEntry() {
             <figure>
               <img
                 src={entry.cover}
-                alt={entry.title}
+                alt={pick(entry.title, entry.titleEn)}
                 loading="lazy"
                 className="w-full h-auto rounded-lg border border-line"
               />
@@ -247,7 +276,7 @@ export default function DiaryEntry() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-haiti-blue transition-colors"
                 >
-                  {entry.source}
+                  {pick(entry.source, entry.sourceEn)}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -264,7 +293,7 @@ export default function DiaryEntry() {
                   </svg>
                 </a>
               ) : (
-                entry.source
+                pick(entry.source, entry.sourceEn)
               )}
             </p>
           )}
@@ -329,11 +358,11 @@ export default function DiaryEntry() {
         <section className="bg-bg border-t border-line">
           <div className="max-w-content mx-auto px-5 py-16">
             <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-3">
-              La galerie
+              {t("journal.galleryEyebrow")}
             </p>
-            <h2 className="font-display text-3xl md:text-4xl mb-2">En images</h2>
+            <h2 className="font-display text-3xl md:text-4xl mb-2">{t("journal.inImages")}</h2>
             {entry.photoCredit && (
-              <p className="text-sm text-muted mb-10">Photos : {entry.photoCredit}</p>
+              <p className="text-sm text-muted mb-10">{t("journal.photosCredit")} {entry.photoCredit}</p>
             )}
             {!entry.photoCredit && <div className="mb-10" />}
 
@@ -358,12 +387,12 @@ export default function DiaryEntry() {
             <div className="flex items-end justify-between gap-4 mb-8">
               <div>
                 <p className="text-haiti-red text-xs uppercase tracking-wider font-bold mb-2">
-                  À lire aussi
+                  {t("journal.alsoRead")}
                 </p>
-                <h2 className="font-display text-2xl md:text-3xl">Autres chroniques</h2>
+                <h2 className="font-display text-2xl md:text-3xl">{t("journal.otherEntries")}</h2>
               </div>
               <Link to="/journal" className="text-sm font-semibold text-haiti-blue hover:text-haiti-red transition-colors whitespace-nowrap">
-                Tout le Journal →
+                {t("journal.allJournal")}
               </Link>
             </div>
             <div className="grid md:grid-cols-3 gap-5">
@@ -373,10 +402,10 @@ export default function DiaryEntry() {
                   to={`/journal/${e.slug}`}
                   className="block bg-white border border-line rounded-lg overflow-hidden hover:border-haiti-red transition-all"
                 >
-                  <ImagePlaceholder src={e.cover} label={e.title} aspect="16/9" rounded={false} />
+                  <ImagePlaceholder src={e.cover} label={pick(e.title, e.titleEn)} aspect="16/9" rounded={false} />
                   <div className="p-4">
-                    <p className="text-xs text-muted mb-1">{e.dateLabel}</p>
-                    <h3 className="font-display text-lg leading-snug">{e.title}</h3>
+                    <p className="text-xs text-muted mb-1">{journalDate(e, lang)}</p>
+                    <h3 className="font-display text-lg leading-snug">{pick(e.title, e.titleEn)}</h3>
                   </div>
                 </Link>
               ))}
@@ -398,7 +427,7 @@ export default function DiaryEntry() {
             <button
               onClick={() => setLightbox(null)}
               className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-bg/10 hover:bg-bg/20 text-bg flex items-center justify-center backdrop-blur-sm"
-              aria-label="Fermer"
+              aria-label={t("a11y.close")}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -408,7 +437,7 @@ export default function DiaryEntry() {
               <button
                 onClick={(e) => { e.stopPropagation(); setLightbox(lightbox - 1); }}
                 className="absolute left-4 z-10 w-12 h-12 rounded-full bg-bg/10 hover:bg-bg/20 text-bg flex items-center justify-center backdrop-blur-sm"
-                aria-label="Précédent"
+                aria-label={t("journal.lightboxPrev")}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -419,7 +448,7 @@ export default function DiaryEntry() {
               <button
                 onClick={(e) => { e.stopPropagation(); setLightbox(lightbox + 1); }}
                 className="absolute right-4 z-10 w-12 h-12 rounded-full bg-bg/10 hover:bg-bg/20 text-bg flex items-center justify-center backdrop-blur-sm"
-                aria-label="Suivant"
+                aria-label={t("journal.lightboxNext")}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -458,6 +487,7 @@ export default function DiaryEntry() {
 //     w-full h-auto), mobile 2 / desktop 3. For large photo sets (e.g. a full
 //     reportage) where cropping would hurt. Opt in with `layout: "masonry"`.
 function Album({ album, flatIndexOf, onPhotoClick }) {
+  const { t } = useT();
   const masonry = album.layout === "masonry";
   return (
     <div>
@@ -467,7 +497,7 @@ function Album({ album, flatIndexOf, onPhotoClick }) {
             {album.title}
           </h3>
           <span className="text-xs text-muted uppercase tracking-wider font-semibold">
-            {album.photos.length} {album.photos.length === 1 ? "photo" : "photos"}
+            {album.photos.length} {album.photos.length === 1 ? t("journal.unitPhoto") : t("journal.unitPhotos")}
           </span>
         </div>
       )}

@@ -534,6 +534,50 @@ const dict = {
     ht: "Détails",
   },
 
+  // ─── JOURNAL (Le Journal: list + article chrome) ──────────────────────
+  "journal.mastheadTitle": { en: "Journal", fr: "Le Journal", ht: "Le Journal" },
+  "journal.mastheadSub": {
+    en: "Chronicle of the national team",
+    fr: "Chronique de la sélection nationale",
+    ht: "Chronique de la sélection nationale",
+  },
+  "journal.archives": { en: "Archives", fr: "Archives", ht: "Archives" },
+  "journal.empty": {
+    en: "First articles coming soon.",
+    fr: "Premières chroniques à paraître prochainement.",
+    ht: "Premières chroniques à paraître prochainement.",
+  },
+  "journal.edition": { en: "Edition of {date}", fr: "Édition du {date}", ht: "Édition du {date}" },
+  "journal.countdown": {
+    en: "{days} days until Haiti vs Scotland",
+    fr: "J-{days} avant Ayiti vs Écosse",
+    ht: "J-{days} avant Ayiti vs Écosse",
+  },
+  "journal.tabArticle": { en: "The article", fr: "L'article", ht: "L'article" },
+  "journal.tabTranscript": {
+    en: "Full transcript",
+    fr: "Transcription intégrale",
+    ht: "Transcription intégrale",
+  },
+  "journal.formatAria": { en: "Article format", fr: "Format de l'article", ht: "Format de l'article" },
+  "journal.notFound": { en: "Article not found.", fr: "Chronique introuvable.", ht: "Chronique introuvable." },
+  "journal.backToJournal": {
+    en: "← Back to the Journal",
+    fr: "← Retour au Journal",
+    ht: "← Retour au Journal",
+  },
+  "journal.watchYoutube": { en: "Watch on YouTube", fr: "Regarder sur YouTube", ht: "Regarder sur YouTube" },
+  "journal.galleryEyebrow": { en: "The gallery", fr: "La galerie", ht: "La galerie" },
+  "journal.inImages": { en: "In pictures", fr: "En images", ht: "En images" },
+  "journal.photosCredit": { en: "Photos:", fr: "Photos :", ht: "Photos :" },
+  "journal.unitPhoto": { en: "photo", fr: "photo", ht: "foto" },
+  "journal.unitPhotos": { en: "photos", fr: "photos", ht: "foto" },
+  "journal.alsoRead": { en: "Also read", fr: "À lire aussi", ht: "À lire aussi" },
+  "journal.otherEntries": { en: "More articles", fr: "Autres chroniques", ht: "Autres chroniques" },
+  "journal.allJournal": { en: "The whole Journal →", fr: "Tout le Journal →", ht: "Tout le Journal →" },
+  "journal.lightboxPrev": { en: "Previous", fr: "Précédent", ht: "Précédent" },
+  "journal.lightboxNext": { en: "Next", fr: "Suivant", ht: "Suivant" },
+
   // ─── WATCH PARTIES ────────────────────────────────────────────────────
   "watchParties.eyebrow": {
     en: "Where Haitians gather",
