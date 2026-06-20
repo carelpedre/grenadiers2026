@@ -4,7 +4,9 @@ import { useT } from "../lib/i18n";
 
 export default function About() {
   const { lang } = useT();
-  return lang === "en" ? <AboutEN /> : <AboutFR />;
+  if (lang === "en") return <AboutEN />;
+  if (lang === "ht") return <AboutHT />;
+  return <AboutFR />;
 }
 
 function AboutFR() {
@@ -184,6 +186,100 @@ function AboutEN() {
 
           <p>
             June 13. Foxborough. The wait ends.
+          </p>
+
+          <p className="font-display text-haiti-red text-xl mt-8">
+            Ann ale, Grenadye.
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+function AboutHT() {
+  return (
+    <div>
+      <PageHeader
+        eyebrow="Konsènan"
+        title="Sit endepandan, ki pa ofisyèl, sou Grenadye yo nan Koup di Mond FIFA 2026 la, Carel Pedre konsevwa epi devlope li."
+        subtitle="grenadiers2026.com ap akonpaye seleksyon nasyonal ayisyen an pandan tout preparasyon li ak patisipasyon li nan Mondyal la."
+      />
+
+      <article className="bg-white">
+        <div className="max-w-prose mx-auto px-5 py-12 space-y-6 text-ink text-lg leading-relaxed">
+          <p>
+            Pandan senkant-de ane, sipòtè ayisyen yo t ap tann. Depi 1974 nan Almay Lwès (Sanon, Francillon, Vorbe) rive 18 novanm 2025, jou Grenadye yo te bat Nikaragwa 2-0 nan Kiraso pou pran plas yo nan Koup di Mond FIFA 2026 la, peyi a te viv yon long absans. Gen yon jenerasyon antye ki fèt epi grandi san yo pa janm wè Ayiti sou pi gwo sèn espòtif nan mond lan.
+          </p>
+
+          <p>
+            Tann nan fini an jen. E sit sa a la pou akonpaye moman an.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Rezon ki fè sit la egziste</h2>
+
+          <p>
+            Grenadye 2026 se yon pwojè endepandan Carel Pedre konsevwa epi devlope. Platfòm nan rasanble nouvèl seleksyon nasyonal ayisyen an pandan kanpay Mondyal 2026 la: pwogram match yo, prezantasyon ekip la, kontni editoryal ak kouvèti chak jou pandan tounwa a.
+          </p>
+
+          <p>
+            Sit la pale an premye ak sipòtè ayisyen yo, ann Ayiti kou nan dyaspora a. Paj seleksyon an prezante chak nan 26 jwè Sébastien Migné chwazi yo. Paj match yo bay detay sou rankont kont Eskòs, Brezil ak Mawòk. Ribrik 1974 la rakonte premye ak sèl patisipasyon Grenadye yo nan yon Koup di Mond, epi ribrik Federasyon an mete limyè sou enstitisyon k ap pote foutbòl ayisyen depi 1904.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Yon lang, yon nasyon</h2>
+
+          <p>
+            Sit la pibliye an franse, youn nan lang ofisyèl Repiblik Ayiti. Gen yon vèsyon an kreyòl ayisyen k ap etidye pou prensipal kontni editoryal yo.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Sa sit la ofri</h2>
+
+          <ul className="space-y-3 list-disc list-inside">
+            <li><Link to="/squad" className="text-haiti-blue hover:text-haiti-red underline">Gwoup 26 la</Link>: chak jwè, klèb li, pakou li</li>
+            <li><Link to="/matches" className="text-haiti-blue hover:text-haiti-red underline">Kalandriye a</Link>: Eskòs, Brezil, Mawòk. Gwoup C. Twa randevou an jen.</li>
+            <li><Link to="/journal" className="text-haiti-blue hover:text-haiti-red underline">Jounal la</Link>: dèyè sèn seleksyon an, jou apre jou</li>
+            <li><Link to="/history-1974" className="text-haiti-blue hover:text-haiti-red underline">1974</Link>: gòl Sanon an, mesye ki te rann li posib yo, ak sivivan yo te onore an me 2026</li>
+            <li><Link to="/the-tribute" className="text-haiti-blue hover:text-haiti-red underline">Omaj kreyatif</Link>: rekonesans seleksyon an pou atis ayisyen k ap mobilize bò kote Grenadye yo</li>
+            <li><Link to="/federation" className="text-haiti-blue hover:text-haiti-red underline">Federasyon an</Link>: FHF la, istwa li ak direksyon aktyèl li</li>
+          </ul>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Remèsiman</h2>
+
+          <p>
+            Grenadye 2026 se yon pwojè endepandan Carel Pedre konsevwa epi devlope. Li benefisye kontribisyon kèk moun ki pasyone pou foutbòl ayisyen:
+          </p>
+
+          <ul className="space-y-3 list-disc list-inside">
+            <li>
+              <a href="https://www.facebook.com/CalebFootHaiti" target="_blank" rel="noopener noreferrer" className="text-haiti-blue hover:text-haiti-red underline">Caleb Jephté Pierre</a>{" "}de{" "}
+              <a href="https://haititempo.com/author/caleb/" target="_blank" rel="noopener noreferrer" className="text-haiti-blue hover:text-haiti-red underline">haititempo.com</a>
+            </li>
+            <li>
+              <a href="https://www.footkoleht.com/" target="_blank" rel="noopener noreferrer" className="text-haiti-blue hover:text-haiti-red underline">Lutherson Leon</a>{" "}de footkoleht.com
+            </li>
+            <li>Rubens Etienne</li>
+          </ul>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Kredi foto</h2>
+
+          <p>
+            Gen kèk imaj yo itilize sou sit la ki soti nan Ticket Magazine ak paj Facebook Federasyon Ayisyèn Foutbòl la.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Koreksyon ak kontak</h2>
+
+          <p>
+            Pou siyale yon erè nan enfòmasyon, pwopoze yon evènman oswa yon kontni, oubyen kontakte redaksyon an, ekri nan <a href="mailto:contact@grenadiers2026.com" className="text-haiti-blue hover:text-haiti-red underline">contact@grenadiers2026.com</a>.
+          </p>
+
+          <h2 className="font-display text-2xl md:text-3xl mt-12 mb-2">Pou fini</h2>
+
+          <p>
+            Foutbòl ayisyen te merite yon espas dijital ki nan nivo istwa li ak moman sa a. Yon platfòm endepandan, dedye, kote istwa Grenadye yo rakonte ak pasyon epi ak rigè.
+          </p>
+
+          <p>
+            13 jen. Foxborough. Tann nan fini.
           </p>
 
           <p className="font-display text-haiti-red text-xl mt-8">
