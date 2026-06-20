@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import YouTubeEmbed from "../components/YouTubeEmbed";
 import { fadeUp, stagger } from "../lib/motion";
+import { useT } from "../lib/i18n";
 import {
   playlist,
   musicVideos,
@@ -14,6 +15,142 @@ import {
   supporterPoem,
   downloads,
 } from "../data/coverage";
+
+// Pick a French/English value by active language (English falls back to French).
+const pickLang = (lang, fr, en) => (lang === "en" ? en ?? fr : fr);
+
+// ── Per-language page copy (curator wall text, headings, fixed labels) ──
+// The long-form prose lives here, in identical structure across languages, so
+// the JSX below stays readable. Data prose (songs, films, art…) carries its own
+// `*En` siblings in src/data/coverage.js.
+const COPY = {
+  fr: {
+    heroEyebrow: "Hommage créatif · Exposition numérique",
+    heroTitle1: "Comment Haïti",
+    heroTitle2: "répond.",
+    heroBody:
+      "Cinquante-deux ans après Munich, le pays ne reste pas spectateur. Pendant que les Grenadiers préparent le Mondial 2026, une vague de créateurs haïtiens — musiciens, réalisateurs, illustratrices — répond. Chansons, documentaires, œuvres. La sélection a allumé quelque chose. Voici ce qu'elle a déclenché.",
+    heroCuration: "Curation : Chokarella Media · Mai 2026",
+    navAria: "Chapitres de l'exposition",
+    chapters: {
+      musique: {
+        label: "Clips musicaux",
+        wall: "Quand une sélection retourne en Coupe du Monde après cinquante-deux ans d'absence, ce n'est pas seulement le terrain qui répond. Ce sont les studios. De Port-au-Prince à Brooklyn, de Montréal à Paris, de Bogotá même, les artistes haïtiens — Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, toutes générations confondues — sortent les morceaux qui accompagnent la campagne. Voici neuf d'entre eux, dans l'ordre où Chokarella Media vous invite à les découvrir.",
+      },
+      playlists: {
+        label: "Playlists",
+        wall: "Au-delà des morceaux pris un par un, Chokarella Media a réuni la campagne dans une seule playlist — la bande-son complète de la route vers le Mondial, à écouter d'un seul tenant, sur Spotify comme sur Apple Music.",
+      },
+      films: {
+        label: "Films",
+        wall: "Pendant que les chansons sortent, un autre travail commence : celui de la pellicule. Loin des manchettes habituelles sur Haïti, des réalisateurs s'attachent à raconter le pays par le sport — avec nuance, avec patience, avec une caméra qui prend le temps de regarder.",
+      },
+      art: {
+        label: "Art",
+        wall: "Et puis l'image fixe prend la parole. Sur les couvertures de FOX Soccer et de Sports Illustrated, Haïti apparaît cet été — non pas illustrée par un studio de Los Angeles ou de New York, mais par une main haïtienne. Lyne Lucien, illustratrice formée à Bowdoin College, basée à Brooklyn, a été désignée par FOX Soccer ambassadrice artistique officielle d'Haïti pour le Mondial 2026.",
+      },
+      objets: {
+        label: "Objets & emblèmes",
+        wall: "Au-delà des chansons, des films et des illustrations, la qualification se matérialise aussi en objets et en emblèmes — ceux que l'on brandit dans les tribunes comme ceux que l'État fait entrer dans l'Histoire. D'un personnage costumé né dans la ferveur des supporters à un timbre commémoratif officiel, voici les hommages tangibles à la route des Grenadiers vers le Mondial 2026.",
+      },
+      poesie: {
+        label: "Poésie",
+        wall: "Au-delà des images et des sons, la qualification inspire aussi les mots. Un supporter signe ici un hommage en vers, sur la liberté, l'unité et cinquante-deux ans d'attente enfin récompensés.",
+      },
+      telecharger: {
+        label: "À télécharger",
+        wall: "Des visuels aux couleurs des Grenadiers, à emporter et à partager.",
+      },
+    },
+    poemPlate: "Hommage littéraire · Poème",
+    poemTextPrefix: "Texte :",
+    playlistEyebrow: "La playlist des Grenadiers",
+    playlistCredit: "Curation :",
+    playlistAvail: " · Disponible sur Spotify et Apple Music.",
+    docSeries: "Série documentaire",
+    docProducer: "— Noémie Ferron, productrice",
+    docFeaturing: "Avec la participation de",
+    docAndOthers: "et d'autres",
+    docSupport: "Avec le soutien de",
+    videoUnsupported: "Votre navigateur ne prend pas en charge la lecture vidéo.",
+    lyneEyebrow: "L'artiste · Désignée par FOX Soccer · Ambassadrice officielle d'Haïti · Mondial FIFA 2026",
+    artworkFor: "Pour",
+    artworkCredit1: "Œuvre signée",
+    artworkCredit2: "· Diffusée avec crédit.",
+    tributeLangAria: "Langue du texte",
+    toggleSecond: "Français",
+    colophonTitle: "Une nation qui supporte.",
+    colophonBody:
+      "Cette exposition rassemble une partie de la réponse créative qu'a suscitée la qualification d'Haïti pour la Coupe du Monde 2026 — chansons, documentaires, illustrations.",
+    colophonCreditPrefix:
+      "Curation : Chokarella Media · Pour signaler une œuvre à ajouter, écrire à",
+    chokEyebrow: "Par Chokarella Media",
+    chokSoon: "Bientôt en ligne.",
+  },
+  en: {
+    heroEyebrow: "Creative tribute · Digital exhibition",
+    heroTitle1: "How Haiti",
+    heroTitle2: "responds.",
+    heroBody:
+      "Fifty-two years after Munich, the country is not staying on the sidelines. As the Grenadiers prepare for the 2026 World Cup, a wave of Haitian creators (musicians, filmmakers, illustrators) responds. Songs, documentaries, works of art. The team lit something. Here is what it set off.",
+    heroCuration: "Curated by Chokarella Media · May 2026",
+    navAria: "Exhibition chapters",
+    chapters: {
+      musique: {
+        label: "Music videos",
+        wall: "When a national team returns to the World Cup after fifty-two years away, it is not only the field that answers. It is the studios. From Port-au-Prince to Brooklyn, from Montréal to Paris, even from Bogotá, Haitian artists (Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, every generation together) are releasing the tracks that carry the campaign. Here are nine of them, in the order Chokarella Media invites you to discover them.",
+      },
+      playlists: {
+        label: "Playlists",
+        wall: "Beyond the tracks taken one by one, Chokarella Media has gathered the campaign into a single playlist: the full soundtrack of the road to the World Cup, to play start to finish, on Spotify and Apple Music alike.",
+      },
+      films: {
+        label: "Films",
+        wall: "While the songs come out, another kind of work begins: the work of film. Far from the usual headlines about Haiti, filmmakers set out to tell the country through sport, with nuance, with patience, with a camera that takes the time to look.",
+      },
+      art: {
+        label: "Art",
+        wall: "And then the still image speaks. On the covers of FOX Soccer and Sports Illustrated, Haiti appears this summer, illustrated not by a studio in Los Angeles or New York, but by a Haitian hand. Lyne Lucien, an illustrator trained at Bowdoin College and based in Brooklyn, was named by FOX Soccer as Haiti's official artistic ambassador for the 2026 World Cup.",
+      },
+      objets: {
+        label: "Objects & emblems",
+        wall: "Beyond the songs, the films, and the illustrations, the qualification also takes shape in objects and emblems: the ones raised in the stands and the ones the State writes into history. From a costumed character born in the fervor of the supporters to an official commemorative stamp, here are the tangible tributes to the Grenadiers' road to the 2026 World Cup.",
+      },
+      poesie: {
+        label: "Poetry",
+        wall: "Beyond the images and the sounds, the qualification also inspires words. A supporter offers here a tribute in verse, on freedom, unity, and fifty-two years of waiting finally rewarded.",
+      },
+      telecharger: {
+        label: "Downloads",
+        wall: "Visuals in the Grenadiers' colors, to take and to share.",
+      },
+    },
+    poemPlate: "Literary tribute · Poem",
+    poemTextPrefix: "Text:",
+    playlistEyebrow: "The Grenadiers' playlist",
+    playlistCredit: "Curated by",
+    playlistAvail: " · Available on Spotify and Apple Music.",
+    docSeries: "Documentary series",
+    docProducer: "— Noémie Ferron, producer",
+    docFeaturing: "Featuring",
+    docAndOthers: "and others",
+    docSupport: "With support from",
+    videoUnsupported: "Your browser does not support video playback.",
+    lyneEyebrow: "The artist · Named by FOX Soccer · Haiti's official ambassador · 2026 FIFA World Cup",
+    artworkFor: "For",
+    artworkCredit1: "Work by",
+    artworkCredit2: "· Shared with credit.",
+    tributeLangAria: "Text language",
+    toggleSecond: "English",
+    colophonTitle: "A nation that backs its team.",
+    colophonBody:
+      "This exhibition gathers part of the creative response that Haiti's qualification for the 2026 World Cup has sparked: songs, documentaries, illustrations.",
+    colophonCreditPrefix:
+      "Curated by Chokarella Media · To suggest a work to add, email",
+    chokEyebrow: "By Chokarella Media",
+    chokSoon: "Coming soon.",
+  },
+};
 
 // ╔══════════════════════════════════════════════════════════════════════╗
 // ║  HOMMAGE CRÉATIF — /the-tribute                                       ║
@@ -28,6 +165,8 @@ export default function Coverage() {
   // Chapters are presented as tabs — one at a time — so the page is no longer
   // one endless scroll. Active chapter is mirrored in the URL hash so links
   // (e.g. /the-tribute#art) and refreshes land on the right chapter.
+  const { lang } = useT();
+  const c = COPY[lang];
   const [activeTab, setActiveTab] = useState(getInitialChapter);
   const isFirstRender = useRef(true);
 
@@ -60,9 +199,9 @@ export default function Coverage() {
       {activeTab === "musique" && (
         <>
           <ChapterMarker
-            title="Clips musicaux"
+            title={c.chapters.musique.label}
             anchorId="musique"
-            wallText="Quand une sélection retourne en Coupe du Monde après cinquante-deux ans d'absence, ce n'est pas seulement le terrain qui répond. Ce sont les studios. De Port-au-Prince à Brooklyn, de Montréal à Paris, de Bogotá même, les artistes haïtiens — Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, toutes générations confondues — sortent les morceaux qui accompagnent la campagne. Voici neuf d'entre eux, dans l'ordre où Chokarella Media vous invite à les découvrir."
+            wallText={c.chapters.musique.wall}
           />
 
           <div className="space-y-24 md:space-y-32 py-12 md:py-16">
@@ -77,9 +216,9 @@ export default function Coverage() {
       {activeTab === "playlists" && (
         <>
           <ChapterMarker
-            title="Playlists"
+            title={c.chapters.playlists.label}
             anchorId="playlists"
-            wallText="Au-delà des morceaux pris un par un, Chokarella Media a réuni la campagne dans une seule playlist — la bande-son complète de la route vers le Mondial, à écouter d'un seul tenant, sur Spotify comme sur Apple Music."
+            wallText={c.chapters.playlists.wall}
           />
 
           <PlaylistExhibit />
@@ -90,9 +229,9 @@ export default function Coverage() {
       {activeTab === "films" && (
         <>
           <ChapterMarker
-            title="Films"
+            title={c.chapters.films.label}
             anchorId="films"
-            wallText="Pendant que les chansons sortent, un autre travail commence : celui de la pellicule. Loin des manchettes habituelles sur Haïti, des réalisateurs s'attachent à raconter le pays par le sport — avec nuance, avec patience, avec une caméra qui prend le temps de regarder."
+            wallText={c.chapters.films.wall}
           />
 
           {/* Courts métrages d'abord, la série documentaire ensuite. */}
@@ -107,9 +246,9 @@ export default function Coverage() {
       {activeTab === "art" && (
         <>
           <ChapterMarker
-            title="Art"
+            title={c.chapters.art.label}
             anchorId="art"
-            wallText="Et puis l'image fixe prend la parole. Sur les couvertures de FOX Soccer et de Sports Illustrated, Haïti apparaît cet été — non pas illustrée par un studio de Los Angeles ou de New York, mais par une main haïtienne. Lyne Lucien, illustratrice formée à Bowdoin College, basée à Brooklyn, a été désignée par FOX Soccer ambassadrice artistique officielle d'Haïti pour le Mondial 2026."
+            wallText={c.chapters.art.wall}
           />
 
           <LyneLucienExhibit />
@@ -122,9 +261,9 @@ export default function Coverage() {
       {activeTab === "objets" && (
         <>
           <ChapterMarker
-            title="Objets & emblèmes"
+            title={c.chapters.objets.label}
             anchorId="objets"
-            wallText="Au-delà des chansons, des films et des illustrations, la qualification se matérialise aussi en objets et en emblèmes — ceux que l'on brandit dans les tribunes comme ceux que l'État fait entrer dans l'Histoire. D'un personnage costumé né dans la ferveur des supporters à un timbre commémoratif officiel, voici les hommages tangibles à la route des Grenadiers vers le Mondial 2026."
+            wallText={c.chapters.objets.wall}
           />
 
           <CreativeTributesExhibit />
@@ -135,9 +274,9 @@ export default function Coverage() {
       {activeTab === "poesie" && (
         <>
           <ChapterMarker
-            title="Poésie"
+            title={c.chapters.poesie.label}
             anchorId="poesie"
-            wallText="Au-delà des images et des sons, la qualification inspire aussi les mots. Un supporter signe ici un hommage en vers, sur la liberté, l'unité et cinquante-deux ans d'attente enfin récompensés."
+            wallText={c.chapters.poesie.wall}
           />
           <PoemExhibit />
         </>
@@ -147,9 +286,9 @@ export default function Coverage() {
       {activeTab === "telecharger" && (
         <>
           <ChapterMarker
-            title="À télécharger"
+            title={c.chapters.telecharger.label}
             anchorId="telecharger"
-            wallText="Des visuels aux couleurs des Grenadiers, à emporter et à partager."
+            wallText={c.chapters.telecharger.wall}
           />
           <DownloadsGrid />
         </>
@@ -162,9 +301,9 @@ export default function Coverage() {
       {chokarellaProductions.length > 0 && (
         <div className="max-w-3xl mx-auto px-5 py-20">
           <p className="text-haiti-red text-[10px] uppercase tracking-[0.25em] font-bold mb-4">
-            Par Chokarella Media
+            {c.chokEyebrow}
           </p>
-          <p className="text-muted italic">Bientôt en ligne.</p>
+          <p className="text-muted italic">{c.chokSoon}</p>
         </div>
       )}
     </div>
@@ -205,6 +344,8 @@ function ReadingProgressBar() {
 // ════════════════════════════════════════════════════════════════════════
 
 function ExhibitionHero() {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <section className="relative bg-ink text-bg overflow-hidden">
       {/* Subtle background — left bicolor edge, like the rest of the site */}
@@ -231,7 +372,7 @@ function ExhibitionHero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-haiti-red text-[11px] md:text-xs uppercase tracking-[0.3em] font-bold mb-7"
           >
-            Hommage créatif · Exposition numérique
+            {c.heroEyebrow}
           </motion.p>
 
           <motion.h1
@@ -240,8 +381,8 @@ function ExhibitionHero() {
             transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-8"
           >
-            Comment Haïti<br />
-            <span className="text-haiti-red">répond.</span>
+            {c.heroTitle1}<br />
+            <span className="text-haiti-red">{c.heroTitle2}</span>
           </motion.h1>
 
           <motion.p
@@ -250,7 +391,7 @@ function ExhibitionHero() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="text-bg/85 text-lg md:text-xl leading-relaxed mb-5"
           >
-            Cinquante-deux ans après Munich, le pays ne reste pas spectateur. Pendant que les Grenadiers préparent le Mondial 2026, une vague de créateurs haïtiens — musiciens, réalisateurs, illustratrices — répond. Chansons, documentaires, œuvres. La sélection a allumé quelque chose. Voici ce qu'elle a déclenché.
+            {c.heroBody}
           </motion.p>
 
           <motion.p
@@ -259,7 +400,7 @@ function ExhibitionHero() {
             transition={{ duration: 0.6, delay: 0.95 }}
             className="text-bg/55 text-sm italic"
           >
-            Curation : Chokarella Media · Mai 2026
+            {c.heroCuration}
           </motion.p>
         </div>
       </div>
@@ -282,23 +423,25 @@ const CHAPTERS = [
 ];
 
 function ChapterNav({ active, onSelect }) {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <nav
       id="chapter-nav"
-      aria-label="Chapitres de l'exposition"
+      aria-label={c.navAria}
       className="sticky top-0 z-30 bg-bg/95 backdrop-blur border-b border-line"
     >
       <div
         role="tablist"
         className="max-w-content mx-auto px-5 py-3 flex items-center gap-2 overflow-x-auto"
       >
-        {CHAPTERS.map(({ id, label }) => (
+        {CHAPTERS.map(({ id }) => (
           <ChapterPill
             key={id}
             active={active === id}
             onClick={() => onSelect(id)}
           >
-            {label}
+            {c.chapters[id].label}
           </ChapterPill>
         ))}
       </div>
@@ -354,6 +497,7 @@ function ChapterMarker({ title, anchorId, wallText }) {
 // ════════════════════════════════════════════════════════════════════════
 
 function MusicVideoExhibit({ video }) {
+  const { lang } = useT();
   return (
     <article
       id={`track-${video.videoId}`}
@@ -389,7 +533,7 @@ function MusicVideoExhibit({ video }) {
           </p>
           {video.note && (
             <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5">
-              {video.note}
+              {pickLang(lang, video.note, video.noteEn)}
             </p>
           )}
         </div>
@@ -403,6 +547,8 @@ function MusicVideoExhibit({ video }) {
 // ════════════════════════════════════════════════════════════════════════
 
 function PoemExhibit() {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <article id="poeme" className="scroll-mt-24 max-w-content mx-auto px-5 pb-20 md:pb-28">
       <motion.div
@@ -414,10 +560,10 @@ function PoemExhibit() {
         {/* Plate caption */}
         <div className="max-w-3xl mx-auto mb-8 md:mb-10 text-center">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            Hommage littéraire · Poème
+            {c.poemPlate}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05]">
-            {supporterPoem.title}
+            {pickLang(lang, supporterPoem.title, supporterPoem.titleEn)}
           </h3>
         </div>
 
@@ -425,7 +571,7 @@ function PoemExhibit() {
         <div className="max-w-md mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md mb-10 md:mb-12">
           <ImagePlaceholder
             src={supporterPoem.image}
-            label={supporterPoem.imageLabel}
+            label={pickLang(lang, supporterPoem.imageLabel, supporterPoem.imageLabelEn)}
             aspect="1/1"
             rounded={false}
           />
@@ -442,13 +588,13 @@ function PoemExhibit() {
               {supporterPoem.lines.join("\n")}
             </p>
             <p className="mt-10 text-center text-sm text-muted">
-              Texte : {supporterPoem.author}
+              {c.poemTextPrefix} {pickLang(lang, supporterPoem.author, supporterPoem.authorEn)}
             </p>
           </div>
 
           {/* Toussaint framing · quiet note */}
           <p className="mt-6 max-w-xl mx-auto text-center text-sm text-muted leading-relaxed">
-            {supporterPoem.note}
+            {pickLang(lang, supporterPoem.note, supporterPoem.noteEn)}
           </p>
         </div>
       </motion.div>
@@ -461,6 +607,8 @@ function PoemExhibit() {
 // ════════════════════════════════════════════════════════════════════════
 
 function PlaylistExhibit() {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <article className="max-w-content mx-auto px-5 pb-20 md:pb-28">
       <motion.div
@@ -471,16 +619,16 @@ function PlaylistExhibit() {
       >
         <div className="max-w-3xl mx-auto mb-8 md:mb-10">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            La playlist des Grenadiers
+            {c.playlistEyebrow}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-4">
-            {playlist.title}
+            {pickLang(lang, playlist.title, playlist.titleEn)}
           </h3>
           <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5 mb-6">
-            {playlist.description}
+            {pickLang(lang, playlist.description, playlist.descriptionEn)}
           </p>
           <p className="text-muted text-sm">
-            Curation :{" "}
+            {c.playlistCredit}{" "}
             <a
               href={playlist.curator.url}
               target="_blank"
@@ -489,7 +637,7 @@ function PlaylistExhibit() {
             >
               {playlist.curator.name}
             </a>
-            {" · "}Disponible sur Spotify et Apple Music.
+            {c.playlistAvail}
           </p>
         </div>
 
@@ -530,6 +678,7 @@ function PlaylistExhibit() {
 // ════════════════════════════════════════════════════════════════════════
 
 function ShortFilmExhibit({ film }) {
+  const { lang } = useT();
   return (
     <article className="max-w-content mx-auto px-5 py-12 md:py-16">
       <motion.div
@@ -541,13 +690,13 @@ function ShortFilmExhibit({ film }) {
         {/* Plate caption above, same convention as the documentary */}
         <div className="max-w-3xl mx-auto mb-2 md:mb-4">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            {film.medium}
+            {pickLang(lang, film.medium, film.mediumEn)}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-3">
             {film.title}
           </h3>
           <p className="text-muted text-base md:text-lg">
-            {film.credit}
+            {pickLang(lang, film.credit, film.creditEn)}
           </p>
         </div>
 
@@ -564,7 +713,7 @@ function ShortFilmExhibit({ film }) {
         {film.note && (
           <div className="max-w-3xl mx-auto">
             <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5">
-              {film.note}
+              {pickLang(lang, film.note, film.noteEn)}
             </p>
           </div>
         )}
@@ -578,6 +727,8 @@ function ShortFilmExhibit({ film }) {
 // ════════════════════════════════════════════════════════════════════════
 
 function DocumentaryExhibit() {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <article className="max-w-content mx-auto px-5 py-12 md:py-16">
       <motion.div
@@ -589,21 +740,21 @@ function DocumentaryExhibit() {
         {/* Plate caption above */}
         <div className="max-w-3xl mx-auto mb-8 md:mb-10">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            Série documentaire
+            {c.docSeries}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-3">
             {ferronDocumentary.title}
           </h3>
           <p className="text-muted text-base md:text-lg mb-4">
-            {ferronDocumentary.credit}
+            {pickLang(lang, ferronDocumentary.credit, ferronDocumentary.creditEn)}
           </p>
           <p className="text-ink/80 text-base md:text-lg leading-relaxed mb-5">
-            {ferronDocumentary.synopsisShort}
+            {pickLang(lang, ferronDocumentary.synopsisShort, ferronDocumentary.synopsisShortEn)}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-semibold text-ink">
               <span className="w-1.5 h-1.5 rounded-full bg-haiti-red" aria-hidden="true"></span>
-              {ferronDocumentary.availability}
+              {pickLang(lang, ferronDocumentary.availability, ferronDocumentary.availabilityEn)}
             </span>
             <a
               href={ferronDocumentary.watch.url}
@@ -611,7 +762,7 @@ function DocumentaryExhibit() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-haiti-blue px-5 py-2.5 text-white text-sm font-semibold hover:bg-haiti-blue-dark transition-colors"
             >
-              {ferronDocumentary.watch.label} →
+              {pickLang(lang, ferronDocumentary.watch.label, ferronDocumentary.watch.labelEn)} →
             </a>
           </div>
         </div>
@@ -631,7 +782,7 @@ function DocumentaryExhibit() {
                   src={ferronDocumentary.trailer}
                   type={ferronDocumentary.trailerType || "video/mp4"}
                 />
-                Votre navigateur ne prend pas en charge la lecture vidéo.
+                {c.videoUnsupported}
               </video>
             </div>
           </div>
@@ -640,29 +791,29 @@ function DocumentaryExhibit() {
         {/* Wall text — curator describes the work */}
         <div className="max-w-3xl mx-auto">
           <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5 mb-8">
-            {ferronDocumentary.synopsisLong}
+            {pickLang(lang, ferronDocumentary.synopsisLong, ferronDocumentary.synopsisLongEn)}
           </p>
 
           <blockquote className="font-display text-2xl md:text-3xl text-ink leading-snug italic mb-3">
-            «&nbsp;{ferronDocumentary.quote}&nbsp;»
+            «&nbsp;{pickLang(lang, ferronDocumentary.quote, ferronDocumentary.quoteEn)}&nbsp;»
           </blockquote>
           <p className="text-muted text-sm mb-10">
-            — Noémie Ferron, productrice
+            {c.docProducer}
           </p>
 
           {/* Featured + funding — quiet metadata block */}
           <div className="space-y-4 mb-10 text-sm">
             <div>
               <p className="text-muted uppercase tracking-wider text-[10px] font-bold mb-1.5">
-                Avec la participation de
+                {c.docFeaturing}
               </p>
               <p className="text-ink/80">
-                {ferronDocumentary.featured.join(" · ")} <span className="text-muted">et d'autres</span>
+                {ferronDocumentary.featured.join(" · ")} <span className="text-muted">{c.docAndOthers}</span>
               </p>
             </div>
             <div>
               <p className="text-muted uppercase tracking-wider text-[10px] font-bold mb-1.5">
-                Avec le soutien de
+                {c.docSupport}
               </p>
               <p className="text-ink/80">{ferronDocumentary.funding.join(" · ")}</p>
             </div>
@@ -674,7 +825,7 @@ function DocumentaryExhibit() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-haiti-blue font-semibold hover:text-haiti-red transition-colors text-sm"
           >
-            {ferronDocumentary.source.label} →
+            {pickLang(lang, ferronDocumentary.source.label, ferronDocumentary.source.labelEn)} →
           </a>
         </div>
       </motion.div>
@@ -687,6 +838,8 @@ function DocumentaryExhibit() {
 // ════════════════════════════════════════════════════════════════════════
 
 function LyneLucienExhibit() {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <div className="bg-bg">
       {/* Artist intro */}
@@ -699,16 +852,16 @@ function LyneLucienExhibit() {
           className="max-w-3xl mx-auto"
         >
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-4">
-            L'artiste · Désignée par FOX Soccer · Ambassadrice officielle d'Haïti · Mondial FIFA 2026
+            {c.lyneEyebrow}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-6">
             {lyneLucien.artist}
           </h3>
           <blockquote className="font-display text-xl md:text-2xl text-ink/85 leading-snug italic mb-8 border-l-2 border-haiti-red pl-5">
-            «&nbsp;{lyneLucien.quote}&nbsp;»
+            «&nbsp;{pickLang(lang, lyneLucien.quote, lyneLucien.quoteEn)}&nbsp;»
           </blockquote>
           <p className="text-ink/80 text-base md:text-lg leading-relaxed mb-8">
-            {lyneLucien.bio}
+            {pickLang(lang, lyneLucien.bio, lyneLucien.bioEn)}
           </p>
           <div className="flex flex-wrap gap-3 text-sm">
             <a
@@ -743,6 +896,8 @@ function LyneLucienExhibit() {
 }
 
 function ArtworkExhibit({ work }) {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <article className="max-w-content mx-auto px-5">
       <motion.figure
@@ -754,23 +909,23 @@ function ArtworkExhibit({ work }) {
         <div className="max-w-3xl mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md">
           <ImagePlaceholder
             src={work.image}
-            label={work.imageLabel}
+            label={pickLang(lang, work.imageLabel, work.imageLabelEn)}
             aspect="4/5"
             rounded={false}
           />
         </div>
         <figcaption className="max-w-2xl mx-auto mt-6 md:mt-8 text-center">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            Pour {work.publication}
+            {c.artworkFor} {work.publication}
           </p>
           <h4 className="font-display text-xl md:text-2xl text-ink mb-4 leading-tight">
-            {work.role}
+            {pickLang(lang, work.role, work.roleEn)}
           </h4>
           <p className="text-ink/75 text-base leading-relaxed mb-3">
-            {work.caption}
+            {pickLang(lang, work.caption, work.captionEn)}
           </p>
           <p className="text-xs text-muted italic">
-            Œuvre signée {lyneLucien.artist} · Diffusée avec crédit.
+            {c.artworkCredit1} {lyneLucien.artist} {c.artworkCredit2}
           </p>
         </figcaption>
       </motion.figure>
@@ -801,11 +956,15 @@ function CreativeTributesExhibit({ chapter = "objets" }) {
 }
 
 function TributeExhibit({ work }) {
-  // Bilingual statement support: show a Kreyòl/Français toggle only when both
-  // are present. Single-statement entries (description) render unchanged.
+  const { lang } = useT();
+  const c = COPY[lang];
+  // Bilingual statement support: show a Kreyòl + translation toggle only when
+  // both are present. The translation follows the page language (English when
+  // available, else French). Single-statement entries render unchanged.
   const hasToggle = Boolean(work.statement_kr && work.statement_fr);
-  const [lang, setLang] = useState("kr"); // default Kreyòl
-  const statement = hasToggle ? (lang === "kr" ? work.statement_kr : work.statement_fr) : null;
+  const [stmtLang, setStmtLang] = useState("kr"); // default Kreyòl
+  const translated = lang === "en" ? work.statement_en ?? work.statement_fr : work.statement_fr;
+  const statement = hasToggle ? (stmtLang === "kr" ? work.statement_kr : translated) : null;
   const pill = (active) =>
     "px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors " +
     (active ? "bg-ink text-bg" : "text-ink hover:bg-bg");
@@ -826,7 +985,7 @@ function TributeExhibit({ work }) {
         >
           <ImagePlaceholder
             src={work.image}
-            label={work.imageLabel}
+            label={pickLang(lang, work.imageLabel, work.imageLabelEn)}
             aspect="3/4"
             fit="contain"
             rounded={false}
@@ -834,14 +993,14 @@ function TributeExhibit({ work }) {
         </div>
         <figcaption className="max-w-2xl mx-auto mt-6 md:mt-8 text-center">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            {work.medium}
+            {pickLang(lang, work.medium, work.mediumEn)}
           </p>
           <h4 className="font-display text-xl md:text-2xl text-ink mb-4 leading-tight">
-            {work.title}
+            {pickLang(lang, work.title, work.titleEn)}
           </h4>
           {work.caption && (
             <p className="text-ink/70 text-base italic leading-relaxed mb-4">
-              {work.caption}
+              {pickLang(lang, work.caption, work.captionEn)}
             </p>
           )}
 
@@ -849,14 +1008,14 @@ function TributeExhibit({ work }) {
             <>
               <div
                 role="group"
-                aria-label="Langue du texte"
+                aria-label={c.tributeLangAria}
                 className="inline-flex items-center gap-1 mb-5 rounded-full border border-line p-1"
               >
-                <button type="button" aria-pressed={lang === "kr"} onClick={() => setLang("kr")} className={pill(lang === "kr")}>
+                <button type="button" aria-pressed={stmtLang === "kr"} onClick={() => setStmtLang("kr")} className={pill(stmtLang === "kr")}>
                   Kreyòl
                 </button>
-                <button type="button" aria-pressed={lang === "fr"} onClick={() => setLang("fr")} className={pill(lang === "fr")}>
-                  Français
+                <button type="button" aria-pressed={stmtLang === "fr"} onClick={() => setStmtLang("fr")} className={pill(stmtLang === "fr")}>
+                  {c.toggleSecond}
                 </button>
               </div>
               <div className="text-left space-y-3 mb-3">
@@ -876,19 +1035,19 @@ function TributeExhibit({ work }) {
             </>
           ) : (
             <p className="text-ink/75 text-base leading-relaxed mb-3">
-              {work.description}
+              {pickLang(lang, work.description, work.descriptionEn)}
             </p>
           )}
 
           {/* Pull-quote · highlighted, set apart from the body */}
           {work.quote && (
             <blockquote className="mx-auto my-6 max-w-xl border-y border-line py-5 font-display text-xl md:text-2xl italic leading-snug text-ink">
-              «&nbsp;{work.quote}&nbsp;»
+              «&nbsp;{pickLang(lang, work.quote, work.quoteEn)}&nbsp;»
             </blockquote>
           )}
 
           <p className="text-xs text-muted italic">
-            {work.credit}
+            {pickLang(lang, work.credit, work.creditEn)}
             {work.creditUrl && (
               <>
                 {work.creditInline ? " " : " · "}
@@ -972,6 +1131,8 @@ function DownloadCard({ item }) {
 // ════════════════════════════════════════════════════════════════════════
 
 function Colophon() {
+  const { lang } = useT();
+  const c = COPY[lang];
   return (
     <section className="border-t border-line bg-ink text-bg">
       <div className="max-w-content mx-auto px-5 py-20 md:py-28">
@@ -983,14 +1144,13 @@ function Colophon() {
           className="max-w-3xl"
         >
           <h2 className="font-display text-3xl md:text-5xl leading-[1.05] mb-7">
-            Une nation qui supporte.
+            {c.colophonTitle}
           </h2>
           <p className="text-bg/80 text-base md:text-lg leading-relaxed mb-10">
-            Cette exposition rassemble une partie de la réponse créative qu'a suscitée la qualification d'Haïti pour la Coupe du Monde 2026 — chansons, documentaires, illustrations.
+            {c.colophonBody}
           </p>
           <p className="text-bg/60 text-sm leading-relaxed">
-            Curation : Chokarella Media · Pour signaler une œuvre à ajouter,
-            écrire à{" "}
+            {c.colophonCreditPrefix}{" "}
             <a
               href="mailto:contact@grenadiers2026.com"
               className="text-bg hover:text-haiti-red transition-colors underline underline-offset-4"
