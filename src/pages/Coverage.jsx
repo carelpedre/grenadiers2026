@@ -29,29 +29,29 @@ const COPY = {
     heroTitle1: "Comment Haïti",
     heroTitle2: "répond.",
     heroBody:
-      "Cinquante-deux ans après Munich, le pays ne reste pas spectateur. Pendant que les Grenadiers préparent le Mondial 2026, une vague de créateurs haïtiens — musiciens, réalisateurs, illustratrices — répond. Chansons, documentaires, œuvres. La sélection a allumé quelque chose. Voici ce qu'elle a déclenché.",
+      "Cinquante-deux ans après Munich, le pays ne reste pas spectateur. Pendant que les Grenadiers préparent le Mondial 2026, une vague de créateurs haïtiens (musiciens, réalisateurs, illustratrices) répond. Chansons, documentaires, œuvres. La sélection a allumé quelque chose. Voici ce qu'elle a déclenché.",
     heroCuration: "Curation : Chokarella Media · Mai 2026",
     navAria: "Chapitres de l'exposition",
     chapters: {
       musique: {
         label: "Clips musicaux",
-        wall: "Quand une sélection retourne en Coupe du Monde après cinquante-deux ans d'absence, ce n'est pas seulement le terrain qui répond. Ce sont les studios. De Port-au-Prince à Brooklyn, de Montréal à Paris, de Bogotá même, les artistes haïtiens — Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, toutes générations confondues — sortent les morceaux qui accompagnent la campagne. Voici {n} vidéos, dans l'ordre où Chokarella Media vous invite à les découvrir.",
+        wall: "Quand une sélection retourne en Coupe du Monde après cinquante-deux ans d'absence, ce n'est pas seulement le terrain qui répond. Ce sont les studios. De Port-au-Prince à Brooklyn, de Montréal à Paris, de Bogotá même, les artistes haïtiens (Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, toutes générations confondues) sortent les morceaux qui accompagnent la campagne. Voici {n} vidéos, dans l'ordre où Chokarella Media vous invite à les découvrir.",
       },
       playlists: {
         label: "Playlists",
-        wall: "Au-delà des morceaux pris un par un, Chokarella Media a réuni la campagne dans une seule playlist — la bande-son complète de la route vers le Mondial, à écouter d'un seul tenant, sur Spotify comme sur Apple Music.",
+        wall: "Au-delà des morceaux pris un par un, Chokarella Media a réuni la campagne dans une seule playlist : la bande-son complète de la route vers le Mondial, à écouter d'un seul tenant, sur Spotify comme sur Apple Music.",
       },
       films: {
         label: "Films",
-        wall: "Pendant que les chansons sortent, un autre travail commence : celui de la pellicule. Loin des manchettes habituelles sur Haïti, des réalisateurs s'attachent à raconter le pays par le sport — avec nuance, avec patience, avec une caméra qui prend le temps de regarder.",
+        wall: "Pendant que les chansons sortent, un autre travail commence : celui de la pellicule. Loin des manchettes habituelles sur Haïti, des réalisateurs s'attachent à raconter le pays par le sport, avec nuance, avec patience, avec une caméra qui prend le temps de regarder.",
       },
       art: {
         label: "Art",
-        wall: "Et puis l'image fixe prend la parole. Sur les couvertures de FOX Soccer et de Sports Illustrated, Haïti apparaît cet été — non pas illustrée par un studio de Los Angeles ou de New York, mais par une main haïtienne. Lyne Lucien, illustratrice formée à Bowdoin College, basée à Brooklyn, a été désignée par FOX Soccer ambassadrice artistique officielle d'Haïti pour le Mondial 2026.",
+        wall: "Et puis l'image fixe prend la parole. Sur les couvertures de FOX Soccer et de Sports Illustrated, Haïti apparaît cet été, non pas illustrée par un studio de Los Angeles ou de New York, mais par une main haïtienne. Lyne Lucien, illustratrice formée à Bowdoin College, basée à Brooklyn, a été désignée par FOX Soccer ambassadrice artistique officielle d'Haïti pour le Mondial 2026.",
       },
       objets: {
         label: "Objets & emblèmes",
-        wall: "Au-delà des chansons, des films et des illustrations, la qualification se matérialise aussi en objets et en emblèmes — ceux que l'on brandit dans les tribunes comme ceux que l'État fait entrer dans l'Histoire. D'un personnage costumé né dans la ferveur des supporters à un timbre commémoratif officiel, voici les hommages tangibles à la route des Grenadiers vers le Mondial 2026.",
+        wall: "Au-delà des chansons, des films et des illustrations, la qualification se matérialise aussi en objets et en emblèmes : ceux que l'on brandit dans les tribunes comme ceux que l'État fait entrer dans l'Histoire. D'un personnage costumé né dans la ferveur des supporters à un timbre commémoratif officiel, voici les hommages tangibles à la route des Grenadiers vers le Mondial 2026.",
       },
       poesie: {
         label: "Poésie",
@@ -68,7 +68,7 @@ const COPY = {
     playlistCredit: "Curation :",
     playlistAvail: " · Disponible sur Spotify et Apple Music.",
     docSeries: "Série documentaire",
-    docProducer: "— Noémie Ferron, productrice",
+    docProducer: "Noémie Ferron, productrice",
     docFeaturing: "Avec la participation de",
     docAndOthers: "et d'autres",
     docSupport: "Avec le soutien de",
@@ -81,7 +81,7 @@ const COPY = {
     toggleSecond: "Français",
     colophonTitle: "Une nation qui supporte.",
     colophonBody:
-      "Cette exposition rassemble une partie de la réponse créative qu'a suscitée la qualification d'Haïti pour la Coupe du Monde 2026 — chansons, documentaires, illustrations.",
+      "Cette exposition rassemble une partie de la réponse créative qu'a suscitée la qualification d'Haïti pour la Coupe du Monde 2026 : chansons, documentaires, illustrations.",
     colophonCreditPrefix:
       "Curation : Chokarella Media · Pour signaler une œuvre à ajouter, écrire à",
     chokEyebrow: "Par Chokarella Media",
@@ -131,7 +131,7 @@ const COPY = {
     playlistCredit: "Curated by",
     playlistAvail: " · Available on Spotify and Apple Music.",
     docSeries: "Documentary series",
-    docProducer: "— Noémie Ferron, producer",
+    docProducer: "Noémie Ferron, producer",
     docFeaturing: "Featuring",
     docAndOthers: "and others",
     docSupport: "With support from",
@@ -651,7 +651,7 @@ function PlaylistExhibit() {
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              title={`${playlist.title} — Spotify`}
+              title={`${playlist.title} · Spotify`}
             />
           </div>
           <div className="rounded-lg overflow-hidden border border-line bg-white">
@@ -663,7 +663,7 @@ function PlaylistExhibit() {
               allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
               sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
               loading="lazy"
-              title={`${playlist.title} — Apple Music`}
+              title={`${playlist.title} · Apple Music`}
               style={{ background: "transparent" }}
             />
           </div>
