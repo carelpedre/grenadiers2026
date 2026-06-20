@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useT } from "../lib/i18n";
 
 export default function CountdownClock({ target }) {
+  const { t } = useT();
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function CountdownClock({ target }) {
 
   return (
     <div className="flex gap-3">
-      <TimeBlock value={days} label="jours" />
+      <TimeBlock value={days} label={t("live.cdDays")} />
       <TimeBlock value={hours} label="h" />
       <TimeBlock value={minutes} label="min" />
       <TimeBlock value={seconds} label="sec" pulse />

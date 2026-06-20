@@ -6,31 +6,31 @@ import { useT } from "../lib/i18n";
 
 // Weather code descriptions (subset of WMO codes)
 const weatherCodes = {
-  0: { label: "Ciel dégagé", icon: "☀️" },
-  1: { label: "Peu nuageux", icon: "🌤️" },
-  2: { label: "Partiellement nuageux", icon: "⛅" },
-  3: { label: "Couvert", icon: "☁️" },
-  45: { label: "Brouillard", icon: "🌫️" },
-  48: { label: "Brouillard", icon: "🌫️" },
-  51: { label: "Bruine", icon: "🌦️" },
-  53: { label: "Bruine", icon: "🌦️" },
-  55: { label: "Bruine", icon: "🌦️" },
-  61: { label: "Pluie faible", icon: "🌧️" },
-  63: { label: "Pluie", icon: "🌧️" },
-  65: { label: "Forte pluie", icon: "🌧️" },
-  71: { label: "Faible chute de neige", icon: "🌨️" },
-  73: { label: "Neige", icon: "🌨️" },
-  75: { label: "Fortes chutes de neige", icon: "🌨️" },
-  80: { label: "Averses", icon: "🌧️" },
-  81: { label: "Averses", icon: "🌧️" },
-  82: { label: "Fortes averses", icon: "⛈️" },
-  95: { label: "Orage", icon: "⛈️" },
-  96: { label: "Orage", icon: "⛈️" },
-  99: { label: "Orage", icon: "⛈️" },
+  0: { label: "Ciel dégagé", en: "Clear sky", icon: "☀️" },
+  1: { label: "Peu nuageux", en: "Mainly clear", icon: "🌤️" },
+  2: { label: "Partiellement nuageux", en: "Partly cloudy", icon: "⛅" },
+  3: { label: "Couvert", en: "Overcast", icon: "☁️" },
+  45: { label: "Brouillard", en: "Fog", icon: "🌫️" },
+  48: { label: "Brouillard", en: "Fog", icon: "🌫️" },
+  51: { label: "Bruine", en: "Drizzle", icon: "🌦️" },
+  53: { label: "Bruine", en: "Drizzle", icon: "🌦️" },
+  55: { label: "Bruine", en: "Drizzle", icon: "🌦️" },
+  61: { label: "Pluie faible", en: "Light rain", icon: "🌧️" },
+  63: { label: "Pluie", en: "Rain", icon: "🌧️" },
+  65: { label: "Forte pluie", en: "Heavy rain", icon: "🌧️" },
+  71: { label: "Faible chute de neige", en: "Light snow", icon: "🌨️" },
+  73: { label: "Neige", en: "Snow", icon: "🌨️" },
+  75: { label: "Fortes chutes de neige", en: "Heavy snow", icon: "🌨️" },
+  80: { label: "Averses", en: "Showers", icon: "🌧️" },
+  81: { label: "Averses", en: "Showers", icon: "🌧️" },
+  82: { label: "Fortes averses", en: "Heavy showers", icon: "⛈️" },
+  95: { label: "Orage", en: "Thunderstorm", icon: "⛈️" },
+  96: { label: "Orage", en: "Thunderstorm", icon: "⛈️" },
+  99: { label: "Orage", en: "Thunderstorm", icon: "⛈️" },
 };
 
 export default function StadiumWeather({ lat, lng, city, compact = false }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(false);
 
@@ -62,7 +62,8 @@ export default function StadiumWeather({ lat, lng, city, compact = false }) {
     );
   }
 
-  const condition = weatherCodes[weather.code] || { label: "—", icon: "🌡️" };
+  const cond = weatherCodes[weather.code] || { label: "—", en: "—", icon: "🌡️" };
+  const condition = { icon: cond.icon, label: lang === "en" ? cond.en : cond.label };
 
   if (compact) {
     return (

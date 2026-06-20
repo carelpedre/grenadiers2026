@@ -442,7 +442,10 @@ function MatchCard({ match, live }) {
         <span onClick={(e) => e.preventDefault()}>
           <MatchReminder match={{
             slug: home.country === "haiti" ? away.country : home.country,
-            opponent: { name: home.country === "haiti" ? away.name : home.name },
+            opponent: {
+              name: home.country === "haiti" ? away.name : home.name,
+              country: home.country === "haiti" ? away.country : home.country,
+            },
             matchNumber,
             kickoff: match.kickoff,
             stadium,

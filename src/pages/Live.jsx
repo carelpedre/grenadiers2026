@@ -13,8 +13,54 @@ import { useLiveFixtures } from "../lib/useLiveFixtures";
 import { fetchFixtureByOpponent, fetchMatchPlayers, getOpponentScouting, isLive } from "../lib/fixturesApi";
 import ScoutingSection from "../components/ScoutingSection";
 import PlayerMatchStatsCard, { PlayerStatsContext, PlayerName } from "../components/PlayerMatchStatsCard";
+import { useT } from "../lib/i18n";
+import { teamName } from "../lib/teamNames";
 
 const HAITI_TEAM_ID = 2386;
+
+// Libellé du groupe selon la langue ("Groupe C" → "Group C").
+function groupLabel(group, t) {
+  return group === "Groupe C" ? t("matches.eyebrow") : group;
+}
+
+// Ville / surface d'un stade selon la langue (siblings *En quand ils existent).
+const stadiumCity = (s, lang) => (lang === "en" && s?.cityEn ? s.cityEn : s?.city);
+const stadiumSurface = (s, lang) => (lang === "en" && s?.surfaceEn ? s.surfaceEn : s?.surface);
+
+// Ligne date · heure de l'en-tête : en anglais dérivée de l'ISO kickoff
+// (le stade est déjà affiché sous l'en-tête) ; en français le libellé stocké.
+function headerDateLine(match, lang) {
+  if (lang === "en" && match?.kickoff) {
+    const d = new Date(match.kickoff);
+    const date = d.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "America/New_York",
+    });
+    const time = d.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/New_York",
+    });
+    return `${date} · ${time} ET`;
+  }
+  return `${match.dateLabel} · ${match.timeLabel}`;
+}
+
+// Date courte d'une carte « autres matchs » : EN dérivée de l'ISO, FR le libellé.
+function shortMatchDate(m, lang) {
+  if (lang === "en" && m?.date) {
+    return new Date(m.date).toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      timeZone: "America/New_York",
+    });
+  }
+  return m.dateLabel.replace(" 2026", "");
+}
 
 // ╔═══════════════════════════════════════════════════════════════════════╗
 // ║  LIVE MATCH CENTER · /live/:slug                                       ║
@@ -36,7 +82,9 @@ export default function Live() {
 }
 
 function LiveMatchView({ match }) {
+  const { t, lang } = useT();
   const { status, haitiScore, opponentScore, minute, opponent, group, dateLabel, timeLabel, stadium, timeline, kickoff, broadcast } = match;
+  const oppLabel = teamName(opponent.country, lang);
 
   // Auto-refresh once a minute so people can leave the page open
   const [, setTick] = useState(0);
@@ -182,10 +230,10 @@ function LiveMatchView({ match }) {
 
   // Tabs for the rich match data (only the sections that have data).
   const detailTabs = [];
-  if (apiEvents.length > 0) detailTabs.push({ id: "chronologie", label: "Chronologie" });
-  if (lineups.length === 2) detailTabs.push({ id: "compositions", label: "Compositions" });
-  if (stats.length === 2) detailTabs.push({ id: "statistiques", label: "Statistiques" });
-  if (hasPlayerStats) detailTabs.push({ id: "joueurs", label: "Joueurs" });
+  if (apiEvents.length > 0) detailTabs.push({ id: "chronologie", label: t("live.tabTimeline") });
+  if (lineups.length === 2) detailTabs.push({ id: "compositions", label: t("live.tabLineups") });
+  if (stats.length === 2) detailTabs.push({ id: "statistiques", label: t("live.tabStats") });
+  if (hasPlayerStats) detailTabs.push({ id: "joueurs", label: t("live.tabPlayers") });
   const [detailTab, setDetailTab] = useState("chronologie");
   const activeDetailTab = detailTabs.some((t) => t.id === detailTab)
     ? detailTab
@@ -217,25 +265,25 @@ function LiveMatchView({ match }) {
         <div className="relative max-w-content mx-auto px-5 py-8 md:py-12">
           <div className="flex items-center justify-between mb-7">
             <Link to="/matches" className="font-cond text-xs uppercase tracking-[0.18em] font-semibold text-bg/70 hover:text-bg transition-colors">
-              ← Tous les matchs
+              {t("live.backToMatches")}
             </Link>
             <StatusBadge status={effStatus} minute={effMinute} />
           </div>
 
           {/* Competition labels */}
           <p className="font-cond text-gold text-xs md:text-sm uppercase tracking-[0.28em] font-semibold">
-            Coupe du Monde FIFA 2026
+            {t("matches.wcFifa2026")}
           </p>
           <div className="mt-2 mb-7 flex items-center gap-3">
             <span className="flag-rule w-10 rounded-full" />
             <p className="font-cond text-bg/70 text-xs uppercase tracking-[0.2em] font-medium">
-              {group}{match.matchNumber != null ? ` · Match ${match.matchNumber}` : ""}
+              {groupLabel(group, t)}{match.matchNumber != null ? ` · ${t("matches.match")} ${match.matchNumber}` : ""}
             </p>
           </div>
 
           {/* Score line · teams left/right, score centered (mobile-friendly) */}
           <div className="grid grid-cols-3 items-center gap-2 md:gap-6 mb-3">
-            <TeamHead name="Haïti" country="haiti" logo={live?.haitiLogo} />
+            <TeamHead name={teamName("haiti", lang)} country="haiti" logo={live?.haitiLogo} />
             <div className="text-center">
               {effStatus === "scheduled" ? (
                 <p className="font-block text-3xl md:text-5xl text-bg/40 leading-none">VS</p>
@@ -247,7 +295,7 @@ function LiveMatchView({ match }) {
                 </p>
               )}
             </div>
-            <TeamHead name={opponent.name} country={opponent.country} logo={live?.oppLogo} />
+            <TeamHead name={oppLabel} country={opponent.country} logo={live?.oppLogo} />
           </div>
 
           {scorers.length > 0 && (
@@ -255,7 +303,7 @@ function LiveMatchView({ match }) {
               <div className="text-right space-y-0.5">
                 {haitiScorers.map((s, i) => (
                   <p key={i}>
-                    {scorerLine(s)} <span className="text-gold">⚽</span>
+                    {scorerLine(s, lang)} <span className="text-gold">⚽</span>
                   </p>
                 ))}
               </div>
@@ -263,7 +311,7 @@ function LiveMatchView({ match }) {
               <div className="text-left space-y-0.5">
                 {oppScorers.map((s, i) => (
                   <p key={i}>
-                    <span className="text-gold">⚽</span> {scorerLine(s)}
+                    <span className="text-gold">⚽</span> {scorerLine(s, lang)}
                   </p>
                 ))}
               </div>
@@ -271,13 +319,13 @@ function LiveMatchView({ match }) {
           )}
 
           <p className="mt-6 text-center font-cond text-bg/55 text-xs md:text-sm uppercase tracking-[0.18em]">
-            {dateLabel} · {timeLabel}
+            {headerDateLine(match, lang)}
           </p>
 
           {effStatus === "scheduled" && (
             <div className="mt-7 pt-6 border-t border-bg/10">
               <p className="font-cond text-gold/90 text-xs uppercase tracking-[0.22em] font-semibold mb-3 text-center">
-                Coup d'envoi dans
+                {t("live.kickoffIn")}
               </p>
               <div className="flex justify-center">
                 <CountdownClock target={kickoff} />
@@ -287,13 +335,13 @@ function LiveMatchView({ match }) {
 
           {match.access && (
             <p className="text-center text-bg/50 text-sm mt-4">
-              <span className="font-cond uppercase tracking-wider text-bg/40 text-xs">Accès :</span> {match.access}
+              <span className="font-cond uppercase tracking-wider text-bg/40 text-xs">{t("live.accessLabel")}</span> {lang === "en" && match.accessEn ? match.accessEn : match.access}
             </p>
           )}
 
           {broadcast && (
             <p className="text-center text-bg/50 text-sm mt-6">
-              <span className="font-cond uppercase tracking-wider text-bg/40 text-xs">Diffusion :</span> {broadcast}
+              <span className="font-cond uppercase tracking-wider text-bg/40 text-xs">{t("live.broadcastLabel")}</span> {broadcast}
             </p>
           )}
 
@@ -303,7 +351,7 @@ function LiveMatchView({ match }) {
                 to={match.journal}
                 className="font-cond text-gold font-semibold uppercase tracking-[0.18em] text-xs hover:text-bg transition-colors"
               >
-                Lire le résumé du match →
+                {t("live.readRecap")}
               </Link>
             </p>
           )}
@@ -313,19 +361,19 @@ function LiveMatchView({ match }) {
       {/* Stade strip (moved up from the sidebar) */}
       <div className="border-b border-line bg-white">
         <div className="max-w-content mx-auto px-5 py-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-          <span className="text-haiti-red text-[11px] uppercase tracking-wider font-bold">Stade</span>
+          <span className="text-haiti-red text-[11px] uppercase tracking-wider font-bold">{t("matches.venue")}</span>
           <span className="text-ink font-semibold">{stadium.fifaName}</span>
-          {stadium.city && <span className="text-muted">· {stadium.city}</span>}
+          {stadium.city && <span className="text-muted">· {stadiumCity(stadium, lang)}</span>}
           {stadium.capacity && (
-            <span className="text-muted">· {stadium.capacity.toLocaleString()} places</span>
+            <span className="text-muted">· {stadium.capacity.toLocaleString()} {t("live.seats")}</span>
           )}
-          {stadium.surface && <span className="text-muted">· {stadium.surface}</span>}
+          {stadium.surface && <span className="text-muted">· {stadiumSurface(stadium, lang)}</span>}
           {stadium.lat && stadium.lng && (
             <span className="md:ml-auto">
               <StadiumWeather
                 lat={stadium.lat}
                 lng={stadium.lng}
-                city={stadium.city.split(",")[0]}
+                city={stadiumCity(stadium, lang).split(",")[0]}
                 compact
               />
             </span>
@@ -360,48 +408,59 @@ function LiveMatchView({ match }) {
                 <Lineups
                   haiti={haitiLineup}
                   opp={oppLineup}
-                  oppName={opponent.name}
+                  oppName={oppLabel}
                   ratingById={ratingById}
                   pstatById={pstatById}
                   subMinById={subMinById}
                 />
               )}
               {activeDetailTab === "statistiques" && (
-                <StatBars haiti={haitiStats} opp={oppStats} oppName={opponent.name} />
+                <StatBars haiti={haitiStats} opp={oppStats} oppName={oppLabel} />
               )}
               {activeDetailTab === "joueurs" && (
-                <PlayerStats haiti={haitiPlayers} opp={oppPlayers} oppName={opponent.name} />
+                <PlayerStats haiti={haitiPlayers} opp={oppPlayers} oppName={oppLabel} />
               )}
             </>
           ) : (
             <>
               <MatchSectionHead>
-                {effStatus === "scheduled" ? "Avant le match" : "Mises à jour en direct"}
+                {effStatus === "scheduled" ? t("live.preMatch") : t("live.liveUpdates")}
               </MatchSectionHead>
               {effStatus === "scheduled" ? (
                 <div className="space-y-8">
                   <p className="text-ink/80 leading-relaxed">
-                    Dès le coup d'envoi, cette page se remplit automatiquement : la{" "}
-                    <strong>chronologie</strong> des buts et cartons, les{" "}
-                    <strong>compositions</strong> avec les notes des joueurs, les{" "}
-                    <strong>statistiques</strong> comparées et les{" "}
-                    <strong>notes individuelles</strong>. Inutile de rafraîchir, tout
-                    apparaît en direct.
+                    {lang === "en" ? (
+                      <>
+                        As soon as the match kicks off, this page fills in automatically: the{" "}
+                        <strong>timeline</strong> of goals and cards, the{" "}
+                        <strong>lineups</strong> with player ratings, the comparative{" "}
+                        <strong>stats</strong> and the{" "}
+                        <strong>individual ratings</strong>. No need to refresh, everything
+                        appears live.
+                      </>
+                    ) : (
+                      <>
+                        Dès le coup d'envoi, cette page se remplit automatiquement : la{" "}
+                        <strong>chronologie</strong> des buts et cartons, les{" "}
+                        <strong>compositions</strong> avec les notes des joueurs, les{" "}
+                        <strong>statistiques</strong> comparées et les{" "}
+                        <strong>notes individuelles</strong>. Inutile de rafraîchir, tout
+                        apparaît en direct.
+                      </>
+                    )}
                   </p>
                   {group === "Groupe C" && (
                     <GroupCTable
                       standings={standings}
-                      title="Classement · Groupe C"
-                      subtitle="Avant le match · actualisé automatiquement"
+                      title={t("matches.tabStandings")}
+                      subtitle={t("matches.standingsPrematch")}
                       footnote={false}
                     />
                   )}
                 </div>
               ) : timeline.length === 0 ? (
                 <div className="bg-bg border border-line rounded-lg p-6 text-muted text-center">
-                  {effStatus === "ft"
-                    ? "Match terminé. Le score final est affiché ci-dessus."
-                    : "Le match a commencé. Le score est mis à jour automatiquement ci-dessus."}
+                  {effStatus === "ft" ? t("live.endedMsg") : t("live.startedMsg")}
                 </div>
               ) : (
                 <motion.ol
@@ -425,7 +484,7 @@ function LiveMatchView({ match }) {
         {/* Recent form */}
         {recentForm.length > 0 && (
           <section>
-            <MatchSectionHead>Forme récente · Haïti</MatchSectionHead>
+            <MatchSectionHead>{t("matches.recentForm")} · {teamName("haiti", lang)}</MatchSectionHead>
             <div className="flex flex-wrap items-stretch gap-3">
               {recentForm.map((f, i) => (
                 <FormChip key={i} fixture={f} />
@@ -436,7 +495,7 @@ function LiveMatchView({ match }) {
 
         {/* Other matches */}
         <section>
-          <MatchSectionHead>Autres matchs</MatchSectionHead>
+          <MatchSectionHead>{t("live.otherMatches")}</MatchSectionHead>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {["scotland", "brazil", "morocco"]
               .filter((s) => s !== match.slug)
@@ -450,8 +509,8 @@ function LiveMatchView({ match }) {
                   >
                     <Flag country={s} size="lg" />
                     <div className="min-w-0">
-                      <p className="font-display text-base md:text-lg truncate">Haïti · {m.opponent.name}</p>
-                      <p className="text-muted text-sm">{m.dateLabel.replace(" 2026", "")}</p>
+                      <p className="font-display text-base md:text-lg truncate">{teamName("haiti", lang)} · {teamName(m.opponent.country, lang)}</p>
+                      <p className="text-muted text-sm">{shortMatchDate(m, lang)}</p>
                     </div>
                   </Link>
                 );
@@ -470,6 +529,7 @@ function LiveMatchView({ match }) {
 // ─── Sub-components ───────────────────────────────────────────────────
 
 function StatusBadge({ status, minute }) {
+  const { t } = useT();
   if (status === "live") {
     return (
       <span className="inline-flex items-center gap-2 px-3 py-1 bg-haiti-red text-bg text-xs font-bold uppercase tracking-wider rounded-full">
@@ -478,17 +538,17 @@ function StatusBadge({ status, minute }) {
           animate={{ opacity: [1, 0.3, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
-        En direct {minute ? `· ${minute}'` : ""}
+        {t("matches.statusLive")} {minute ? `· ${minute}'` : ""}
       </span>
     );
   }
   if (status === "ht") {
-    return <span className="inline-flex items-center gap-2 px-3 py-1 bg-gold text-ink text-xs font-bold uppercase tracking-wider rounded-full">Mi-temps</span>;
+    return <span className="inline-flex items-center gap-2 px-3 py-1 bg-gold text-ink text-xs font-bold uppercase tracking-wider rounded-full">{t("matches.statusHalftime")}</span>;
   }
   if (status === "ft") {
-    return <span className="inline-flex items-center gap-2 px-3 py-1 bg-ink/60 text-bg text-xs font-bold uppercase tracking-wider rounded-full">Fin de match</span>;
+    return <span className="inline-flex items-center gap-2 px-3 py-1 bg-ink/60 text-bg text-xs font-bold uppercase tracking-wider rounded-full">{t("live.statusFullTime")}</span>;
   }
-  return <span className="inline-flex items-center gap-2 px-3 py-1 bg-bg/15 text-bg text-xs font-bold uppercase tracking-wider rounded-full">À venir</span>;
+  return <span className="inline-flex items-center gap-2 px-3 py-1 bg-bg/15 text-bg text-xs font-bold uppercase tracking-wider rounded-full">{t("matches.statusUpcoming")}</span>;
 }
 
 // Country flag when we have one, otherwise the API team crest (logo).
@@ -518,8 +578,9 @@ function TeamHead({ name, country, logo }) {
 }
 
 function TimelineEvent({ event, match }) {
+  const { t, lang } = useT();
   const { type, minute, side, scorer, player, on, off, text, note } = event;
-  const sideName = side === "haiti" ? "Haïti" : match.opponent.name;
+  const sideName = side === "haiti" ? teamName("haiti", lang) : teamName(match.opponent.country, lang);
 
   const icons = {
     goal: "⚽",
@@ -544,13 +605,13 @@ function TimelineEvent({ event, match }) {
         <span className="text-lg flex-shrink-0">{icons[type] || "•"}</span>
         <div className="flex-1 min-w-0">
           {type === "goal" && (
-            <p className="text-ink"><strong className="font-display">BUT · {sideName}</strong> {scorer}{note ? ` · ${note}` : ""}</p>
+            <p className="text-ink"><strong className="font-display">{t("live.evGoalUpper")} · {sideName}</strong> {scorer}{note ? ` · ${note}` : ""}</p>
           )}
           {(type === "yellow" || type === "red") && (
-            <p className="text-ink"><strong>{type === "yellow" ? "Carton jaune" : "Carton rouge"} · {sideName}</strong> · {player}{note ? `. ${note}` : ""}</p>
+            <p className="text-ink"><strong>{type === "yellow" ? t("live.evYellow") : t("live.evRed")} · {sideName}</strong> · {player}{note ? `. ${note}` : ""}</p>
           )}
           {type === "sub" && (
-            <p className="text-ink"><strong>Changement · {sideName}</strong> entrée de {on}, sortie de {off}</p>
+            <p className="text-ink"><strong>{t("live.evSub")} · {sideName}</strong> {t("live.subInOut").replace("{on}", on).replace("{off}", off)}</p>
           )}
           {(type === "ht" || type === "ft" || type === "kickoff" || type === "note") && (
             <p className="text-ink italic">{text}</p>
@@ -561,33 +622,19 @@ function TimelineEvent({ event, match }) {
   );
 }
 
-// Noms FR des adversaires récents (l'API renvoie l'anglais).
-const FORM_FR = {
-  haiti: "Haïti",
-  peru: "Pérou",
-  scotland: "Écosse",
-  brazil: "Brésil",
-  morocco: "Maroc",
-  "new zealand": "Nouvelle-Zélande",
-  iceland: "Islande",
-  tunisia: "Tunisie",
-  "costa rica": "Costa Rica",
-  nicaragua: "Nicaragua",
-};
-const frFormName = (n) => FORM_FR[n?.toLowerCase()] || n;
-
 // Forme récente · carte : bande de résultat, logo, NOM de l'adversaire, score, résultat.
 function FormChip({ fixture }) {
+  const { t, lang } = useT();
   const { haitiGoals, oppGoals, oppName, oppLogo } = fixture;
   const win = haitiGoals > oppGoals;
   const draw = haitiGoals === oppGoals;
-  const word = win ? "Victoire" : draw ? "Nul" : "Défaite";
+  const word = win ? t("matches.win") : draw ? t("matches.draw") : t("matches.loss");
   const strip = win ? "bg-haiti-blue" : draw ? "bg-gold" : "bg-haiti-red";
   const text = win ? "text-haiti-blue" : draw ? "text-muted" : "text-haiti-red";
   return (
     <div
       className="w-28 sm:w-32 flex-shrink-0 bg-white border border-line rounded-lg overflow-hidden text-center"
-      title={`Haïti ${haitiGoals}–${oppGoals} ${frFormName(oppName)}`}
+      title={`${teamName("haiti", lang)} ${haitiGoals}–${oppGoals} ${teamName(oppName, lang)}`}
     >
       <div className={`h-1.5 ${strip}`} />
       <div className="p-3 flex flex-col items-center gap-1.5">
@@ -597,7 +644,7 @@ function FormChip({ fixture }) {
           <span className="w-9 h-9" />
         )}
         <span className="text-[11px] text-ink leading-tight line-clamp-2 min-h-[1.6rem] flex items-center">
-          {frFormName(oppName)}
+          {teamName(oppName, lang)}
         </span>
         <span className="font-display text-lg tabular-nums leading-none">
           {haitiGoals}
@@ -636,6 +683,7 @@ function ApiTimeline({ events }) {
 }
 
 function ApiEvent({ e }) {
+  const { t } = useT();
   const haiti = e.team?.id === HAITI_TEAM_ID;
   const minute =
     e.time?.elapsed != null
@@ -643,24 +691,24 @@ function ApiEvent({ e }) {
       : "";
   let label;
   if (e.type === "Goal") {
-    const tag = e.detail === "Penalty" ? " (pén.)" : e.detail === "Own Goal" ? " (csc)" : "";
+    const tag = e.detail === "Penalty" ? ` ${t("live.tagPen")}` : e.detail === "Own Goal" ? ` ${t("live.tagOwnGoal")}` : "";
     label = (
       <>
-        <strong className="font-display">But</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
+        <strong className="font-display">{t("live.evGoal")}</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
         {tag}
-        {e.assist?.name ? <span className="text-muted"> (passe : <PlayerName id={e.assist?.id} name={e.assist.name} className="text-muted" />)</span> : null}
+        {e.assist?.name ? <span className="text-muted"> ({t("live.assistLabel")} <PlayerName id={e.assist?.id} name={e.assist.name} className="text-muted" />)</span> : null}
       </>
     );
   } else if (e.type === "Card") {
     label = (
       <>
-        <strong>{e.detail?.includes("Red") ? "Carton rouge" : "Carton jaune"}</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
+        <strong>{e.detail?.includes("Red") ? t("live.evRed") : t("live.evYellow")}</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
       </>
     );
   } else if (e.type === "subst") {
     label = (
       <>
-        <strong>Changement</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
+        <strong>{t("live.evSub")}</strong> · <PlayerName id={e.player?.id} name={e.player?.name} />
         {e.assist?.name ? <> ↔ <PlayerName id={e.assist?.id} name={e.assist.name} /></> : null}
       </>
     );
@@ -823,6 +871,7 @@ function SingleTeamPitch({ lineup, color, ratingById, subMinById }) {
 }
 
 function TeamLineupList({ lineup, name, showXI }) {
+  const { t, lang } = useT();
   if (!lineup) return null;
   return (
     <div className="bg-white border border-line rounded-lg p-5">
@@ -838,14 +887,14 @@ function TeamLineupList({ lineup, name, showXI }) {
               <span className="text-muted tabular-nums w-5 text-right flex-shrink-0">{player?.number}</span>
               <PlayerAvatar id={player?.id} className="w-6 h-6" />
               <span className="text-ink truncate"><PlayerName id={player?.id} name={player?.name} /></span>
-              {player?.pos && <span className="text-muted text-xs ml-auto flex-shrink-0">{posFr(player.pos)}</span>}
+              {player?.pos && <span className="text-muted text-xs ml-auto flex-shrink-0">{posFr(player.pos, lang)}</span>}
             </li>
           ))}
         </ol>
       )}
       {(lineup.substitutes || []).length > 0 && (
         <>
-          <p className="text-[11px] uppercase tracking-wider text-muted font-semibold mb-1.5">Remplaçants</p>
+          <p className="text-[11px] uppercase tracking-wider text-muted font-semibold mb-1.5">{t("live.subsTitle")}</p>
           <ol className="space-y-1.5 text-sm">
             {lineup.substitutes.map(({ player }, j) => (
               <li key={j} className="flex items-center gap-2 text-ink/70">
@@ -859,7 +908,7 @@ function TeamLineupList({ lineup, name, showXI }) {
       )}
       {lineup.coach?.name && (
         <p className="text-muted text-xs mt-3 pt-3 border-t border-line">
-          Sélectionneur : {lineup.coach.name}
+          {t("live.coachLabel")} {lineup.coach.name}
         </p>
       )}
     </div>
@@ -867,6 +916,7 @@ function TeamLineupList({ lineup, name, showXI }) {
 }
 
 const POS_FR = { G: "Gardien", D: "Défenseur", M: "Milieu", F: "Attaquant" };
+const POS_EN = { G: "Goalkeeper", D: "Defender", M: "Midfielder", F: "Forward" };
 const POS_WORDS = {
   goalkeeper: "Gardien",
   keeper: "Gardien",
@@ -876,9 +926,19 @@ const POS_WORDS = {
   forward: "Attaquant",
   striker: "Attaquant",
 };
-const posFr = (p) => {
+const POS_WORDS_EN = {
+  goalkeeper: "Goalkeeper",
+  keeper: "Goalkeeper",
+  defender: "Defender",
+  midfielder: "Midfielder",
+  attacker: "Forward",
+  forward: "Forward",
+  striker: "Forward",
+};
+const posFr = (p, lang) => {
   if (!p) return "";
   const s = String(p).trim();
+  if (lang === "en") return POS_EN[s.toUpperCase()] || POS_WORDS_EN[s.toLowerCase()] || s;
   return POS_FR[s.toUpperCase()] || POS_WORDS[s.toLowerCase()] || s;
 };
 
@@ -897,6 +957,7 @@ function splitSubs(lineup, pstatById, subMinById) {
 }
 
 function SubRow({ player, stat, onMinute }) {
+  const { lang } = useT();
   const hasRating = stat?.rating != null;
   return (
     <li className="flex items-center gap-2.5 py-1.5">
@@ -909,7 +970,7 @@ function SubRow({ player, stat, onMinute }) {
       <span className="text-muted tabular-nums text-xs w-5 text-right flex-shrink-0">{player?.number}</span>
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm text-ink"><PlayerName id={player?.id} name={player?.name} /></span>
-        <span className="block text-[11px] text-muted">{posFr(player?.pos)}</span>
+        <span className="block text-[11px] text-muted">{posFr(player?.pos, lang)}</span>
       </span>
       <span className="flex items-center gap-1.5 text-xs flex-shrink-0">
         {stat?.yellow > 0 && <span aria-hidden>🟨</span>}
@@ -923,6 +984,7 @@ function SubRow({ player, stat, onMinute }) {
 
 // One team's subs (entered the game) and bench, single column.
 function TeamSubs({ played, bench, pstatById, subMinById }) {
+  const { t } = useT();
   if (played.length === 0 && bench.length === 0) return null;
   const block = (title, players) =>
     players.length === 0 ? null : (
@@ -937,23 +999,24 @@ function TeamSubs({ played, bench, pstatById, subMinById }) {
     );
   return (
     <div className="space-y-6">
-      {block("Remplaçants", played)}
-      {block("Banc", bench)}
+      {block(t("live.subsTitle"), played)}
+      {block(t("live.benchTitle"), bench)}
     </div>
   );
 }
 
 function Lineups({ haiti, opp, oppName, ratingById, pstatById, subMinById }) {
+  const { t: tr, lang } = useT();
   // One team at a time · the full pitch is too crowded on mobile with photos.
   const [team, setTeam] = useState("haiti");
   const sel = team === "haiti" ? haiti : opp;
-  const selName = team === "haiti" ? "Haïti" : oppName;
+  const selName = team === "haiti" ? teamName("haiti", lang) : oppName;
   const selColor = team === "haiti" ? "bg-haiti-blue" : "bg-haiti-red";
 
   const toggle = (
     <div className="mb-6 flex w-max max-w-full gap-1 rounded-full border border-line bg-bg p-1">
       {[
-        { id: "haiti", label: "Haïti", logo: haiti?.team?.logo },
+        { id: "haiti", label: teamName("haiti", lang), logo: haiti?.team?.logo },
         { id: "opp", label: oppName, logo: opp?.team?.logo },
       ].map((t) => (
         <button
@@ -994,7 +1057,7 @@ function Lineups({ haiti, opp, oppName, ratingById, pstatById, subMinById }) {
         <TeamSubs played={s.played} bench={s.bench} pstatById={pstatById} subMinById={subMinById} />
         {sel?.coach?.name && (
           <p className="text-xs text-muted pt-2 border-t border-line">
-            Sélectionneur : {sel.coach.name}
+            {tr("live.coachLabel")} {sel.coach.name}
           </p>
         )}
       </div>
@@ -1021,6 +1084,7 @@ function normPlayer(p, isHaiti) {
 }
 
 function PlayerStats({ haiti, opp, oppName }) {
+  const { t, lang } = useT();
   const rows = [
     ...haiti.map((p) => normPlayer(p, true)),
     ...opp.map((p) => normPlayer(p, false)),
@@ -1032,20 +1096,20 @@ function PlayerStats({ haiti, opp, oppName }) {
   return (
     <div>
       <div className="flex items-center gap-4 text-[11px] uppercase tracking-wider text-muted mb-3">
-        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-haiti-blue" /> Haïti</span>
+        <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-haiti-blue" /> {teamName("haiti", lang)}</span>
         <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-haiti-red" /> {oppName}</span>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="text-muted text-[10px] uppercase tracking-wider border-b border-line">
-              <th className="text-left py-2 pr-2 font-semibold">Joueur</th>
-              <th className="text-center py-2 px-1.5 font-semibold">Note</th>
-              <th className="text-center py-2 px-1.5 font-semibold" title="Minutes">Min</th>
-              <th className="text-center py-2 px-1.5 font-semibold" title="Buts">B</th>
-              <th className="text-center py-2 px-1.5 font-semibold" title="Passes décisives">PD</th>
-              <th className="text-center py-2 px-1.5 font-semibold" title="Tirs">T</th>
-              <th className="text-center py-2 pl-1.5 font-semibold" title="Tirs cadrés">TC</th>
+              <th className="text-left py-2 pr-2 font-semibold">{t("live.colPlayer")}</th>
+              <th className="text-center py-2 px-1.5 font-semibold">{t("live.colRating")}</th>
+              <th className="text-center py-2 px-1.5 font-semibold" title={t("live.colMinFull")}>{t("live.colMin")}</th>
+              <th className="text-center py-2 px-1.5 font-semibold" title={t("live.colGoalsFull")}>{t("live.colGoals")}</th>
+              <th className="text-center py-2 px-1.5 font-semibold" title={t("live.colAssistsFull")}>{t("live.colAssists")}</th>
+              <th className="text-center py-2 px-1.5 font-semibold" title={t("live.colShotsFull")}>{t("live.colShots")}</th>
+              <th className="text-center py-2 pl-1.5 font-semibold" title={t("live.colShotsOnFull")}>{t("live.colShotsOn")}</th>
             </tr>
           </thead>
           <tbody>
@@ -1078,8 +1142,10 @@ function PlayerStats({ haiti, opp, oppName }) {
   );
 }
 
-const scorerLine = (s) => {
-  const tag = s.detail === "Penalty" ? " (pén.)" : s.detail === "Own Goal" ? " (csc)" : "";
+const scorerLine = (s, lang) => {
+  const pen = lang === "en" ? " (pen.)" : " (pén.)";
+  const og = lang === "en" ? " (o.g.)" : " (csc)";
+  const tag = s.detail === "Penalty" ? pen : s.detail === "Own Goal" ? og : "";
   return `${s.player} ${s.minute != null ? `${s.minute}'` : ""}${tag}`.trim();
 };
 
@@ -1102,7 +1168,26 @@ const STAT_FR = {
   "Passes %": "Passes (%)",
   expected_goals: "Buts attendus (xG)",
 };
-const statFr = (t) => STAT_FR[t] || t;
+const STAT_EN = {
+  "Ball Possession": "Possession",
+  "Total Shots": "Shots",
+  "Shots on Goal": "Shots on target",
+  "Shots off Goal": "Shots off target",
+  "Blocked Shots": "Blocked shots",
+  "Shots insidebox": "Shots (inside box)",
+  "Shots outsidebox": "Shots (outside box)",
+  Fouls: "Fouls",
+  "Corner Kicks": "Corners",
+  Offsides: "Offsides",
+  "Yellow Cards": "Yellow cards",
+  "Red Cards": "Red cards",
+  "Goalkeeper Saves": "Saves",
+  "Total passes": "Passes",
+  "Passes accurate": "Accurate passes",
+  "Passes %": "Pass accuracy (%)",
+  expected_goals: "Expected goals (xG)",
+};
+const statFr = (t, lang) => (lang === "en" ? STAT_EN[t] : STAT_FR[t]) || t;
 
 function parseStat(v) {
   if (v == null) return 0;
@@ -1123,6 +1208,7 @@ const TOP_STATS = [
 
 // FotMob-style comparison bars: Haïti (blue, left) vs opponent (red, right).
 function StatBars({ haiti, opp, oppName }) {
+  const { t: tr, lang } = useT();
   const hStats = haiti?.statistics || [];
   const types = hStats.map((s) => s.type);
   if (types.length === 0) return null;
@@ -1151,7 +1237,7 @@ function StatBars({ haiti, opp, oppName }) {
             {hRaw ?? "·"}
           </span>
           <span className="font-cond text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-            {statFr(t)}
+            {statFr(t, lang)}
           </span>
           <span className={`font-block text-lg leading-none tabular-nums ${aLead ? "text-haiti-red" : "text-ink/60"}`}>
             {aRaw ?? "·"}
@@ -1194,11 +1280,11 @@ function StatBars({ haiti, opp, oppName }) {
   return (
     <div className="space-y-7">
       <div className="flex items-center justify-between">
-        <TeamTag logo={haiti?.team?.logo} name="Haïti" align="left" />
+        <TeamTag logo={haiti?.team?.logo} name={teamName("haiti", lang)} align="left" />
         <TeamTag logo={opp?.team?.logo} name={oppName} align="right" />
       </div>
-      <Section title="Statistiques clés" items={top} />
-      <Section title="Toutes les statistiques" items={rest} />
+      <Section title={tr("live.statsKey")} items={top} />
+      <Section title={tr("live.statsAll")} items={rest} />
     </div>
   );
 }

@@ -19,13 +19,14 @@
 
 import { useState } from "react";
 import { useT } from "../lib/i18n";
+import { teamName } from "../lib/teamNames";
 
 export default function MatchReminder({ match }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [downloaded, setDownloaded] = useState(false);
 
   function handleDownload() {
-    const ics = buildIcs(match);
+    const ics = buildIcs(match, lang);
     const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -50,7 +51,7 @@ export default function MatchReminder({ match }) {
 }
 
 // Build a single-event .ics file with a 30-minute reminder alarm
-function buildIcs(match) {
+function buildIcs(match, lang) {
   const start = new Date(match.kickoff);
   const end = new Date(start.getTime() + 2.5 * 60 * 60 * 1000); // 2.5 hours
 
@@ -60,16 +61,33 @@ function buildIcs(match) {
   const dtStamp = fmt(new Date());
   const uid = `${match.slug}-grenadiers2026@grenadiers2026.com`;
 
-  const summary = `Haïti vs ${match.opponent.name} — Coupe du Monde FIFA 2026`;
-  const description = [
-    `Groupe C, match ${match.matchNumber}.`,
-    `${match.stadium.fifaName}, ${match.stadium.city}.`,
-    "",
-    `Diffusion : ${match.broadcast || "Consulter la programmation locale"}`,
-    `Suivi en direct : https://grenadiers2026.com/live/${match.slug}`,
-    `Trouver une projection publique : https://grenadiers2026.com/watch-parties`,
-  ].join("\\n");
-  const location = `${match.stadium.fifaName}, ${match.stadium.city}`;
+  const en = lang === "en";
+  const oppName = match.opponent.country ? teamName(match.opponent.country, lang) : match.opponent.name;
+  const haiti = en ? "Haiti" : "Haïti";
+  const city = en && match.stadium.cityEn ? match.stadium.cityEn : match.stadium.city;
+
+  const summary = en
+    ? `${haiti} vs ${oppName} - 2026 FIFA World Cup`
+    : `${haiti} vs ${oppName} — Coupe du Monde FIFA 2026`;
+  const description = (en
+    ? [
+        `Group C, match ${match.matchNumber}.`,
+        `${match.stadium.fifaName}, ${city}.`,
+        "",
+        `Broadcast: ${match.broadcast || "Check local listings"}`,
+        `Live coverage: https://grenadiers2026.com/live/${match.slug}`,
+        `Find a watch party: https://grenadiers2026.com/watch-parties`,
+      ]
+    : [
+        `Groupe C, match ${match.matchNumber}.`,
+        `${match.stadium.fifaName}, ${city}.`,
+        "",
+        `Diffusion : ${match.broadcast || "Consulter la programmation locale"}`,
+        `Suivi en direct : https://grenadiers2026.com/live/${match.slug}`,
+        `Trouver une projection publique : https://grenadiers2026.com/watch-parties`,
+      ]
+  ).join("\\n");
+  const location = `${match.stadium.fifaName}, ${city}`;
 
   return [
     "BEGIN:VCALENDAR",
@@ -90,7 +108,7 @@ function buildIcs(match) {
     "BEGIN:VALARM",
     "TRIGGER:-PT30M",
     "ACTION:DISPLAY",
-    `DESCRIPTION:${escapeIcs("Haïti entre sur le terrain dans 30 minutes ! 🇭🇹")}`,
+    `DESCRIPTION:${escapeIcs(en ? "Haiti takes the field in 30 minutes! 🇭🇹" : "Haïti entre sur le terrain dans 30 minutes ! 🇭🇹")}`,
     "END:VALARM",
     "END:VEVENT",
     "END:VCALENDAR",

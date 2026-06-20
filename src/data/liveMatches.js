@@ -33,8 +33,10 @@ export const liveMatches = {
     stadium: {
       fifaName: "Inter Miami CF Stadium",
       city: "Fort Lauderdale, Floride, États-Unis",
+      cityEn: "Fort Lauderdale, Florida, USA",
       capacity: 21550,
       surface: "Pelouse naturelle",
+      surfaceEn: "Natural grass",
     },
     status: "scheduled",
     minute: null,
@@ -56,11 +58,14 @@ export const liveMatches = {
     dateLabel: "Vendredi 5 juin 2026",
     timeLabel: "20h00 ET · Nu Stadium",
     access: "À guichets fermés · Portes 18h · Parking 17h",
+    accessEn: "Sold out · Gates 6 PM · Parking 5 PM",
     stadium: {
       fifaName: "Nu Stadium",
       city: "Miami, Floride, États-Unis",
+      cityEn: "Miami, Florida, USA",
       capacity: 26700,
       surface: "Pelouse naturelle",
+      surfaceEn: "Natural grass",
     },
     status: "scheduled", // scheduled | live | ht | ft
     minute: null,

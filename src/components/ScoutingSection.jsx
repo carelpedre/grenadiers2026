@@ -9,16 +9,20 @@
 // ╚══════════════════════════════════════════════════════════════════╝
 
 import { motion } from "framer-motion";
-import ResultPill, { RESULT } from "./ResultPill";
-import { frName } from "../lib/teamNames";
+import ResultPill from "./ResultPill";
+import { teamName } from "../lib/teamNames";
+import { useT } from "../lib/i18n";
 
-// Libellés FR de compétitions pour le bilan H2H.
+// Libellés de compétitions pour le bilan H2H (normalisation, identique FR/EN).
 const COMP_FR = { "Copa America": "Copa América" };
 const compLabel = (name) => COMP_FR[name] || name || "";
 
-function frDate(iso) {
+// Clé i18n du résultat (réutilise matches.win/draw/loss).
+const RES_KEY = { V: "matches.win", N: "matches.draw", D: "matches.loss" };
+
+function fmtDate(iso, lang) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("fr-FR", {
+  return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -30,10 +34,11 @@ function frYear(iso) {
 }
 
 export default function ScoutingSection({ data }) {
+  const { t, lang } = useT();
   if (!data || !data.ok) return null;
 
   const opp = data.opponent ?? {};
-  const oppName = frName(opp.name) || "l'adversaire";
+  const oppName = teamName(opp.name, lang) || t("live.theOpponent");
   const h2h = data.h2h ?? {};
   const last5 = Array.isArray(data.opponent_form?.last5) ? data.opponent_form.last5 : [];
 
@@ -45,9 +50,9 @@ export default function ScoutingSection({ data }) {
   return (
     <section>
       <div className="border-b border-line pb-3 mb-6">
-        <h2 className="font-display text-2xl md:text-3xl">Scouting adversaire</h2>
+        <h2 className="font-display text-2xl md:text-3xl">{t("live.scoutingTitle")}</h2>
         <p className="text-muted text-sm mt-1">
-          Avant le coup d'envoi : la forme du moment et le bilan face à Haïti.
+          {t("live.scoutingSub")}
         </p>
       </div>
 
@@ -58,7 +63,7 @@ export default function ScoutingSection({ data }) {
             {opp.logo && (
               <img src={opp.logo} alt="" loading="lazy" className="w-6 h-6 object-contain shrink-0" />
             )}
-            <h3 className="font-display text-lg text-ink">Forme récente de {oppName}</h3>
+            <h3 className="font-display text-lg text-ink">{t("live.scoutingFormOf").replace("{name}", oppName)}</h3>
           </div>
 
           {strip.length > 0 ? (
@@ -69,7 +74,7 @@ export default function ScoutingSection({ data }) {
                     key={i}
                     res={r.res}
                     size="lg"
-                    title={`${RESULT[r.res]?.full ?? ""} · ${r.gf}-${r.ga} ${frName(r.opponent)}`}
+                    title={`${RES_KEY[r.res] ? t(RES_KEY[r.res]) : ""} · ${r.gf}-${r.ga} ${teamName(r.opponent, lang)}`}
                   />
                 ))}
               </div>
@@ -80,11 +85,11 @@ export default function ScoutingSection({ data }) {
                     <ResultPill res={r.res} size="sm" />
                     <div className="min-w-0 flex-1">
                       <p className="text-[11px] uppercase tracking-wider text-muted font-semibold truncate">
-                        {frDate(r.date)}
-                        <span className="text-muted/70"> · {r.home_away === "dom" ? "Dom." : "Ext."}</span>
+                        {fmtDate(r.date, lang)}
+                        <span className="text-muted/70"> · {r.home_away === "dom" ? t("matches.venueHome") : t("matches.venueAway")}</span>
                       </p>
                       <p className="text-sm text-ink truncate">
-                        vs {frName(r.opponent)}{" "}
+                        vs {teamName(r.opponent, lang)}{" "}
                         <span className="tabular-nums text-muted">
                           {r.gf}
                           <span className="mx-0.5">-</span>
@@ -97,25 +102,25 @@ export default function ScoutingSection({ data }) {
               </ul>
             </>
           ) : (
-            <p className="text-sm text-muted">Forme récente indisponible.</p>
+            <p className="text-sm text-muted">{t("live.scoutingFormUnavail")}</p>
           )}
         </div>
 
         {/* b) Face à Haïti */}
         <div className="bg-white border border-line rounded-lg p-5">
-          <h3 className="font-display text-lg text-ink mb-4">Face à Haïti</h3>
+          <h3 className="font-display text-lg text-ink mb-4">{t("live.scoutingVsHaiti")}</h3>
 
           {h2h.played > 0 ? (
             <>
               <p className="text-sm text-ink mb-4">
                 <span className="font-display text-base">
-                  {h2h.played} rencontre{h2h.played > 1 ? "s" : ""}
+                  {h2h.played} {h2h.played > 1 ? t("live.meetingsPlural") : t("live.meetingSingular")}
                 </span>
                 <span className="text-muted">
                   {" · "}
-                  {h2h.haiti_wins} V {h2h.draws} N {h2h.haiti_losses} D
+                  {h2h.haiti_wins} {lang === "en" ? "W" : "V"} {h2h.draws} {lang === "en" ? "D" : "N"} {h2h.haiti_losses} {lang === "en" ? "L" : "D"}
                   {" · "}
-                  <span className="tabular-nums">{h2h.gf}-{h2h.ga}</span> buts
+                  <span className="tabular-nums">{h2h.gf}-{h2h.ga}</span> {t("live.goalsWord")}
                 </span>
               </p>
 
@@ -129,7 +134,7 @@ export default function ScoutingSection({ data }) {
                         {m.date ? <span className="text-muted/70"> · {frYear(m.date)}</span> : null}
                       </p>
                       <p className="text-sm text-ink">
-                        Haïti{" "}
+                        {teamName("haiti", lang)}{" "}
                         <span className="tabular-nums">
                           {m.haiti_gf}
                           <span className="text-muted mx-0.5">-</span>
@@ -143,7 +148,7 @@ export default function ScoutingSection({ data }) {
             </>
           ) : (
             <p className="text-sm text-muted leading-relaxed">
-              Première confrontation entre les deux nations.
+              {t("live.scoutingFirstMeeting")}
             </p>
           )}
         </div>
