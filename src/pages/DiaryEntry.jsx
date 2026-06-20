@@ -42,6 +42,14 @@ function pickBody(entry, lang) {
   return entry.body;
 }
 
+// Transcription « conférence de presse » selon la langue : transcriptHt/transcriptEn
+// s'il existe, sinon la transcription française (même shape par item).
+function pickTranscript(entry, lang) {
+  if (lang === "ht" && Array.isArray(entry?.transcriptHt)) return entry.transcriptHt;
+  if (lang === "en" && Array.isArray(entry?.transcriptEn)) return entry.transcriptEn;
+  return entry.transcript;
+}
+
 function getYouTubeId(input) {
   if (!input) return "";
   if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
@@ -322,7 +330,7 @@ export default function DiaryEntry() {
                 <p className="text-sm text-muted italic mb-8">{entry.transcriptNote}</p>
               )}
               <div className="space-y-6 leading-relaxed">
-                {entry.transcript.map((t, i) =>
+                {pickTranscript(entry, lang).map((t, i) =>
                   t.heading ? (
                     // Section header (e.g. a player's name in a zone-mixte transcript).
                     <div key={i} className="pt-6 first:pt-0">
