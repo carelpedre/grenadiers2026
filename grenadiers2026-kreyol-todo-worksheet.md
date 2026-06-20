@@ -88,81 +88,81 @@ Generated from `src/lib/translations.js`. Every key below still has `ht === fr` 
 
 | Key | Français | Kreyòl |
 |---|---|---|
-| `squad.heroEyebrow` | La sélection d'Haïti · Coupe du Monde 2026 |  |
-| `squad.heroTitle1` | Joueurs et staff. |  |
-| `squad.heroTitle2` | Une seule mission. |  |
-| `squad.heroSubtext` | Cinquante-deux ans après Munich, les Grenadiers retrouvent la Coupe du Monde de la FIFA. Les 26 joueurs retenus, dévoilés par la Fédération Haïtienne de Football le 16 mai 2026. |  |
-| `squad.navGoalkeepers` | Gardiens |  |
-| `squad.navMidfielders` | Milieux |  |
-| `squad.forfaits` | Forfaits |  |
-| `squad.forfaitsNote` | Ils font partie de l'aventure mais ont dû renoncer sur blessure. |  |
-| `squad.player` | joueur |  |
-| `squad.players` | joueurs |  |
-| `squad.members` | membres |  |
-| `squad.kitTitle` | Le maillot |  |
-| `squad.kitSubtext` | Trois tenues signées Saeta. Une seule signature : l'histoire d'Haïti, cousue dans le tissu. |  |
-| `squad.kitImageLabel` | Maillots officiels de la Coupe du Monde 2026 · Saeta |  |
-| `squad.kitIntro` | Chaque centimètre du design original, conçu par Saeta, raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière. |  |
-| `squad.kit1Label` | Côté droit du torse, en bas |  |
-| `squad.kit1Body` | Hommage aux combattants de la Bataille de Vertières, où les troupes indigènes ont défait l'armée napoléonienne, scellant l'indépendance d'Haïti et donnant naissance à la première République noire du monde moderne. |  |
-| `squad.kit2Label` | Dissimulé sur tout le devant |  |
-| `squad.kit2Title` | « L'union fait la force » |  |
-| `squad.kit2Body` | La devise nationale, inscrite en lettres minuscules sur tout le buste du maillot. Lisible uniquement de très près. Un message que les joueurs portent en eux, même invisible à distance. |  |
-| `squad.kit3Label` | Sur le dos |  |
-| `squad.kit3Title` | Montagnes et palmiers |  |
-| `squad.kit3Body` | La silhouette d'Ayiti elle-même : les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs. |  |
-| `squad.kitUpdatePrefix` | Mise à jour, 9 juin 2026 : |  |
-| `squad.kitUpdateLink` | à la demande de la FIFA |  |
-| `squad.kitUpdateSuffix` | , certains éléments visuels du design original ont été ajustés avant le début de la compétition. Saeta, qui défend l'esprit de sa création, a appliqué les modifications exigées, et c'est cette version que les Grenadiers porteront pendant la Coupe du Monde. |  |
-| `squad.kitMadeByPrefix` | Fabriqué par |  |
-| `squad.kitMadeBySuffix` | , partenaire de la Fédération Haïtienne de Football depuis 2014. |  |
-| `squad.kitBuy` | Acheter le maillot |  |
-| `squad.campTitle` | Centres de préparation |  |
-| `squad.campSubtext` | Là où Les Grenadiers préparent la Coupe du Monde : deux phases, deux états d'esprit. |  |
-| `squad.lodging` | Hébergement |  |
-| `squad.selectedBy` | Choisi par |  |
-| `squad.localTies` | Liens locaux avec le camp de base |  |
-| `squad.aboutSelection` | À propos de cette sélection |  |
-| `squad.qualifRecordTitle` | Bilan des éliminatoires · CONCACAF · sept. 2024 à nov. 2025 |  |
-| `squad.winsDrawsLosses` | Victoires · Nuls · Défaites |  |
-| `squad.goalsForAgainst` | Buts pour · contre |  |
-| `squad.rankingsTitle` | Classements de la sélection |  |
-| `squad.topScorers` | Meilleurs buteurs |  |
-| `squad.mostCapped` | Plus sélectionnés |  |
-| `squad.goalsUnit` | buts |  |
-| `squad.capsUnit` | sél. |  |
-| `squad.ageUnit` | ans |  |
-| `squad.ctaEyebrow` | Coupe du Monde 2026 · Groupe C |  |
-| `squad.ctaTitle1` | Trois adversaires. |  |
-| `squad.ctaTitle2` | Trois villes. Un seul drapeau. |  |
-| `squad.ctaBody` | Écosse à Foxborough, Brésil à Philadelphie, Maroc à Atlanta. Onze jours sur le sol américain pour la deuxième Coupe du Monde de l'histoire d'Haïti. |  |
-| `squad.ctaButton` | Découvrir le calendrier |  |
-| `squad.profile` | Profil |  |
-| `squad.statsDisclaimer` | Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels. |  |
-| `squad.starTag` | Cadre |  |
-| `squad.playerGeneric` | Joueur |  |
-| `squad.label.age` | Âge |  |
-| `squad.label.goalsCaps` | Buts (sél.) |  |
-| `squad.label.bornOn` | Né le |  |
-| `squad.label.height` | Taille |  |
-| `squad.label.debut` | Première sélection |  |
-| `squad.label.positions` | Postes |  |
-| `squad.label.apps` | Matchs |  |
-| `squad.label.assists` | Passes D. |  |
-| `squad.label.rating` | Note moy. |  |
-| `squad.modalClubSeason` | En club cette saison |  |
-| `squad.modalAllComps` | toutes compétitions cette saison |  |
-| `squad.modalBio` | Biographie |  |
-| `squad.modalFollow` | Suivre |  |
-| `squad.modalShareProfile` | Partager cette fiche |  |
-| `squad.modalCapsInfoLabel` | À propos du nombre de sélections |  |
-| `squad.modalCapsInfoText` | Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon. |  |
-| `squad.bestScorer` | meilleur buteur |  |
-| `squad.bestPasser` | meilleur passeur |  |
-| `squad.goalsInQualif` | {n} buts en qualif. |  |
-| `squad.goalsShort` | {n} buts |  |
-| `squad.assistsInQualif` | {n} passes en qualif. |  |
-| `squad.assistsShort` | {n} passes |  |
+| `squad.heroEyebrow` | La sélection d'Haïti · Coupe du Monde 2026 | Seleksyon Ayiti a · Koup di Mond 2026 |
+| `squad.heroTitle1` | Joueurs et staff. | Jwè ak estaf. |
+| `squad.heroTitle2` | Une seule mission. | Yon sèl misyon. |
+| `squad.heroSubtext` | Cinquante-deux ans après Munich, les Grenadiers retrouvent la Coupe du Monde de la FIFA. Les 26 joueurs retenus, dévoilés par la Fédération Haïtienne de Football le 16 mai 2026. | Senkant-de ane apre Munich, Grenadye yo retounen nan Koup di Mond FIFA a. Se 26 jwè ki chwazi yo, Federasyon Ayisyen Foutbòl la te devwale 16 me 2026. |
+| `squad.navGoalkeepers` | Gardiens | Gadyen |
+| `squad.navMidfielders` | Milieux | Milye |
+| `squad.forfaits` | Forfaits | Forfè |
+| `squad.forfaitsNote` | Ils font partie de l'aventure mais ont dû renoncer sur blessure. | Yo fè pati avanti a men yo te oblije kite akoz blesi. |
+| `squad.player` | joueur | jwè |
+| `squad.players` | joueurs | jwè |
+| `squad.members` | membres | manm |
+| `squad.kitTitle` | Le maillot | Mayo a |
+| `squad.kitSubtext` | Trois tenues signées Saeta. Une seule signature : l'histoire d'Haïti, cousue dans le tissu. | Twa tenu Saeta siyen. Yon sèl siyati : istwa Ayiti, koud nan twal la. |
+| `squad.kitImageLabel` | Maillots officiels de la Coupe du Monde 2026 · Saeta | Mayo ofisyèl Koup di Mond 2026 · Saeta |
+| `squad.kitIntro` | Chaque centimètre du design original, conçu par Saeta, raconte l'Haïti d'hier et d'aujourd'hui. Loin d'être un simple habillage, la tenue est le récit même du pays, traduit en motifs et en matière. | Chak santimèt nan desen orijinal la, Saeta konsevwa, rakonte Ayiti yè ak jodi a. Pi lwen pase yon senp abiman, tenu a se istwa peyi a menm, tradui an modèl ak an matyè. |
+| `squad.kit1Label` | Côté droit du torse, en bas | Bò dwat lestonmak la, anba |
+| `squad.kit1Body` | Hommage aux combattants de la Bataille de Vertières, où les troupes indigènes ont défait l'armée napoléonienne, scellant l'indépendance d'Haïti et donnant naissance à la première République noire du monde moderne. | Yon omaj pou konbatan Batay Vertières yo, kote twoup endijèn yo te bat lame Napoleon an, ki sele endepandans Ayiti epi ki bay nesans premye Repiblik nwa nan mond modèn nan. |
+| `squad.kit2Label` | Dissimulé sur tout le devant | Kache sou tout devan an |
+| `squad.kit2Title` | « L'union fait la force » | « L'union fait la force » |
+| `squad.kit2Body` | La devise nationale, inscrite en lettres minuscules sur tout le buste du maillot. Lisible uniquement de très près. Un message que les joueurs portent en eux, même invisible à distance. | Deviz nasyonal la, ekri an tou piti sou tout devan mayo a. Ou ka li l sèlman lè ou byen pre. Yon mesaj jwè yo pote nan kè yo, menm si ou pa ka wè l de lwen. |
+| `squad.kit3Label` | Sur le dos | Sou do a |
+| `squad.kit3Title` | Montagnes et palmiers | Mòn ak palmis |
+| `squad.kit3Body` | La silhouette d'Ayiti elle-même : les montagnes qui ont donné au pays son nom taïno (« terre des hautes montagnes ») et les palmiers des armoiries nationales. Le pays entier, porté sur les épaules des joueurs. | Silwèt Ayiti li menm : mòn ki bay peyi a non taino li (« peyi mòn ki wo yo ») ak palmis ki nan blazon nasyonal la. Tout peyi a, sou zepòl jwè yo. |
+| `squad.kitUpdatePrefix` | Mise à jour, 9 juin 2026 : | Mizajou, 9 jen 2026 : |
+| `squad.kitUpdateLink` | à la demande de la FIFA | sou demann FIFA |
+| `squad.kitUpdateSuffix` | , certains éléments visuels du design original ont été ajustés avant le début de la compétition. Saeta, qui défend l'esprit de sa création, a appliqué les modifications exigées, et c'est cette version que les Grenadiers porteront pendant la Coupe du Monde. | , yo te ajiste kèk eleman vizyèl nan desen orijinal la anvan konpetisyon an kòmanse. Saeta, ki defann lespri kreyasyon li, te aplike chanjman yo te mande yo, epi se vèsyon sa a Grenadye yo ap pote pandan Koup di Mond la. |
+| `squad.kitMadeByPrefix` | Fabriqué par | Fabrike pa |
+| `squad.kitMadeBySuffix` | , partenaire de la Fédération Haïtienne de Football depuis 2014. | , patnè Federasyon Ayisyen Foutbòl la depi 2014. |
+| `squad.kitBuy` | Acheter le maillot | Achte mayo a |
+| `squad.campTitle` | Centres de préparation | Sant preparasyon yo |
+| `squad.campSubtext` | Là où Les Grenadiers préparent la Coupe du Monde : deux phases, deux états d'esprit. | Kote Grenadye yo prepare Koup di Mond la : de faz, de eta lespri. |
+| `squad.lodging` | Hébergement | Lojman |
+| `squad.selectedBy` | Choisi par | Chwazi pa |
+| `squad.localTies` | Liens locaux avec le camp de base | Lyen lokal ak kan baz la |
+| `squad.aboutSelection` | À propos de cette sélection | Konsènan seleksyon sa a |
+| `squad.qualifRecordTitle` | Bilan des éliminatoires · CONCACAF · sept. 2024 à nov. 2025 | Bilan eliminatwa yo · CONCACAF · sept. 2024 a nov. 2025 |
+| `squad.winsDrawsLosses` | Victoires · Nuls · Défaites | Viktwa · Nil · Defèt |
+| `squad.goalsForAgainst` | Buts pour · contre | Gòl pou · kont |
+| `squad.rankingsTitle` | Classements de la sélection | Klasman seleksyon an |
+| `squad.topScorers` | Meilleurs buteurs | Pi gwo katchè yo |
+| `squad.mostCapped` | Plus sélectionnés | Plis seleksyone yo |
+| `squad.goalsUnit` | buts | gòl |
+| `squad.capsUnit` | sél. | sel. |
+| `squad.ageUnit` | ans | an |
+| `squad.ctaEyebrow` | Coupe du Monde 2026 · Groupe C | Koup di Mond 2026 · Gwoup C |
+| `squad.ctaTitle1` | Trois adversaires. | Twa advèsè. |
+| `squad.ctaTitle2` | Trois villes. Un seul drapeau. | Twa vil. Yon sèl drapo. |
+| `squad.ctaBody` | Écosse à Foxborough, Brésil à Philadelphie, Maroc à Atlanta. Onze jours sur le sol américain pour la deuxième Coupe du Monde de l'histoire d'Haïti. | Eskòs nan Foxborough, Brezil nan Philadelphie, Mawòk nan Atlanta. Onz jou sou tè ameriken pou dezyèm Koup di Mond nan istwa Ayiti. |
+| `squad.ctaButton` | Découvrir le calendrier | Dekouvri pwogram nan |
+| `squad.profile` | Profil | Pwofil |
+| `squad.statsDisclaimer` | Les statistiques et le nombre de sélections proviennent de sources tierces et peuvent différer des chiffres officiels. | Estatistik yo ak kantite seleksyon yo soti nan sous twazyèm pati epi yo ka diferan de chif ofisyèl yo. |
+| `squad.starTag` | Cadre | Pilye |
+| `squad.playerGeneric` | Joueur | Jwè |
+| `squad.label.age` | Âge | Laj |
+| `squad.label.goalsCaps` | Buts (sél.) | Gòl (sel.) |
+| `squad.label.bornOn` | Né le | Fèt |
+| `squad.label.height` | Taille | Wotè |
+| `squad.label.debut` | Première sélection | Premye seleksyon |
+| `squad.label.positions` | Postes | Pòs yo |
+| `squad.label.apps` | Matchs | Match |
+| `squad.label.assists` | Passes D. | Pas D. |
+| `squad.label.rating` | Note moy. | Nòt mwayèn |
+| `squad.modalClubSeason` | En club cette saison | Nan klèb sezon sa a |
+| `squad.modalAllComps` | toutes compétitions cette saison | tout konpetisyon sezon sa a |
+| `squad.modalBio` | Biographie | Biyografi |
+| `squad.modalFollow` | Suivre | Swiv |
+| `squad.modalShareProfile` | Partager cette fiche | Pataje fich sa a |
+| `squad.modalCapsInfoLabel` | À propos du nombre de sélections | Konsènan kantite seleksyon yo |
+| `squad.modalCapsInfoText` | Le nombre de sélections provient de sources tierces et peut varier : certains matchs ne sont pas toujours comptabilisés de la même façon. | Kantite seleksyon yo soti nan sous twazyèm pati epi li ka varye : gen kèk match yo pa toujou konte menm jan an. |
+| `squad.bestScorer` | meilleur buteur | pi gwo katchè |
+| `squad.bestPasser` | meilleur passeur | pi gwo pasè |
+| `squad.goalsInQualif` | {n} buts en qualif. | {n} gòl nan eliminatwa |
+| `squad.goalsShort` | {n} buts | {n} gòl |
+| `squad.assistsInQualif` | {n} passes en qualif. | {n} pas nan eliminatwa |
+| `squad.assistsShort` | {n} passes | {n} pas |
 
 ## matches.* (65)
 
