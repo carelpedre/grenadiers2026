@@ -1493,17 +1493,17 @@ const dict = {
   "stories.eyebrow": {
     en: "Chokarella editorial",
     fr: "Chokarella · Éditorial",
-    ht: "Chokarella · Editoryal",
+    ht: "Istwa",
   },
   "stories.title": {
     en: "Stories",
     fr: "Histoires",
-    ht: "Istwa",
+    ht: "Istwa yo.",
   },
   "stories.subtitle": {
     en: "Pre-match analysis, player profiles, family interviews from Haiti, and post-match reaction. The Chokarella treatment for Les Grenadiers' return.",
     fr: "Analyses d'avant-match, portraits de joueurs, interviews avec les familles en Haïti, et réactions d'après-match. Le traitement Chokarella pour le retour des Grenadiers.",
-    ht: "Analiz anvan match, pwofil jwè yo, entèvyou ak fanmi yo nan Ayiti, ak reyaksyon apre match. Tretman Chokarella pou retou Grenadye yo.",
+    ht: "Atik long sou kòch la, chwa yo, taktik yo, moun yo. Ekri pou moman sa a.",
   },
   "stories.moreStories": {
     en: "More stories",
