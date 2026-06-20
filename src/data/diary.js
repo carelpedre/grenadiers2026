@@ -37,6 +37,9 @@ export const diaryEntries = [
     titleEn: "Duke Lacroix's fairy tale, from Philadelphia to facing Vinícius",
     eyebrowEn: "Portrait · FIFA",
     dekEn: "On the eve of Haiti-Brazil, FIFA devotes a Team Feature to defender Duke Lacroix: raised in New Jersey, educated at the University of Pennsylvania, he returns to Philadelphia to challenge Vinícius Jr and the Brazilian stars.",
+    titleHt: "Kont fe Duke Lacroix la, soti Philadelphia rive fas ak Vinícius",
+    eyebrowHt: "Pòtrè · FIFA",
+    dekHt: "Lavèy Ayiti-Brezil, FIFA konsakre yon Team Feature pou defansè Duke Lacroix: li grandi nan New Jersey, li fòme nan Inivèsite Pennsylvania, li retounen Philadelphia pou defye Vinícius Jr ak zetwal brezilyen yo.",
     bodyEn: [
       "As the long-awaited clash between Haiti and Brazil approaches at Philadelphia Stadium, attention is turning to a duel that resembles \"David versus Goliath\". At the heart of this historical epic is Haitian defender Duke Lacroix, whose personal journey spectacularly intersects with the great history of his country's football.",
       "## A homecoming full of emotion",
@@ -54,6 +57,21 @@ export const diaryEntries = [
     video: "https://www.youtube.com/watch?v=jyu5HpdP1Os",
     videoExternal: true, // contenu FIFA : intégration bloquée, ouvre sur YouTube
     videoCaption: "Team Feature FIFA consacré à Duke Lacroix.",
+    videoCaptionHt: "Team Feature FIFA konsakre pou Duke Lacroix.",
+    bodyHt: [
+      "Pandan gwo match tout moun t ap tann nan ant Ayiti ak Brezil nan Philadelphia Stadium ap pwoche, atansyon an vire sou yon match ki sanble « David kont Golyat ». Nan kè epope istorik sa a, nou jwenn defansè ayisyen Duke Lacroix, ki gen yon pakou pèsonèl ki kwaze yon fason espektakilè ak gwo istwa foutbòl peyi l la.",
+      "## Yon retou nan rasin li, chaje ak emosyon",
+      "Pou Duke Lacroix, match sa a nan Philadelphia reprezante plis pase yon senp match Koup di Mond. Li grandi nan New Jersey, li te pase kat ane sou ban Inivèsite Pennsylvania pou etid premye sik inivèsitè li. Se la karyè foutbòl li te pase etap enpòtan. Retounen nan vil sa a pou jwe yon match ki gen yon dimansyon entènasyonal konsa se yon vrè rèv timoun ki vin reyalite.",
+      "Jwè a eksprime ak anpil fyète sa li reprezante pou li pote koulè peyi orijin li:",
+      "« Se definitivman yon moman mwen te reve: jwe kont kèk nan ikòn espò sa a, nan rejyon kote mwen te grandi a, ak peyi mwen idantifye avè l epi kote paran mwen te grandi. Mwen pa t ap ka ekri yon pi bon senaryo. »",
+      "Emosyon an menm jan entans sou bò fanmi l. Lacroix sonje ak tandrès reyaksyon paran li yo lè premye seleksyon li, premye match li ak ekip nasyonal la: pandan im nasyonal la t ap sonnen, paran li yo t ap rele ak kè kontan devan televizyon an epi papa l menm te kriye. Anons konvokasyon ofisyèl li ak Grenadye Ayiti yo te fè yo debode ak kè kontan.",
+      "## Soti nan lonbraj rive anba limyè pwojektè yo",
+      "Pakou seleksyon ayisyen an nan kanpay Koup di Mond 2026 sa a se definisyon menm pèseverans. Duke Lacroix sonje nan tout kòmansman avanti yo an 2024, ekip la te jwe devan apèn kèk santèn espektatè nan Barbad.",
+      "Kontras la frapan: pandan premye match gwoup yo kont Eskòs, ki te fini ak yon defèt sere 1-0, ekip la te jwe devan yon gwo foul 65 000 moun. Pou gwo match kont zetwal brezilyen yo tankou Vinícius Júnior, estad Philadelphia a ap plen nèt.",
+      "## Konfyans ak detèminasyon kont jeyan brezilyen an",
+      "Malgre presyon k ap grandi a ak estati gwo favori Brezil la, gwoup ayisyen an abòde randevou sa a san okenn konplèks. Lacroix souliye gen yon fò kilti konfyans nan tèt yo nan ekip la. Jwè yo gen konviksyon nan kapasite yo ak nan sa yo ka akonpli sou teren an.",
+      "Pou Ayiti, match sa a se okazyon rèv la pou pwouve valè li devan je lemonn antye, devan sipòtè ayisyen ak brezilyen yo ak tout pasyone foutbòl. Randevou a pran pou gwo moman istorik sa a.",
+    ],
     body: [
       "À l'approche du choc tant attendu entre Haïti et le Brésil au Philadelphia Stadium, l'attention se tourne vers un duel aux allures de « David contre Goliath ». Au cœur de cette épopée historique se trouve le défenseur haïtien Duke Lacroix, dont le parcours personnel croise de manière spectaculaire la grande histoire du football de son pays.",
       "## Un retour aux sources chargé d'émotion",

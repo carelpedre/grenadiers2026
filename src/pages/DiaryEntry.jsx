@@ -7,15 +7,22 @@ import ShareButton from "../components/ShareButton";
 import { getEntryBySlug, getEntriesSorted, getAlbums } from "../data/diary";
 import { useT } from "../lib/i18n";
 
-// Sélecteur de langue pour les champs d'une entrée : renvoie le champ anglais
-// en mode "en" quand il existe, sinon le français (ht retombe sur le français).
+// Sélecteur de langue pour les champs d'une entrée : créole (ht) puis anglais (en)
+// quand le champ existe, sinon le français (fallback fr partout).
 function makePick(lang) {
-  return (fr, en) => (lang === "en" && en ? en : fr);
+  return (fr, en, ht) => (lang === "ht" && ht ? ht : lang === "en" && en ? en : fr);
 }
 
-// Date affichée : en anglais, formatée depuis l'ISO `date` ; sinon le
-// dateLabel français stocké (sortie française inchangée).
+// Mois en créole haïtien (Intl n'a pas de locale 'ht').
+const HT_MONTHS = ["janvye", "fevriye", "mas", "avril", "me", "jen", "jiyè", "out", "septanm", "oktòb", "novanm", "desanm"];
+
+// Date affichée : en créole, formatée "D MMMM yyyy" depuis l'ISO `date` ; en anglais,
+// via toLocaleDateString ; en français, le dateLabel stocké (sortie française inchangée).
 function journalDate(entry, lang) {
+  if (lang === "ht" && entry?.date) {
+    const d = new Date(`${entry.date}T00:00:00Z`);
+    return `${d.getUTCDate()} ${HT_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  }
   if (lang === "en" && entry?.date) {
     return new Date(`${entry.date}T00:00:00Z`).toLocaleDateString("en-US", {
       year: "numeric",
@@ -27,10 +34,12 @@ function journalDate(entry, lang) {
   return entry?.dateLabel;
 }
 
-// Corps de l'article selon la langue : bodyEn en anglais s'il existe, sinon
+// Corps de l'article selon la langue : bodyHt/bodyEn s'il existe, sinon
 // le corps français (même convention "## " pour les titres).
 function pickBody(entry, lang) {
-  return lang === "en" && Array.isArray(entry?.bodyEn) ? entry.bodyEn : entry.body;
+  if (lang === "ht" && Array.isArray(entry?.bodyHt)) return entry.bodyHt;
+  if (lang === "en" && Array.isArray(entry?.bodyEn)) return entry.bodyEn;
+  return entry.body;
 }
 
 function getYouTubeId(input) {
@@ -66,6 +75,9 @@ export default function DiaryEntry() {
     );
   }
 
+  // Légende vidéo selon la langue (ht/en si présent, sinon fr).
+  const vcap = pick(entry.videoCaption, entry.videoCaptionEn, entry.videoCaptionHt);
+
   // Normalize the entry's photos into albums (handles legacy gallery field).
   const albums = getAlbums(entry);
 
@@ -99,21 +111,21 @@ export default function DiaryEntry() {
       {/* Hero */}
       <header className="relative bg-ink text-bg overflow-hidden">
         <div className="absolute inset-0">
-          <ImagePlaceholder src={entry.cover} label={pick(entry.title, entry.titleEn)} aspect="16/9" rounded={false} className="w-full h-full object-cover opacity-40" />
+          <ImagePlaceholder src={entry.cover} label={pick(entry.title, entry.titleEn, entry.titleHt)} aspect="16/9" rounded={false} className="w-full h-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/70 to-ink"></div>
         </div>
         <div className="relative max-w-content mx-auto px-5 py-20 md:py-28">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5 text-xs">
               <span className="text-haiti-red uppercase tracking-wider font-bold">
-                {pick(entry.eyebrow, entry.eyebrowEn)}
+                {pick(entry.eyebrow, entry.eyebrowEn, entry.eyebrowHt)}
               </span>
               <span className="text-bg/60">{journalDate(entry, lang)}</span>
             </div>
-            <h1 className="font-display text-4xl md:text-6xl mb-5 leading-tight">{pick(entry.title, entry.titleEn)}</h1>
-            <p className="text-bg/80 text-lg md:text-xl leading-relaxed">{pick(entry.dek, entry.dekEn)}</p>
+            <h1 className="font-display text-4xl md:text-6xl mb-5 leading-tight">{pick(entry.title, entry.titleEn, entry.titleHt)}</h1>
+            <p className="text-bg/80 text-lg md:text-xl leading-relaxed">{pick(entry.dek, entry.dekEn, entry.dekHt)}</p>
             <div className="mt-6">
-              <ShareButton dark title={pick(entry.title, entry.titleEn)} text={pick(entry.dek, entry.dekEn)} />
+              <ShareButton dark title={pick(entry.title, entry.titleEn, entry.titleHt)} text={pick(entry.dek, entry.dekEn, entry.dekHt)} />
             </div>
           </div>
         </div>
@@ -194,7 +206,7 @@ export default function DiaryEntry() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative block w-full overflow-hidden rounded-xl aspect-video bg-ink"
-                  aria-label={`${entry.videoCaption || pick(entry.title, entry.titleEn)} · ${t("journal.watchYoutube")}`}
+                  aria-label={`${vcap || pick(entry.title, entry.titleEn, entry.titleHt)} · ${t("journal.watchYoutube")}`}
                 >
                   {entry.cover && (
                     <img
@@ -220,7 +232,7 @@ export default function DiaryEntry() {
                   <iframe
                     className="absolute inset-0 h-full w-full"
                     src={`https://www.youtube-nocookie.com/embed/${getYouTubeId(entry.video)}`}
-                    title={entry.videoCaption || entry.title}
+                    title={vcap || entry.title}
                     loading="lazy"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -228,8 +240,8 @@ export default function DiaryEntry() {
                   />
                 </div>
               )}
-              {entry.videoCaption && (
-                <figcaption className="mt-2 text-sm opacity-70">{entry.videoCaption}</figcaption>
+              {vcap && (
+                <figcaption className="mt-2 text-sm opacity-70">{vcap}</figcaption>
               )}
             </figure>
           )}
@@ -261,7 +273,7 @@ export default function DiaryEntry() {
             <figure>
               <img
                 src={entry.cover}
-                alt={pick(entry.title, entry.titleEn)}
+                alt={pick(entry.title, entry.titleEn, entry.titleHt)}
                 loading="lazy"
                 className="w-full h-auto rounded-lg border border-line"
               />
@@ -276,7 +288,7 @@ export default function DiaryEntry() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-0.5 underline underline-offset-2 hover:text-haiti-blue transition-colors"
                 >
-                  {pick(entry.source, entry.sourceEn)}
+                  {pick(entry.source, entry.sourceEn, entry.sourceHt)}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -293,7 +305,7 @@ export default function DiaryEntry() {
                   </svg>
                 </a>
               ) : (
-                pick(entry.source, entry.sourceEn)
+                pick(entry.source, entry.sourceEn, entry.sourceHt)
               )}
             </p>
           )}
@@ -402,10 +414,10 @@ export default function DiaryEntry() {
                   to={`/journal/${e.slug}`}
                   className="block bg-white border border-line rounded-lg overflow-hidden hover:border-haiti-red transition-all"
                 >
-                  <ImagePlaceholder src={e.cover} label={pick(e.title, e.titleEn)} aspect="16/9" rounded={false} />
+                  <ImagePlaceholder src={e.cover} label={pick(e.title, e.titleEn, e.titleHt)} aspect="16/9" rounded={false} />
                   <div className="p-4">
                     <p className="text-xs text-muted mb-1">{journalDate(e, lang)}</p>
-                    <h3 className="font-display text-lg leading-snug">{pick(e.title, e.titleEn)}</h3>
+                    <h3 className="font-display text-lg leading-snug">{pick(e.title, e.titleEn, e.titleHt)}</h3>
                   </div>
                 </Link>
               ))}

@@ -6,15 +6,22 @@ import { getEntriesSorted, getAlbums } from "../data/diary";
 import { fadeUp, stagger } from "../lib/motion";
 import { useT } from "../lib/i18n";
 
-// Sélecteur de langue pour les champs d'une entrée : renvoie le champ anglais
-// en mode "en" quand il existe, sinon le français (ht retombe sur le français).
+// Sélecteur de langue pour les champs d'une entrée : créole (ht) puis anglais (en)
+// quand le champ existe, sinon le français (fallback fr partout).
 function makePick(lang) {
-  return (fr, en) => (lang === "en" && en ? en : fr);
+  return (fr, en, ht) => (lang === "ht" && ht ? ht : lang === "en" && en ? en : fr);
 }
 
-// Date affichée : en anglais, formatée depuis l'ISO `date` ; sinon le
-// dateLabel français stocké (sortie française inchangée).
+// Mois en créole haïtien (Intl n'a pas de locale 'ht').
+const HT_MONTHS = ["janvye", "fevriye", "mas", "avril", "me", "jen", "jiyè", "out", "septanm", "oktòb", "novanm", "desanm"];
+
+// Date affichée : en créole, formatée "D MMMM yyyy" depuis l'ISO `date` ; en anglais,
+// via toLocaleDateString ; en français, le dateLabel stocké (sortie française inchangée).
 function journalDate(entry, lang) {
+  if (lang === "ht" && entry?.date) {
+    const d = new Date(`${entry.date}T00:00:00Z`);
+    return `${d.getUTCDate()} ${HT_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  }
   if (lang === "en" && entry?.date) {
     return new Date(`${entry.date}T00:00:00Z`).toLocaleDateString("en-US", {
       year: "numeric",
@@ -101,16 +108,16 @@ export default function Diary() {
                   <div className="hidden md:flex md:flex-col absolute inset-x-0 bottom-0 p-6 md:p-10 max-h-[55%] overflow-hidden">
                     {hero.eyebrow && (
                       <p className="text-gold text-sm uppercase tracking-[0.18em] font-bold mb-3">
-                        {pick(hero.eyebrow, hero.eyebrowEn)}
+                        {pick(hero.eyebrow, hero.eyebrowEn, hero.eyebrowHt)}
                       </p>
                     )}
                     <h2 className="font-display text-bg text-5xl leading-[1.05] max-w-3xl line-clamp-2">
-                      {pick(hero.title, hero.titleEn)}
+                      {pick(hero.title, hero.titleEn, hero.titleHt)}
                     </h2>
                     <div className="h-[3px] w-0 bg-haiti-red mt-3 transition-all duration-500 ease-out group-hover:w-24" />
                     {hero.dek && (
                       <p className="text-bg/80 text-lg mt-4 max-w-2xl line-clamp-2">
-                        {pick(hero.dek, hero.dekEn)}
+                        {pick(hero.dek, hero.dekEn, hero.dekHt)}
                       </p>
                     )}
                     <p className="text-bg/60 text-sm uppercase tracking-wider mt-4">
@@ -123,15 +130,15 @@ export default function Diary() {
                 <div className="md:hidden pt-4">
                   {hero.eyebrow && (
                     <p className="text-gold text-xs uppercase tracking-[0.18em] font-bold mb-2">
-                      {pick(hero.eyebrow, hero.eyebrowEn)}
+                      {pick(hero.eyebrow, hero.eyebrowEn, hero.eyebrowHt)}
                     </p>
                   )}
                   <h2 className="font-display text-ink text-2xl leading-[1.12]">
-                    {pick(hero.title, hero.titleEn)}
+                    {pick(hero.title, hero.titleEn, hero.titleHt)}
                   </h2>
                   {hero.dek && (
                     <p className="text-muted text-sm leading-relaxed mt-2 line-clamp-2">
-                      {pick(hero.dek, hero.dekEn)}
+                      {pick(hero.dek, hero.dekEn, hero.dekHt)}
                     </p>
                   )}
                   <p className="text-muted text-xs uppercase tracking-wider mt-3">
@@ -189,11 +196,11 @@ export default function Diary() {
                       </span>
                       {entry.eyebrow && (
                         <span className="text-gold text-xs uppercase tracking-wider font-bold md:w-52 md:shrink-0">
-                          {pick(entry.eyebrow, entry.eyebrowEn)}
+                          {pick(entry.eyebrow, entry.eyebrowEn, entry.eyebrowHt)}
                         </span>
                       )}
                       <span className="font-display text-ink text-lg md:text-xl leading-snug transition-colors group-hover:text-haiti-blue">
-                        {pick(entry.title, entry.titleEn)}
+                        {pick(entry.title, entry.titleEn, entry.titleHt)}
                       </span>
                     </Link>
                   </motion.li>
@@ -219,7 +226,7 @@ function GridCard({ entry }) {
             <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
               <ImagePlaceholder
                 src={entry.cover}
-                alt={pick(entry.title, entry.titleEn)}
+                alt={pick(entry.title, entry.titleEn, entry.titleHt)}
                 aspect="16/10"
                 rounded={false}
               />
@@ -230,16 +237,16 @@ function GridCard({ entry }) {
         <div className="pt-5">
           {entry.eyebrow && (
             <span className="inline-block text-gold text-[11px] uppercase tracking-[0.16em] font-bold border border-line rounded-full px-3 py-1">
-              {pick(entry.eyebrow, entry.eyebrowEn)}
+              {pick(entry.eyebrow, entry.eyebrowEn, entry.eyebrowHt)}
             </span>
           )}
           <h3 className="font-display text-ink text-2xl md:text-[1.7rem] leading-snug mt-4 line-clamp-2">
-            {pick(entry.title, entry.titleEn)}
+            {pick(entry.title, entry.titleEn, entry.titleHt)}
           </h3>
           <div className="h-[3px] w-0 bg-haiti-red mt-2 transition-all duration-500 ease-out group-hover:w-16" />
           {entry.dek && (
             <p className="text-muted text-sm md:text-base leading-relaxed mt-3 line-clamp-2">
-              {pick(entry.dek, entry.dekEn)}
+              {pick(entry.dek, entry.dekEn, entry.dekHt)}
             </p>
           )}
           <p className="text-muted text-xs uppercase tracking-wider mt-4">
