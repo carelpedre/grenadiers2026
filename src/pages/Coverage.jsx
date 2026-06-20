@@ -35,7 +35,7 @@ const COPY = {
     chapters: {
       musique: {
         label: "Clips musicaux",
-        wall: "Quand une sélection retourne en Coupe du Monde après cinquante-deux ans d'absence, ce n'est pas seulement le terrain qui répond. Ce sont les studios. De Port-au-Prince à Brooklyn, de Montréal à Paris, de Bogotá même, les artistes haïtiens — Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, toutes générations confondues — sortent les morceaux qui accompagnent la campagne. Voici neuf d'entre eux, dans l'ordre où Chokarella Media vous invite à les découvrir.",
+        wall: "Quand une sélection retourne en Coupe du Monde après cinquante-deux ans d'absence, ce n'est pas seulement le terrain qui répond. Ce sont les studios. De Port-au-Prince à Brooklyn, de Montréal à Paris, de Bogotá même, les artistes haïtiens — Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, toutes générations confondues — sortent les morceaux qui accompagnent la campagne. Voici {n} vidéos, dans l'ordre où Chokarella Media vous invite à les découvrir.",
       },
       playlists: {
         label: "Playlists",
@@ -98,7 +98,7 @@ const COPY = {
     chapters: {
       musique: {
         label: "Music videos",
-        wall: "When a national team returns to the World Cup after fifty-two years away, it is not only the field that answers. It is the studios. From Port-au-Prince to Brooklyn, from Montréal to Paris, even from Bogotá, Haitian artists (Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, every generation together) are releasing the tracks that carry the campaign. Here are nine of them, in the order Chokarella Media invites you to discover them.",
+        wall: "When a national team returns to the World Cup after fifty-two years away, it is not only the field that answers. It is the studios. From Port-au-Prince to Brooklyn, from Montréal to Paris, even from Bogotá, Haitian artists (Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, every generation together) are releasing the tracks that carry the campaign. Here are {n} videos, in the order Chokarella Media invites you to discover them.",
       },
       playlists: {
         label: "Playlists",
@@ -201,7 +201,7 @@ export default function Coverage() {
           <ChapterMarker
             title={c.chapters.musique.label}
             anchorId="musique"
-            wallText={c.chapters.musique.wall}
+            wallText={c.chapters.musique.wall.replace("{n}", musicVideos.length)}
           />
 
           <div className="space-y-24 md:space-y-32 py-12 md:py-16">
