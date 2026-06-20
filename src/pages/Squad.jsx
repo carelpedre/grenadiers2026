@@ -363,8 +363,8 @@ export default function Squad() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-5 text-sm md:text-base text-muted">
                 <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 – 2 – 2</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">{t("squad.winsDrawsLosses")}</span></span>
                 <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">20 : 13</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">{t("squad.goalsForAgainst")}</span></span>
-                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">6 buts</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Nazon, {t("squad.bestScorer")}</span></span>
-                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">3 passes</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Jean-Jacques, {t("squad.bestPasser")}</span></span>
+                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">{t("squad.goalsShort").replace("{n}", 6)}</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Nazon, {t("squad.bestScorer")}</span></span>
+                <span><strong className="text-haiti-blue font-display text-xl md:text-2xl tabular-nums">{t("squad.assistsShort").replace("{n}", 3)}</strong>{" "}<span className="ml-1 uppercase tracking-wider text-xs">Jean-Jacques, {t("squad.bestPasser")}</span></span>
               </div>
             </div>
           </div>
