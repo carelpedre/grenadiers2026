@@ -12,6 +12,25 @@ import { squad, squadStats } from "../data/squad";
 import { getEntriesSorted } from "../data/diary";
 import { useT } from "../lib/i18n";
 
+// Sélecteur de langue pour les champs d'une entrée du Journal : champ anglais
+// en mode "en" s'il existe, sinon français (ht retombe sur le français).
+function makePick(lang) {
+  return (fr, en) => (lang === "en" && en ? en : fr);
+}
+// Date affichée : en anglais, formatée depuis l'ISO `date` ; sinon le
+// dateLabel français stocké (sortie française inchangée).
+function journalDate(entry, lang) {
+  if (lang === "en" && entry?.date) {
+    return new Date(`${entry.date}T00:00:00Z`).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  }
+  return entry?.dateLabel;
+}
+
 const featuredPlayers = [
   { slug: "jean-ricner-bellegarde", name: "Bellegarde", role: "Milieu de terrain · Wolverhampton", photo: "/images/photos/jean-ricner-bellegarde.jpg" },
   { slug: "wilson-isidor", name: "Isidor", role: "Attaquant Premier League · Sunderland", photo: "/images/photos/wilson-isidor.jpg" },
@@ -452,7 +471,8 @@ function JournalPreview() {
 }
 
 function FeaturedJournalCard({ entry }) {
-  const { t } = useT();
+  const { t, lang } = useT();
+  const pick = makePick(lang);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -468,7 +488,7 @@ function FeaturedJournalCard({ entry }) {
           <motion.div className="h-full" whileHover={{ scale: 1.03 }} transition={{ duration: 0.5 }}>
             <ImagePlaceholder
               src={entry.cover}
-              label={entry.title}
+              label={pick(entry.title, entry.titleEn)}
               aspect="16/9"
               rounded={false}
               className="w-full h-full object-cover"
@@ -480,12 +500,12 @@ function FeaturedJournalCard({ entry }) {
         </div>
         <div className="p-6 md:p-8 flex flex-col justify-center">
           <div className="flex items-center gap-2 mb-3 text-xs flex-wrap">
-            <span className="text-haiti-red uppercase tracking-wider font-bold">{entry.eyebrow}</span>
+            <span className="text-haiti-red uppercase tracking-wider font-bold">{pick(entry.eyebrow, entry.eyebrowEn)}</span>
             <span className="text-muted">·</span>
-            <span className="text-muted">{entry.dateLabel}</span>
+            <span className="text-muted">{journalDate(entry, lang)}</span>
           </div>
-          <h3 className="font-display text-2xl md:text-3xl mb-3 leading-snug">{entry.title}</h3>
-          <p className="text-muted leading-relaxed line-clamp-3">{entry.dek}</p>
+          <h3 className="font-display text-2xl md:text-3xl mb-3 leading-snug">{pick(entry.title, entry.titleEn)}</h3>
+          <p className="text-muted leading-relaxed line-clamp-3">{pick(entry.dek, entry.dekEn)}</p>
           <p className="mt-4 text-sm font-semibold text-haiti-blue group-hover:text-haiti-red transition-colors">
             {t("home.journal.readCta")} →
           </p>
@@ -496,7 +516,8 @@ function FeaturedJournalCard({ entry }) {
 }
 
 function JournalCard({ entry }) {
-  const { t } = useT();
+  const { t, lang } = useT();
+  const pick = makePick(lang);
   return (
     <motion.div variants={fadeUp} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
       <Link
@@ -507,7 +528,7 @@ function JournalCard({ entry }) {
           <motion.div whileHover={{ scale: 1.04 }} transition={{ duration: 0.5 }}>
             <ImagePlaceholder
               src={entry.cover}
-              label={entry.title}
+              label={pick(entry.title, entry.titleEn)}
               aspect="16/9"
               rounded={false}
             />
@@ -516,13 +537,13 @@ function JournalCard({ entry }) {
         <div className="p-5">
           <div className="flex items-center gap-2 mb-2 text-xs flex-wrap">
             <span className="text-haiti-red uppercase tracking-wider font-bold">
-              {entry.eyebrow}
+              {pick(entry.eyebrow, entry.eyebrowEn)}
             </span>
             <span className="text-muted">·</span>
-            <span className="text-muted">{entry.dateLabel}</span>
+            <span className="text-muted">{journalDate(entry, lang)}</span>
           </div>
-          <h3 className="font-display text-lg md:text-xl mb-2 leading-snug">{entry.title}</h3>
-          <p className="text-muted text-sm leading-relaxed">{entry.dek}</p>
+          <h3 className="font-display text-lg md:text-xl mb-2 leading-snug">{pick(entry.title, entry.titleEn)}</h3>
+          <p className="text-muted text-sm leading-relaxed">{pick(entry.dek, entry.dekEn)}</p>
           <p className="mt-3 text-sm font-semibold text-haiti-blue">{t("home.journal.readCta")} →</p>
         </div>
       </Link>
