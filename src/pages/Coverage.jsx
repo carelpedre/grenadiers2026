@@ -150,6 +150,69 @@ const COPY = {
     chokEyebrow: "By Chokarella Media",
     chokSoon: "Coming soon.",
   },
+  ht: {
+    heroEyebrow: "Omaj kreyatif · Ekspozisyon dijital",
+    heroTitle1: "Kijan Ayiti",
+    heroTitle2: "reponn.",
+    heroBody:
+      "Senkanndezan apre Minik, peyi a pa rete ap gade. Pandan Grenadye yo ap prepare Mondyal 2026 la, yon vag kreyatè ayisyen (mizisyen, sineas, ilistratris) ap reponn. Chante, dokimantè, zèv. Seleksyon an limen yon bagay. Men sa li deklanche.",
+    heroCuration: "Kurasyon : Chokarella Media · Me 2026",
+    navAria: "Chapit ekspozisyon an",
+    chapters: {
+      musique: {
+        label: "Klip mizik",
+        wall: "Lè yon seleksyon retounen nan Koup di Mond apre senkanndezan absans, se pa teren an sèlman ki reponn. Se estidyo yo tou. Soti Pòtoprens rive Brooklyn, soti Monreyal rive Pari, menm soti Bogota, atis ayisyen yo (Mizik Rasin, rap kreyòl, konpa, afrobeats, Raboday, tout jenerasyon ansanm) ap sòti moso ki akonpaye kanpay la. Men {n} videyo, nan lòd Chokarella Media envite w dekouvri yo.",
+      },
+      playlists: {
+        label: "Playlists",
+        wall: "Pi lwen pase moso yo pran youn pa youn, Chokarella Media rasanble kanpay la nan yon sèl playlist : tout mizik wout la pou rive nan Mondyal la, pou koute yon sèl kou, sou Spotify kou sou Apple Music.",
+      },
+      films: {
+        label: "Fim",
+        wall: "Pandan chante yo ap sòti, yon lòt travay ap kòmanse : sa fim yo. Lwen gwo tit abityèl yo sou Ayiti, sineas yo angaje pou rakonte peyi a atravè espò, ak nuans, ak pasyans, ak yon kamera ki pran tan pou l gade.",
+      },
+      art: {
+        label: "Atizay",
+        wall: "Epi imaj fiks la pran lapawòl. Sou kouvèti FOX Soccer ak Sports Illustrated, Ayiti parèt ete sa a, se pa yon estidyo Los Angeles oswa New York ki desine l, men yon men ayisyen. Lyne Lucien, ilistratris ki fòme nan Bowdoin College, ki baze nan Brooklyn, FOX Soccer chwazi l kòm anbasadè atistik ofisyèl Ayiti pou Mondyal 2026 la.",
+      },
+      objets: {
+        label: "Objè ak anblèm",
+        wall: "Pi lwen pase chante, fim ak ilistrasyon, kalifikasyon an materyalize nan objè ak anblèm tou : sa moun leve nan tribin yo kou sa Leta fè antre nan Listwa. Soti nan yon pèsonaj an kostim ki fèt nan fèvè sipòtè yo rive nan yon tenm komemoratif ofisyèl, men omaj konkrè sou wout Grenadye yo nan Mondyal 2026 la.",
+      },
+      poesie: {
+        label: "Pwezi",
+        wall: "Pi lwen pase imaj ak son, kalifikasyon an enspire mo yo tou. Yon sipòtè siyen isit la yon omaj an vè, sou libète, inite ak senkanndezan tann ki anfen rekonpanse.",
+      },
+      telecharger: {
+        label: "Pou telechaje",
+        wall: "Vizyèl nan koulè Grenadye yo, pou pote ak pou pataje.",
+      },
+    },
+    poemPlate: "Omaj literè · Powèm",
+    poemTextPrefix: "Tèks :",
+    playlistEyebrow: "Playlist Grenadye yo",
+    playlistCredit: "Kurasyon :",
+    playlistAvail: " · Disponib sou Spotify ak Apple Music.",
+    docSeries: "Seri dokimantè",
+    docProducer: "Noémie Ferron, pwodiktris",
+    docFeaturing: "Ak patisipasyon",
+    docAndOthers: "ak lòt moun",
+    docSupport: "Ak sipò",
+    videoUnsupported: "Navigatè ou a pa sipòte lekti videyo.",
+    lyneEyebrow: "Atis la · Chwazi pa FOX Soccer · Anbasadè ofisyèl Ayiti · Mondyal FIFA 2026",
+    artworkFor: "Pou",
+    artworkCredit1: "Zèv ki siyen",
+    artworkCredit2: "· Difize ak kredi.",
+    tributeLangAria: "Lang tèks la",
+    toggleSecond: "Kreyòl",
+    colophonTitle: "Yon nasyon k ap sipòte.",
+    colophonBody:
+      "Ekspozisyon sa a rasanble yon pati nan repons kreyatif kalifikasyon Ayiti pou Koup di Mond 2026 la pwovoke : chante, dokimantè, ilistrasyon.",
+    colophonCreditPrefix:
+      "Kurasyon : Chokarella Media · Pou siyale yon zèv pou ajoute, ekri",
+    chokEyebrow: "Pa Chokarella Media",
+    chokSoon: "Talè konsa sou entènèt.",
+  },
 };
 
 // ╔══════════════════════════════════════════════════════════════════════╗
@@ -166,7 +229,7 @@ export default function Coverage() {
   // one endless scroll. Active chapter is mirrored in the URL hash so links
   // (e.g. /the-tribute#art) and refreshes land on the right chapter.
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   const [activeTab, setActiveTab] = useState(getInitialChapter);
   const isFirstRender = useRef(true);
 
@@ -345,7 +408,7 @@ function ReadingProgressBar() {
 
 function ExhibitionHero() {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <section className="relative bg-ink text-bg overflow-hidden">
       {/* Subtle background — left bicolor edge, like the rest of the site */}
@@ -424,7 +487,7 @@ const CHAPTERS = [
 
 function ChapterNav({ active, onSelect }) {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <nav
       id="chapter-nav"
@@ -548,7 +611,7 @@ function MusicVideoExhibit({ video }) {
 
 function PoemExhibit() {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <article id="poeme" className="scroll-mt-24 max-w-content mx-auto px-5 pb-20 md:pb-28">
       <motion.div
@@ -608,7 +671,7 @@ function PoemExhibit() {
 
 function PlaylistExhibit() {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <article className="max-w-content mx-auto px-5 pb-20 md:pb-28">
       <motion.div
@@ -728,7 +791,7 @@ function ShortFilmExhibit({ film }) {
 
 function DocumentaryExhibit() {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <article className="max-w-content mx-auto px-5 py-12 md:py-16">
       <motion.div
@@ -839,7 +902,7 @@ function DocumentaryExhibit() {
 
 function LyneLucienExhibit() {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <div className="bg-bg">
       {/* Artist intro */}
@@ -897,7 +960,7 @@ function LyneLucienExhibit() {
 
 function ArtworkExhibit({ work }) {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <article className="max-w-content mx-auto px-5">
       <motion.figure
@@ -957,7 +1020,7 @@ function CreativeTributesExhibit({ chapter = "objets" }) {
 
 function TributeExhibit({ work }) {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   // Bilingual statement support: show a Kreyòl + translation toggle only when
   // both are present. The translation follows the page language (English when
   // available, else French). Single-statement entries render unchanged.
@@ -1132,7 +1195,7 @@ function DownloadCard({ item }) {
 
 function Colophon() {
   const { lang } = useT();
-  const c = COPY[lang];
+  const c = COPY[lang] || COPY.fr;
   return (
     <section className="border-t border-line bg-ink text-bg">
       <div className="max-w-content mx-auto px-5 py-20 md:py-28">

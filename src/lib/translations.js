@@ -2831,7 +2831,7 @@ const dict = {
   "federation.team.institution": {
     en: "Institution",
     fr: "Institution",
-    ht: "Institution",
+    ht: "Enstitisyon",
   },
   "federation.team.menA": {
     en: "Men A",
