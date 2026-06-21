@@ -17,7 +17,8 @@ import {
 } from "../data/coverage";
 
 // Pick a French/English value by active language (English falls back to French).
-const pickLang = (lang, fr, en) => (lang === "en" ? en ?? fr : fr);
+const pickLang = (lang, fr, en, ht) =>
+  lang === "ht" ? ht ?? fr : lang === "en" ? en ?? fr : fr;
 
 // ── Per-language page copy (curator wall text, headings, fixed labels) ──
 // The long-form prose lives here, in identical structure across languages, so
@@ -596,7 +597,7 @@ function MusicVideoExhibit({ video }) {
           </p>
           {video.note && (
             <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5">
-              {pickLang(lang, video.note, video.noteEn)}
+              {pickLang(lang, video.note, video.noteEn, video.noteHt)}
             </p>
           )}
         </div>
@@ -626,7 +627,7 @@ function PoemExhibit() {
             {c.poemPlate}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05]">
-            {pickLang(lang, supporterPoem.title, supporterPoem.titleEn)}
+            {pickLang(lang, supporterPoem.title, supporterPoem.titleEn, supporterPoem.titleHt)}
           </h3>
         </div>
 
@@ -634,7 +635,7 @@ function PoemExhibit() {
         <div className="max-w-md mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md mb-10 md:mb-12">
           <ImagePlaceholder
             src={supporterPoem.image}
-            label={pickLang(lang, supporterPoem.imageLabel, supporterPoem.imageLabelEn)}
+            label={pickLang(lang, supporterPoem.imageLabel, supporterPoem.imageLabelEn, supporterPoem.imageLabelHt)}
             aspect="1/1"
             rounded={false}
           />
@@ -651,13 +652,13 @@ function PoemExhibit() {
               {supporterPoem.lines.join("\n")}
             </p>
             <p className="mt-10 text-center text-sm text-muted">
-              {c.poemTextPrefix} {pickLang(lang, supporterPoem.author, supporterPoem.authorEn)}
+              {c.poemTextPrefix} {pickLang(lang, supporterPoem.author, supporterPoem.authorEn, supporterPoem.authorHt)}
             </p>
           </div>
 
           {/* Toussaint framing · quiet note */}
           <p className="mt-6 max-w-xl mx-auto text-center text-sm text-muted leading-relaxed">
-            {pickLang(lang, supporterPoem.note, supporterPoem.noteEn)}
+            {pickLang(lang, supporterPoem.note, supporterPoem.noteEn, supporterPoem.noteHt)}
           </p>
         </div>
       </motion.div>
@@ -685,10 +686,10 @@ function PlaylistExhibit() {
             {c.playlistEyebrow}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-4">
-            {pickLang(lang, playlist.title, playlist.titleEn)}
+            {pickLang(lang, playlist.title, playlist.titleEn, playlist.titleHt)}
           </h3>
           <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5 mb-6">
-            {pickLang(lang, playlist.description, playlist.descriptionEn)}
+            {pickLang(lang, playlist.description, playlist.descriptionEn, playlist.descriptionHt)}
           </p>
           <p className="text-muted text-sm">
             {c.playlistCredit}{" "}
@@ -753,13 +754,13 @@ function ShortFilmExhibit({ film }) {
         {/* Plate caption above, same convention as the documentary */}
         <div className="max-w-3xl mx-auto mb-2 md:mb-4">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            {pickLang(lang, film.medium, film.mediumEn)}
+            {pickLang(lang, film.medium, film.mediumEn, film.mediumHt)}
           </p>
           <h3 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] mb-3">
             {film.title}
           </h3>
           <p className="text-muted text-base md:text-lg">
-            {pickLang(lang, film.credit, film.creditEn)}
+            {pickLang(lang, film.credit, film.creditEn, film.creditHt)}
           </p>
         </div>
 
@@ -776,7 +777,7 @@ function ShortFilmExhibit({ film }) {
         {film.note && (
           <div className="max-w-3xl mx-auto">
             <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5">
-              {pickLang(lang, film.note, film.noteEn)}
+              {pickLang(lang, film.note, film.noteEn, film.noteHt)}
             </p>
           </div>
         )}
@@ -809,15 +810,15 @@ function DocumentaryExhibit() {
             {ferronDocumentary.title}
           </h3>
           <p className="text-muted text-base md:text-lg mb-4">
-            {pickLang(lang, ferronDocumentary.credit, ferronDocumentary.creditEn)}
+            {pickLang(lang, ferronDocumentary.credit, ferronDocumentary.creditEn, ferronDocumentary.creditHt)}
           </p>
           <p className="text-ink/80 text-base md:text-lg leading-relaxed mb-5">
-            {pickLang(lang, ferronDocumentary.synopsisShort, ferronDocumentary.synopsisShortEn)}
+            {pickLang(lang, ferronDocumentary.synopsisShort, ferronDocumentary.synopsisShortEn, ferronDocumentary.synopsisShortHt)}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-semibold text-ink">
               <span className="w-1.5 h-1.5 rounded-full bg-haiti-red" aria-hidden="true"></span>
-              {pickLang(lang, ferronDocumentary.availability, ferronDocumentary.availabilityEn)}
+              {pickLang(lang, ferronDocumentary.availability, ferronDocumentary.availabilityEn, ferronDocumentary.availabilityHt)}
             </span>
             <a
               href={ferronDocumentary.watch.url}
@@ -825,7 +826,7 @@ function DocumentaryExhibit() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-haiti-blue px-5 py-2.5 text-white text-sm font-semibold hover:bg-haiti-blue-dark transition-colors"
             >
-              {pickLang(lang, ferronDocumentary.watch.label, ferronDocumentary.watch.labelEn)} →
+              {pickLang(lang, ferronDocumentary.watch.label, ferronDocumentary.watch.labelEn, ferronDocumentary.watch.labelHt)} →
             </a>
           </div>
         </div>
@@ -854,11 +855,11 @@ function DocumentaryExhibit() {
         {/* Wall text — curator describes the work */}
         <div className="max-w-3xl mx-auto">
           <p className="text-ink/80 text-base md:text-lg leading-relaxed border-l-2 border-haiti-blue/30 pl-5 mb-8">
-            {pickLang(lang, ferronDocumentary.synopsisLong, ferronDocumentary.synopsisLongEn)}
+            {pickLang(lang, ferronDocumentary.synopsisLong, ferronDocumentary.synopsisLongEn, ferronDocumentary.synopsisLongHt)}
           </p>
 
           <blockquote className="font-display text-2xl md:text-3xl text-ink leading-snug italic mb-3">
-            «&nbsp;{pickLang(lang, ferronDocumentary.quote, ferronDocumentary.quoteEn)}&nbsp;»
+            «&nbsp;{pickLang(lang, ferronDocumentary.quote, ferronDocumentary.quoteEn, ferronDocumentary.quoteHt)}&nbsp;»
           </blockquote>
           <p className="text-muted text-sm mb-10">
             {c.docProducer}
@@ -888,7 +889,7 @@ function DocumentaryExhibit() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-haiti-blue font-semibold hover:text-haiti-red transition-colors text-sm"
           >
-            {pickLang(lang, ferronDocumentary.source.label, ferronDocumentary.source.labelEn)} →
+            {pickLang(lang, ferronDocumentary.source.label, ferronDocumentary.source.labelEn, ferronDocumentary.source.labelHt)} →
           </a>
         </div>
       </motion.div>
@@ -921,10 +922,10 @@ function LyneLucienExhibit() {
             {lyneLucien.artist}
           </h3>
           <blockquote className="font-display text-xl md:text-2xl text-ink/85 leading-snug italic mb-8 border-l-2 border-haiti-red pl-5">
-            «&nbsp;{pickLang(lang, lyneLucien.quote, lyneLucien.quoteEn)}&nbsp;»
+            «&nbsp;{pickLang(lang, lyneLucien.quote, lyneLucien.quoteEn, lyneLucien.quoteHt)}&nbsp;»
           </blockquote>
           <p className="text-ink/80 text-base md:text-lg leading-relaxed mb-8">
-            {pickLang(lang, lyneLucien.bio, lyneLucien.bioEn)}
+            {pickLang(lang, lyneLucien.bio, lyneLucien.bioEn, lyneLucien.bioHt)}
           </p>
           <div className="flex flex-wrap gap-3 text-sm">
             <a
@@ -972,7 +973,7 @@ function ArtworkExhibit({ work }) {
         <div className="max-w-3xl mx-auto rounded-lg overflow-hidden bg-white border border-line shadow-md">
           <ImagePlaceholder
             src={work.image}
-            label={pickLang(lang, work.imageLabel, work.imageLabelEn)}
+            label={pickLang(lang, work.imageLabel, work.imageLabelEn, work.imageLabelHt)}
             aspect="4/5"
             rounded={false}
           />
@@ -982,10 +983,10 @@ function ArtworkExhibit({ work }) {
             {c.artworkFor} {work.publication}
           </p>
           <h4 className="font-display text-xl md:text-2xl text-ink mb-4 leading-tight">
-            {pickLang(lang, work.role, work.roleEn)}
+            {pickLang(lang, work.role, work.roleEn, work.roleHt)}
           </h4>
           <p className="text-ink/75 text-base leading-relaxed mb-3">
-            {pickLang(lang, work.caption, work.captionEn)}
+            {pickLang(lang, work.caption, work.captionEn, work.captionHt)}
           </p>
           <p className="text-xs text-muted italic">
             {c.artworkCredit1} {lyneLucien.artist} {c.artworkCredit2}
@@ -1048,7 +1049,7 @@ function TributeExhibit({ work }) {
         >
           <ImagePlaceholder
             src={work.image}
-            label={pickLang(lang, work.imageLabel, work.imageLabelEn)}
+            label={pickLang(lang, work.imageLabel, work.imageLabelEn, work.imageLabelHt)}
             aspect="3/4"
             fit="contain"
             rounded={false}
@@ -1056,14 +1057,14 @@ function TributeExhibit({ work }) {
         </div>
         <figcaption className="max-w-2xl mx-auto mt-6 md:mt-8 text-center">
           <p className="text-haiti-red text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold mb-3">
-            {pickLang(lang, work.medium, work.mediumEn)}
+            {pickLang(lang, work.medium, work.mediumEn, work.mediumHt)}
           </p>
           <h4 className="font-display text-xl md:text-2xl text-ink mb-4 leading-tight">
-            {pickLang(lang, work.title, work.titleEn)}
+            {pickLang(lang, work.title, work.titleEn, work.titleHt)}
           </h4>
           {work.caption && (
             <p className="text-ink/70 text-base italic leading-relaxed mb-4">
-              {pickLang(lang, work.caption, work.captionEn)}
+              {pickLang(lang, work.caption, work.captionEn, work.captionHt)}
             </p>
           )}
 
@@ -1098,19 +1099,19 @@ function TributeExhibit({ work }) {
             </>
           ) : (
             <p className="text-ink/75 text-base leading-relaxed mb-3">
-              {pickLang(lang, work.description, work.descriptionEn)}
+              {pickLang(lang, work.description, work.descriptionEn, work.descriptionHt)}
             </p>
           )}
 
           {/* Pull-quote · highlighted, set apart from the body */}
           {work.quote && (
             <blockquote className="mx-auto my-6 max-w-xl border-y border-line py-5 font-display text-xl md:text-2xl italic leading-snug text-ink">
-              «&nbsp;{pickLang(lang, work.quote, work.quoteEn)}&nbsp;»
+              «&nbsp;{pickLang(lang, work.quote, work.quoteEn, work.quoteHt)}&nbsp;»
             </blockquote>
           )}
 
           <p className="text-xs text-muted italic">
-            {pickLang(lang, work.credit, work.creditEn)}
+            {pickLang(lang, work.credit, work.creditEn, work.creditHt)}
             {work.creditUrl && (
               <>
                 {work.creditInline ? " " : " · "}

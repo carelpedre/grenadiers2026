@@ -20,10 +20,13 @@ export const playlist = {
   // Common
   title: "Grenadiers 2026 · La playlist",
   titleEn: "Grenadiers 2026 · The Playlist",
+  titleHt: "Grenadiers 2026 · Playlist la",
   description:
     "La bande-son des Grenadiers, mise à jour au fil de la route vers le Mondial. Chaque titre choisi par Chokarella Media pour accompagner Les Grenadiers.",
   descriptionEn:
     "The Grenadiers' soundtrack, updated along the road to the World Cup. Every track chosen by Chokarella Media to accompany the Grenadiers.",
+  descriptionHt:
+    "Mizik Grenadye yo, ki mete ajou sou wout Mondyal la. Chak tit Chokarella Media chwazi pou akonpaye Grenadye yo.",
   curator: {
     name: "Chokarella Media",
     handle: "@chokarella",
@@ -52,6 +55,7 @@ export const musicVideos = [
     artist: "Ayiiti feat. Boukman Eksperyans & Paul Beaubrun",
     note: "La génération Mizik Rasin passe le flambeau. Boukman Eksperyans, le groupe nommé en hommage à Dutty Boukman, le prêtre vodou dont la cérémonie de 1791 a contribué à allumer la Révolution haïtienne, et plusieurs fois nommé aux Grammy Awards, y rejoint Paul Beaubrun (fils du leader Lolo Beaubrun) et le producteur T-Ansyto, autour d'Ayiiti, artiste haïtienne basée en Colombie. Le morceau est une interpolation de « Kè m Pa Sote », hymne classique de Boukman Eksperyans, et marie les racines vodou de la Mizik Rasin et la production contemporaine. Le message, dans les mots d'Ayiiti : l'unité et la fierté haïtienne au moment de paraître sur la scène mondiale, 52 ans après.",
     noteEn: "The Mizik Rasin generation passes the torch. Boukman Eksperyans, the group named in tribute to Dutty Boukman, the vodou priest whose 1791 ceremony helped ignite the Haitian Revolution, and a multiple Grammy nominee, is joined here by Paul Beaubrun (son of bandleader Lolo Beaubrun) and producer T-Ansyto, around Ayiiti, a Haitian artist based in Colombia. The track is an interpolation of \"Kè m Pa Sote\", a classic Boukman Eksperyans anthem, and weds the vodou roots of Mizik Rasin to contemporary production. The message, in Ayiiti's words: Haitian unity and pride as the country steps onto the world stage, 52 years on.",
+    noteHt: "Jenerasyon Mizik Rasin lan ap pase flanbo a. Boukman Eksperyans, gwoup ki pote non Dutty Boukman, prèt vodou seremoni 1791 li a te ede limen Revolisyon ayisyen an, epi ki nominen plizyè fwa nan Grammy Awards, jwenn isit la Paul Beaubrun (pitit gason chèf gwoup Lolo Beaubrun) ak pwodiktè T-Ansyto, alantou Ayiiti, yon atis ayisyen ki baze nan Kolonbi. Moso a se yon entèpolasyon « Kè m Pa Sote », yon im klasik Boukman Eksperyans, epi li marye rasin vodou Mizik Rasin lan ak pwodiksyon kontanporen. Mesaj la, nan mo Ayiiti: inite ak fyète ayisyen nan moman peyi a ap parèt sou sèn mondyal la, 52 an apre.",
   },
   {
     videoId: "qQixgzEcypk",
@@ -59,6 +63,7 @@ export const musicVideos = [
     artist: "Tonymix & T-Ansyto feat. J Perry, Shabba, K-Dilak & Kenny Haïti",
     note: "Un sommet de la production haïtienne contemporaine. Tonymix et T-Ansyto, deux des architectes du son afrobeats-konpa de la diaspora, réunissent J Perry, Shabba, K-Dilak et Kenny Haïti pour livrer une bande-son taillée pour la campagne 2026.",
     noteEn: "A peak of contemporary Haitian production. Tonymix and T-Ansyto, two of the architects of the diaspora's afrobeats-konpa sound, bring together J Perry, Shabba, K-Dilak, and Kenny Haïti to deliver a soundtrack cut for the 2026 campaign.",
+    noteHt: "Yon somè pwodiksyon ayisyen kontanporen. Tonymix ak T-Ansyto, de nan achitèk son afrobeats-konpa dyaspora a, reyini J Perry, Shabba, K-Dilak ak Kenny Haïti pou bay yon mizik taye pou kanpay 2026 la.",
   },
   {
     videoId: "j3GOVYuS0I0",
@@ -66,6 +71,7 @@ export const musicVideos = [
     artist: "Roody Roodboy",
     note: "Roody Roodboy entre dans la danse avec un titre qui sonne comme un mot d'ordre : faites qu'ils nous voient. Une énergie taillée pour les tribunes, au moment précis où les Grenadiers s'apprêtent à montrer au monde entier qui nous sommes.",
     noteEn: "Roody Roodboy joins in with a track that lands like a rallying cry: make them see us. An energy built for the stands, at the very moment the Grenadiers are about to show the whole world who we are.",
+    noteHt: "Roody Roodboy antre nan dans lan ak yon moso ki sonnen tankou yon mo dòd: fè yo wè nou. Yon enèji taye pou tribin yo, nan moman egzak Grenadye yo prèt pou montre tout mond lan kiyès nou ye.",
   },
   {
     videoId: "6euO1ITsOW8",
@@ -73,6 +79,7 @@ export const musicVideos = [
     artist: "Darline Desca",
     note: "Darline Desca pose sa voix sur la fierté nationale : Nou Fyè, nous sommes fiers. Un hommage tout en émotion à ce que représentent les Grenadiers pour le peuple haïtien, au moment où le pays retrouve la scène mondiale.",
     noteEn: "Darline Desca lends her voice to national pride: Nou Fyè, we are proud. A deeply felt tribute to what the Grenadiers mean to the Haitian people, as the country returns to the world stage.",
+    noteHt: "Darline Desca mete vwa li sou fyète nasyonal la: Nou Fyè. Yon omaj ki chaje ak emosyon sou sa Grenadye yo reprezante pou pèp ayisyen an, nan moman peyi a ap retounen sou sèn mondyal la.",
   },
   {
     videoId: "HRJGk9p-Sgw",
@@ -80,6 +87,7 @@ export const musicVideos = [
     artist: "Manno Beats feat. Fantom",
     note: "Manno Beats s'associe à Fantom pour un morceau taillé pour l'événement : Nan Mondyal, à la Coupe du Monde. Une énergie rentre-dedans qui dit la fierté de voir Haïti enfin de retour au plus haut niveau.",
     noteEn: "Manno Beats teams up with Fantom for a track built for the occasion: Nan Mondyal, at the World Cup. A hard-charging energy that voices the pride of seeing Haiti back at the highest level at last.",
+    noteHt: "Manno Beats asosye ak Fantom pou yon moso taye pou evènman an: Nan Mondyal. Yon enèji ki rantre ladan ki di fyète pou wè Ayiti anfen retounen nan pi wo nivo a.",
   },
   {
     videoId: "wHIpW-LvW2k",
@@ -87,6 +95,7 @@ export const musicVideos = [
     artist: "Sincerely Suav · Afriken An · T-Ansyto",
     note: "Sincerely Suav et Afriken An retrouvent T-Ansyto à la production. Set It Off, littéralement « tout déclencher », capte l'énergie qui précède le coup d'envoi. Un titre Raboday fait autant pour les stades que pour les écouteurs.",
     noteEn: "Sincerely Suav and Afriken An reunite with T-Ansyto on production. Set It Off captures the energy right before kickoff. A Raboday track made as much for the stadiums as for the headphones.",
+    noteHt: "Sincerely Suav ak Afriken An jwenn T-Ansyto ankò nan pwodiksyon. Set It Off, literalman « deklanche tout bagay », kenbe enèji ki vin anvan kout anvwa a. Yon moso Raboday fèt otan pou estad yo ke pou ekoutè yo.",
   },
   {
     videoId: "JfTfquzZ2mo",
@@ -94,6 +103,7 @@ export const musicVideos = [
     artist: "Junior Bonheur (Crush) feat. Alex Coffy",
     note: "« Nous ne sommes pas seuls. Haïti, lève-toi. » Le titre dit l'essentiel. Junior Bonheur, alias Crush, signe avec Alex Coffy un appel à la résilience collective porté par une production konpa contemporaine. Une bande-son qui s'adresse directement à la sélection autant qu'à celles et ceux qui la suivent.",
     noteEn: "\"We are not alone. Haiti, rise up.\" The title says what matters. Junior Bonheur, alias Crush, joins Alex Coffy for a call to collective resilience carried by contemporary konpa production. A soundtrack that speaks directly to the team as much as to those who follow it.",
+    noteHt: "« Nou pa poukont nou. Ayiti, leve. » Tit la di esansyèl la. Junior Bonheur, alyas Crush, siyen ak Alex Coffy yon apèl pou rezilyans kolektif yon pwodiksyon konpa kontanporen pote. Yon mizik ki pale dirèkteman ak seleksyon an otan ak moun k ap swiv li yo.",
   },
   {
     videoId: "DgpIcZGxCxg",
@@ -101,6 +111,7 @@ export const musicVideos = [
     artist: "Leicka Paul × Eddy François",
     note: "Les battre. Les corriger. Le vocabulaire compétitif de chaque terrain vague haïtien, désormais amplifié par Eddy François, la voix légendaire de la Mizik Rasin, fondateur de Boukan Ginen après son départ de Boukman Eksperyans, dont les collaborations avec Wyclef Jean ont porté la musique racine haïtienne dans le monde. Leicka Paul apporte la nouvelle génération ; Eddy François apporte la mémoire institutionnelle de ce que sonne la musique haïtienne quand elle a du sens.",
     noteEn: "To beat them. To school them. The competitive vocabulary of every Haitian sandlot, now amplified by Eddy François, the legendary Mizik Rasin voice, founder of Boukan Ginen after leaving Boukman Eksperyans, whose collaborations with Wyclef Jean carried Haitian roots music around the world. Leicka Paul brings the new generation; Eddy François brings the institutional memory of what Haitian music sounds like when it means something.",
+    noteHt: "Bat yo. Korije yo. Vokabilè konpetitif chak teren vag ann Ayiti, kounye a Eddy François anplifye l, vwa lejandè Mizik Rasin lan, fondatè Boukan Ginen apre li te kite Boukman Eksperyans, ki kolaborasyon li ak Wyclef Jean te pote mizik rasin ayisyen an nan mond lan. Leicka Paul pote nouvo jenerasyon an; Eddy François pote memwa enstitisyonèl sou kijan mizik ayisyen sonnen lè li gen sans.",
   },
   {
     videoId: "R-MpbUg1M-8",
@@ -108,6 +119,7 @@ export const musicVideos = [
     artist: "Halfdan feat. BIC Tizon Dife",
     note: "« Haïti, devant. » L'invitation de Halfdan a réuni l'une des plumes les plus écoutées de la chanson haïtienne : BIC Tizon Dife, dont la discographie a accompagné deux décennies de conscience haïtienne, et dont chaque couplet engage autant qu'il rythme.",
     noteEn: "\"Haiti, out front.\" Halfdan's invitation drew in one of the most listened-to pens in Haitian song: BIC Tizon Dife, whose discography has accompanied two decades of Haitian consciousness, and whose every verse commits as much as it grooves.",
+    noteHt: "« Ayiti, devan. » Envitasyon Halfdan an reyini youn nan plim ki pi koute nan chante ayisyen an: BIC Tizon Dife, ki diskografi li akonpaye de deseni konsyans ayisyen, epi ki chak kouplè angaje otan ke li bay ritm.",
   },
   {
     videoId: "ya02qrfeG4U",
@@ -115,6 +127,7 @@ export const musicVideos = [
     artist: "Fantom feat. Map Zoe, Cator Gshytt, Dutty, Percutant Flow, Boaz",
     note: "Un hymne rap pour accompagner les Grenadiers vers le Mondial 2026, signé Fantom et invités.",
     noteEn: "A rap anthem to carry the Grenadiers toward the 2026 World Cup, by Fantom and guests.",
+    noteHt: "Yon im rap pou akonpaye Grenadye yo nan wout Mondyal 2026 la, siyen Fantom ak envite.",
   },
   {
     videoId: "V9cT4mf-4Iw",
@@ -122,6 +135,7 @@ export const musicVideos = [
     artist: "JEEJEE",
     note: "« Après 52 ans. » Le titre, à lui seul, dit toute la distance entre Munich 1974 et Foxborough 2026. JEEJEE, voix montante de la musique haïtienne, prend en charge ce poids mémoriel et l'installe dans le langage musical contemporain. Le pont entre deux générations qui se reconnaissent dans le même drapeau.",
     noteEn: "\"After 52 years.\" The title alone says the whole distance between Munich 1974 and Foxborough 2026. JEEJEE, a rising voice in Haitian music, takes on that weight of memory and sets it in a contemporary musical language. The bridge between two generations who recognize themselves in the same flag.",
+    noteHt: "« Apre 52 an. » Tit la pou kont li di tout distans ki genyen ant Minik 1974 ak Foxborough 2026. JEEJEE, yon vwa k ap monte nan mizik ayisyen an, pran pwa memwa sa a sou li epi mete l nan langaj mizikal kontanporen. Pon ant de jenerasyon ki rekonèt tèt yo nan menm drapo a.",
   },
   {
     videoId: "C5Fpq4rjxdY",
@@ -129,6 +143,7 @@ export const musicVideos = [
     artist: "David Dely & Ismael",
     note: "« Les Grenadiers peuvent le faire. » Réponse directe au cri de ralliement « Grenadye, alaso ». David Dely et Ismael portent en duo une déclaration de foi, quatre mots qu'on entendra repris des deux côtés de l'Atlantique au coup d'envoi.",
     noteEn: "\"The Grenadiers can do it.\" A direct answer to the rallying cry \"Grenadye, alaso\". David Dely and Ismael carry, as a duo, a declaration of faith, four words that will be echoed on both sides of the Atlantic at kickoff.",
+    noteHt: "« Grenadye yo ka fè l. » Repons dirèk ak kri rasanbleman « Grenadye, alaso ». David Dely ak Ismael pote an dwo yon deklarasyon lafwa, kat mo y ap repete de bò Atlantik la nan kout anvwa a.",
   },
   {
     videoId: "pXT6JRI30kw",
@@ -136,6 +151,7 @@ export const musicVideos = [
     artist: "DANAEE",
     note: "« Champions ». Le mot qu'un peuple entier ose enfin prononcer. DANAEE transforme l'ambition en hymne : une déclaration portée par la nouvelle scène haïtienne, taillée pour accompagner Les Grenadiers sur la route du Mondial 2026.",
     noteEn: "\"Champions.\" The word a whole people finally dares to say. DANAEE turns ambition into an anthem: a declaration carried by the new Haitian scene, made to accompany the Grenadiers on the road to the 2026 World Cup.",
+    noteHt: "« Champions ». Mo yon pèp antye anfen oze di. DANAEE transfòme anbisyon an an im: yon deklarasyon nouvo sèn ayisyen an pote, taye pou akonpaye Grenadye yo sou wout Mondyal 2026 la.",
   },
   {
     videoId: "5cg4Zw42lO8",
@@ -143,6 +159,7 @@ export const musicVideos = [
     artist: "DOIZAY",
     note: "« Ayibobo », le cri de louange hérité du vaudou haïtien, devenu ici hymne de la victoire. DOIZAY transforme cette affirmation ancestrale en chant de ralliement, où la ferveur populaire et la fierté nationale se rejoignent pour accompagner Les Grenadiers vers le Mondial 2026.",
     noteEn: "\"Ayibobo\", the cry of praise inherited from Haitian vodou, becomes here a victory anthem. DOIZAY turns this ancestral affirmation into a rallying song, where popular fervor and national pride meet to accompany the Grenadiers toward the 2026 World Cup.",
+    noteHt: "« Ayibobo », kri lwanj ki soti nan vodou ayisyen an, vin tounen isit la yon im viktwa. DOIZAY transfòme afimasyon zansèt sa a an yon chante rasanbleman, kote fèvè popilè ak fyète nasyonal rejwenn pou akonpaye Grenadye yo nan wout Mondyal 2026 la.",
   },
   {
     videoId: "PE6s-i2ZEbs",
@@ -150,6 +167,7 @@ export const musicVideos = [
     artist: "Prince Dany et un collectif d'artistes haïtiens du Chili",
     note: "Depuis le Chili, des artistes haïtiens de la diaspora signent un hymne pour le retour d'Haïti en Coupe du Monde : un message d'unité, d'espoir et de fierté, porté par ceux qui vivent loin du pays mais jamais loin du drapeau.",
     noteEn: "From Chile, Haitian diaspora artists sign an anthem for Haiti's return to the World Cup: a message of unity, hope, and pride, carried by those who live far from home but never far from the flag.",
+    noteHt: "Soti nan Chili, atis ayisyen dyaspora a siyen yon im pou retou Ayiti nan Koup di Mond: yon mesaj inite, espwa ak fyète, moun k ap viv lwen peyi a men ki pa janm lwen drapo a pote.",
   },
 ];
 
@@ -178,38 +196,49 @@ export const lyneLucien = {
   artist: "Lyne Lucien",
   bio: "Illustratrice haïtienne primée, basée à Brooklyn. Diplômée de Bowdoin College. Désignée par FOX Soccer comme ambassadrice artistique officielle d'Haïti pour la Coupe du Monde de la FIFA 2026. Son travail a été publié dans New York Magazine, NPR, The Atlantic, Columbia Journalism Review et lors de campagnes Google. Sa pièce illustrée de 2021 sur la soupe joumou pour New York Magazine a accompagné le dossier qui a permis à la soupe d'obtenir le statut de patrimoine culturel immatériel de l'UNESCO. Distinctions : Society of Illustrators 64, American Illustration 40/41, World Illustration Award, Applied Arts, longue liste Communication Arts.",
   bioEn: "An award-winning Haitian illustrator based in Brooklyn. A graduate of Bowdoin College. Named by FOX Soccer as Haiti's official artistic ambassador for the 2026 FIFA World Cup. Her work has appeared in New York Magazine, NPR, The Atlantic, Columbia Journalism Review, and in Google campaigns. Her 2021 illustrated piece on joumou soup for New York Magazine accompanied the dossier that earned the soup UNESCO intangible cultural heritage status. Honors: Society of Illustrators 64, American Illustration 40/41, World Illustration Award, Applied Arts, Communication Arts long list.",
+  bioHt: "Ilistratris ayisyen primè, ki baze nan Brooklyn. Diplome nan Bowdoin College. FOX Soccer chwazi l kòm anbasadè atistik ofisyèl Ayiti pou Koup di Mond FIFA 2026 la. Travay li parèt nan New York Magazine, NPR, The Atlantic, Columbia Journalism Review ak nan kanpay Google. Pyès ilistre li an 2021 sou soup joumou pou New York Magazine te akonpaye dosye ki te fè soup la jwenn estati patrimwàn kiltirèl imateryèl UNESCO. Distenksyon: Society of Illustrators 64, American Illustration 40/41, World Illustration Award, Applied Arts, lis long Communication Arts.",
   website: "https://www.lynelucien.com",
   instagram: "https://www.instagram.com/lyne.lucien",
   quote:
     "Puisant dans l'énergie et l'esprit de son pays, Lyne Lucien crée des illustrations colorées et vibrantes, témoignage de ce que fut son enfance en Haïti.",
   quoteEn:
     "Drawing on the energy and spirit of her country, Lyne Lucien creates colorful, vibrant illustrations, a testament to what her childhood in Haiti was.",
+  quoteHt:
+    "Pandan li pran nan enèji ak lespri peyi li, Lyne Lucien kreye ilistrasyon kolore e vibran, yon temwayaj sou sa anfans li ann Ayiti te ye.",
   works: [
     {
       slug: "fox-sports",
       publication: "FOX Soccer",
       role: "Ambassadrice artistique officielle d'Haïti · Coupe du Monde FIFA 2026",
       roleEn: "Haiti's official artistic ambassador · 2026 FIFA World Cup",
+      roleHt: "Anbasadè atistik ofisyèl Ayiti · Koup di Mond FIFA 2026",
       image: "/images/lyne-lucien/fox-poster.jpg",
       imageLabel: "Haïti · par Lyne Lucien pour FOX Soccer",
       imageLabelEn: "Haiti, by Lyne Lucien for FOX Soccer",
+      imageLabelHt: "Ayiti · pa Lyne Lucien pou FOX Soccer",
       caption:
         "Lyne Lucien a été choisie par FOX Soccer comme ambassadrice artistique officielle d'Haïti pour le Mondial 2026, l'une d'une série d'illustrateurs commandés pour représenter les nations participantes. Sa pièce se veut, selon ses propres mots, « un hommage au peuple haïtien, à ses supporters et à son histoire ».",
       captionEn:
         "Lyne Lucien was chosen by FOX Soccer as Haiti's official artistic ambassador for the 2026 World Cup, one of a series of illustrators commissioned to represent the participating nations. Her piece is meant, in her own words, to be \"a tribute to the Haitian people, its supporters, and its history\".",
+      captionHt:
+        "FOX Soccer chwazi Lyne Lucien kòm anbasadè atistik ofisyèl Ayiti pou Mondyal 2026 la, youn nan yon seri ilistratè yo komande pou reprezante nasyon k ap patisipe yo. Pyès li a vle ye, nan pwòp mo li, « yon omaj pou pèp ayisyen an, sipòtè li yo ak istwa li ».",
     },
     {
       slug: "sports-illustrated",
       publication: "Sports Illustrated",
       role: "Illustration · Couverture Haïti, Coupe du Monde 2026",
       roleEn: "Illustration · Haiti cover, 2026 World Cup",
+      roleHt: "Ilistrasyon · Kouvèti Ayiti, Koup di Mond 2026",
       image: "/images/lyne-lucien/si-poster.jpg",
       imageLabel: "Haïti · par Lyne Lucien pour Sports Illustrated",
       imageLabelEn: "Haiti, by Lyne Lucien for Sports Illustrated",
+      imageLabelHt: "Ayiti · pa Lyne Lucien pou Sports Illustrated",
       caption:
         "Une seconde œuvre de Lyne Lucien, associée à l'avant-Mondial Sports Illustrated consacré à Haïti. La même main, la même voix, l'art haïtien qui représente le football haïtien devant un public mondial.",
       captionEn:
         "A second piece by Lyne Lucien, paired with the Sports Illustrated World Cup preview devoted to Haiti. The same hand, the same voice: Haitian art representing Haitian football before a global audience.",
+      captionHt:
+        "Yon dezyèm zèv Lyne Lucien, ki asosye ak avan-Mondyal Sports Illustrated ki dedye a Ayiti. Menm men an, menm vwa a, atizay ayisyen k ap reprezante foutbòl ayisyen devan yon piblik mondyal.",
     },
   ],
 };
@@ -225,18 +254,24 @@ export const creativeTributes = [
     chapter: "art",
     medium: "Illustration",
     mediumEn: "Illustration",
+    mediumHt: "Ilistrasyon",
     large: true, // l'œuvre EST l'hommage : on l'affiche en grand, non rognée
     image: "/images/tribute/the-winner-khami-ken.jpg",
     imageLabel: "The WINNER · illustration de Khami_ken",
     imageLabelEn: "The WINNER · illustration by Khami_ken",
+    imageLabelHt: "The WINNER · ilistrasyon Khami_ken",
     description:
       "Cette illustration symbolise la passion, la force et la détermination des Grenadiers. Le joueur, illuminé par la lumière du soleil, représente l'espoir et la fierté de toute une nation. Son cri incarne le courage, le sacrifice et l'esprit de combat nécessaires pour atteindre les plus grands sommets, alimenté par une soif de victoire. Elle a pour objectif de refléter l'équipe nationale et le peuple haïtien à travers une seule chair, et de porter haut les couleurs d'Haïti sur la scène internationale.",
     descriptionEn:
       "This illustration stands for the passion, strength, and determination of the Grenadiers. The player, lit by sunlight, represents the hope and pride of a whole nation. His cry embodies the courage, sacrifice, and fighting spirit it takes to reach the greatest heights, fueled by a thirst for victory. It aims to reflect the national team and the Haitian people as one flesh, and to carry Haiti's colors high on the international stage.",
+    descriptionHt:
+      "Ilistrasyon sa a senbolize pasyon, fòs ak detèminasyon Grenadye yo. Jwè a, limen pa limyè solèy la, reprezante espwa ak fyète tout yon nasyon. Rèl li enkane kouraj, sakrifis ak lespri konba ki nesesè pou rive nan pi gwo somè yo, alimante pa yon swaf viktwa. Li gen pou objektif reflete ekip nasyonal la ak pèp ayisyen an nan yon sèl chè, epi pote koulè Ayiti yo wo sou sèn entènasyonal la.",
     quote: "Chaque cri de victoire est l'aboutissement d'années de sacrifice.",
     quoteEn: "Every victory cry is the culmination of years of sacrifice.",
+    quoteHt: "Chak rèl viktwa se rezilta ane sakrifis.",
     credit: "Illustration :",
     creditEn: "Illustration:",
+    creditHt: "Ilistrasyon :",
     creditInline: true, // « Illustration : Khami_ken » (espace, pas de middot)
     creditHandle: "Khami_ken",
     creditUrl: "https://www.instagram.com/khami_ken/",
@@ -248,13 +283,17 @@ export const creativeTributes = [
     chapter: "art",
     medium: "Peinture · Mars 2026",
     mediumEn: "Painting · March 2026",
+    mediumHt: "Penti · Mas 2026",
     image: "/images/tribute/lento-ayizan-tanbou-2026.jpg",
     imageLabel: "Lento Ayizan · Ayiti nan Mondyal 2026, le tambour de la victoire",
     imageLabelEn: "Lento Ayizan · Ayiti nan Mondyal 2026, the drum of victory",
+    imageLabelHt: "Lento Ayizan · Ayiti nan Mondyal 2026, tanbou viktwa a",
     caption:
       "Une toile où le tambour, aux couleurs du drapeau, devient le cœur du peuple qui accompagne les Grenadiers vers le Mondial 2026.",
     captionEn:
       "A canvas where the drum, in the colors of the flag, becomes the heart of a people accompanying the Grenadiers toward the 2026 World Cup.",
+    captionHt:
+      "Yon tablo kote tanbou a, nan koulè drapo a, vin tounen kè pèp la k ap akonpaye Grenadye yo nan Mondyal 2026 la.",
     statement_kr: `Nan tablo sa a, mwen chwazi fè yon retou nan rasin pèp ayisyen an pou montre fòs, kouraj ak eritaj ki mache ansanm ak Seleksyon Nasyonal Ayiti a nan chemen li pou Mondyal 2026 la.
 Anndan estad la, dèyè foul sipòtè yo, nou ka remake Sitadèl Laferrière, youn nan pi gwo senbòl fyète nasyonal nou. Li reprezante rezistans, diyite ak memwa ewo nou yo ki te goumen pou libète peyi a. Prezans li nan tablo a fè nou sonje ke chak jwè k ap pote koulè ble ak wouj yo ap mache sou tras zansèt vanyan sa yo.
 Sou lòt bò a, gen yon ti kay peyizan, ki senbolize kominote ak fanmi chak jwè. Li raple nou ke dèyè chak atlèt genyen yon istwa, yon bitasyon, yon Loa, yon fanmi ak yon pèp k ap sipòte li. Se rasin sa yo ki bay fòs pou monte pi wo.
@@ -291,28 +330,37 @@ LEANDRE Loodwens aka LENTO AYIZAN`,
     creditUrl: "https://www.instagram.com/haitianheroofficial",
     medium: "Personnage costumé · Mascotte de supporters",
     mediumEn: "Costumed character · Supporters' mascot",
+    mediumHt: "Pèsonaj an kostim · Maskòt sipòtè yo",
     image: "/images/mascott/haitian-hero.jpg",
     imageLabel: "Haitian Hero · mascotte des supporters haïtiens",
     imageLabelEn: "Haitian Hero · mascot of the Haitian supporters",
+    imageLabelHt: "Haitian Hero · maskòt sipòtè ayisyen yo",
     description:
       "Créé par Ricardo Ralph Lopez (RRL Show / Artquake Studios), le Haitian Hero est un personnage costumé qui galvanise les supporters haïtiens dans les tribunes. Inspiré de l'imaginaire révolutionnaire haïtien, avec son bicorne, son cache-œil et les couleurs nationales, il incarne la ferveur du douzième homme à l'approche de la Coupe du Monde 2026.",
     descriptionEn:
       "Created by Ricardo Ralph Lopez (RRL Show / Artquake Studios), the Haitian Hero is a costumed character who fires up the Haitian supporters in the stands. Inspired by Haiti's revolutionary imagery, with his bicorne hat, his eye patch, and the national colors, he embodies the fervor of the twelfth man as the 2026 World Cup approaches.",
+    descriptionHt:
+      "Ricardo Ralph Lopez (RRL Show / Artquake Studios) kreye l, Haitian Hero se yon pèsonaj an kostim ki galvanize sipòtè ayisyen yo nan tribin yo. Enspire nan imajinè revolisyonè ayisyen an, ak chapo bikòn li, kachè je li ak koulè nasyonal yo, li enkane fèvè douzyèm nonm nan pandan Koup di Mond 2026 la ap pwoche.",
   },
   {
     slug: "timbre-grenadiers-2026",
     title: "Le timbre des Grenadiers",
     titleEn: "The Grenadiers Stamp",
+    titleHt: "Tenm Grenadye yo",
     credit: "Dubicart Gallery & Office des Postes d'Haïti (OPH)",
     medium: "Timbre commémoratif officiel · 1000 gourdes",
     mediumEn: "Official commemorative stamp · 1000 gourdes",
+    mediumHt: "Tenm komemoratif ofisyèl · 1000 goud",
     image: "/images/timbre/hommage-timbre-grenadiers-2026.jpg",
     imageLabel: "Timbre commémoratif des Grenadiers · 1000 gourdes",
     imageLabelEn: "Grenadiers commemorative stamp · 1000 gourdes",
+    imageLabelHt: "Tenm komemoratif Grenadye yo · 1000 goud",
     description:
       "À l'occasion de la qualification d'Haïti pour la Coupe du Monde 2026, Dubicart Gallery et l'Office des Postes d'Haïti ont fait émettre un timbre commémoratif officiel d'une valeur de 1000 gourdes, autorisé par un arrêté du Conseil des ministres le 6 mai 2026. La vignette réunit en une seule image les Grenadiers en bleu, le gardien en jaune et le drapeau national porté à bout de bras, au milieu d'une foule en liesse. Plus qu'un objet de collection, ce timbre devient un document officiel appelé à circuler à travers le monde, témoin durable de la résilience et du talent haïtiens. Une initiative portée par le juriste Wolff Dubic, fondateur de Dubicart Gallery, qui inscrit l'exploit des Grenadiers dans la grande tradition philatélique des Mondiaux.",
     descriptionEn:
       "To mark Haiti's qualification for the 2026 World Cup, Dubicart Gallery and the Office des Postes d'Haïti issued an official commemorative stamp worth 1000 gourdes, authorized by a Council of Ministers order on May 6, 2026. The vignette brings together in a single image the Grenadiers in blue, the goalkeeper in yellow, and the national flag held high, in the middle of a jubilant crowd. More than a collector's item, this stamp becomes an official document meant to travel the world, a lasting witness to Haitian resilience and talent. The initiative was led by the jurist Wolff Dubic, founder of Dubicart Gallery, placing the Grenadiers' feat within the great philatelic tradition of the World Cups.",
+    descriptionHt:
+      "Pou kalifikasyon Ayiti nan Koup di Mond 2026 la, Dubicart Gallery ak Office des Postes d'Haïti fè emèt yon tenm komemoratif ofisyèl ki vo 1000 goud, yon arete Konsèy Minis otorize 6 me 2026. Vinyèt la reyini nan yon sèl imaj Grenadye yo an ble, gadyen an an jòn ak drapo nasyonal la leve byen wo, nan mitan yon foul moun ki an delir. Pi plis pase yon objè koleksyon, tenm sa a vin yon dokiman ofisyèl ki gen pou sikile atravè mond lan, yon temwen dirab rezilyans ak talan ayisyen. Yon inisyativ jiris Wolff Dubic pote, fondatè Dubicart Gallery, ki enskri eksplwa Grenadye yo nan gwo tradisyon filatelik Mondyal yo.",
   },
 ];
 
@@ -323,11 +371,14 @@ LEANDRE Loodwens aka LENTO AYIZAN`,
 export const supporterPoem = {
   title: "L'arbre de la liberté",
   titleEn: "The Tree of Liberty",
+  titleHt: "Pyebwa libète a",
   image: "/images/tribute/hommage-poeme.jpg",
   imageLabel: "L'arbre de la liberté · hommage poétique aux Grenadiers",
   imageLabelEn: "The Tree of Liberty · a poetic tribute to the Grenadiers",
+  imageLabelHt: "Pyebwa libète a · omaj powetik pou Grenadye yo",
   author: "un supporter haïtien", // remplacer par le nom fourni, le cas échéant
   authorEn: "a Haitian supporter",
+  authorHt: "yon sipòtè ayisyen",
   lines: [
     "52 years of waiting to see the world stage",
     "52 years of a nation rooting for others",
@@ -358,6 +409,8 @@ export const supporterPoem = {
     "Inspiré par la demande de refonte du maillot national et par cette phrase de Toussaint Louverture : « En me renversant, on n'a abattu à Saint-Domingue que le tronc de l'arbre de la liberté ; il repoussera par les racines, car elles sont profondes et nombreuses. » L'union fait la force.",
   noteEn:
     "Inspired by the request to redesign the national jersey and by these words of Toussaint Louverture: \"In overthrowing me, you have cut down in Saint-Domingue only the trunk of the tree of liberty; it will spring back from the roots, for they are deep and many.\" L'union fait la force.",
+  noteHt:
+    "Enspire pa demann pou refè mayo nasyonal la ak pa fraz Toussaint Louverture sa a: « Lè yo ranvèse m, se sèlman tij pyebwa libète a yo koupe nan Sen Domeng; l ap repouse nan rasin yo, paske yo fon e yo anpil. » L'union fait la force.",
 };
 
 // ─── À télécharger · visuels aux couleurs des Grenadiers ────────────────
@@ -367,16 +420,20 @@ export const downloads = [
   {
     label: "Affiche des Grenadiers",
     labelEn: "Grenadiers poster",
+    labelHt: "Afich Grenadye yo",
     kind: "Affiche",
     kindEn: "Poster",
+    kindHt: "Afich",
     file: "/downloads/grenadiers-2026-affiche.jpg",
     aspect: "16/9",
   },
   {
     label: "Fond d'écran (téléphone)",
     labelEn: "Wallpaper (phone)",
+    labelHt: "Fon ekran (telefòn)",
     kind: "Fond d'écran",
     kindEn: "Wallpaper",
+    kindHt: "Fon ekran",
     file: "/downloads/grenadiers-2026-fond-ecran.jpg",
     aspect: "3/4",
   },
@@ -395,10 +452,13 @@ export const shortFilms = [
     title: "Grenadye Alaso! · 1974-2026",
     credit: "Un film de Leo Volcy · Invisible North · Voix de Jimmy Jean-Louis",
     creditEn: "A film by Leo Volcy · Invisible North · Voice of Jimmy Jean-Louis",
+    creditHt: "Yon fim Leo Volcy · Invisible North · Vwa Jimmy Jean-Louis",
     medium: "Court métrage · 11 juin 2026",
     mediumEn: "Short film · June 11, 2026",
+    mediumHt: "Kout metraj · 11 jen 2026",
     note: "Un court métrage cinématographique qui relie les deux Mondiaux d'Haïti : les images aériennes du pays, la vie quotidienne, les archives de la génération 1974 et les Grenadiers d'aujourd'hui, portés par la voix en créole de Jimmy Jean-Louis. La bande sonore marie Trio Select (Ensemble Select) au Gaya de Michaël Brun avec Lakou Mizik et J Perry. Produit par Invisible North, avec Michaël Brun et Jozy Altidore parmi les producteurs exécutifs.",
     noteEn: "A cinematic short film that links Haiti's two World Cups: aerial images of the country, daily life, archive footage of the 1974 generation, and today's Grenadiers, carried by Jimmy Jean-Louis's voice in Creole. The score weds Trio Select (Ensemble Select) to Michaël Brun's Gaya, with Lakou Mizik and J Perry. Produced by Invisible North, with Michaël Brun and Jozy Altidore among the executive producers.",
+    noteHt: "Yon kout metraj sinematografik ki lye de Mondyal Ayiti yo: imaj aeryen peyi a, lavi chak jou, achiv jenerasyon 1974 la ak Grenadye jodi a, pote pa vwa Jimmy Jean-Louis an kreyòl. Mizik la marye Trio Select (Ensemble Select) ak Gaya Michaël Brun ansanm ak Lakou Mizik ak J Perry. Invisible North pwodui l, ak Michaël Brun ak Jozy Altidore pami pwodiktè egzekitif yo.",
   },
 ];
 
@@ -408,22 +468,29 @@ export const ferronDocumentary = {
   englishTitle: "Haïti, au-delà du jeu",
   credit: "Réalisée par Félix Trépanier · 2026",
   creditEn: "Directed by Félix Trépanier · 2026",
+  creditHt: "Reyalize pa Félix Trépanier · 2026",
   // Disponibilité géographique — gardée visible pour les visiteurs hors Canada.
   availability: "Disponible au Canada",
   availabilityEn: "Available in Canada",
+  availabilityHt: "Disponib nan Kanada",
   watch: {
     label: "Regarder sur TFO",
     labelEn: "Watch on TFO",
+    labelHt: "Gade sou TFO",
     url: "https://www.tfo.org/serie/haiti-au-dela-du-jeu/003299432",
   },
   synopsisShort:
     "La renaissance du football haïtien après cinquante ans d'absence, et le retour des Grenadiers vers la Coupe du Monde 2026, en Haïti comme dans la diaspora.",
   synopsisShortEn:
     "The rebirth of Haitian football after fifty years away, and the Grenadiers' return to the 2026 World Cup, in Haiti and across the diaspora.",
+  synopsisShortHt:
+    "Renesans foutbòl ayisyen an apre senkant an absans, ak retou Grenadye yo nan Koup di Mond 2026 la, ann Ayiti kou nan dyaspora a.",
   synopsisLong:
     "« Haïti : au-delà du jeu » retrace la renaissance du football haïtien après cinquante ans d'absence : le retour de la sélection vers la Coupe du Monde 2026, porté par une génération née en grande partie en exil, et le sentiment d'appartenance qu'il redonne à tout un peuple, en Haïti comme dans la diaspora. Entre l'épopée fondatrice de 1974 et le présent, la série interroge ce que signifie continuer d'exister sur la scène mondiale quand on ne peut plus jouer chez soi.",
   synopsisLongEn:
     "\"Haïti : au-delà du jeu\" traces the rebirth of Haitian football after fifty years away: the national team's return to the 2026 World Cup, carried by a generation born largely in exile, and the sense of belonging it gives back to a whole people, in Haiti and across the diaspora. Between the founding saga of 1974 and the present, the series asks what it means to keep existing on the world stage when you can no longer play at home.",
+  synopsisLongHt:
+    "« Haïti : au-delà du jeu » retrase renesans foutbòl ayisyen an apre senkant an absans: retou seleksyon an nan Koup di Mond 2026 la, yon jenerasyon ki fèt anpil nan egzil pote l, ak santiman apatenans li remèt tout yon pèp, ann Ayiti kou nan dyaspora a. Ant epope fondatè 1974 la ak prezan an, seri a poze kesyon sou sa sa vle di pou kontinye egziste sou sèn mondyal la lè ou pa ka jwe lakay ou ankò.",
   producer: "Noémie Ferron",
   director: "Félix Trépanier",
   productionCompany: "Ferron Motions Inc.",
@@ -450,9 +517,12 @@ export const ferronDocumentary = {
     "Peu importe ce qui se passe, on se relève toujours.",
   quoteEn:
     "No matter what happens, we always get back up.",
+  quoteHt:
+    "Kèlkeswa sa k pase, nou toujou kanpe ankò.",
   source: {
     label: "Lire le reportage complet d'Olaïsha Francis · Bonjour Ontario",
     labelEn: "Read Olaïsha Francis's full report · Bonjour Ontario",
+    labelHt: "Li repòtaj konplè Olaïsha Francis · Bonjour Ontario",
     url: "https://bonjourontario.ca/?p=2347",
   },
 };
