@@ -674,63 +674,63 @@ Nòt sous: Sous : CBS News Boston.
 
 ---
 
-## 13. "Sou atak la": dènye mo Sébastien Migné anvan Boston
+## 13. « Sou atak la »: dènye mo Sébastien Migné anvan Boston
 
 URL sous: https://grenadiers2026.com/journal/sebastien-migne-entretien-camp-de-base
 
 Dat: 11 jen 2026
 
-Kategori: Antretyen · Seleksyon
+Kategori: Entèvyou · Seleksyon
 
-Rezime: Anvan li kite kan debaz New Jersey pou Boston, antrenè a fè bilan: retrè Leverton Pierre, jesyon estrès, ajisteman final la ak yon apèl bay douzyèm mesye a.
+Rezime: Anvan li kite kan debaz New Jersey a pou Boston, antrenè a fè yon bilan: forfè Leverton Pierre, jesyon estrès, dènye ajisteman yo ak yon apèl bay douzyèm nonm nan.
 
-Videyo: https://grenadiers2026.com/media/videos/2026-06-11-sebastien-migne-itw-fhf.mp4 — Entèvyou ak antrenè Sébastien Migné nan kan de baz, Federasyon foutbòl ayisyen an pibliye.
+Videyo: https://grenadiers2026.com/media/videos/2026-06-11-sebastien-migne-itw-fhf.mp4 · Entèvyou antrenè Sébastien Migné nan kan debaz la, Federasyon Ayisyen Foutbòl pibliye.
 
-Anvan li fè valiz li pou Boston, antrenè Sébastien Migné te pale nan yon entèvyou Federasyon an pibliye. Enstale depi lendi 8 jen nan kan baz yo nan New Jersey, Grenadye yo te jwenn, dapre li, kondisyon pafè: yon akeyi cho ak enstalasyon trè pwofesyonèl. "Nou p ap gen okenn eskiz nan nivo sa a," li rezime.
+Anvan li boukle valiz li pou Boston, antrenè Sébastien Migné konfye nan yon entèvyou Federasyon an pibliye. Enstale depi lendi 8 jen nan kan debaz yo nan New Jersey, Grenadye yo jwenn, dapre li, kondisyon pafè: yon akèy cho ak enstalasyon trè pwofesyonèl. « Nou p ap gen eskiz nan nivo sa a », li rezime.
 
-Antrenè a tou retounen nan souflèt la difisil nan semèn nan: retrè a nan Leverton Pierre, ranplase pa Garven Metusala. Yon moman difisil pou gwoup la, e pou antrenè a ki te oblije bay jwè a nouvèl la. Fidèl nan lespri ekip sa a, li vle transfòme pwoblèm nan nan fòs ak tire nan panse a pou Leverton nanm siplemantè ki nesesè pou konpetisyon an.
+Antrenè a tounen tou sou gwo kou semèn nan: forfè Leverton Pierre, ke Garven Metusala ranplase. Yon moman difisil pou gwoup la, epi pou antrenè a ki te oblije anonse jwè a nouvèl la. Fidèl ak lespri ekip sa a, li vle transfòme pwoblèm nan an fòs epi rale, nan panse l gen pou Leverton, sipleman nanm konpetisyon an mande a.
 
-Konsènan eta lespri gwoup la, Sébastien Migné pa kache enjeux emosyonèl yo. Koup di Mond se Sentespri Graal ke chak jwè te reve depi nan anfans, epi li se sou eksperyans evènman an plen nan san kite estrès pran sou. Staff la apiye jwè yo sou teren sa a tou, e antrenè a di li konplètman satisfè ak reyaksyon gwoup li a: ti gason yo motive e yo pa ka tann pou li kòmanse.
+Sou eta despri gwoup la, Sébastien Migné pa kache anje emosyonèl la. Koup di Mond se Graal chak jwè ap reve depi timoun, epi se viv evènman an nèt san kite estrès pran devan. Estaf la akonpaye jwè yo sou teren sa a tou, epi antrenè a di li nèt satisfè reyaksyon gwoup li a: ti gason yo motive epi yo prèt pou sa kòmanse.
 
-Sou bò anplasman an, dènye sesyon nan New Jersey te konsakre pou mete moso, ak kèk lòt ajisteman te planifye pou fòmasyon Boston. Pifò nan travay la fè, ensiste antrenè a: li rete kenbe dinamik la, pran prekosyon pou fè pou evite nenpòt aksidan ak rive nan tèt la nan de jou.
+Sou bò teren an, dènye sesyon nan New Jersey a te konsakre pou kout pye arete yo, ak kèk lòt ajisteman pou antrènman Boston an. Pi gwo pati travay la fèt, antrenè a ensiste: rete pou kenbe dinamik la, pran prekosyon pou evite tout blesi epi rive nan pi wo nivo nan de jou.
 
-Kounye a pwogram nan estriktire: depa pou Boston, check-in nan otèl la, fòmasyon envizib nan aswè a, rekiperasyon nan sal tretman an ak brèf sou Eskòs. Lè sa a, li lè pou match la.
+Pwogram nan kadanse kounye a: depa pou Boston, enstalasyon nan otèl la, antrènman envizib nan aswè a, rekiperasyon nan sal swen an ak briefing sou Eskòs. Apre sa, plas pou match la.
 
-Antrenè a kenbe dènye mo li pou piblik la. Touche pa ferveur sipòtè yo nan Florid, ki te rete pozitif ak dèyè ekip la malgre defèt nan dènye match amikal la, li espere jwenn menm enèji a nan Samdi: ke douzyèm mesye a se bò kote Ayiti nan Boston. Entèvyou a fini jan li ta dwe. Grenadye? Sou atak la.
+Antrenè a kenbe dènye mo li yo pou piblik la. Touche pa fèvè sipòtè yo nan Florid, ki rete pozitif epi dèyè ekip la malgre defèt nan dènye match zanmitay la, li espere jwenn menm enèji a samdi: pou douzyèm nonm nan kanpe bò kote Ayiti nan Boston. Entèvyou a fini jan li dwe fini. Grenadye? Sou atak la.
 
-Nòt sous: Sous: Federasyon ayisyen foutbòl.
+Nòt sous: Sous : Federasyon Ayisyen Foutbòl.
 
 ---
 
-## 14. Souflèt difisil pou Grenadye yo: Leverton Pierre forfait, Garven Metusala jwenn apèl
+## 14. Gwo kou pou Grenadye yo: Leverton Pierre forfè, yo rele Garven Metusala
 
 URL sous: https://grenadiers2026.com/journal/leverton-pierre-forfait-metusala-appele
 
 Dat: 11 jen 2026
 
-Kategori: Seleksyon · Koup di Mond 2026
+Kategori: Seleksyon · Mondyal 2026
 
-Rezime: De jou anvan demaraj la, mitan teren Leverton Pierre dwe abandone Koup di Mond lan akoz yon aksidan. Garven Metusala, prezan pandan faz eliminatwa yo, rantre nan gwoup la nan Boston.
+Rezime: De jou anvan kout anvwa a, milye teren Leverton Pierre dwe renonse ak Mondyal la akoz yon blesi. Garven Metusala, ki te prezan pandan eliminatwa yo, rantre nan gwoup la nan Boston.
 
-Move nouvèl nan kan baz Grenadye yo. Staff medikal seleksyon an anonse Leverton Pierre pap ka jwe Koup di Mond lan. Miye teren an soufri de yon blesi nivo 2 adductor dwat, ki te fèt pandan cho-up pou match amikal la, yon blesi ki pral kenbe l lwen teren an pandan plizyè semèn.
+Move nouvèl nan kan debaz Grenadye yo. Estaf medikal seleksyon an anonse Leverton Pierre p ap ka jwe Koup di Mond la. Milye teren an soufri yon lezyon nivo 2 nan adiktè dwat li, ki rive pandan echofman match zanmitay la, yon blesi k ap kenbe l lwen teren yo pandan plizyè semèn.
 
-Pou ranplase l, anplwaye teknik yo rele Garven Metusala. Defandè a, ki moun ki ka jwe tou nan mitan an, konnen gwoup la byen: li te fè pati seleksyon an pandan kalifikasyon yo, ki gen ladan pandan fenèt la desizif nan Novanm nan. Li pral rantre nan koekipye li yo dirèkteman nan Boston.
+Pou ranplase l, estaf teknik la rele Garven Metusala. Defansè a, ki ka jwe nan milye a tou, konnen gwoup la byen: li te fè pati seleksyon an pandan eliminatwa yo, ladan yo pandan fenèt desizif Novanm nan. L ap rankontre koekipye li yo dirèkteman nan Boston.
 
-Metusala ki te antrene nan Quebec, kounye a jwe pou Colorado Springs Switchbacks nan USL Championship, apre yon ti tan remakab nan Forge FC kote li te genyen de tit chanpyona Lig Premier Kanadyen. Solid nan duèl ak abitye nan reyinyon entènasyonal ak anviwon kenz seleksyon, li pote gwoup la yon opsyon adisyonèl nan aks la.
+Fòme nan Kebèk, Metusala ap jwe kounye a ak Colorado Springs Switchbacks, nan USL Championship, apre yon pasaj remakab nan Forge FC kote li te ranpòte de tit chanpyon nan Premier League kanadyen an. Solid nan dyèl epi abitye ak randevou entènasyonal yo ak yon kenzèn seleksyon, li pote nan gwoup la yon opsyon anplis nan aks la.
 
-Nan yon mesaj ki pibliye sou paj li a, Leverton Pierre reyaji ak yon diyite ki di tout bagay sou jwè a ak mesye a. Ak kè li "divize ant tristès ak rekonesans", li rakonte rèv sa a li te fè pandan anpil ane, travay san pran souf, sakrifis yo, ak aksidan sa a ki te wete l nan jaden an nan moman sa a lè tout te kòmanse.
+Nan yon mesaj li pibliye sou paj li, Leverton Pierre reyaji ak yon diyite ki di tout bagay sou jwè a ak sou nonm nan. Ak kè li « pataje ant tristès ak rekonesans », li rakonte rèv sa a li pote depi tout ane sa yo, travay san rete a, sakrifis yo, ak blesi sa a ki prive l teren an nan moman tout bagay t ap kòmanse.
 
-Men, li pa kite bato a. Li pral rete ak frè l yo jouk nan fen avanti a, li pwomèt, epi li pral sipòte yo ak tout fòs li, kòm premye sipòtè nan ekip sa a. Li remèsye koekipye l yo, staf la, tout moun ki voye priyè ak pawòl ankourajman l depi anons la, ak fanmi l, poto l nan bon moman ak nan move tan.
+Men li pa kite batiman an. L ap rete bò kote frè li yo jouk nan fen avanti a, li pwomèt, epi l ap sipòte yo ak tout fòs li, kòm premye sipòtè ekip sa a. Li remèsye koekipye li yo, estaf la, tout moun ki voye priyè ak pawòl ankourajman ba li depi anons la, ak fanmi li, poto li nan bon moman kou nan move moman.
 
-"Blesi sa a pa defini istwa mwen. Sa a se jis yon lòt chapit nan vwayaj mwen an. Mwen pral tounen pi fò. "
+« Blesi sa a pa defini istwa mwen. Se yon lòt chapit anplis nan pakou mwen. M ap tounen pi fò. »
 
-Bondye beni Ayiti, li konkli. Yon pèp antye reponn ak yon sèl vwa: rekiperasyon rapid, Leverton. Rèv la ap kontinye, epi li se yon pati totalman nan li.
+Se pou Bondye beni Ayiti, li konkli. Tout yon pèp reponn li ak yon sèl vwa: bon retablisman, Leverton. Rèv la kontinye, epi li fè pati l nèt.
 
-Nòt sous: Sous: Kominike pou laprès seleksyon ofisyèl.
+Nòt sous: Sous : kominike ofisyèl seleksyon an.
 
 ---
 
-## 15. Soti nan lari Ayiti rive nan Koup di Mond: Frantzdy Pierrot pale ak FIFA
+## 15. Soti nan lari Ayiti rive nan Mondyal la: Frantzdy Pierrot konfye bay FIFA
 
 URL sous: https://grenadiers2026.com/journal/frantzdy-pierrot-entretien-fifa
 
@@ -738,109 +738,109 @@ Dat: 10 jen 2026
 
 Kategori: Entèvyou · FIFA
 
-Rezime: Nan yon entèvyou ak FIFA, atakan Grenadiers la fè yon ti repo sou anfans li, sakrifis papa l, vwayaj li nan Lig chanpyon an ak rèv li fè pou tout yon pèp.
+Rezime: Nan yon entèvyou li bay FIFA, atakan Grenadye yo retounen sou anfans li, sakrifis papa l, pakou li jouk nan Lig Chanpyon an ak rèv li pote pou tout yon pèp.
 
-Kèk jou anvan Ayiti retounen nan Koup di Mond, FIFA te konsakre yon long entèvyou ak Frantzdy Pierrot. Atakan Grenadye yo retrate yon vwayaj ki kòmanse byen lwen gwo stad yo: nan lari ann Ayiti, kote li te jwe pye atè ak boul enpwovize, fèt ak sa ki te vin nan men yo. Pou li menm ak zanmi li yo, li di, foutbòl te pi plis pase yon jwèt: yon sous lajwa, libète ak koneksyon ant timoun yo nan katye a.
+Kèk jou anvan retou Ayiti nan Koup di Mond, FIFA konsakre yon long entèvyou ak Frantzdy Pierrot. Atakan Grenadye yo retrase yon pakou ki kòmanse byen lwen gwo estad yo: nan lari Ayiti, kote li te jwe pye atè ak balon enpwovize, fèt ak sa ki te tonbe anba men. Pou li ak zanmi li yo, li rakonte, foutbòl te pi plis pase yon jwèt: yon sous lajwa, libète ak lyen ant timoun katye a.
 
-Pwen vire nan lavi li te rive nan laj 11, lè fanmi li te deplase nan Massachusetts. Papa l , ki te viv la pou plizyè ane, te travay plizyè travay pou ekonomize lajan pou mennen fanmi l'. Pierrot dekri depa sa a kòm jou ki pi kontan nan lavi l, youn nan lè tout bagay te vin posib.
+Viraj nan lavi li rive a 11 an, lè fanmi li al nan Massachusetts. Papa l, ki te enstale la depi plizyè ane, t ap fè plizyè travay pou ekonomize kòb pou fè fanmi l vini. Pierrot dekri depa sa a kòm pi bèl jou nan lavi li, jou kote tout bagay vin posib.
 
-Sa ki te swiv se te yon aza: kite konfò nan yon karyè inivèsite Ameriken eseye chans ou an Ewòp. Maccabi Haifa te vin tranplen desizif la, youn nan ki te ba l konfyans epi ki te pouse l nan Lig chanpyon an, anvan li deplase nan AEK Athens epi nan Çaykur Rizespor. Men Pierrot pa janm koupe kòd la ak peyi a: fondasyon li jodi a sipòte timoun Ayiti yo, ak anbisyon pou ofri yo yon kad, opòtinite ak edikasyon, sou teren ak andeyò.
+Sa ki vin apre, se yon pari li asime: kite konfò pakou inivèsitè ameriken an pou tante chans li ann Ewòp. Maccabi Haïfa vin tranplen desizif la, sa ki ba li konfyans epi pwopilse l jouk nan Lig Chanpyon an, anvan pasaj li nan AEK Athènes apre sa nan Çaykur Rizespor. Men Pierrot pa janm koupe fil la ak peyi a: fondasyon li akonpaye timoun Ayiti yo jodi a, ak anbisyon pou ofri yo yon kad, opòtinite ak yon edikasyon, sou teren an ak andeyò.
 
-Li tou retounen nan objektif li kont Costa Rica, sa a ki pratikman sele kalifikasyon istorik Grenadye yo. Yon moman prèske enposib pou dekri, li di, kote premye panse li te ale nan fanmi li, koekipye li yo ak pèp ayisyen an, kòm si ane nan sakrifis yo te finalman jwenn sans yo. Li sonje tou jou kalifikasyon an, lè plizyè milye moun te anvayi lari pou chante ak danse, bliye pou yon aswè difikilte lavi chak jou.
+Li retounen tou sou gòl li kont Costa Rica, sa ki te prèske sele kalifikasyon istorik Grenadye yo. Yon moman prèske enposib pou dekri, li di, kote premye panse li te ale nan fanmi li, koekipye li yo ak pèp ayisyen an, kòmsi ane sakrifis yo te finalman jwenn sans yo. Li sonje tou jou kalifikasyon an, lè plizyè milye moun te anvayi lari pou chante ak danse, bliye pou yon sware difikilte lavi chak jou yo.
 
-Anfas Ekòs, Brezil ak Mawòk, Pierrot pa kache: gwoup la se difisil, men ekip la kwè nan tèt li e li gen entansyon montre mond lan kè, inite ak kouraj pèp ayisyen an. Objektif li genyen nan yon sèl fraz, ki rezime tout eta lespri seleksyon sa a: "Nou vle fè pèp ayisyen an fyè".
+Devan Eskòs, Brezil ak Mawòk, Pierrot pa kache: gwoup la difisil, men ekip la kwè nan tèt li epi li gen entansyon montre lemonn kè, inite ak kouraj pèp ayisyen an. Objektif li kenbe nan yon sèl fraz, ki rezime tout eta despri seleksyon sa a: « Nou vle fè pèp ayisyen an fyè ».
 
 Ou ka li tout entèvyou a sou fifa.com.
 
-Nòt sous: Sous: entèvyou pibliye pa FIFA (fifa.com).
+Nòt sous: Sous : entèvyou FIFA pibliye (fifa.com).
 
 ---
 
-## 16. Saeta eksplike ke FIFA mande chanjman nan mayòt Grenadye yo
+## 16. FIFA egzije chanjman nan mayo Grenadye yo, Saeta bay esplikasyon
 
-URL sous: https://grenadiers2026.com/journal/mayòt-grenadiers-fifa-modifications
+URL sous: https://grenadiers2026.com/journal/maillot-grenadiers-fifa-modifications
 
 Dat: 10 jen 2026
 
-Kategori: Ekipman · Koup di Mond 2026
+Kategori: Ekipman · Mondyal 2026
 
-Rezime: Kèk jou anvan Ayiti vs Eskòs, manifakti ekipman Saeta konfime li te ajiste mayo ofisyèl la sou demann FIFA, pandan y ap defann lespri konsepsyon orijinal li.
+Rezime: Kèk jou anvan Ayiti vs Eskòs, ekipmantye Saeta konfime li ajiste mayo ofisyèl la sou demann FIFA, pandan l ap defann lespri konsepsyon orijinal li a.
 
-Kèk jou anvan Grenadye yo antre nan deba kont Eskòs, manifakti ekipman Saeta te anonse ke yo te fè modifikasyon nan mayo ofisyèl Ayiti a sou demann FIFA. Konfimasyon an te soti nan yon nòt pou laprès ofisyèl ki te pibliye pa mak la, apre plizyè semèn nan espekilasyon sou ekip Grenadye yo pral mete pou retounen istorik yo nan Mondyal la.
+Kèk jou anvan Grenadye yo antre an lis kont Eskòs, ekipmantye Saeta anonse yo fè chanjman nan mayo ofisyèl Ayiti a sou demann FIFA. Konfimasyon an soti nan yon kominike ofisyèl mak la pibliye, apre plizyè semèn espekilasyon sou rad Grenadye yo pral mete pou retou istorik yo nan Koup di Mond la.
 
-Nan nòt pou laprès sa a, Saeta sonje li te fèt mayo a an kolaborasyon sere ak Federasyon ayisyen foutbòl la, ak yon anbisyon klè: selebre fyète, rezilyans ak lespri pèp ayisyen an. Konsepsyon orijinal la te rann omaj a fanm ak gason ki bati avni Ayiti chak jou, alantou senbòl drapo a, deviz "Inite se fòs" ak ewo endepandans yo.
+Nan kominike sa a, Saeta raple li te konsevwa mayo a an kolaborasyon sere ak Federasyon Ayisyen Foutbòl la, ak yon anbisyon klè: selebre fyète, rezilyans ak lespri pèp ayisyen an. Konsepsyon orijinal la te rann omaj a fanm ak gason ki bati avni Ayiti chak jou, alantou senbòl drapo a, deviz « L'union fait la force » ak ewo endepandans yo.
 
-Dapre mak la, plizyè konsèp te ale nan pwosesis estanda apwobasyon FIFA. Li te pandan evalyasyon sa a ke kò a te konsidere ke sèten eleman vizyèl yo ta ka entèprete yon fason diferan ak konsiderasyon règleman li yo sou ekipman, epi li te mande ajisteman anvan yo kòmanse nan konpetisyon an.
+Dapre mak la, plizyè konsèp te pase nan pwosesis apwobasyon estanda FIFA a. Se pandan evalyasyon sa a enstans lan te estime sèten eleman vizyèl te ka entèprete yon lòt jan parapò ak règleman li yo sou ekipman, epi li mande ajisteman anvan konpetisyon an kòmanse.
 
-Saeta reklamasyon li gen yon lekti diferan nan pwòp entansyon li, konsepsyon an pa gen, dapre li, pa gen okenn siyifikasyon politik. Mak la sepandan endike ke li te respekte desizyon an ak aplike tout modifikasyon yo mande yo.
+Saeta afime li gen yon lekti diferan de pwòp entansyon li yo, konsepsyon an pa gen, dapre li, okenn pòte politik. Men mak la endike li respekte desizyon an epi li aplike tout chanjman yo egzije yo.
 
-Chanjman yo deja anvigè: jwè seleksyon yo te pran foto ofisyèl yo ak vèsyon modifye nan mayo la, e se rad sa a ke Grenadys yo pral mete samdi kont Eskòs nan Gillette Stadium.
+Chanjman yo deja anvigè: jwè seleksyon yo pran foto ofisyèl yo ak vèsyon modifye mayo a, epi se rad sa a Grenadye yo pral mete samdi kont Eskòs nan Gillette Stadium.
 
-Malgre epizòd la, Saeta di li fyè dèske li te kontribye, ansanm ak FHF, nan moman istorik sa a nan foutbòl ayisyen an, e li swete Grenadye yo tout siksè pou Koup di Mond sa a. Mayòt la rete sa li te ye depi premye jou a: yon senbòl ke tout yon pèp deja mete nan kè yo, depi nan kanpe Foxborough rive nan kat kwen dyaspora a.
+Malgre epizòd la, Saeta di li fyè dèske li kontribye, ansanm ak FHF la, nan moman istorik sa a nan foutbòl ayisyen an, epi li swete Grenadye yo tout siksè pou Koup di Mond sa a. Mayo a, li menm, rete sa li te ye depi premye jou a: yon senbòl tout yon pèp deja pote sou kè li, depi tribin Foxborough yo rive nan kat kwen dyaspora a.
 
-Nòt sous: Sous: piblikasyon laprès ofisyèl ki soti nan Saeta · Lafrans 24 · Juno7.
+Nòt sous: Sous : kominike ofisyèl Saeta · France 24 · Juno7.
 
 ---
 
-## 17. Grenadye yo tabli nan Stockton University avan Koup di Mond lan
+## 17. Grenadye yo poze valiz yo nan Stockton University anvan Mondyal la
 
 URL sous: https://grenadiers2026.com/journal/grenadiers-stockton-university-camp-de-base
 
 Dat: 9 jen 2026
 
-Kategori: Kan Baz · New Jersey
+Kategori: Kan debaz · New Jersey
 
-Rezime: Kèk jou anvan demaraj, seleksyon ayisyen an etabli nan Stockton University, kan debaz ofisyèl li pou Koup di Mond lan, anba je yon dyaspora trè aktif.
+Rezime: Kèk jou anvan kout anvwa a, seleksyon ayisyen an enstale nan Stockton University, kan debaz ofisyèl li pou Mondyal la, anba je yon dyaspora an efèvesans.
 
-Videyo: https://www.youtube.com/watch?v=899SgV7MPKc — CBS News Philadelphia rapòte soti nan kan baz Grenadye yo nan Stockton University.
+Videyo: https://www.youtube.com/watch?v=899SgV7MPKc · Repòtaj CBS News Philadelphia nan kan debaz Grenadye yo nan Stockton University.
 
-Kèk jou anvan lansman, Grenadiers yo te vin ofisyèlman rezidans nan Stockton University, sou kanpis Galloway nan sid New Jersey. Se isit la, nan premye enstalasyon, seleksyon ayisyen an ap prepare retounen istorik li nan Koup di Mond lan, jan CBS News Philadelphia rapòte.
+Kèk jou anvan kout anvwa a, Grenadye yo enstale ofisyèlman nan Stockton University, sou kanpis Galloway nan sid New Jersey. Se isit la, nan enstalasyon premye plan, seleksyon ayisyen an ap prepare retou istorik li nan Koup di Mond la, jan CBS News Philadelphia rapòte.
 
-Emosyon an te palpab alantou jaden an. Pou gran majorite sipòtè ayisyen-ameriken nan rejyon an ak fanatik ki soti byen lwen, se premye fwa nan lavi yo ke yo pral wè Ayiti evolye nan nivo sa a. Plis pase 50 ane apre sezon 1974 la, lafyèv Koup di Mond rive nan New Jersey.
+Emosyon an te palpab alantou teren an. Pou pifò sipòtè ayisyano-ameriken nan rejyon an ak fanatik ki soti byen lwen, se premye fwa nan lavi yo y ap wè Ayiti ap jwe nan nivo sa a. Plis pase 50 an apre epope 1974 la, lafyèv Mondyal la gaye nan New Jersey.
 
-Pandan ke pratik nan G. Larry James Stadium ak Stockton Sports Center yo fèt dèyè pòt fèmen pou rezon sekirite, ekip la louvri pòt li pou yon jwèt intrasquad òganize pou gwoup kominotè ak òganizasyon jèn lokal yo. Nan kwen an nan teren an, timoun yo gade Grenadye yo ak zetwal nan je yo, kèk jèn foutbolè deja gen konfyans yo te vle repwodui jès yo nan pwofesyonèl yo nan pwòp match yo.
+Si sesyon antrènman yo nan G. Larry James Stadium ak Stockton Sports Center fèt dèyè pòt fèmen pou rezon sekirite, ekip la louvri pòt li pou yon match anndan ekip la yo òganize pou gwoup kominotè ak òganizasyon jèn lokal yo. Sou bò teren an, timoun yo t ap gade Grenadye yo ak zetwal nan je yo, kèk jèn foutbolè deja ap di yo vle repwodui jès pwofesyonèl yo nan pwòp match pa yo.
 
-Defi k ap tann Ayiti a enpòtan anpil: yon gwoup ki pran tèt ak Eskòs, Brezil ak Mawòk. Patizan lokal yo te deja tcheke match la kont Brezil, ki pwograme toupre nan Philadelphia. Men, optimis pa febli.
+Defi k ap tann Ayiti a gwo anpil: yon gwoup difisil ak Eskòs, Brezil ak Mawòk. Sipòtè lokal yo deja make match la kont Brezil, ki pwograme toupre, nan Philadelphia. Men optimis la pa febli.
 
-"Nou trè eksite, e nou panse ke nou pral ale nan dezyèm tou an," yon fanatik te di CBS News Philadelphia repòtè Ross DiMattei.
+« Nou trè antouzyas, epi nou panse n ap rive nan dezyèm tou a », yon sipòtè konfye bay jounalis Ross DiMattei nan CBS News Philadelphia.
 
-Pou Stockton University, òganize yon seleksyon nasyonal pa gen anyen nouvo. Kanpis la te deja sèvi kòm yon kan de baz pou Arabi Saoudit anvan 1994 Mondyal la, e li te òganize pi popilè klib brezilyen Flamengo ane pase a. Yon chwa ki, dapre ofisyèl inivèsite yo, konfime kalite enfrastrikti espò li yo.
+Pou Stockton University, akeyi yon seleksyon nasyonal pa gen anyen nouvo. Kanpis la te deja sèvi kòm kan debaz pou Arabi Saoudit anvan Mondyal 1994 la, epi li te resevwa selèb klib brezilyen Flamengo a ane pase. Yon chwa ki, dapre responsab inivèsite a, konfime kalite enfrastrikti espòtiv li yo.
 
-Grenadye yo pral sèvi ak kanpis la kòm yon kan de baz pou omwen de semèn. Men, si lafwa enkonstrabl nan sipòtè yo se nenpòt endikasyon, rete yo nan rejyon an ka byen pwolonje pi lwen pase sa.
+Grenadye yo ap sèvi ak kanpis la kòm kan debaz pandan omwen de semèn. Epi si lafwa enebranlab sipòtè yo se yon endis, sejou yo nan rejyon an ka byen pwolonje pi lwen pase sa.
 
-Nòt sous: Sous: CBS News Philadelphia.
+Nòt sous: Sous : CBS News Philadelphia.
 
 ---
 
-## 18. Yon èdtan metriz, dis minit fatal: Ayiti pèdi 2-1 devan Perou
+## 18. Yon èdtan metriz, dis minit fatal: Ayiti pèdi 2-1 devan Pewou
 
 URL sous: https://grenadiers2026.com/journal/haiti-perou-bilan-2-1
 
 Dat: 5 jen 2026
 
-Kategori: Nouvèl · Rapò match
+Kategori: Aktyalite · Rapò match
 
-Rezime: Nan Stad Nu nan Miami, Grenadiers yo te kontwole prèske yon èdtan nan jwèt anvan yo bay nan de moso. Evalyasyon nan yon defèt rich nan leson, uit jou anvan antre nan batay la kont Eskòs.
+Rezime: Nan Nu Stadium nan Miami, Grenadye yo kontwole prèske yon èdtan jwèt anvan yo lage sou de kout pye arete. Bilan yon defèt ki rich an leson, uit jou anvan antre an lis kont Eskòs.
 
-Pou dènye repetisyon li anvan Koup di Mond lan, Ayiti kenbe Pewou pou yon bon bout tan nan Nu Stadium nan Miami, anvan li bay nan dènye kad inèdtan e li pèdi 2-1. Yon sware ak de figi, ki kite otan rezon pou ankourajman ke gen pwojè pou rezoud, uit jou anvan kòmansman match la kont Eskòs.
+Pou dènye repetisyon li anvan Koup di Mond la, Ayiti kenbe tèt ak Pewou pandan lontan nan Nu Stadium nan Miami, anvan li lage nan dènye ka dè a epi pèdi 2-1. Yon sware ak de figi, ki kite otan rezon pou ankourajman ke chantye pou rezoud, uit jou anvan antre an lis kont Eskòs.
 
-Tout bagay te kòmanse byen menm si. Galvanize pa siksè yo 4-0 kont Nouvèl Zeland, Grenadye yo enpoze entansite yo depi nan kòmansman an. Nan 16èm minit, presyon an peye: Jean-Ricner Bellegarde refè balon nan pye André Carrillo, Louicius Deedson glise nan yon pas pafè, Wilson Isidor fini san tranble. 1-0, ak yon Isidor toujou desizif, nan kontinwite angajman li te montre depi lè l te chwazi pou l reprezante Ayiti.
+Poutan tout bagay te byen kòmanse. Chofe pa siksè 4-0 yo kont Nouvèl Zeland, Grenadye yo enpoze entansite yo depi nan kòmansman. Nan 16yèm minit la, presyon an peye: Jean-Ricner Bellegarde refè balon an nan pye André Carrillo, Louicius Deedson glise yon pas pafè, epi Wilson Isidor fini san tranble. 1-0, ak yon Isidor toujou desizif, nan kontinwite angajman li montre depi lè li te chwazi reprezante Ayiti.
 
-Pandan prèske yon èdtan, Ayiti metrize sijè li a. Solid defansiv, pwòp nan rekiperasyon an, danjere nan tranzisyon, ekip Sébastien Migné a gen lontan mizo yon advèsè ki se poutan pi byen klase. Ruben Providence ak Frantzdy Pierrot menm te gen kèk okazyon pou yo fè ti repo a.
+Pandan prèske yon èdtan, Ayiti metrize sijè li a. Solid nan defans, pwòp nan relans lan, danjere nan tranzisyon, ekip Sébastien Migné a kenbe lontan yon advèsè ki pi byen klase poutan. Ruben Providence ak Frantzdy Pierrot menm jwenn kèk okazyon pou fè eka a.
 
-Men, Perou te retounen soti nan amwa a ak lòt entansyon. Plis prezan, plis pasyans, Sid Ameriken yo piti piti pouse Ayiti tounen nan kan li. Epi li te sou ti moso ke tout bagay chanje. Nan 81e minit, Renzo Garcés egalize nan yon ti kwen. Twa minit pita, Jairo Vélez te konplete reaparisyon an ak yon piki soti nan bò dwat la, ankò apre yon kwen travay pa Yoshimar Yotún. Nan kèk minit, yon match kontwole tounen yon defèt.
+Men Pewou tounen soti nan vestyè a ak lòt entansyon. Pi prezan, pi pasyan, Sid Ameriken yo piti piti pouse Ayiti tounen nan kan li. Epi se sou kout pye arete tout bagay chavire. Nan 81yèm minit la, Renzo Garcés egalize toupre sou yon kòne. Twa minit pita, Jairo Vélez konplete remonte a ak yon frap pye dwat, ankò apre yon kòne Yoshimar Yotún travay. Nan kèk minit, yon match yo te kontwole tounen yon defèt.
 
-Ayiti te eseye reyaji nan tan adisyonèl, san yo pa jwenn fot la. Score final: Pewou 2, Ayiti 1.
+Ayiti eseye reyaji nan tan adisyonèl, san jwenn fay la. Eskò final: Pewou 2, Ayiti 1.
 
-Kisa pou w sonje? Premyèman, ke se te yon match amikal, e ke rezilta a konte mwens pase leson yo. Presan an, premye peryòd referans, fòm Isidor a: gen ase yo apwoche Mondyal la ak konfyans. Men, nan fen match la kite yon avètisman klè: jesyon an nan kout kouto ak kapasite nan kenbe yon rezilta yo pral desizif kont Eskòs, Brezil ak Mawòk. Se konsa, anpil detay ke anplwaye a kounye a gen uit jou yo korije.
+Kisa pou n sonje? Dabò ke se te yon match zanmitay, epi rezilta a konte mwens pase leson yo. Presyon an, premye peryòd referans lan, fòm Isidor: gen ase pou abòde Mondyal la ak konfyans. Men fen match la kite yon avètisman klè: jesyon kout pye arete yo ak kapasite pou kenbe yon rezilta ap desizif kont Eskòs, Brezil ak Mawòk. Otan detay estaf la gen kounye a uit jou pou korije.
 
-13 jen nan Boston, pa gen anyen ki pral amikal ankò.
+13 jen nan Boston, anyen p ap zanmitay ankò.
 
-Nòt sous: Dapre kouvèti laprès nan match Ayiti-Peru, 5 jen 2026 (Miami Herald, Bolavip).
+Nòt sous: Dapre kouvèti laprès match Ayiti-Pewou a, 5 jen 2026 (Miami Herald, Bolavip).
 
 ---
 
-## 19. Ale nan Pewou, dènye tès anvan Mondyal la
+## 19. Kap sou Pewou, dènye tès anvan Mondyal la
 
 URL sous: https://grenadiers2026.com/journal/perou-dernier-test-avant-mondial
 
@@ -848,35 +848,35 @@ Dat: 4 jen 2026
 
 Kategori: Konferans pou laprès · Anvan match
 
-Rezime: Aprè demonstrasyon yo kont Nouvèl Zeland (4-0), Grenadye yo fini kan antrenman yo nan Miami epi defye Perou nan yon match amikal. Nan yon konferans pou laprès, antrenè Sébastien Migné ak defansè Ricardo Adé pataje entansyon taktik yo, salye nouvo rekrite yo epi voye yon mesaj bay pèp ayisyen an, kèk jou anvan Koup di Mond lan.
+Rezime: Apre demonstrasyon yo kont Nouvèl Zeland (4-0), Grenadye yo boukle kan antrènman yo nan Miami epi defye Pewou nan yon match zanmitay. Nan yon konferans pou laprès, antrenè Sébastien Migné ak defansè Ricardo Adé pataje entansyon taktik yo, salye nouvo rekri yo epi voye yon mesaj bay pèp ayisyen an, kèk jou anvan Mondyal la.
 
-Videyo: https://www.youtube.com/watch?v=CouTaufrzik — Konferans pou laprès anvan match — Sébastien Migné ak Ricardo Adé
+Videyo: https://www.youtube.com/watch?v=CouTaufrzik · Konferans pou laprès anvan match · Sébastien Migné ak Ricardo Adé
 
-### Yon sistèm, plis pase fòmasyon
+### Yon sistèm, plis pase yon fòmasyon
 
-Malgre gwo siksè kont Nouvèl Zeland, Sébastien Migné kenbe pye l atè. Yo te poze l kesyon sou deba sou duo atakan li a, li te raple ke fòmasyon an konte mwens pase fason pou li kouri. Kit ou fè de oswa twa atakè, li te fè remake, kat gòl yo kont Nouvèl Zeland tout te soti nan kote sa yo. 4-4-2 obsève a se sitou itilize ranplase blòk defans la lè ekip la pa gen boul la. Lisid, antrenè a te santi ke nòt la te yon ti kras piman bouk pou Nouvo Zeland yo, e ke opozan yon lòt kalib pa pral padonnen menm erè yo. Kòm match la kont Eskòs apwoche 13 jen, match la kont Perou pwomèt yo dwe dènye laboratwa pou teste nouvo asosyasyon.
+Malgre gwo siksè kont Nouvèl Zeland la, Sébastien Migné kenbe pye l atè. Lè yo poze l kesyon sou deba ki gen sou dwo atakan li a, li raple fòmasyon an konte mwens pase fason pou anime l. Kit ou aliyen de oswa twa atakan, li souliye, kat gòl yo kont Nouvèl Zeland tout soti sou kote yo. 4-4-2 yo obsève a sèvi sitou pou replase blòk defansif la lè ekip la pa gen balon an. Lisid, antrenè a estime eskò a te yon ti jan sevè pou Neozelande yo, epi advèsè ki gen yon lòt kalib p ap padone menm erè yo. Pandan antre an lis kont Eskòs la ap pwoche 13 jen, match la kont Pewou anonse tankou dènye laboratwa pou teste nouvo asosyasyon.
 
-### Yon defans ki kenbe, yon kolektif ini
+### Yon defans ki kenbe, yon kolektif sere
 
-Ricardo Adé pwolonje diskou antrenè li a. Pou li, kenbe yon fèy pwòp se pa sèlman yon pwoblèm pou santral oswa plen-do, men yon efò kolektif. Tout ekip la te reponn, sa ki reprezante yon pwogrè reyèl nan konfyans pou gwoup la. Defansè a fè lwanj tou pou kontribisyon nouvo rekri, Dominique Simon ak Lenny Joseph, remake kont Nouvèl Zeland nan rekipere balon an ak balans ekip la.
+Ricardo Adé pwolonje diskou antrenè li a. Pou li, kenbe bi a san pran gòl se pa zafè defansè santral oswa lateral yo sèlman, men yon efò kolektif. Tout ekip la reponn prezan, sa ki reprezante yon vrè gany konfyans pou gwoup la. Defansè a salye tou apò nouvo rekri yo, Dominique Simon ak Lenny Joseph, yo te remake kont Nouvèl Zeland nan rekiperasyon balon an ak nan ekilib ekip la.
 
-### Adapte ak style Sid Ameriken
+### Adapte ak stil Sid Ameriken an
 
-Chwa a nan Perou se pa ensiyifyan. Kote Nouvèl Zeland te ofri yon jwèt dirèk, Perou te enpoze yon defi ki baze sou posesyon ak transmisyon kout. Pa gen seleksyon parfe replike yon magouyè tankou Brezil, men jwèt la pase Perouvyen an pral fòse Grenadye yo ajiste byen vit, yon tès nesesè anvan etap mondyal la. Migné te note tou ang sikolojik rankont la: Pewou, ki pa kalifye pou Koup di Mond sa a, pral jwe libere, san presyon, alòske Ayiti gen pou l rekonsilye dezi pou genyen ak nesesite pou l prezève tèt li devan pi gwo tounwa nan karyè li.
+Chwa Pewou a pa anodin menm. Kote Nouvèl Zeland te pwopoze yon jwèt dirèk, Pewou enpoze yon defi ki baze sou posesyon ak pas kout. Pa gen seleksyon ki repwodui pafètman yon mastodont tankou Brezil, men jwèt pas peruvyen an ap fòse Grenadye yo ajiste vit, yon tès nesesè anvan sèn mondyal la. Migné releve tou ang sikolojik rankont la: Pewou, ki pa kalifye pou Mondyal sa a, ap jwe libere, san presyon, alòske Ayiti ap gen pou konsilye anvi pou genyen ak nesesite pou prezève tèt li anvan pi gwo tounwa karyè li.
 
 ### Foutbòl kòm yon limyè espwa
 
-Konferans lan pran yon viraj ki pi grav lè y ap diskite sou sitiyasyon peyi a. Paske seleksyon an te oblije jwe tout kalifikasyon li yo andeyò Ayiti, jwè yo santi yon lòt responsablite. Ricardo Adé, ki te grandi nan peyi a, te pale ak fòs de sa avanti sa a reprezante pou yon nasyon k ap pase eprèv la. Pi bon jwè yo ka ofri se pèfòmans yo sou teren an. Atravè foutbòl byen jwe, yo ka pote fyète ak lajwa bay pèp la. Plis pase senkant ane apre dènye patisipasyon nan Koup di Mond foutbòl la rete, daprè li, youn nan bagay ki ra ki kapab fè Ayisyen souri e fè yo bliye ensekirite, si se pou yon ti moman.
+Konferans lan pran yon vire pi grav nan moman pou pale sou sitiyasyon peyi a. Paske seleksyon an te oblije jwe tout kalifikasyon li yo andeyò Ayiti, jwè yo santi yon responsablite anplis. Ricardo Adé, ki grandi nan peyi a, di ak fòs sa avanti sa a reprezante pou yon nasyon k ap travèse eprèv. Pi bon bagay jwè yo ka ofri se pèfòmans yo sou teren an. Atravè yon foutbòl byen jwe, yo ka rann fyète ak lajwa bay pèp la. Plis pase senkant an apre dènye patisipasyon nan Mondyal la, foutbòl rete, dapre li, youn nan ti bagay ki ka fè Ayisyen souri epi fè yo bliye ensekirite a, menm si se pou yon ti moman.
 
-### Yon apèl bay sipòtè
+### Yon apèl bay sipòtè yo
 
-Tou de Migné ak Adé eksprime rekonesans yo pou anbyans dyaspora a te ofri pandan premye match la nan Florid. Pou match la kont Perou, antrenè a espere yon estad plen. Jwè li yo, li te di, merite jwe devan yon gwo foul moun: li ta deja yon premye viktwa, ak enèji sa a pral pouse ekip la bay pi bon nan tèt li.
+Ni Migné ni Adé di tout rekonesans yo pou anbyans dyaspora a te ofri pandan premye match la nan Florid. Pou rankont la kont Pewou, antrenè a espere yon estad plen. Jwè li yo, li di, merite jwe devan yon gwo foul moun: sa t ap deja yon premye viktwa, epi enèji sa a ap pouse ekip la bay pi bon nan tèt li.
 
-Nòt sous: Dapre konferans pou laprès grenadye yo anvan match (Sébastien Migné ak Ricardo Adé), jen 2026.
+Nòt sous: Dapre konferans pou laprès anvan match Grenadye yo (Sébastien Migné ak Ricardo Adé), jen 2026.
 
 ---
 
-## 20. Ricardo Adé, ko-kapitèn nan yon rèv 52-zan
+## 20. Ricardo Adé, ko-kapitèn yon rèv ki gen 52 an
 
 URL sous: https://grenadiers2026.com/journal/ricardo-ade-co-capitaine-reve-52-ans
 
@@ -884,25 +884,25 @@ Dat: 4 jen 2026
 
 Kategori: Pòtrè · Entèvyou
 
-Rezime: Li te fèt nan Saint-Marc, defansè santral LDU Quito, Ricardo Adé pral mete braslè ko-kapitèn lan lè Ayiti retounen nan koup di mond lan, yon mwatye syèk apre pyonye yo nan 1974. Dèyè jwè a, yon vwayaj ki te fèt nan pasyans, ekzil ak refi bay moute.
+Rezime: Li fèt nan Saint-Marc, defansè santral LDU Quito a, Ricardo Adé pral mete braslè ko-kapitèn nan lè Ayiti jwenn Koup di Mond la ankò, yon mwatye syèk apre pyonye 1974 yo. Dèyè jwè a, yon pakou ki fèt ak pasyans, egzil ak refi pou bay legen.
 
-Anvan yo te youn nan figi retou Ayiti nan pi gwo etap foutbòl ameriken an, Ricardo Adé se te yon timoun Sen Mak ak yon rèv ki te sanble prèske ireyèl: konpetisyon nan yon Koup di Mond nan mayo ayisyen an, epi jwe li kòm kapitèn. Li te grandi ak istwa a nan 1974 nan zòrèy li, poze tèt li yon sèl kesyon: poukisa pa nou, poukisa pa jenerasyon li a?
+Anvan li te youn nan figi retou Ayiti sou pi gwo sèn foutbòl la, Ricardo Adé te yon timoun Saint-Marc ak yon rèv ki te sanble prèske ireyalis: jwe yon Koup di Mond anba mayo ayisyen an, epi jwe l kòm kapitèn. Li grandi ak istwa 1974 la nan zòrèy li, pandan l ap poze tèt li yon sèl kesyon: poukisa pa nou, poukisa pa jenerasyon pa l la?
 
-Wout la te anyen men dwat. Apre yon premye aparisyon nan Gold Cup la nan kòmansman ven li, Adé te eseye chans li nan Thailand, lwen tout bagay. Peryòd la difisil. Se la, li fè konnen, li te fè eksperyans rasis la pou premye fwa, yon eprèv ke li te chwazi transfòme an fòs e ki toujou fòme fason li nan dirije yon gwoup jodi a.
+Wout la te tout sof dwat. Apre yon premye aparisyon nan Gold Cup nan kòmansman ventèn li, Adé tante chans li nan Thailand, lwen tout bagay. Peryòd la di. Se la, li konfye, li fè eksperyans rasis la pou premye fwa, yon eprèv li chwazi transfòme an fòs epi ki fòje toujou jodi a fason li mennen yon gwoup.
 
-Pwen vire a soti Miami. Nan yon lig dimanch ki anrasinen nan kominote ayisyen an, li te mete koulè yon ekip Sen Mak, anvan yon rankont te mennen l nan Miami United. La, finalman li te jwenn sa ki te manke anpil nan peyi a: imaj jwèt li. An Ayiti, li eksplike, premye obstak la se souvan absans videyo, ki se sa klib yo mande sitou. Imaj sa yo louvri pòt yo pou li. Apre sa ap vini Chili, Lè sa a, Ekwatè. Manadjè kominikasyon li a, Erica Dumas, rezime vwayaj sa a nan yon sèl souf: soti nan izolasyon nan Thailand rive nan Miami, nan Chili, pou vin tounen yon referans nan Ekwatè.
+Viraj la soti Miami. Nan yon lig dimanch ki anrasinen nan kominote ayisyen an, li pote koulè yon ekip Saint-Marc, anvan yon rankont mennen l nan Miami United. La, li jwenn anfen sa ki te manke peyi a anpil: imaj jwèt li. Ann Ayiti, li t ap eksplike, premye obstak la se souvan absans videyo, sa klib yo mande sitou poutan. Imaj sa yo louvri pòt yo pou li. Apre sa ap vini Chili, answit Ekwatè. Chajè kominikasyon li, Erica Dumas, rezime pakou sa a ak yon sèl trè: soti nan izolman nan Thailand rive Miami, nan Chili, jouk li vin yon referans nan Ekwatè.
 
-Jodi a yon poto nan defans anba lòd antrenè franse Sébastien Migné, Adé jwe nan LDU Quito, nan yon chanpyona ki gen entansite fizik koresponn, li di, egzakteman nan defansè a ke li ye. Ko-kapitèn, li konnen pwa nan mayo la. Li raple seleksyon an te oblije jwe kalifikasyon lakay li nan Curaçao, akoz mank estabilite nan peyi a, e foutbòl ka ofri lajwa yon pèp k ap soufri. Se figi Ayiti, fè yon bagay ki bon pou peyi a: se konsa li rezime misyon an.
+Jodi a poto defans lan anba lòd antrenè franse Sébastien Migné, Adé ap jwe nan LDU Quito, nan yon chanpyona kote entansite fizik la koresponn, li di, egzakteman ak defansè li ye a. Ko-kapitèn, li konnen pwa mayo a. Li raple seleksyon an te oblije jwe kalifikasyon lakay li yo nan Curaçao, akoz mank estabilite nan peyi a, epi foutbòl ka ofri lajwa bay yon pèp k ap soufri. Se figi Ayiti, fè yon bagay ki bon pou peyi a: se konsa li rezime misyon an.
 
-Gen yon randevou nan kalandriye a ki rezone pi fò pase lòt yo. 19 jen Ayiti fè fas ak Brezil nan Philadelphia. Adé konnen sa: nan absans Mondial, jenerasyon ayisyen te grandi ap sipòte Seleção. Fwa sa a, yo pral mete koulè pwòp yo. Ko-kapitèn nan, sepandan, refize fè li yon mòn enfranchisabl. Sou teren an, li sonje, se onz kont onz, e nenpòt bagay ka rive.
+Gen, nan kalandriye a, yon randevou ki rezone pi fò pase lòt yo. 19 jen, Ayiti afronte Brezil nan Philadelphia. Adé konnen sa: nan absans Mondyal, jenerasyon Ayisyen te grandi ap sipòte Seleção a. Fwa sa a, y ap mete pwòp koulè pa yo. Ko-kapitèn nan refize poutan fè l tounen yon mòn ou pa ka travèse. Sou teren an, li raple, se onz kont onz, epi tout bagay ka rive.
 
-Bagay esansyèl la rete, sa li adrese bay sipòtè yo: konsyans sou sa moman sa a reprezante. Prepare tèt ou, rete enb devan grandè etap la, epi reprezante peyi a jan ou kapab. Senkant-de ane apre Minik, yon timoun nan Saint-Marc ap prepare pou fè listwa, ak yon braslè sou bra l .
+Rete esansyèl la, sa li adrese bay sipòtè yo: konsyans sou sa moman sa a reprezante. Prepare tèt ou, rete enb devan grandè sèn nan, epi reprezante peyi a pi byen ou kapab. Senkanndezan apre Minik, yon timoun Saint-Marc ap prepare pou antre nan istwa, ak braslè a nan bra l.
 
-Nòt sous: Baze sou yon entèvyou ak FOX 29 (Tyler Thrasher), jen 2026.
+Nòt sous: Dapre yon entèvyou li bay FOX 29 (Tyler Thrasher), jen 2026.
 
 ---
 
-## 21. Anvan Koup di Mond lan, Ayiti domine Nouvèl Zeland 4 a 0
+## 21. Anvan Mondyal la, Ayiti domine Nouvèl Zeland 4-0
 
 URL sous: https://grenadiers2026.com/journal/haiti-nouvelle-zelande-amical
 
@@ -910,37 +910,37 @@ Dat: 2 jen 2026
 
 Kategori: Zanmitay · Rapò match
 
-Rezime: Providence lanse Grenadiers yo, Lenny Joseph, Pierrot ak Lacroix konkli: nan Fort Lauderdale, Ayiti ranpòte 4-0 pou premye tès li anvan Koup di Mond.
+Rezime: Providence lanse Grenadye yo, Lenny Joseph, Pierrot ak Lacroix konkli: nan Fort Lauderdale, Ayiti enpoze tèt li 4-0 pou premye tès li anvan Mondyal la.
 
-Videyo: https://www.youtube.com/watch?v=gGGVBaLe0w0 — Pwen esansyèl — Ayiti 4-0 Nouvèl Zeland
+Videyo: https://www.youtube.com/watch?v=gGGVBaLe0w0 · Moman fò yo · Ayiti 4-0 Nouvèl Zeland
 
-Pou premye nan de preparasyon amikal li yo, Ayiti te bay yon pèfòmans siksè nan domine Nouvèl Zeland 4-0, madi 2 jen 2026 nan Inter Miami CF Stadium nan Fort Lauderdale. Apeprè dis jou anvan li antre nan FIFA Koup di Mond la, seleksyon Sébastien Migné te transfòme pwomès li nan jwe nan rezilta nèt.
+Pou premye nan de match zanmitay preparasyon li yo, Ayiti bay yon kopi abouti lè li domine Nouvèl Zeland 4-0, madi 2 jen 2026 nan Inter Miami CF Stadium nan Fort Lauderdale. Yon dizèn jou anvan antre li nan Koup di Mond FIFA a, seleksyon Sébastien Migné a transfòme pwomès jwèt li an rezilta nèt.
 
-Kickoff, pwograme pou 7:30 p.m. (Eastern Time), yo te retade apeprè 30 minit akòz yon risk tanpèt loraj, an akò ak pwotokòl lokal yo. Nan chalè ki toupre 30 ° C, abit la te bay de repo fre - nan 35yèm la ak apre nan 77yèm minit - yon nouvo pwovizyon FIFA pou tounwa a. Tèlman kondisyon ke Grenadye yo pral jwenn nan mwa jen.
+Kout anvwa a, ki te pwograme pou 7:30 p.m. (lè Lès la), te pran yon trantèn minit reta akoz yon risk loraj, dapre pwotokòl lokal yo. Anba yon chalè toupre 30 °C, abit la akòde de poz fre, nan 35yèm apre sa nan 77yèm minit, yon nouvo dispozisyon FIFA pou tounwa a. Otan kondisyon Grenadye yo pral jwenn nan mwa jen.
 
-Sa pat pran tan pou Ayiti fè grèv. Apati 12èm minit, Wilson Isidor te glise yon balon dèyè defans Ruben Providence, ki te vire nan yon pòch anvan li bat Alex Paulsen nan yon ang sere. 1-0, ak senaryo ideyal la pou yon ekip detèmine pou enpoze tèmpo li yo.
+Ayiti pa pran tan pou frape. Depi 12yèm minit la, Wilson Isidor glise yon balon nan do defans lan pou Ruben Providence, ki vire kò l nan yon ti espas piti anvan li bat Alex Paulsen nan yon ang fèmen. 1-0, ak senaryo ideyal la pou yon ekip ki deside enpoze tèmpo li.
 
-Jostled, Nouvèl Zeland te reyaji epi kenbe boul la pou yon bon pati nan premye peryòd la, san yo pa rive twonpe Johny Placide. Nan repo a, Grenadye yo te pran devan, mèt nan esansyèl yo.
+Souke, Nouvèl Zeland reyaji epi kenbe balon an pou yon bon pati nan premye peryòd la, san rive twonpe Johny Placide. Nan poz la, Grenadye yo te pase devan, mèt sou sa ki esansyèl.
 
-Retounen soti nan kazye a, pandan tout Blan yo te fè plizyè chanjman, Ayiti vin pi gran diferans lan. Jwenn nan yon diferans ant defansè opoze yo, Lenny Joseph reziste retounen defans la pou double devan (2-0).
+Lè yo tounen soti nan vestyè a, alòske All Whites yo te fè plizyè chanjman, Ayiti fè eka a vin pi gwo. Jwenn nan yon entèval ant defansè advèsè yo, Lenny Joseph reziste retou defans lan pou double eskò a (2-0).
 
-Yon ti tan apre, Frantzdy Pierrot —ki te antre nan repo a nan plas Duckens Nazon — koupe yon kwa Carlens Arcus ak yon tèt gratis nan kè a nan zòn nan pou fè li 3 a 0 nan 62e minit, yon ti kras mwens yon demi èdtan apre.
+Yon ti tan apre, Frantzdy Pierrot, ki te antre nan poz la nan plas Duckens Nazon, koupe yon sant Carlens Arcus ak yon tèt lib nan mitan sifas la pou pote eskò a nan 3-0 nan 62yèm minit la, yon ti kras mwens pase yon demi èdtan anvan fen an.
 
-Resital la te fini nan 87e minit ak yon gwo siksè: nan yon aksyon sal, Duke Lacroix boukle yon piki ke Max Crocombe, ki te antre nan dezyèm mitan an, pa t kapab devye. 4-0, pa gen apèl.
+Resital la fini nan 87yèm minit la ak yon bèl reyisit: nan yon aksyon dezòd, Duke Lacroix anwoule yon frap Max Crocombe, ki te antre nan dezyèm peryòd la, pa t ka devye. 4-0, san konteste.
 
-Fidèl ak entansyon Migné te montre nan konferans pou laprès la - "Nou pa pral pake otobis la" - Ayiti te chèche jwèt la e li te fè pwen sa yo rive vre: kat marqueur diferan ak yon Placide Imperial pou konsève fèy pwòp li yo.
+Fidèl ak entansyon Migné te montre nan konferans pou laprès la, « Nou p ap pake otobis la », Ayiti chèche jwèt la epi konkretize moman fò li yo: kat katchè diferan ak yon Placide enperyal pou prezève bi li san pran gòl.
 
-Se te premye konfwontasyon ant de nasyon yo nan nivo siperyè. Nan klasman FIFA a, Nouvèl Zeland (85 zièm) te pi pwòch advèsè Ayiti (83 zièm) pami seleksyon ki kalifye pou Koup di Mond lan - yon tès kalibre devan opozisyon yon lòt kalib. Sou bò Nouvèl Zeland, tou kalifye (Gwoup G), antrenè a vire toutotou eskwadwon li a anpil, pataje tan jwe ant de gadyen li yo.
+Se te toupremye konfwontasyon ant de nasyon yo nan nivo senior. Nan klasman FIFA a, Nouvèl Zeland (85yèm) te advèsè ki pi pre Ayiti (83yèm) pami seleksyon ki kalifye pou Mondyal la, yon tès kalibre anvan opozisyon yon lòt kalib. Sou bò neozelande a, ki kalifye tou (Gwoup G), antrenè a fè efektif li vire anpil, pandan li pataje tan jwe ant de gadyen li yo.
 
-Siksè klè sa a reviv dinamik yon gwoup ki te rete ak yon defèt (0-1) kont Tinizi ak yon match nul (1-1) kont Islann nan mwa mas. Ki baze nan Florid pou fòmasyon yo, Grenadye yo te wè ekip yo ranpli ak arive Jean-Ricner Bellegarde; Woodensky Pierre, miye teren Violette AC e sèl jwè nan gwoup k ap jwe nan peyi a, rete tann.
+Siksè nèt sa a relanse dinamik yon gwoup ki te rete sou yon defèt (0-1) kont Tinizi ak yon match nil (1-1) kont Islann nan mwa mas. Enstale nan Florid pou kan yo, Grenadye yo wè efektif yo konplete ak arive Jean-Ricner Bellegarde; Woodensky Pierre, milye Violette AC e sèl jwè nan gwoup la k ap jwe nan peyi a, rete tann.
 
-Rete yon dènye tès anvan gwo so a: Perou, 5 jen nan NU Stadium nan Miami. Lè sa a, ap vini antre nan deba, sou 13 jen kont Eskòs, nan Gillette Stadium nan Foxborough - premye reyinyon an nan gwoup C ki Lè sa a, rezève Brezil ak Mawòk. Objektif deklare: wonn 16 yo.
+Rete yon dènye tès anvan gwo so a: Pewou, 5 jen nan NU Stadium nan Miami. Apre sa ap vini antre an lis la, 13 jen kont Eskòs, nan Gillette Stadium nan Foxborough, premye randevou yon Gwoup C ki rezève Brezil ak Mawòk apre. Objektif deklare: 16yèm final yo.
 
-Nòt sous: Ki baze sou match amikal Ayiti-Nouvèl Zeland, 2 jen 2026 nan Fort Lauderdale. Sous: RNZ, Nouvèl Zeland Herald.
+Nòt sous: Dapre match zanmitay Ayiti-Nouvèl Zeland la, 2 jen 2026 nan Fort Lauderdale. Sous : RNZ, New Zealand Herald.
 
 ---
 
-## 22. Migné, anvan Nouvèl Zeland: "Nou pa pral pake otobis la"
+## 22. Migné, anvan Nouvèl Zeland: « Nou p ap pake otobis la »
 
 URL sous: https://grenadiers2026.com/journal/conference-avant-nouvelle-zelande
 
@@ -948,25 +948,25 @@ Dat: 1ye jen 2026
 
 Kategori: Konferans pou laprès · Anvan match
 
-Rezime: Lavèy premye match amikal la, Sébastien Migné ak Frantzdy Pierrot te eksprime anbisyon yon seleksyon ki detèmine pou l vanse - douz jou anvan match kont Eskòs la kòmanse.
+Rezime: Lavèy premye match zanmitay la, Sébastien Migné ak Frantzdy Pierrot di anbisyon yon seleksyon ki deside ale pi devan, douz jou anvan antre an lis kont Eskòs la.
 
-Nan lavèy match amikal kont Nouvèl Zeland, ki te pwograme pou 2 jen nan Fort Lauderdale, Sébastien Migné ak Frantzdy Pierrot parèt devan laprès. Eta nan tèt gwoup la, apwòch taktik, fyète nan reprezante yon pèp antye: douz jou anvan kòmansman an nan match la kont Eskòs, antrenè a ak atakan li yo te dekri kontou yo nan yon ekip ki pa gen entansyon refize okenn nan anbisyon li yo.
+Lavèy match zanmitay la kont Nouvèl Zeland, ki te pwograme pou 2 jen nan Fort Lauderdale, Sébastien Migné ak Frantzdy Pierrot prezante devan laprès. Eta despri gwoup la, apwòch taktik, fyète pou reprezante tout yon pèp: douz jou anvan antre an lis kont Eskòs, antrenè a ak atakan li dekri kontou yon ekip ki pa gen entansyon renye okenn nan anbisyon li yo.
 
-Antrenè a te raple premye objektif reyinyon sa yo: rezoud mekanik yo. Nan etap sa a nan sezon an, kondisyon fizik yo varye anpil de yon jwè a yon lòt - gen kèk ki soti nan yon egzèsis klib fatigan, lòt moun yo manke tan pou jwe. "Demen, nou pral pataje minit yo," endike Migné, tankou sa lòt seleksyon yo ap fè, yo nan lòd yo pran momantòm alantou 13 jen san yo pa kouri risk ki pa nesesè.
+Antrenè a raple dabò vokasyon rankont sa yo: regle mekanik la. Nan etap sezon sa a, kondisyon fizik la varye anpil de yon jwè a yon lòt, gen kèk ki soti nan yon egzèsis klib ki fatigan, lòt yo manke tan jwe. « Demen, n ap pataje minit yo », Migné endike, tankou sa lòt seleksyon yo ap fè, pou monte an pwisans vè 13 jen san pran risk ki pa nesesè.
 
-Yo rapòte mendèv la an bon sante e li konplètman mobilize. Se sèlman Woodensky Pierre, miye teren pou Violette AC e sèl jwè nan seleksyon an k ap jwe nan peyi a, ki pral rantre nan gwoup la ak yon ti reta, pandan li finalize fòmalite ki gen rapò ak viza li a. Pou rès la, seleksyon an ta dwe fini nan jou kap vini yo.
+Efektif la, li menm, anonse an bon sante epi mobilize nèt. Se sèlman Woodensky Pierre, milye Violette AC e sèl jwè nan seleksyon an k ap jwe nan peyi a, k ap rankontre gwoup la ak yon ti reta, jis pou l finalize fòmalite ki gen rapò ak viza li. Pou rès la, seleksyon an ta dwe okonplè nan jou k ap vini yo.
 
-Mande sou figi ke Ayiti pral ofri kont opozan nan kalib la nan Eskòs oswa Brezil, Migné eskli nenpòt apwòch piman defans. Yon blòk solid rete esansyèl pou fè konpetisyon nan nivo ki pi wo a, men tou senpleman defann ta, li di, ale kont karaktè jwè li yo. "Nou renmen avanse pou pi devan epi sèvi ak flan yo," li te rezime, konvenki ke nou pral gen nòt yo espere kreye yon sipriz.
+Lè yo poze l kesyon sou figi Ayiti pral ofri devan advèsè ki gen kalib Eskòs oswa Brezil, Migné ekate tout apwòch piman defansif. Yon blòk solid rete endispansab pou rivalize nan pi wo nivo, men kontante l defann sèlman ta, li di, kont karaktè jwè li yo. « Nou renmen ale pi devan epi sèvi ak kote yo », li rezime, konvenki fòk ou make pou espere kreye sipriz la.
 
-Lanbisyon sa a baze sou konpetisyon ki te vin tounen, nan je l , yon liks reyèl. Aparisyon nan eleman jèn tankou Louicius Don Deedson ak Shanyder Borgelin, ansanm ak yon egzekitif tankou Pierrot, te dans sektè atak la ak fòse moun ki gen plis eksperyans yo rete byen file. Ase yo ofri anplwaye yo pwofil varye: soti nan pwen fizik sipò nan zèl byen file nan yon sèl-a-yon sitiyasyon.
+Anbisyon sa a apiye sou yon konkirans ki vin, nan je l, yon vrè liks. Eklozyon jèn eleman tankou Louicius Don Deedson ak Shanyder Borgelin, akote yon kad tankou Pierrot, densifye sektè ofansif la epi oblije pi eksperimante yo rete file. Ase pou ofri estaf la pwofil varye: depi pwen dapui fizik la rive nan ailye trenchan nan en-kont-en.
 
-Antrenè a pa inyorans diferans ki genyen nan notoryete ki separe Ayiti ak yon jeyan tankou Brezil. Men, dapre konfwontasyon anvan li yo ak Seleção la, li trase yon konviksyon: sou teren an, toutotan yon gwoup rete kolektivman ini, tout bagay rete posib.
+Antrenè a pa inyore eka notoryete ki separe Ayiti ak yon jeyan tankou Brezil. Men, ak fòs konfwontasyon li te genyen anvan ak Seleção a, li rale yon konviksyon: sou teren an, toutotan yon gwoup rete ini kolektivman, tout bagay rete posib.
 
-Frantzdy Pierrot konplètman sipoze pwa a tache ak mayo la. Byen lwen soufri li, atakè a fè li yon fòs kondwi. "Nou pote drapo sa a pou reprezante tout yon nasyon," li te deklare, konsyan ke pèp la ap konte sou jwè yo epi yo pral vini an kantite pou sipòte yo.
+Frantzdy Pierrot, li menm, asime nèt pwa ki tache ak mayo a. Lwen pou li sibi l, atakan an fè l tounen yon motè. « Nou pote drapo sa a pou reprezante tout yon nasyon », li deklare, konsyan ke pèp la ap konte sou jwè li yo epi l ap deplase an kantite pou sipòte yo.
 
-Kou a rete, ki Migné fè atansyon pou pa boule. Objektif la deklare pa varye: rive nan omwen wonn 16, premye tou eliminasyon dirèk nan fòma karannwit ekip la. Men, priyorite imedyat la chita nan de reyinyon preparasyon - Nouvèl Zeland, Lè sa a, Perou sou 5 jen nan Miami - anvan konplètman vire je nou anvè Eskòs le 13 jen nan Foxborough.
+Rete kap la, ke Migné veye pou l pa boule. Objektif deklare a pa chanje: rive omwen nan 16yèm final yo, premye tou eliminasyon dirèk nan fòma karantwit ekip la. Men priyorite imedyat la kenbe nan de randevou preparasyon, Nouvèl Zeland, apre sa Pewou 5 jen nan Miami, anvan vire je yo nèt sou Eskòs, 13 jen nan Foxborough.
 
-Nòt sous: Daprè konferans pou laprès seleksyon an avan match la, 1ye jen 2026 (Sébastien Migné ak Frantzdy Pierrot).
+Nòt sous: Dapre konferans pou laprès anvan match seleksyon an, 1ye jen 2026 (Sébastien Migné ak Frantzdy Pierrot).
 
 ---
 
