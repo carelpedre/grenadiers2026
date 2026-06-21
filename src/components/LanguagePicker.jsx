@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 import { getStoredLang, setStoredLang, useT, LANGUAGES } from "../lib/i18n";
+import US from "country-flag-icons/react/3x2/US";
+import FR from "country-flag-icons/react/3x2/FR";
+import HT from "country-flag-icons/react/3x2/HT";
+
+// Drapeau + nom complet par code de langue (US = English, FR = Français, HT = Kreyòl).
+const FLAG_META = {
+  fr: { Flag: FR, name: "Français" },
+  en: { Flag: US, name: "English" },
+  ht: { Flag: HT, name: "Kreyòl" },
+};
 
 // Stockage (clé + TTL) et état de langue gérés dans ../lib/i18n. Ce fichier
 // fournit l'écran d'accueil plein écran et le sélecteur compact (LanguageToggle).
@@ -152,20 +162,33 @@ export function getCurrentLang() {
 export function LanguageToggle({ className = "" }) {
   const { lang, setLang } = useT();
   return (
-    <div className={`flex items-center gap-1 ${className}`} role="group" aria-label="Choisir la langue">
-      {LANGUAGES.map((l) => (
-        <button
-          key={l.code}
-          type="button"
-          aria-pressed={lang === l.code}
-          onClick={() => setLang(l.code)}
-          className={`px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
-            lang === l.code ? "bg-haiti-blue text-bg" : "text-ink hover:text-haiti-blue"
-          }`}
-        >
-          {l.label}
-        </button>
-      ))}
+    <div
+      className={`inline-flex items-center gap-0.5 rounded-lg border border-[#D8E1ED] bg-white p-0.5 shadow-sm ${className}`}
+      role="group"
+      aria-label="Choisir la langue"
+    >
+      {LANGUAGES.map((l) => {
+        const { Flag, name } = FLAG_META[l.code];
+        const active = lang === l.code;
+        return (
+          <button
+            key={l.code}
+            type="button"
+            aria-pressed={active}
+            aria-label={name}
+            title={name}
+            onClick={() => setLang(l.code)}
+            className={`inline-flex items-center gap-1.5 rounded px-3 py-2 min-h-[40px] text-sm font-medium transition-colors ${
+              active
+                ? "bg-[#1A4480] text-white"
+                : "bg-transparent text-[#4B5563] hover:bg-[#F0F4FA]"
+            }`}
+          >
+            <Flag className="w-[22px] h-[15px] shrink-0 rounded-sm ring-1 ring-black/10" />
+            {l.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

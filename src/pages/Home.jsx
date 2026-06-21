@@ -488,7 +488,7 @@ function FeaturedJournalCard({ entry }) {
           <motion.div className="h-full" whileHover={{ scale: 1.03 }} transition={{ duration: 0.5 }}>
             <ImagePlaceholder
               src={entry.cover}
-              label={pick(entry.title, entry.titleEn)}
+              label={pick(entry.title, entry.titleEn, entry.titleHt)}
               aspect="16/9"
               rounded={false}
               className="w-full h-full object-cover"
@@ -500,12 +500,12 @@ function FeaturedJournalCard({ entry }) {
         </div>
         <div className="p-6 md:p-8 flex flex-col justify-center">
           <div className="flex items-center gap-2 mb-3 text-xs flex-wrap">
-            <span className="text-haiti-red uppercase tracking-wider font-bold">{pick(entry.eyebrow, entry.eyebrowEn)}</span>
+            <span className="text-haiti-red uppercase tracking-wider font-bold">{pick(entry.eyebrow, entry.eyebrowEn, entry.eyebrowHt)}</span>
             <span className="text-muted">·</span>
             <span className="text-muted">{journalDate(entry, lang)}</span>
           </div>
-          <h3 className="font-display text-2xl md:text-3xl mb-3 leading-snug">{pick(entry.title, entry.titleEn)}</h3>
-          <p className="text-muted leading-relaxed line-clamp-3">{pick(entry.dek, entry.dekEn)}</p>
+          <h3 className="font-display text-2xl md:text-3xl mb-3 leading-snug">{pick(entry.title, entry.titleEn, entry.titleHt)}</h3>
+          <p className="text-muted leading-relaxed line-clamp-3">{pick(entry.dek, entry.dekEn, entry.dekHt)}</p>
           <p className="mt-4 text-sm font-semibold text-haiti-blue group-hover:text-haiti-red transition-colors">
             {t("home.journal.readCta")} →
           </p>
@@ -528,7 +528,7 @@ function JournalCard({ entry }) {
           <motion.div whileHover={{ scale: 1.04 }} transition={{ duration: 0.5 }}>
             <ImagePlaceholder
               src={entry.cover}
-              label={pick(entry.title, entry.titleEn)}
+              label={pick(entry.title, entry.titleEn, entry.titleHt)}
               aspect="16/9"
               rounded={false}
             />
@@ -537,13 +537,13 @@ function JournalCard({ entry }) {
         <div className="p-5">
           <div className="flex items-center gap-2 mb-2 text-xs flex-wrap">
             <span className="text-haiti-red uppercase tracking-wider font-bold">
-              {pick(entry.eyebrow, entry.eyebrowEn)}
+              {pick(entry.eyebrow, entry.eyebrowEn, entry.eyebrowHt)}
             </span>
             <span className="text-muted">·</span>
             <span className="text-muted">{journalDate(entry, lang)}</span>
           </div>
-          <h3 className="font-display text-lg md:text-xl mb-2 leading-snug">{pick(entry.title, entry.titleEn)}</h3>
-          <p className="text-muted text-sm leading-relaxed">{pick(entry.dek, entry.dekEn)}</p>
+          <h3 className="font-display text-lg md:text-xl mb-2 leading-snug">{pick(entry.title, entry.titleEn, entry.titleHt)}</h3>
+          <p className="text-muted text-sm leading-relaxed">{pick(entry.dek, entry.dekEn, entry.dekHt)}</p>
           <p className="mt-3 text-sm font-semibold text-haiti-blue">{t("home.journal.readCta")} →</p>
         </div>
       </Link>

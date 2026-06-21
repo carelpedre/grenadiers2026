@@ -117,19 +117,23 @@ export default function Layout() {
               </div>
             </div>
 
-            {/* Sélecteur de langue compact (FR / EN / HT) */}
-            <LanguageToggle className="pl-3 border-l border-line" />
+            {/* Sélecteur de langue à drapeaux (FR / EN / HT) */}
+            <LanguageToggle className="ml-2" />
           </nav>
 
-          <button
-            className="xl:hidden p-2"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              {open ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
-            </svg>
-          </button>
+          {/* Mobile : drapeaux toujours visibles, hors du menu replié */}
+          <div className="flex items-center gap-2 xl:hidden">
+            <LanguageToggle />
+            <button
+              className="p-2"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                {open ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {open && (
@@ -172,14 +176,6 @@ export default function Layout() {
                     </NavLink>
                   ))}
                 </div>
-              </div>
-
-              {/* Langue · sélecteur compact dans le menu mobile */}
-              <div className="mt-1 pt-3 border-t border-line">
-                <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-2">
-                  {t("layout.language")}
-                </p>
-                <LanguageToggle />
               </div>
             </div>
           </nav>

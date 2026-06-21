@@ -875,32 +875,32 @@ const dict = {
   "mur.eyebrow": {
     en: "The voice of the Grenadiers",
     fr: "La voix des Grenadiers",
-    ht: "La voix des Grenadiers",
+    ht: "Vwa Grenadye yo",
   },
   "mur.title": {
     en: "Fan wall",
     fr: "Mur des supporters",
-    ht: "Mur des supporters",
+    ht: "Miray sipòtè yo",
   },
   "mur.subtitle": {
     en: "Leave your message for the team, from Haiti, from the diaspora, from all over the world. Messages are published after moderation.",
     fr: "Laissez votre message pour la sélection, d'Haïti, de la diaspora, du monde entier. Les messages sont publiés après modération.",
-    ht: "Laissez votre message pour la sélection, d'Haïti, de la diaspora, du monde entier. Les messages sont publiés après modération.",
+    ht: "Kite mesaj ou pou seleksyon an, soti Ayiti, soti nan dyaspora a, soti toupatou nan mond lan. Mesaj yo pibliye apre yon moderasyon.",
   },
   "mur.messagesTitle": {
     en: "Fan messages",
     fr: "Les messages des supporters",
-    ht: "Les messages des supporters",
+    ht: "Mesaj sipòtè yo",
   },
   "mur.beFirst": {
     en: "Be the first to write.",
     fr: "Soyez le premier à écrire.",
-    ht: "Soyez le premier à écrire.",
+    ht: "Se ou ki pou ekri an premye.",
   },
   "mur.empty": {
     en: "No messages yet. Yours could be the first. 🇭🇹",
     fr: "Aucun message pour le moment. Votre message pourrait être le premier. 🇭🇹",
-    ht: "Aucun message pour le moment. Votre message pourrait être le premier. 🇭🇹",
+    ht: "Pa gen mesaj pou kounye a. Pa ou a ka premye a. 🇭🇹",
   },
 
   // ─── 404 / NOT FOUND (Phase 2 additions) ─────────────────────────────
@@ -3117,7 +3117,7 @@ const dict = {
   // ─── Accueil · cartes d'appel à l'action ──
   "home.cta.murTitle": {
     en: "Post your message before kickoff",
-    fr: "Voye mesaj ou anvan match la",
+    fr: "Envoyez votre message avant le coup d'envoi",
     ht: "Voye mesaj ou anvan match la",
   },
   "home.cta.murAction": { en: "Sign the wall", fr: "Signer le mur", ht: "Siyen miray la" },
@@ -3174,22 +3174,22 @@ const dict = {
   "home.munich.cta": { en: "Read the full story", fr: "Lire le récit complet", ht: "Li tout istwa a" },
 
   // ─── Mise en page (Layout) · ht = placeholder fr ──
-  "layout.skipToContent": { en: "Skip to content", fr: "Aller au contenu", ht: "Aller au contenu" },
-  "layout.supportersMenu": { en: "Supporters", fr: "Espace Supporters", ht: "Espace Supporters" },
+  "layout.skipToContent": { en: "Skip to content", fr: "Aller au contenu", ht: "Ale nan kontni an" },
+  "layout.supportersMenu": { en: "Supporters", fr: "Espace Supporters", ht: "Espas Sipòtè" },
   "layout.shareTitle": {
     en: "Grenadiers 2026 · Haiti at the 2026 World Cup",
     fr: "Grenadiers 2026 · Haïti à la Coupe du Monde 2026",
-    ht: "Grenadiers 2026 · Haïti à la Coupe du Monde 2026",
+    ht: "Grenadiers 2026 · Ayiti nan Koup di Mond 2026",
   },
-  "layout.language": { en: "Language", fr: "Langue", ht: "Langue" },
+  "layout.language": { en: "Language", fr: "Langue", ht: "Lang" },
   "layout.footer.tagline": {
     en: "FIFA World Cup 2026",
     fr: "Coupe du Monde de la FIFA 2026",
-    ht: "Coupe du Monde de la FIFA 2026",
+    ht: "Koup di Mond FIFA 2026",
   },
-  "layout.footer.mediaTitle": { en: "For media", fr: "Pour les médias", ht: "Pour les médias" },
-  "layout.footer.aboutSite": { en: "About this site", fr: "À propos de ce site", ht: "À propos de ce site" },
-  "layout.footer.contact": { en: "Contact us", fr: "Nous contacter", ht: "Nous contacter" },
+  "layout.footer.mediaTitle": { en: "For media", fr: "Pour les médias", ht: "Pou medya yo" },
+  "layout.footer.aboutSite": { en: "About this site", fr: "À propos de ce site", ht: "Apropo sit sa a" },
+  "layout.footer.contact": { en: "Contact us", fr: "Nous contacter", ht: "Kontakte nou" },
 
   // ─── Accessibilité ──
   "a11y.close": { en: "Close", fr: "Fermer", ht: "Fermer" },
