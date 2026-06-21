@@ -27,7 +27,8 @@ const TEAM_KEY = {
 export default function Federation() {
   const yearsOld = 2026 - federation.founded;
   const { t, lang } = useT();
-  const pick = (frVal, enVal) => (lang === "en" ? enVal : frVal);
+  const pick = (frVal, enVal, htVal) =>
+    lang === "ht" ? (htVal ?? frVal) : lang === "en" ? (enVal ?? frVal) : frVal;
   const featured = federation.currentLeadership.featured;
 
   return (
@@ -71,7 +72,7 @@ export default function Federation() {
                   .replace("{hq}", federation.headquarters)
                   .replace("{fifa}", federation.fifaAffiliation)
                   .replace("{concacaf}", federation.concacafAffiliation)}{" "}
-                {pick(federation.publicUtilityNote, federation.publicUtilityNoteEn)}
+                {pick(federation.publicUtilityNote, federation.publicUtilityNoteEn, federation.publicUtilityNoteHt)}
               </p>
             </div>
           </div>
@@ -125,7 +126,7 @@ export default function Federation() {
                 {t("federation.pioneer")}
               </p>
               <h3 className="font-display text-2xl md:text-3xl mb-3">{federation.founder}</h3>
-              <p className="text-ink leading-relaxed">{pick(federation.founderNote, federation.founderNoteEn)}</p>
+              <p className="text-ink leading-relaxed">{pick(federation.founderNote, federation.founderNoteEn, federation.founderNoteHt)}</p>
             </div>
           </div>
         </section>
@@ -139,10 +140,10 @@ export default function Federation() {
           {/* Context card */}
           <div className="bg-white border border-line rounded-lg p-6 md:p-8 mb-6">
             <p className="text-xs uppercase tracking-wider text-haiti-red font-bold mb-2">
-              {pick(federation.currentLeadership.structure, federation.currentLeadership.structureEn)}
+              {pick(federation.currentLeadership.structure, federation.currentLeadership.structureEn, federation.currentLeadership.structureHt)}
             </p>
             <p className="text-ink leading-relaxed">
-              {pick(federation.currentLeadership.structureNote, federation.currentLeadership.structureNoteEn)}
+              {pick(federation.currentLeadership.structureNote, federation.currentLeadership.structureNoteEn, federation.currentLeadership.structureNoteHt)}
             </p>
           </div>
 
@@ -155,7 +156,7 @@ export default function Federation() {
                 <div className="md:hidden">
                   <ImagePlaceholder
                     src={featured.photo}
-                    label={pick(featured.photoLabel, featured.photoLabelEn)}
+                    label={pick(featured.photoLabel, featured.photoLabelEn, featured.photoLabelHt)}
                     aspect="1/1"
                     objectPosition="center 25%"
                     rounded={false}
@@ -165,7 +166,7 @@ export default function Federation() {
                 <div className="hidden md:block">
                   <ImagePlaceholder
                     src={featured.photo}
-                    label={pick(featured.photoLabel, featured.photoLabelEn)}
+                    label={pick(featured.photoLabel, featured.photoLabelEn, featured.photoLabelHt)}
                     aspect="4/5"
                     objectPosition="center 25%"
                     rounded={false}
@@ -176,17 +177,17 @@ export default function Federation() {
               {/* Bio + milestones */}
               <div className="p-6 md:p-10">
                 <p className="text-gold text-xs uppercase tracking-wider font-bold mb-3">
-                  {t("federation.inOffice").replace("{since}", pick(featured.since, featured.sinceEn))}
+                  {t("federation.inOffice").replace("{since}", pick(featured.since, featured.sinceEn, featured.sinceHt))}
                 </p>
                 <h3 className="font-display text-3xl md:text-4xl mb-2 leading-tight">
                   {featured.name}
                 </h3>
                 <p className="text-bg/70 text-sm md:text-base mb-5 font-semibold">
-                  {pick(featured.role, featured.roleEn)}
+                  {pick(featured.role, featured.roleEn, featured.roleHt)}
                 </p>
 
                 <p className="text-bg/85 leading-relaxed mb-6">
-                  {pick(featured.bio, featured.bioEn)}
+                  {pick(featured.bio, featured.bioEn, featured.bioHt)}
                 </p>
 
                 <div className="mb-5">
@@ -194,7 +195,7 @@ export default function Federation() {
                     {t("federation.keyMoments")}
                   </p>
                   <ul className="space-y-2">
-                    {pick(featured.milestones, featured.milestonesEn).map((m, i) => (
+                    {pick(featured.milestones, featured.milestonesEn, featured.milestonesHt).map((m, i) => (
                       <li key={i} className="text-sm text-bg/80 leading-relaxed flex items-start gap-2">
                         <span className="text-haiti-red mt-1.5 shrink-0">●</span>
                         <span>{m}</span>
@@ -204,7 +205,7 @@ export default function Federation() {
                 </div>
 
                 <p className="text-xs text-bg/60 leading-relaxed italic">
-                  {pick(featured.previousRoles, featured.previousRolesEn)}
+                  {pick(featured.previousRoles, featured.previousRolesEn, featured.previousRolesHt)}
                 </p>
               </div>
             </div>
@@ -216,7 +217,7 @@ export default function Federation() {
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             {federation.currentLeadership.members.map((m) => (
-              <LeaderCard key={m.role} role={pick(m.role, m.roleEn)} name={m.name} />
+              <LeaderCard key={m.role} role={pick(m.role, m.roleEn, m.roleHt)} name={m.name} />
             ))}
           </div>
         </section>
@@ -238,7 +239,7 @@ export default function Federation() {
             </h3>
             <p className="text-bg/60 text-sm mb-4">{federation.homeStadium.city}</p>
             <p className="text-bg/80 leading-relaxed max-w-prose">
-              {pick(federation.homeStadium.note, federation.homeStadium.noteEn)}
+              {pick(federation.homeStadium.note, federation.homeStadium.noteEn, federation.homeStadium.noteHt)}
             </p>
           </div>
         </section>
@@ -255,7 +256,7 @@ export default function Federation() {
                 className="bg-white border border-line rounded-lg p-4 text-ink flex items-start gap-3"
               >
                 <span className="w-2 h-2 bg-haiti-red rounded-full mt-2 shrink-0"></span>
-                <span>{pick(c, federation.competitionsOrganizedEn[i])}</span>
+                <span>{pick(c, federation.competitionsOrganizedEn[i], federation.competitionsOrganizedHt[i])}</span>
               </li>
             ))}
           </ul>
@@ -284,7 +285,7 @@ export default function Federation() {
                       {TEAM_KEY[m.team] ? t(`federation.team.${TEAM_KEY[m.team]}`) : m.team}
                     </span>
                   )}
-                  <span className="text-ink leading-relaxed text-sm md:text-base">{pick(m.event, m.eventEn)}</span>
+                  <span className="text-ink leading-relaxed text-sm md:text-base">{pick(m.event, m.eventEn, m.eventHt)}</span>
                 </div>
               </li>
             ))}
