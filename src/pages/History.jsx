@@ -21,7 +21,7 @@ import { fadeUp, stagger, CountUpNumber } from "../lib/motion";
 
 export default function History() {
   const { lang } = useT();
-  return lang === "en" ? <HistoryEN /> : <HistoryFR />;
+  return lang === "en" ? <HistoryEN /> : lang === "ht" ? <HistoryHT /> : <HistoryFR />;
 }
 
 function HistoryFR() {
@@ -330,6 +330,320 @@ function HistoryFR() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-bg text-ink font-semibold rounded-full hover:bg-line transition-colors border border-line"
             >
               Hommage créatif
+            </Link>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+function HistoryHT() {
+  return (
+    <div>
+      <PageHeader
+        eyebrow="1974 · Almay Lwès"
+        title="Mesye ki te louvri wout la."
+        subtitle="Istwa venndezòm ayisyen ki te fè peyi a antre nan Koup di Mond, epi ki te prepare wout la jouk 2026."
+      />
+
+      {/* Byline strip — under the page header */}
+      <section className="bg-ink/95 text-bg/80 border-b border-bg/10">
+        <div className="max-w-4xl mx-auto px-5 py-3 text-xs uppercase tracking-[0.2em] font-semibold flex items-center gap-3">
+          <span className="text-haiti-red">Pa Chokarella.</span>
+          <span className="text-bg/30">·</span>
+          <span className="text-bg/60">Lekti : 12 min</span>
+        </div>
+      </section>
+
+      {/* Hero image — the squad */}
+      <section className="bg-bg border-b border-line">
+        <div className="max-w-content mx-auto px-5 py-8">
+          <figure>
+            <ImagePlaceholder src="/images/photos/squad-1974.jpg" aspect="16/9" objectPosition="center top" label="Seleksyon nasyonal Ayiti · Foto gwoup anvan Koup di Mond 1974" />
+            <figcaption className="text-sm text-muted leading-relaxed mt-3 space-y-1.5">
+              <span className="block font-display text-ink">Seleksyon ayisyen an, Koup di Mond 1974</span>
+              <span className="block">
+                <strong className="font-display text-ink">Kanpe</strong> (de goch a dwat) : Arsène Auguste (defansè, n°3), Wilner Nazaire (defansè, n°14, kapitèn), Ernst Jean-Joseph (defansè, n°12), Pierre Bayonne (defansè, n°6), Jean-Claude Désir (milye, n°8), Henri Françillon (gadyen, n°1, mayo jòn).
+              </span>
+              <span className="block">
+                <strong className="font-display text-ink">Akwoupi</strong> (de goch a dwat) : Eddy Antoine (milye, n°9), Guy François (milye, n°10), Philippe Vorbe (milye, n°7), Emmanuel Sanon (atakan, n°20, katchè istorik Ayiti nan Koup di Mond), Roger Saint-Vil (atakan, n°15).
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <article className="bg-white">
+        <div className="max-w-4xl mx-auto px-5 py-12 md:py-14">
+          {/* Lede */}
+          <p className="font-display text-3xl md:text-4xl text-ink leading-[1.1] mb-10">
+            15 jen 1974, Ayiti antre nan listwa.
+          </p>
+
+          {/* Opening framing */}
+          <div className="prose prose-lg max-w-none text-ink leading-relaxed space-y-5 mb-10">
+            <p>Jou sa a, nan Minik, plis pase 53 000 espektatè pran plas nan tribin Olympiastadion an pou asiste ak yon match Koup di Mond ant Itali ak yon ekip ki istwa li pa twò konnen pou anpil nan yo. Pou pifò obsèvatè ewopeyen yo, senaryo a sanble deja ekri.</p>
+            <p>Itali se finalis Koup di Mond 1970 la. Gadyen li, Dino Zoff, pa pran okenn gòl anba mayo nasyonal la depi prèske de an. Yo tann Azzurri yo pami favori tounwa a. Ayiti, li menm, ap jwe premye Koup di Mond nan istwa li.</p>
+            <p>Pèsonn pa imajine ankò ke kèk èdtan pita, non yon jèn atakan ayisyen ap fè tou latè. Pèsonn pa imajine ke yon ti nasyon karayib prèt pou ekri youn nan chapit ki pi memorab nan istwa espòtif li. Epoutan, se egzakteman sa ki pral pase.</p>
+            <p>Istwa sa a se pa sèlman istwa yon gòl. Se istwa <strong className="text-ink">venndezòm ki te louvri yon wout</strong>, yon wout ki pral mennen, senkanndezan pita, jouk nan Koup di Mond 2026 la.</p>
+          </div>
+
+          {/* ─── ANVAN MINIK ─────────────────────────────────────────── */}
+          <Section heading="Anvan Minik">
+            <p>Byen anvan Almay, byen anvan kamera mond lan, byen anvan foutbòl ayisyen an te fè antre li nan achiv ofisyèl FIFA, te gen Stade Sylvio Cator.</p>
+            <p>Nan ane 1960 yo ak nan kòmansman ane 1970 yo, foutbòl deja anrasinen byen fon nan kilti popilè ayisyen an. Gwo afich ant Racing Club Haïtien, Violette Athletic Club, Aigle Noir ak Victory Sportif Club rale gwo foul moun. Tout moun konnen pi bon jwè peyi a. Yo vin figi popilè, ewo.</p>
+            <p>Seleksyon nasyonal la ap pwogrese tou. An 1971, nan Chanpyona CONCACAF la nan Trinidad-et-Tobago, Ayiti fini nan dezyèm plas dèyè Meksik sou diferans gòl. Lè sa a peyi a konprann li ka rivalize ak pi bon nasyon nan rejyon an.</p>
+            <p>Kalifikasyon nan Koup di Mond pa yon itopi ankò. Li vin yon objektif.</p>
+          </Section>
+
+          {/* ─── TOUNWA KI TE CHANJE LISTWA A ────────────────────────── */}
+          <Section heading="Tounwa ki te chanje listwa a">
+            <p>Soti 29 novanm rive 18 desanm 1973, Pòtoprens akeyi Chanpyona CONCACAF la. Nan epòk sa a, konpetisyon an gen yon enpòtans patikilye : chanpyon an kalifye dirèkteman pou Koup di Mond. Pa gen baraj. Pa gen dezyèm chans. Yon sèl ekip ap ale nan Almay Lwès.</p>
+            <p>Sis nasyon nan depa a : Ayiti, Meksik, Ondiras, Gwatemala, Trinidad-et-Tobago, Antiy neyèlandè. Pandan ven jou, peyi a kenbe souf li. Match apre match, Grenadye yo avanse. Viktwa yo anpile, piblik la plen tribin yo, espwa a grandi.</p>
+            <p>Nan fen tounwa a, Ayiti afiche <strong className="text-ink">kat viktwa ak yon sèl defèt. Uit gòl make. Twa pran.</strong> Chanpyon CONCACAF, pou premye fwa nan istwa li, epi jiska jodi a, pou sèl fwa a.</p>
+            <p>Nan kè kanpay sa a gen yon jèn atakan venndezan : Emmanuel Sanon. Senk gòl. Pi gwo katchè tounwa a. Yon zetwal fèt.</p>
+            <ImageInline
+              src="/images/photos/qualif-1973-port-au-prince.jpg"
+              label="Stade Sylvio Cator · Pòtoprens · Chanpyona CONCACAF 1973"
+              caption="Soti 29 novanm rive 18 desanm 1973, gazon Pòtoprens lan pote kalifikasyon an. Kat viktwa pou Ayiti nan senk match. Tikè pou Almay Lwès la."
+            />
+          </Section>
+
+          {/* ─── ANTOINE TASSY ─────────────────────────────────────── */}
+          <Section heading="Antoine Tassy">
+            <ImageInline
+              src="/images/photos/antoine-tassy.jpg"
+              aspect="3/4"
+              objectPosition="top"
+              fit="contain"
+              narrow
+              label="Antoine Tassy · Seleksyonè · 1974"
+              caption="Antoine Tassy mennen seleksyon an nan tit CONCACAF 1973 li a ak nan premye patisipasyon li nan Koup di Mond."
+            />
+            <p>Tout gwo ekip gen yon lidè. Pou Ayiti, nonm sa a rele Antoine Tassy. Respekte, egzijan epi pwofondman konvenki de potansyèl jwè li yo, li refize konsidere Koup di Mond la kòm yon senp rekonpans. Pou li, se yon misyon.</p>
+            <p>Ekip li dwe pare : mantalman, fizikman, taktikman. Nan yon epòk kote resous yo limite, Tassy prepare jwè li yo ak anpil swen. Temwayaj epòk la rakonte li etidye advèsè yo ak yon rigè yo pa t konn wè souvan nan rejyon an.</p>
+            <p>Li vle jwè li yo rive nan Almay ak yon sètitid : yo gen plas yo pami pi bon yo. Konviksyon sa a ap vin youn nan pi gwo fòs gwoup la.</p>
+          </Section>
+
+          {/* ─── VENNDEZÒM ───────────────────────────────────────────── */}
+          <Section heading="Venndezòm">
+            <ImageInline
+              src="/images/photos/squad-1974-group.jpg"
+              aspect="3/2"
+              objectPosition="center"
+              fit="contain"
+              label="Seleksyon nasyonal Ayiti a · Minik, jen 1974"
+              caption="Gwoup la nan Minik, pandan Koup di Mond la. Venndezòm, twa gwo klib nan Pòtoprens (Racing, Aigle Noir, Violette), plis Victory SC pou gadyen Françillon."
+            />
+            <p>Seleksyon ayisyen ki debake nan Almay la pa sanble ak okenn lòt. Pifò jwè li yo ap evolye toujou nan chanpyona nasyonal la. Anpil ladan yo grandi ansanm. Pifò konnen youn lòt depi plizyè ane.</p>
+            <p>Yo reprezante sitou twa klib istorik : <strong className="text-ink">Racing Club Haïtien, Violette Athletic Club, Aigle Noir.</strong> Henri Françillon se sèl jwè ki soti nan Victory Sportif Club.</p>
+            <p>Alatèt yo gen kapitèn Wilner Nazaire. Nan bi, Henri Françillon. Nan mitan teren, Philippe Vorbe. Nan atak, Emmanuel Sanon. Bò kote yo : Pierre Bayonne, Guy Saint-Vil, Jean-Claude Désir, Serge Racine, Arsène Auguste, Eddy Antoine ak anpil lòt.</p>
+            <p>Yo pa gen mwayen gwo pwisans yo. Men yo gen yon bagay ki pa gen pri : yo kwè nan tèt yo.</p>
+          </Section>
+
+          {/* ─── ITALI — 15 JEN 1974 ─────────────────────────────────── */}
+          <Section heading="15 jen 1974 · kont Itali">
+            <p>Olympiastadion an plen. Itali se favori. Yo konsidere Dino Zoff prèske enbatab : seri envensiblite li rive nan 1 142 minit. Laprès italyen an ap mande ki atakan ki ka anfen mete fen nan sekans eksepsyonèl sa a.</p>
+            <p>Pèsonn pa panse ak Emmanuel Sanon.</p>
+            <ImageInline
+              src="/images/photos/francillon-italie.jpg"
+              label="Henri Françillon · Itali-Ayiti · Olympiastadion, Minik · 15 jen 1974"
+              caption="« Chat Karayib la » kenbe Itali nan premye peryòd la. Nan mitan match la, tablo a make 0-0."
+            />
+            <p>Yo bay kout anvwa a. Epi pandan karannsenk minit, Ayiti reziste. Italyen yo atake, ankò e ankò, men Henri Françillon reponn prezan : sòti ayeryen, parad reflèks, entèvansyon desizif. Minit apre minit, gadyen ayisyen an pouse asèsman italyen yo.</p>
+            <p>Lè abit la soufle mitan match la, tablo a toujou make 0-0. Ewòp dekouvri lè sa a yon bagay li pa t prevwa.</p>
+            <p><strong className="text-ink">Ayiti pa vini pou patisipe. Ayiti vini pou jwe.</strong></p>
+          </Section>
+
+          {/* ─── GÒL LA ──────────────────────────────────────────────── */}
+          <Section heading="Gòl la">
+            <ImageInline
+              src="/images/photos/sanon-zoff.jpg"
+              label="Emmanuel Sanon · Dino Zoff · Minik, 15 jen 1974"
+              caption="Nonm ki te make a. Gadyen li te bat la. Moman Ayiti te vin tounen repons yon kesyon Itali te kwè pa t gen repons."
+            />
+            <p>Kèk moman apre repriz la, Philippe Vorbe refè balon an. Li leve tèt li, obsève, epi li glise yon pas nan espas la. Emmanuel Sanon demare, pran devan defans italyen an. Dino Zoff soti nan bi li. Sanon kontinye kous li, kontoune gadyen an, epi li pouse balon an dousman nan fon filè a.</p>
+            <p className="font-display text-xl md:text-2xl text-ink"><strong>Silans. Apre sa sezisman. Apre sa listwa.</strong></p>
+            <p>Seri Dino Zoff la pran fen. Apre <CountUpNumber target={1142} duration={2200} className="font-display text-2xl text-haiti-red" /> minit. <strong className="text-ink">Ayiti ap mennen Itali nan Koup di Mond.</strong></p>
+            <p>Pandan kèk minit, mond lan antye ap gade tablo a. Itali 0. Ayiti 1. Foutbòl fèk sot raple ke okenn senaryo pa ekri davans.</p>
+
+            <YouTubeEmbed
+              videoId="Nx9gqAuyGRI"
+              title="Gòl la · Emmanuel Sanon mete fen nan seri rekò Dino Zoff la, 1974"
+              caption="Soti nan chèn YouTube ofisyèl FIFA a. « Gade Emmanuel Sanon kite defans italyen an dèyè pou l make yon gòl lejandè kont mayestro italyen Dino Zoff, pandan Koup di Mond 1974 la. »"
+              aspect="9/16"
+            />
+          </Section>
+
+          {/* ─── SWASANNDIS MINIT ETÈNITE ────────────────────────────── */}
+          <Section heading="Swasanndis minit etènite">
+            <p>Itali reyaji vit. Romeo Benetti egalize. Apre sa Pietro Anastasi bay Italyen yo lavans. Sergio Gori make yon twazyèm gòl. Eskò final : <strong className="text-ink">Itali 3, Ayiti 1.</strong></p>
+            <p>Men rezilta a pa rakonte tout istwa a. Paske pandan kèk minit, Ayiti te defye lòd etabli a. Pandan kèk minit, favori yo te doute. Pandan kèk minit, yon peyi antye te touche somè foutbòl mondyal la.</p>
+            <p>Piblik almann nan aplodi Ayisyen yo lè yo sot sou teren an. Yo genyen respè a.</p>
+
+            <YouTubeEmbed
+              videoId="lgKdZHZ8xeA"
+              title="Ayiti nan Koup di Mond 1974"
+              caption="Soti nan chèn YouTube ofisyèl FIFA a, pibliye 14 jen 2016, 42yèm anivèsè a. « Jou sa a an 1974, Ayiti te jwe premye ak sèl aparisyon li nan Koup di Mond, yon gwo pèfòmans foutbòl ayisyen an toujou ap selebre. »"
+              aspect="16/9"
+            />
+          </Section>
+
+          {/* ─── KONT POLÒY ──────────────────────────────────────────── */}
+          <Section heading="19 jen · kont Polòy">
+            <p>Kat jou pita, Ayiti afronte youn nan pi bon ekip tounwa a : Polòy Grzegorz Lato a, yon ekip ki pral fini <strong className="text-ink">twazyèm nan Koup di Mond la.</strong></p>
+            <ImageInline
+              src="/images/photos/pologne-1974.jpg"
+              label="Ayiti-Polòy · Olympiastadion, Minik · 19 jen 1974"
+              caption="Kont Polòy Lato, Szarmach ak Deyna, ki t ap fini twazyèm nan Mondyal la. Sèt gòl pran, men okenn match yo pa t lage."
+            />
+            <p>Polonè yo enpoze ritm yo depi nan kòmansman match la. Talan ofansif la eksepsyonèl. Lato make. Szarmach make. Deyna make. Eskò a anfle. Match la fini sou yon gwo defèt : 7 a 0.</p>
+            <p>Men menm nan difikilte, Ayisyen yo kontinye goumen. Henri Françillon reyalize toujou plizyè arè remakab. Pèsonn pa lage. Pèsonn pa bese bra.</p>
+          </Section>
+
+          {/* ─── DÈNYE MATCH LA ──────────────────────────────────────── */}
+          <Section heading="23 jen · dènye match la">
+            <p>Nan dat 23 jen 1974, Ayiti jwe dènye match tounwa a. Advèsè a rele Ajantin, yon lòt pwisans mondyal, yon lòt mòn pou monte.</p>
+            <ImageInline
+              src="/images/photos/argentine-1974.jpg"
+              label="Ayiti-Ajantin · Olympiastadion, Minik · 23 jen 1974"
+              caption="Dènye match tounwa a. Nan 63yèm minit la, Vorbe lanse Sanon nan pwofondè. Atakan ayisyen an redui eka a. Okenn lòt Ayisyen pa make nan Koup di Mond depi lè sa a."
+            />
+            <p>Yazalde ouvri eskò a, apre sa li ajoute yon dezyèm gòl. Ajantin pran kontwòl match la. Men nan 63yèm minit la, listwa retounen frape nan pòt la.</p>
+            <p>Philippe Vorbe wè yon apèl. Yon lòt fwa ankò. Li lanse Emmanuel Sanon. Yon lòt fwa ankò. Atakan an kontwole. Frape. <strong className="text-ink">Gòl.</strong></p>
+            <p>Dezyèm gòl Koup di Mond li a. Dezyèm nan istwa Ayiti nan Koup di Mond. Dènye a tou.</p>
+            <p>Eskò final la se 4 a 1. Pakou a kanpe. Men yon bagay rete : yon non nan achiv yo. <strong className="text-ink">E. Sanon. De gòl.</strong> Kont Itali. Kont Ajantin. Bò kote sa yo Cruyff, Müller, Beckenbauer, Lato ak Rivelino.</p>
+          </Section>
+
+          {/* ─── APRE MINIK ──────────────────────────────────────────── */}
+          <Section heading="Apre Minik">
+            <p>Koup di Mond la chanje lavi. Henri Françillon rantre nan TSV 1860 Munich nan Almay. Manno Sanon siyen pita nan Beerschot an Bèljik, kote li ap konnen plizyè sezon reyisi epi li ap ranpòte Coupe de Belgique la.</p>
+            <p>Foutbòl ayisyen an ap ekspòte talan li yo kounye a. Pèfòmans 1974 yo louvri pòt : yo montre jwè ayisyen yo ka rivalize nan pi wo nivo, epi yo ofri peyi a yon nouvo vizibilite.</p>
+          </Section>
+
+          {/* ─── MANNO SANON ─────────────────────────────────────────── */}
+          <Section heading="Manno Sanon">
+            <p>Pou anpil moun, li rete figi avanti sa a. Òfelen byen jèn, fòme nan Don Bosco, chanpyon nasyonal, pi gwo katchè kalifikasyon an, otè de premye gòl ayisyen yo nan Koup di Mond.</p>
+            <p>Pakou li depase foutbòl. Li vin yon senbòl : sa yon jèn Ayisyen ki kapab mezire l ak pi gwo yo. An 1994, <em>France Football</em> mete l pami san pi gwo figi nan istwa Koup di Mond la. Yon rekonesans eksepsyonèl. <strong className="text-ink">Yon Ayisyen pami lejand foutbòl mondyal yo.</strong></p>
+            <p>Lè Manno Sanon disparèt an 2008, nasyon antye a rann li omaj. Ansyen koekipye li yo pote sèkèy li sou gazon Stade Sylvio Cator a. Tankou yon dènye salitasyon. Tankou yon pwomès.</p>
+          </Section>
+
+          {/* ─── SÈT YO ──────────────────────────────────────────────── */}
+          <Section heading="Sèt yo">
+            <p>Sèt jwè jwe tout twa match Ayiti yo nèt pandan Koup di Mond sa a :</p>
+            <p className="font-display text-lg text-ink leading-relaxed pl-4 border-l-2 border-haiti-red">
+              Henri Françillon. Wilner Nazaire. Philippe Vorbe. Emmanuel Sanon. Jean-Claude Désir. Pierre Bayonne. Eddy Antoine.
+            </p>
+            <p>Sèt nonm. Twa match. Twa jeyan foutbòl mondyal la. Yon paj istwa.</p>
+          </Section>
+
+          {/* ─── FIL KI LYE 1974 AK 2026 LA ──────────────────────────── */}
+          <Section heading="Fil ki lye 1974 ak 2026 la">
+            <p>Tan an pase. Jenerasyon yo chanje. Mayo yo evolye. Men gen kèk bagay ki rete.</p>
+            <p>An 1974, Philippe Vorbe ak Pierre Bayonne reprezante Violette Athletic Club nan Koup di Mond. An 2026, <Link to="/squad" className="text-haiti-blue hover:text-haiti-red underline decoration-haiti-blue/30 hover:decoration-haiti-red underline-offset-4 transition-colors font-semibold">Woodensky Pierre</Link> reprezante Violette a sou sèn mondyal la atou pa li.</p>
+            <p><strong className="text-ink">Menm klib la. Menm ekison an. Menm rèv la.</strong></p>
+            <p>Yon fil envizib travèse deseni yo. Li lye pyonye yo ak eritye yo.</p>
+          </Section>
+
+          {/* ─── SA 1974 KITE POU NOU ────────────────────────────────── */}
+          <Section heading="Sa 1974 kite pou nou">
+            <p>Mesye 1974 yo pa ranpòte Koup di Mond la. Yo pa leve trofe a. Men yo akonpli yon bagay ki menm jan enpòtan.</p>
+            <p>Yo bay foutbòl ayisyen an plas li nan listwa. Yo ofri peyi a sèl tit chanpyon CONCACAF li. Yo make de premye gòl ayisyen yo nan Koup di Mond. Yo pwouve Ayiti ka gade pi gwo nasyon yo nan je.</p>
+            <p><strong className="text-ink">Yo bati fondasyon yo.</strong></p>
+            <p>Chak jenerasyon ki vin apre mache sou teren yo te prepare a. Chak timoun ki reve pou pote mayo nasyonal la grandi nan eritaj yo. Chak Grenadye 2026 dwe yo yon bagay.</p>
+            <p>Paske retou Ayiti nan Koup di Mond pa kòmanse an 2026. Li kòmanse nan Pòtoprens an 1973. Li pase nan Minik an 1974. Li pase nan gòl Sanon an, nan arè Françillon yo, nan vizyon Vorbe a, nan braslè Nazaire a, nan venndezòm ki te oze kwè plas yo te pami pi bon yo.</p>
+            <p>Jodi a, lè Grenadye yo antre sou gazon Koup di Mond 2026 la, yo pa mache pou kont yo. Dèyè yo gen pyonye yo k ap avanse tou. Mesye 1974 yo.</p>
+            <p className="font-display text-xl md:text-2xl text-ink"><strong>Mesye ki te louvri wout la.</strong></p>
+          </Section>
+
+          {/* The Fourteen — tribute */}
+          <section className="mb-12 -mx-5 md:mx-0 my-16">
+            <div className="bg-gradient-to-br from-haiti-blue via-haiti-blue to-ink text-bg px-5 md:px-12 py-12 md:py-16 md:rounded-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-haiti-red text-bg text-xs font-bold uppercase tracking-wider rounded-full mb-6">
+                <span className="w-1.5 h-1.5 bg-bg rounded-full"></span>
+                Toujou pami nou
+              </div>
+              <h2 className="font-display text-3xl md:text-5xl mb-6">
+                Katòz yo.
+              </h2>
+              <p className="text-bg/80 leading-relaxed text-lg max-w-3xl mb-4">
+                Manno Sanon kite nou an 2008. Plizyè nan koekipye li yo nan ete Minik sa a tou. Men katòz manm seleksyon ayisyen 1974 la toujou pami nou an 2026.
+              </p>
+              <p className="text-bg/80 leading-relaxed text-lg max-w-3xl mb-10">
+                Non yo, yo li yo awotvwa pandan yon omaj yo te rann yo nan Miami, an me 2026 :
+              </p>
+
+              <motion.ol
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 max-w-4xl"
+                variants={stagger(0.08, 0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.15 }}
+              >
+                {[
+                  { name: "Wilner Nazaire", note: "Kapitèn nan Minik." },
+                  { name: "Philippe Vorbe", note: "Pas la sou gòl la." },
+                  { name: "Wilfrid Louis" },
+                  { name: "Pierre Bayonne", note: "Violette AC." },
+                  { name: "Wilner Piquant" },
+                  { name: "Henri Françillon", note: "Chat Karayib la." },
+                  { name: "Mario Léandre" },
+                  { name: "Jean-Claude Désir", note: "Tom Pouce." },
+                  { name: "Fritz André Plantin" },
+                  { name: "Ernst Racine" },
+                  { name: "Herby Austin" },
+                  { name: "Boby Joseph" },
+                  { name: "Guy St. Vil" },
+                  { name: "Frantz St. Lot" },
+                ].map((player, i) => (
+                  <motion.li
+                    key={player.name}
+                    variants={fadeUp}
+                    className="flex items-baseline gap-3 border-l-2 border-haiti-red pl-3"
+                  >
+                    <span className="font-display text-haiti-red text-sm tabular-nums w-6 flex-shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="font-display text-lg leading-tight">{player.name}</div>
+                      {player.note && (
+                        <div className="text-bg/60 text-xs italic mt-0.5">{player.note}</div>
+                      )}
+                    </div>
+                  </motion.li>
+                ))}
+              </motion.ol>
+
+              <p className="text-bg/70 italic leading-relaxed max-w-3xl mt-12 pt-8 border-t border-bg/10">
+                Violette Athletic Club Philippe Vorbe a rete fil wouj la : kote Vorbe ak Pierre Bayonne te jwe, kote <Link to="/squad" className="text-haiti-red hover:text-bg underline decoration-haiti-red/30 hover:decoration-bg underline-offset-4 transition-colors">Woodensky Pierre</Link> ap jwe jodi a.
+              </p>
+            </div>
+          </section>
+
+          {/* Footer credit */}
+          <div className="mt-16 pt-8 border-t border-line">
+            <p className="text-sm text-muted leading-relaxed">
+              <strong className="text-ink">Presizyon ak sous.</strong> Yo site seri envensiblite Dino Zoff la pi souvan a 1 142 minit, gòl Sanon an mete fen li 15 jen 1974. Gen sous ki awondi l a 1 143 oswa site 1 174 ; nou kenbe 1 142, chif achiv kontanporen ak achiv an italyen bay pi souvan an.
+            </p>
+            <p className="text-sm text-muted leading-relaxed mt-4">
+              Sous : FIFA, Wikipedia (Emmanuel Sanon, Philippe Vorbe, Pierre Bayonne, Henri Françillon, Wilner Nazaire, Antoine Tassy, Chanpyona CONCACAF 1973, Ayiti nan Koup di Mond 1974), CONCACAF, <em>France Football</em>, Hugh McIlvanney nan <em>The Observer</em> (fevriye 1974), <em>Shoot!</em> (fevriye 1974, entèvyou Wilner Nazaire), kòmantè BBC David Coleman (15 jen 1974), achiv Bundesarchiv, Getty Images, Potomitan, World Wide Soccer Stories.
+            </p>
+          </div>
+
+          {/* CTAs */}
+          <div className="mt-12 flex flex-wrap gap-3">
+            <Link
+              to="/squad"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-haiti-red text-bg font-semibold rounded-full hover:bg-haiti-red-dark transition-colors"
+            >
+              Dekouvri gwoup 2026 la →
+            </Link>
+            <Link
+              to="/the-tribute"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-bg text-ink font-semibold rounded-full hover:bg-line transition-colors border border-line"
+            >
+              Omaj kreyatif
             </Link>
           </div>
         </div>
