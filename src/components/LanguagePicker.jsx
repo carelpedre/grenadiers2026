@@ -2,13 +2,30 @@ import { useEffect, useState } from "react";
 import { getStoredLang, setStoredLang, useT, LANGUAGES } from "../lib/i18n";
 import US from "country-flag-icons/react/3x2/US";
 import FR from "country-flag-icons/react/3x2/FR";
-import HT from "country-flag-icons/react/3x2/HT";
+
+// Drapeau d'Haïti rendu en interne : le drapeau civil (bicolore bleu/rouge),
+// net à petite taille. Le drapeau d'État (country-flag-icons HT) embarque les
+// armoiries, illisibles et brouillonnes à ~22×15 px dans le sélecteur.
+function HaitiFlag({ className }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 3 2"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="3" height="2" fill="#D21034" />
+      <rect width="3" height="1" fill="#00209F" />
+    </svg>
+  );
+}
 
 // Drapeau + nom complet par code de langue (US = English, FR = Français, HT = Kreyòl).
 const FLAG_META = {
   fr: { Flag: FR, name: "Français" },
   en: { Flag: US, name: "English" },
-  ht: { Flag: HT, name: "Kreyòl" },
+  ht: { Flag: HaitiFlag, name: "Kreyòl" },
 };
 
 // Stockage (clé + TTL) et état de langue gérés dans ../lib/i18n. Ce fichier
