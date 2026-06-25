@@ -2715,9 +2715,9 @@ const dict = {
 
   // ─── HOMEPAGE: ROUTE MONDIAL + FAN WALL (Phase 2) ────────────────────
   "home.routeTitle": {
-    en: "The World Cup begins.",
-    fr: "Le Mondial commence.",
-    ht: "Mondyal la kòmanse.",
+    en: "Our World Cup",
+    fr: "Notre Coupe du Monde",
+    ht: "Koup di Mond pa nou an",
   },
   "home.fanwall.title": {
     en: "The fan wall.",
