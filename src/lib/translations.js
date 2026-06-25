@@ -3116,9 +3116,9 @@ const dict = {
 
   // ─── Accueil · cartes d'appel à l'action ──
   "home.cta.murTitle": {
-    en: "Post your message before kickoff",
-    fr: "Envoyez votre message avant le coup d'envoi",
-    ht: "Voye mesaj ou anvan match la",
+    en: "Leave your message for the Grenadiers",
+    fr: "Laisse ton message aux Grenadiers",
+    ht: "Kite mesaj ou pou Grenadye yo",
   },
   "home.cta.murAction": { en: "Sign the wall", fr: "Signer le mur", ht: "Siyen miray la" },
   "home.cta.journalTitle": {

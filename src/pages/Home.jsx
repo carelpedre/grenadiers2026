@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { SponsorBanner } from "../components/Sponsor";
 import ImagePlaceholder from "../components/ImagePlaceholder";
-import { HomeMatchHero, RouteMondial } from "../components/HomeLiveHero";
+import { RouteMondial } from "../components/HomeLiveHero";
 import CountdownHero from "../components/CountdownHero";
 import FanWall from "../components/FanWall";
 import { fetchApprovedPhotos, fanPhotoUrl } from "../lib/fanGalleryApi";
@@ -59,9 +59,6 @@ export default function Home() {
       <CountdownHero />
       <HeroCtaRow />
       <PlayerMarquee surnames={surnames} />
-
-      {/* State-aware match hero — live / pre-match / post-match */}
-      <HomeMatchHero />
 
       <SponsorBanner placement="home-after-hero" />
 
