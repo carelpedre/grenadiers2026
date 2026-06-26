@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ImagePlaceholder from "../components/ImagePlaceholder";
 import MatchResultCard from "../components/MatchResultCard";
 import ShareButton from "../components/ShareButton";
+import YouTubeEmbed from "../components/YouTubeEmbed";
 import { getEntryBySlug, getEntriesSorted, getAlbums } from "../data/diary";
 import { useT } from "../lib/i18n";
 
@@ -216,11 +217,16 @@ export default function DiaryEntry() {
                   className="group relative block w-full overflow-hidden rounded-xl aspect-video bg-ink"
                   aria-label={`${vcap || pick(entry.title, entry.titleEn, entry.titleHt)} · ${t("journal.watchYoutube")}`}
                 >
-                  {entry.cover && (
+                  {(entry.videoPoster || entry.cover) && (
                     <img
-                      src={entry.cover}
+                      src={entry.videoPoster || entry.cover}
                       alt=""
                       loading="lazy"
+                      onError={(e) => {
+                        if (entry.cover && e.currentTarget.src !== entry.cover) {
+                          e.currentTarget.src = entry.cover;
+                        }
+                      }}
                       className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity duration-300 group-hover:opacity-90"
                     />
                   )}
@@ -268,15 +274,21 @@ export default function DiaryEntry() {
               </a>
             </div>
           )}
-          {pickBody(entry, lang).map((paragraph, i) =>
-            typeof paragraph === "string" && paragraph.startsWith("## ") ? (
-              <h2 key={i} className="font-display text-2xl md:text-3xl text-ink leading-snug pt-4">
-                {paragraph.slice(3)}
-              </h2>
-            ) : (
-              <p key={i}>{paragraph}</p>
-            )
-          )}
+          {pickBody(entry, lang).map((paragraph, i) => {
+            if (typeof paragraph === "string" && paragraph.startsWith("## ")) {
+              return (
+                <h2 key={i} className="font-display text-2xl md:text-3xl text-ink leading-snug pt-4">
+                  {paragraph.slice(3)}
+                </h2>
+              );
+            }
+            const videoMatch =
+              typeof paragraph === "string" && paragraph.match(/^\[VIDEO\]\s+(\S+)$/);
+            if (videoMatch) {
+              return <YouTubeEmbed key={i} videoId={getYouTubeId(videoMatch[1])} />;
+            }
+            return <p key={i}>{paragraph}</p>;
+          })}
           {entry.coverAtEnd && entry.cover && (
             <figure>
               <img
