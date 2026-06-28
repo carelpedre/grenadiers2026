@@ -12,14 +12,22 @@ import { squad, squadStats } from "../data/squad";
 import { getEntriesSorted } from "../data/diary";
 import { useT } from "../lib/i18n";
 
-// Sélecteur de langue pour les champs d'une entrée du Journal : champ anglais
-// en mode "en" s'il existe, sinon français (ht retombe sur le français).
+// Sélecteur de langue pour les champs d'une entrée du Journal : créole (ht) puis
+// anglais (en) quand le champ existe, sinon le français (fallback fr partout).
 function makePick(lang) {
-  return (fr, en) => (lang === "en" && en ? en : fr);
+  return (fr, en, ht) => (lang === "ht" && ht ? ht : lang === "en" && en ? en : fr);
 }
-// Date affichée : en anglais, formatée depuis l'ISO `date` ; sinon le
-// dateLabel français stocké (sortie française inchangée).
+
+// Mois en créole haïtien (Intl n'a pas de locale 'ht').
+const HT_MONTHS = ["janvye", "fevriye", "mas", "avril", "me", "jen", "jiyè", "out", "septanm", "oktòb", "novanm", "desanm"];
+
+// Date affichée : en créole, formatée "D MMMM yyyy" depuis l'ISO `date` ; en anglais,
+// via toLocaleDateString ; en français, le dateLabel stocké (sortie française inchangée).
 function journalDate(entry, lang) {
+  if (lang === "ht" && entry?.date) {
+    const d = new Date(`${entry.date}T00:00:00Z`);
+    return `${d.getUTCDate()} ${HT_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  }
   if (lang === "en" && entry?.date) {
     return new Date(`${entry.date}T00:00:00Z`).toLocaleDateString("en-US", {
       year: "numeric",
