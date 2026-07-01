@@ -324,7 +324,7 @@ function LiveScoreBadge({ live }) {
 
 function MatchCard({ match, live }) {
   const { t, lang } = useT();
-  const { home, away, time, timeET, stadium, broadcast, diaspora, matchNumber } = match;
+  const { home, away, time, timeET, stadium, broadcast, diaspora, matchNumber, attendance } = match;
   const date = fixtureDate(match, lang);
   const city = lang === "en" && stadium.cityEn ? stadium.cityEn : stadium.city;
   const diasporaText = lang === "en" && match.diasporaEn ? match.diasporaEn : diaspora;
@@ -411,13 +411,21 @@ function MatchCard({ match, live }) {
       </div>
 
       {/* Details strip */}
-      <div className="bg-bg border-t border-line px-6 py-5 grid md:grid-cols-4 gap-5 text-sm">
+      <div className="bg-bg border-t border-line px-6 py-5 grid md:grid-cols-5 gap-5 text-sm">
         <div>
           <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">{t("matches.capacity")}</p>
           <p className="text-ink font-display text-lg tabular-nums">
             {stadium.capacity.toLocaleString()}
           </p>
         </div>
+        {attendance && (
+          <div>
+            <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">{t("matches.attendance")}</p>
+            <p className="text-ink font-display text-lg tabular-nums">
+              {attendance.toLocaleString()}
+            </p>
+          </div>
+        )}
         <div>
           <p className="text-xs uppercase tracking-wider text-muted font-semibold mb-1">{t("matches.pitch")}</p>
           <p className="text-ink text-sm">{t("matches.naturalGrass")}</p>

@@ -88,6 +88,7 @@ export const liveMatches = {
     dateLabel: "Samedi 13 juin 2026",
     timeLabel: "21h00 ET · Gillette Stadium",
     stadium: stadiums.gillette,
+    attendance: 64146,
     status: "scheduled", // scheduled | live | ht | ft
     minute: null,
     haitiScore: 0,
@@ -108,6 +109,7 @@ export const liveMatches = {
     dateLabel: "Vendredi 19 juin 2026",
     timeLabel: "21h00 ET · Lincoln Financial Field",
     stadium: stadiums.lincoln,
+    attendance: 68239,
     status: "scheduled",
     minute: null,
     haitiScore: 0,
@@ -128,6 +130,7 @@ export const liveMatches = {
     dateLabel: "Mercredi 24 juin 2026",
     timeLabel: "18h00 ET · Mercedes-Benz Stadium",
     stadium: stadiums.mercedesBenz,
+    attendance: 68324,
     status: "scheduled",
     minute: null,
     haitiScore: 0,

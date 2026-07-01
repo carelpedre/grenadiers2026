@@ -367,6 +367,9 @@ function LiveMatchView({ match }) {
           {stadium.capacity && (
             <span className="text-muted">· {stadium.capacity.toLocaleString()} {t("live.seats")}</span>
           )}
+          {match.attendance && (
+            <span className="text-muted">· {match.attendance.toLocaleString()} {t("live.attendance")}</span>
+          )}
           {stadium.surface && <span className="text-muted">· {stadiumSurface(stadium, lang)}</span>}
           {stadium.lat && stadium.lng && (
             <span className="md:ml-auto">

@@ -478,6 +478,11 @@ const dict = {
     fr: "Capacité",
     ht: "Kapasite",
   },
+  "matches.attendance": {
+    en: "Attendance",
+    fr: "Affluence",
+    ht: "Espektatè",
+  },
   "matches.surface": {
     en: "Surface",
     fr: "Surface",
@@ -607,6 +612,7 @@ const dict = {
   "live.broadcastLabel": { en: "Broadcast:", fr: "Diffusion :", ht: "Difizyon :" },
   "live.readRecap": { en: "Read the match recap →", fr: "Lire le résumé du match →", ht: "Li rezime match la →" },
   "live.seats": { en: "seats", fr: "places", ht: "plas" },
+  "live.attendance": { en: "in attendance", fr: "spectateurs", ht: "espektatè" },
   "live.statusFullTime": { en: "Full time", fr: "Fin de match", ht: "Match fini" },
   "live.tabTimeline": { en: "Timeline", fr: "Chronologie", ht: "Kronoloji" },
   "live.tabLineups": { en: "Lineups", fr: "Compositions", ht: "Konpozisyon" },
